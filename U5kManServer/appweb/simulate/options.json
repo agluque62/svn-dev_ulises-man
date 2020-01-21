@@ -1,0 +1,42 @@
+{
+	"version": "1.5.0",
+	"bdt": "03/11/2015",
+	"lconf": [
+		{
+			"id": "Local Item 01",
+			"val": "valor 01",
+			"tp": 0,
+			"opt": ["Option 1", "Option 2", "Option 3"]
+		},{
+			"id": "Local Item 02",
+			"val": "0",
+			"tp": 1,
+			"opt": ["Option 1", "Option 2", "Option 3"]
+		},{
+			"id": "Local Item 03",
+			"val": "Valor 03",
+			"tp": 0,
+			"opt": ["Option 1", "Option 2", "Option 3"]
+		},{
+			"id": "Local Item 04",
+			"val": "Valor 04",
+			"tp": 0,
+			"opt": ["Option 1", "Option 2", "Option 3"]
+		},{
+			"id": "Local Item 05",
+			"val": "Valor 05",
+			"tp": 0,
+			"opt": ["Option 1", "Option 2", "Option 3"]
+		},{
+			"id": "Local Item 06",
+			"val": "1",
+			"tp": 1,
+			"opt": ["Option 1", "Option 2", "Option 3"]
+		},{
+			"id": "Local Item 07",
+			"val": "Valor 07",
+			"tp": 0,
+			"opt": ["Option 1", "Option 2", "Option 3"]
+		}
+	]
+}

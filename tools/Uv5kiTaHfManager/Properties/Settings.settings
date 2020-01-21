@@ -1,0 +1,47 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Uv5kiTaHfManager.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="FrecuencySet" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;3.125#3,125&lt;/string&gt;
+  &lt;string&gt;9.450#9,450&lt;/string&gt;
+  &lt;string&gt;11.322#11,322&lt;/string&gt;
+  &lt;string&gt;17.876#17,876&lt;/string&gt;
+  &lt;string&gt;21.112#21,112&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="RadioEqSet" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;Equipo 01#.1.1.100.1&lt;/string&gt;
+  &lt;string&gt;Equipo 02#.1.1.100.2&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="LastConfig" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Idioma" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">fr</Value>
+    </Setting>
+    <Setting Name="RcsSnmpIp" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">192.168.0.71</Value>
+    </Setting>
+    <Setting Name="RcsSnmpPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">161</Value>
+    </Setting>
+    <Setting Name="RcsSnmpReadCommunity" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">public</Value>
+    </Setting>
+    <Setting Name="RcsSnmpWriteCommunity" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">public</Value>
+    </Setting>
+    <Setting Name="SnmpReadTimeout" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="SnmpWriteTimeout" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1500</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

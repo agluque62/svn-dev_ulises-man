@@ -1,0 +1,58 @@
+2000,2001,Ignorar,Cambio estado CGW
+2003,2200,Evento,Cambio estado LAN
+2005,2200,Ignorar,Cambio estado CPU
+2007,2003,Ignorar,
+2008,2004,Ignorar,
+2009,2005,Ignorar,
+2010,2006,Ignorar,
+2011,2007,Ignorar,
+2012,2008,Ignorar,
+2013,2009,Ignorar,
+2014,2010,Ignorar,
+2015,2015,Normal,
+2016,2016,Normal,
+2017,2017,Normal,
+2018,2018,Normal,
+2019,2013,Normal,
+2020,2014,Normal,
+2021,2200,Evento,Servidor NTP Conectado
+2022,2200,Evento,Servidor NTP Desconectado
+2027,2200,Evento,Estado DB
+2101,2200,Evento,Sesion SIP
+2102,2200,Evento,PTT
+2103,2200,Evento,SQH
+2200,2012,Normal,
+2202,2200,Evento,Fallo Test LCEN Voip
+2203,2025,Normal,
+2204,2200,Evento,Fallo llamada de test R2 SCV
+2205,2200,Evento,Fallo llamada de test R2 VoIP (mensaje Options)
+2206,2200,Evento,Error Protocolo N5
+2207,2200,Evento,Fallo llamada de test N5 SCV
+2208,2200,Evento,Fallo llamada de test N5 VoIP (mensaje Options)
+2300,2020,Llamada,TRO;NO;PR;ND
+2301,2021,Llamada,TRO
+2302,2022,Llamada,TRO;NO;PR;ND
+2303,2023,Llamada,TRO
+2304,2024,Llamada,RC
+2305,2030,Llamada,
+2306,2031,Llamada,
+2307,2032,Llamada,
+2308,2033,Llamada,
+2309,2040,Llamada,DS;??1;IF;??2
+2310,2041,Llamada,DS;??1;IF;??2
+2311,2042,Llamada,DS;??1;IF;??2
+2312,2043,Llamada,DS;??1;IF;??2
+2313,2100,Llamada,DS;??1;IF;??2
+150,2300,Operacion,Modificación Parámetro Pasarela
+153,2300,Operacion,Modificación Parámetro Recurso
+154,2300,Operacion,Generación Configuración Defecto
+155,2300,Operacion,Activación Configuración Defecto
+156,2300,Operacion,Borrado Configuración Defecto
+157,2300,Operacion,Alta Recurso Radio
+158,2300,Operacion,Baja Recurso Radio
+159,2300,Operacion,Alta Recurso Telefonía
+160,2300,Operacion,Baja Recurso Telefonía
+161,2300,Operacion,Conflicto Configuracion
+182,2300,Operacion,Reset Remoto
+183,2300,Operacion,Selección Bucle Prueba
+184,2300,Operacion,Comando Bite

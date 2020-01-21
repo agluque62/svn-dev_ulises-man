@@ -1,0 +1,205 @@
+{
+	"name" : "TIFX-18",
+	"tipo" : 2,
+	"std" : 1,
+	"main" : 1,
+	"fa" : 1,
+	"ip" : "192.168.0.50",
+	"cpus" : [{
+			"ip" : "192.168.0.51",
+			"lan1" : 1,
+			"lan2" : 1,
+			"ntp" : 1,
+			"recs" : [{
+					"name" : "rec-00",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-01",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-02",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-03",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-10",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-11",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-12",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-13",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-20",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-21",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-22",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-23",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-30",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-31",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-32",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-33",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}
+			]
+		}, {
+			"ip" : "192.168.0.52",
+			"lan1" : 1,
+			"lan2" : 1,
+			"ntp" : 1,
+			"recs" : [{
+					"name" : "rec-00",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-01",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-02",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-03",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-10",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-11",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-12",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-13",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-20",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-21",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-22",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-23",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-30",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-31",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-32",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}, {
+					"name" : "rec-33",
+					"cfg" : 1,
+					"not" : 1,
+					"std" : 0
+				}
+			]
+		}
+	]
+	, "versiones": 
+	[
+		  { "line": "Linux version 2.4.32 NUCLEODF  (gcc version 3.2.2 20030217 (Yellow Dog Linux 3.0 3.2.2-2a_1)) #203 jue feb 19 12:55:29 CET 2015"}
+		, { "line": "cgw6747: 15-09-2015, 17:46 <291328>>"}
+		, { "line": "Servdsp V0.0.2 (NUCLEODF 2016-02-22 11:06:12)"}
+		, { "line": "Recurso R2N5 V0.0.1 (NUCLEODF 2016-02-22 11:06:12)"}
+		, { "line": "Recurso TLF V0.0.1 (NUCLEODF 2016-02-22 11:06:12)"}
+		, { "line": "Recurso LC V0.0.1 (NUCLEODF 2016-02-22 11:06:12)"}
+		, { "line": "Recurso RAD V0.0.1 (NUCLEODF 2016-02-22 11:06:12)"}
+		, { "line": "ulisesg5000-cgw V1.0.0 (NUCLEODF 2016-02-22 11:06:12)"}
+		, { "line": "EEPROM2F V0.0.0 (NUCLEODF 2012-07-25 08:39:32)"}
+		, { "line": "swiniciacgw: NUCLEODF 2014-10-13 15:13:26"}
+		, { "line": "Driver e/s discretas. $Revision: 1.14 $ (Feb 4 2016 20:07:08)"}
+		, { "line": "Driver com Host/DSP. $Revision: 1.0 $ (Nov 11 2014 11:30:46)"}
+		, { "line": "Driver EEPROM. $Revision: 1.0 $ (Nov 11 2014 11:09:54)"}
+		, { "line": "Driver PCM 82xx MCC. $Revision: 1.10 $ (Jan 22 2016 09:21:28)"}
+		, { "line": "Driver RISC Timers $Revision: 1.3 $ (Nov 11 2014 11:30:47)"}
+		, { "line": "Driver 82xx CPM SPI. $Revision: 1.0 $ (Feb 5 2016 17:22:53)"}
+		, { "line": "Driver MTIFM SLICS. $Revision: 1.9 $ (Feb 4 2016 20:07:10)"}
+		, { "line": "Driver MTIFM. $Revision: 1.9 $(Feb 4 2016 20:07:10)"}
+	]
+}

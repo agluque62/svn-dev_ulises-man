@@ -1,0 +1,148 @@
+[{
+		"Components": [{
+				"Files": [{
+						"Path": "C:\\Program Files (x86)\\DF Nucleo\\UlisesV5000Cluster\\ClusterLib.dll",
+						"Date": "File not found",
+						"Size": "File not found",
+						"MD5": "File not found"
+					}, {
+						"Path": "C:\\Program Files (x86)\\DF Nucleo\\UlisesV5000Cluster\\ClusterSrv.exe",
+						"Date": "File not found",
+						"Size": "File not found",
+						"MD5": "File not found"
+					}
+				],
+				"Name": "UV5K-SGM Gestor Cluster"
+			}, {
+				"Files": [{
+						"Path": "c:\\inetpub\\wwwroot\\NucleoDF\\U5kCfg\\bin\\App_code.dll",
+						"Date": "05/07/2017",
+						"Size": "10240",
+						"MD5": "43D2AA461495AA9804AA39D4A32251F7"
+					}, {
+						"Path": "c:\\inetpub\\wwwroot\\NucleoDF\\U5kCfg\\Servicios\\bin\\bdcd40.dll",
+						"Date": "05/07/2017",
+						"Size": "338432",
+						"MD5": "04303B61569D810CBD94B85AB906B2C0"
+					}, {
+						"Path": "c:\\inetpub\\wwwroot\\NucleoDF\\U5kCfg\\Servicios\\bin\\sectorizaciondll.dll",
+						"Date": "05/07/2017",
+						"Size": "59392",
+						"MD5": "2E35BCDEBF0E9A22CDACA1FF403CDAD9"
+					}, {
+						"Path": "c:\\inetpub\\wwwroot\\NucleoDF\\U5kCfg\\InterfazSOAPConfiguracion\\bin\\UtilitiesCD40.dll",
+						"Date": "05/07/2017",
+						"Size": "20992",
+						"MD5": "F64C298C01AF371F5B34B5F29928D6A5"
+					}, {
+						"Path": "c:\\inetpub\\wwwroot\\NucleoDF\\U5kCfg\\InterfazSacta\\bin\\sacta.dll",
+						"Date": "05/07/2017",
+						"Size": "281088",
+						"MD5": "53BB44F28CFA52E55E05096737B0A140"
+					}
+				],
+				"Name": "UV5K-SGM Configuracion"
+			}, {
+				"Files": [{
+						"Path": "c:\\Program Files (x86)\\DF Nucleo\\UlisesV5000SSM\\U5kManServer.exe",
+						"Date": "05/07/2017",
+						"Size": "362496",
+						"MD5": "A63871ACCDFFF0C4FABD94D210052F8C"
+					}, {
+						"Path": "c:\\Program Files (x86)\\DF Nucleo\\UlisesV5000SSM\\U5kBaseDatos.dll",
+						"Date": "05/07/2017",
+						"Size": "39936",
+						"MD5": "51D4E2B6441C37E3CA5ABF73374BB7DA"
+					}, {
+						"Path": "c:\\Program Files (x86)\\DF Nucleo\\UlisesV5000SSM\\Utilities.dll",
+						"Date": "05/07/2017",
+						"Size": "76800",
+						"MD5": "F5026E3C9A986A5E5FC3AAE1A66DBC12"
+					}, {
+						"Path": "c:\\Program Files (x86)\\DF Nucleo\\UlisesV5000SSM\\ndf.uv5k.137b5.mib",
+						"Date": "05/07/2017",
+						"Size": "26103",
+						"MD5": "952D7E58F244E221FF85FEF208C897D2"
+					}
+				],
+				"Name": "UV5K-SGM Mantenimiento"
+			}
+		],
+		"Server": "DF1501",
+		"Version": "2.5.4",
+		"Fecha": "14/07/2017"
+	}, 
+{
+		"Components": [{
+				"Files": [{
+						"Path": "C:\\Program Files (x86)\\DF Nucleo\\UlisesV5000Cluster\\ClusterLib.dll",
+						"Date": "File not found",
+						"Size": "",
+						"MD5": ""
+					}, {
+						"Path": "C:\\Program Files (x86)\\DF Nucleo\\UlisesV5000Cluster\\ClusterSrv.exe",
+						"Date": "File not found",
+						"Size": "",
+						"MD5": ""
+					}
+				],
+				"Name": "UV5K-SGM Gestor Cluster"
+			}, {
+				"Files": [{
+						"Path": "c:\\inetpub\\wwwroot\\NucleoDF\\U5kCfg\\bin\\App_code.dll",
+						"Date": "05/07/2017",
+						"Size": "10240",
+						"MD5": "43D2AA461495AA9804AA39D4A32251F7"
+					}, {
+						"Path": "c:\\inetpub\\wwwroot\\NucleoDF\\U5kCfg\\Servicios\\bin\\bdcd40.dll",
+						"Date": "05/07/2017",
+						"Size": "338432",
+						"MD5": "04303B61569D810CBD94B85AB906B2C0"
+					}, {
+						"Path": "c:\\inetpub\\wwwroot\\NucleoDF\\U5kCfg\\Servicios\\bin\\sectorizaciondll.dll",
+						"Date": "05/07/2017",
+						"Size": "59392",
+						"MD5": "2E35BCDEBF0E9A22CDACA1FF403CDAD9"
+					}, {
+						"Path": "c:\\inetpub\\wwwroot\\NucleoDF\\U5kCfg\\InterfazSOAPConfiguracion\\bin\\UtilitiesCD40.dll",
+						"Date": "05/07/2017",
+						"Size": "20992",
+						"MD5": "F64C298C01AF371F5B34B5F29928D6A5"
+					}, {
+						"Path": "c:\\inetpub\\wwwroot\\NucleoDF\\U5kCfg\\InterfazSacta\\bin\\sacta.dll",
+						"Date": "05/07/2017",
+						"Size": "281088",
+						"MD5": "53BB44F28CFA52E55E05096737B0A140"
+					}
+				],
+				"Name": "UV5K-SGM Configuracion"
+			}, {
+				"Files": [{
+						"Path": "c:\\Program Files (x86)\\DF Nucleo\\UlisesV5000SSM\\U5kManServer.exe",
+						"Date": "05/07/2017",
+						"Size": "362496",
+						"MD5": "A63871ACCDFFF0C4FABD94D210052F8C"
+					}, {
+						"Path": "c:\\Program Files (x86)\\DF Nucleo\\UlisesV5000SSM\\U5kBaseDatos.dll",
+						"Date": "05/07/2017",
+						"Size": "39936",
+						"MD5": "51D4E2B6441C37E3CA5ABF73374BB7DA"
+					}, {
+						"Path": "c:\\Program Files (x86)\\DF Nucleo\\UlisesV5000SSM\\Utilities.dll",
+						"Date": "05/07/2017",
+						"Size": "76800",
+						"MD5": "F5026E3C9A986A5E5FC3AAE1A66DBC12"
+					}, {
+						"Path": "c:\\Program Files (x86)\\DF Nucleo\\UlisesV5000SSM\\ndf.uv5k.137b5.mib",
+						"Date": "05/07/2017",
+						"Size": "26103",
+						"MD5": "952D7E58F244E221FF85FEF208C897D2"
+					}
+				],
+				"Name": "UV5K-SGM Mantenimiento"
+			}
+		],
+		"Server": "DF1502",
+		"Version": "2.5.3",
+		"Fecha": "14/04/2017"
+	}	]

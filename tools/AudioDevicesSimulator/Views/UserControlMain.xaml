@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="AudioDevicesSimulator.Views.UserControlMain"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AudioDevicesSimulator.ViewModel"
+             xmlns:led="clr-namespace:LedControl"
+             xmlns:p="clr-namespace:AudioDevicesSimulator.Properties"    
+             xmlns:ToggleSwitch="clr-namespace:ToggleSwitch;assembly=ToggleSwitch"
+             mc:Ignorable="d" Height="240" Width="300" 
+             >
+    <UserControl.DataContext>
+        <local:ViewModelMain x:Name="ViewModelMain"/>
+    </UserControl.DataContext>
+    <Grid Margin="0,0,0,0" Background="#FFB5BED3" >
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0"  Content="Dispositivo" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold"></Label>
+        <Label Grid.Row="0" Grid.Column="1"  Content="Presencia" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold"></Label>
+        <Label Grid.Row="0" Grid.Column="2"  Content="Mando" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" ></Label>
+
+        <Label Grid.Row="1" Grid.Column="0"  Content="Ejecutivo" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
+        <ToggleSwitch:HorizontalToggleSwitch  Grid.Row="1" Grid.Column="1" IsChecked="{Binding Iao.Ejecutivo, Mode=TwoWay}"/>
+        <ToggleSwitch:HorizontalToggleSwitch  Grid.Row="1" Grid.Column="2" IsChecked="{Binding Iao.PttEjecutivo, Mode=TwoWay}"/>
+
+        <Label Grid.Row="2" Grid.Column="0"  Content="Ayudante" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
+        <ToggleSwitch:HorizontalToggleSwitch  Grid.Row="2" Grid.Column="1" IsChecked="{Binding Iao.Ayudante, Mode=TwoWay}"/>
+        <ToggleSwitch:HorizontalToggleSwitch  Grid.Row="2" Grid.Column="2" IsChecked="{Binding Iao.PttAyudante, Mode=TwoWay}"/>
+
+        <Label Grid.Row="3" Grid.Column="0"  Content="Altavoz Radio" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
+        <ToggleSwitch:HorizontalToggleSwitch  Grid.Row="3" Grid.Column="1" IsChecked="{Binding Iao.AltavozRadio, Mode=TwoWay}"/>
+        <led:Led  Grid.Row="3" Grid.Column="2" IsActive="{Binding Iao.LedAltavozRadio, Mode=OneWay}" Flashing="{Binding Flash}" ColorNull="Gray" ColorOff="Green" ColorOn="GreenYellow" Width="16" Height="16" />
+
+        <Label Grid.Row="4" Grid.Column="0"  Content="Altavoz Radio 2" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
+        <ToggleSwitch:HorizontalToggleSwitch  Grid.Row="4" Grid.Column="1" IsChecked="{Binding Iao.AltavozRadio2, Mode=TwoWay}" />
+        <led:Led  Grid.Row="4" Grid.Column="2" IsActive="{Binding Iao.LedAltavozRadio2, Mode=OneWay}" Flashing="{Binding Flash}" ColorNull="Gray" ColorOff="Green" ColorOn="GreenYellow" Width="16" Height="16" />
+
+        <Label Grid.Row="5" Grid.Column="0"  Content="Altavoz LC" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
+        <ToggleSwitch:HorizontalToggleSwitch  Grid.Row="5" Grid.Column="1" IsChecked="{Binding Iao.AltavozLc, Mode=TwoWay}"/>
+        <led:Led  Grid.Row="5" Grid.Column="2" IsActive="{Binding Iao.LedAltavozTelefonia, Mode=OneWay}" Flashing="{Binding Flash}" ColorNull="Gray" ColorOff="Green" ColorOn="GreenYellow" Width="16" Height="16" />
+
+        <Label Grid.Row="6" Grid.Column="0"  Content="Cable Grabacion" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
+        <ToggleSwitch:HorizontalToggleSwitch  Grid.Row="6" Grid.Column="1" IsChecked="{Binding Iao.CableDeGrabacion, Mode=TwoWay}"/>
+        <led:Led  Grid.Row="6" Grid.Column="2" IsActive="False" Flashing="{Binding Flash}" ColorNull="Gray" ColorOff="Green" ColorOn="GreenYellow" Width="16" Height="16" />
+    </Grid>
+</UserControl>

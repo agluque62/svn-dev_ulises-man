@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://CD40.es/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://CD40.es/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://CD40.es/">
+      <s:element name="GetEstadoSacta">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetEstadoSactaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetEstadoSactaResult" type="s:unsignedByte" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="StartSacta">
+        <s:complexType />
+      </s:element>
+      <s:element name="StartSactaResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EndSacta">
+        <s:complexType />
+      </s:element>
+      <s:element name="EndSactaResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="SactaConfGet">
+        <s:complexType />
+      </s:element>
+      <s:element name="SactaConfGetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SactaConfGetResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SactaConfSet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="jcfg" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SactaConfSetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SactaConfSetResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="unsignedByte" type="s:unsignedByte" />
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="boolean" type="s:boolean" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetEstadoSactaSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEstadoSacta" />
+  </wsdl:message>
+  <wsdl:message name="GetEstadoSactaSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEstadoSactaResponse" />
+  </wsdl:message>
+  <wsdl:message name="StartSactaSoapIn">
+    <wsdl:part name="parameters" element="tns:StartSacta" />
+  </wsdl:message>
+  <wsdl:message name="StartSactaSoapOut">
+    <wsdl:part name="parameters" element="tns:StartSactaResponse" />
+  </wsdl:message>
+  <wsdl:message name="EndSactaSoapIn">
+    <wsdl:part name="parameters" element="tns:EndSacta" />
+  </wsdl:message>
+  <wsdl:message name="EndSactaSoapOut">
+    <wsdl:part name="parameters" element="tns:EndSactaResponse" />
+  </wsdl:message>
+  <wsdl:message name="SactaConfGetSoapIn">
+    <wsdl:part name="parameters" element="tns:SactaConfGet" />
+  </wsdl:message>
+  <wsdl:message name="SactaConfGetSoapOut">
+    <wsdl:part name="parameters" element="tns:SactaConfGetResponse" />
+  </wsdl:message>
+  <wsdl:message name="SactaConfSetSoapIn">
+    <wsdl:part name="parameters" element="tns:SactaConfSet" />
+  </wsdl:message>
+  <wsdl:message name="SactaConfSetSoapOut">
+    <wsdl:part name="parameters" element="tns:SactaConfSetResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEstadoSactaHttpPostIn" />
+  <wsdl:message name="GetEstadoSactaHttpPostOut">
+    <wsdl:part name="Body" element="tns:unsignedByte" />
+  </wsdl:message>
+  <wsdl:message name="StartSactaHttpPostIn" />
+  <wsdl:message name="StartSactaHttpPostOut" />
+  <wsdl:message name="EndSactaHttpPostIn" />
+  <wsdl:message name="EndSactaHttpPostOut" />
+  <wsdl:message name="SactaConfGetHttpPostIn" />
+  <wsdl:message name="SactaConfGetHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SactaConfSetHttpPostIn">
+    <wsdl:part name="jcfg" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SactaConfSetHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:portType name="ServicioInterfazSactaSoap">
+    <wsdl:operation name="GetEstadoSacta">
+      <wsdl:input message="tns:GetEstadoSactaSoapIn" />
+      <wsdl:output message="tns:GetEstadoSactaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StartSacta">
+      <wsdl:input message="tns:StartSactaSoapIn" />
+      <wsdl:output message="tns:StartSactaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EndSacta">
+      <wsdl:input message="tns:EndSactaSoapIn" />
+      <wsdl:output message="tns:EndSactaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SactaConfGet">
+      <wsdl:input message="tns:SactaConfGetSoapIn" />
+      <wsdl:output message="tns:SactaConfGetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SactaConfSet">
+      <wsdl:input message="tns:SactaConfSetSoapIn" />
+      <wsdl:output message="tns:SactaConfSetSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ServicioInterfazSactaHttpPost">
+    <wsdl:operation name="GetEstadoSacta">
+      <wsdl:input message="tns:GetEstadoSactaHttpPostIn" />
+      <wsdl:output message="tns:GetEstadoSactaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StartSacta">
+      <wsdl:input message="tns:StartSactaHttpPostIn" />
+      <wsdl:output message="tns:StartSactaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EndSacta">
+      <wsdl:input message="tns:EndSactaHttpPostIn" />
+      <wsdl:output message="tns:EndSactaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SactaConfGet">
+      <wsdl:input message="tns:SactaConfGetHttpPostIn" />
+      <wsdl:output message="tns:SactaConfGetHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SactaConfSet">
+      <wsdl:input message="tns:SactaConfSetHttpPostIn" />
+      <wsdl:output message="tns:SactaConfSetHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServicioInterfazSactaSoap" type="tns:ServicioInterfazSactaSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetEstadoSacta">
+      <soap:operation soapAction="http://CD40.es/GetEstadoSacta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartSacta">
+      <soap:operation soapAction="http://CD40.es/StartSacta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndSacta">
+      <soap:operation soapAction="http://CD40.es/EndSacta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SactaConfGet">
+      <soap:operation soapAction="http://CD40.es/SactaConfGet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SactaConfSet">
+      <soap:operation soapAction="http://CD40.es/SactaConfSet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServicioInterfazSactaSoap12" type="tns:ServicioInterfazSactaSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetEstadoSacta">
+      <soap12:operation soapAction="http://CD40.es/GetEstadoSacta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartSacta">
+      <soap12:operation soapAction="http://CD40.es/StartSacta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndSacta">
+      <soap12:operation soapAction="http://CD40.es/EndSacta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SactaConfGet">
+      <soap12:operation soapAction="http://CD40.es/SactaConfGet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SactaConfSet">
+      <soap12:operation soapAction="http://CD40.es/SactaConfSet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServicioInterfazSactaHttpPost" type="tns:ServicioInterfazSactaHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetEstadoSacta">
+      <http:operation location="/GetEstadoSacta" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartSacta">
+      <http:operation location="/StartSacta" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EndSacta">
+      <http:operation location="/EndSacta" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="SactaConfGet">
+      <http:operation location="/SactaConfGet" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SactaConfSet">
+      <http:operation location="/SactaConfSet" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServicioInterfazSacta">
+    <wsdl:port name="ServicioInterfazSactaSoap" binding="tns:ServicioInterfazSactaSoap">
+      <soap:address location="http://localhost:51277/InterfazSacta/ServicioInterfazSacta.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServicioInterfazSactaSoap12" binding="tns:ServicioInterfazSactaSoap12">
+      <soap12:address location="http://localhost:51277/InterfazSacta/ServicioInterfazSacta.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServicioInterfazSactaHttpPost" binding="tns:ServicioInterfazSactaHttpPost">
+      <http:address location="http://localhost:51277/InterfazSacta/ServicioInterfazSacta.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

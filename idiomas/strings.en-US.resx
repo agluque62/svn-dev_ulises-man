@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="EVENTOSPTT" xml:space="preserve">
+    <value>Recording PTT / SQH events</value>
+  </data>
+  <data name="GENERAL" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="HISTORICO" xml:space="preserve">
+    <value>Logs</value>
+  </data>
+  <data name="IDGETCOMM" xml:space="preserve">
+    <value>Read community</value>
+  </data>
+  <data name="Idioma" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="IDSETCOMM" xml:space="preserve">
+    <value>Write community</value>
+  </data>
+  <data name="NO" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="SACTA" xml:space="preserve">
+    <value>Sacta</value>
+  </data>
+  <data name="ServidorDual" xml:space="preserve">
+    <value>Dual Server</value>
+  </data>
+  <data name="SI" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="SNMP" xml:space="preserve">
+    <value>Snmp</value>
+  </data>
+  <data name="SNMPPORT" xml:space="preserve">
+    <value>SNMP port</value>
+  </data>
+  <data name="SNMPTRAPPORT" xml:space="preserve">
+    <value>SNMP Traps port</value>
+  </data>
+  <data name="USERS" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="V2" xml:space="preserve">
+    <value>V2</value>
+  </data>
+  <data name="V3" xml:space="preserve">
+    <value>V3</value>
+  </data>
+  <data name="VERSION" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="WAP_MSG_001" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="WAP_MSG_002" xml:space="preserve">
+    <value>: Method Not Allowed</value>
+  </data>
+  <data name="WAP_MSG_003" xml:space="preserve">
+    <value>Control Working Positions</value>
+  </data>
+  <data name="WAP_MSG_004" xml:space="preserve">
+    <value>Gateways</value>
+  </data>
+  <data name="WAP_MSG_005" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="WAP_MSG_006" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="WAP_MSG_007" xml:space="preserve">
+    <value>Dual Server</value>
+  </data>
+  <data name="WAP_MSG_008" xml:space="preserve">
+    <value>Master Clock</value>
+  </data>
+  <data name="WAP_MSG_009" xml:space="preserve">
+    <value>Internal PABX</value>
+  </data>
+  <data name="WAP_MSG_010" xml:space="preserve">
+    <value>Sound</value>
+  </data>
+  <data name="WAP_MSG_011" xml:space="preserve">
+    <value>Generate Log</value>
+  </data>
+  <data name="WAP_MSG_012" xml:space="preserve">
+    <value>Days on LOG</value>
+  </data>
+  <data name="WAP_MSG_013" xml:space="preserve">
+    <value>Not acknowledged Incidents</value>
+  </data>
+  <data name="WAP_MSG_014" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="WAP_MSG_015" xml:space="preserve">
+    <value>HF / HF Speaker</value>
+  </data>
+  <data name="WAP_MSG_016" xml:space="preserve">
+    <value>Gateways Management</value>
+  </data>
+  <data name="WAP_OPT_001" xml:space="preserve">
+    <value>1 Week</value>
+  </data>
+  <data name="WAP_OPT_002" xml:space="preserve">
+    <value>2 Weeks</value>
+  </data>
+  <data name="WAP_OPT_003" xml:space="preserve">
+    <value>1 Month</value>
+  </data>
+  <data name="WAP_OPT_004" xml:space="preserve">
+    <value>3 Months</value>
+  </data>
+  <data name="WAP_OPT_005" xml:space="preserve">
+    <value>6 Months</value>
+  </data>
+  <data name="WAP_OPT_006" xml:space="preserve">
+    <value>1 Year</value>
+  </data>
+  <data name="WAP_OPT_007" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="WAP_OPT_008" xml:space="preserve">
+    <value>Unified</value>
+  </data>
+  <data name="GWS_Principal" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="GWS_Reserva" xml:space="preserve">
+    <value>Standby</value>
+  </data>
+  <data name="GWS_ResInterfazNo" xml:space="preserve">
+    <value>Resource Interface not Available</value>
+  </data>
+  <data name="GWS_ResInterfazSi" xml:space="preserve">
+    <value>Resource Interface Available</value>
+  </data>
+  <data name="GWS_VersionError" xml:space="preserve">
+    <value>Error Version</value>
+  </data>
+  <data name="NBX_Activo" xml:space="preserve">
+    <value>NBX Active on</value>
+  </data>
+  <data name="NBX_Caido" xml:space="preserve">
+    <value>NBX no Active on</value>
+  </data>
+  <data name="NBX_NoService" xml:space="preserve">
+    <value>No Master NBX Service</value>
+  </data>
+  <data name="NTP_NoServer" xml:space="preserve">
+    <value>No NTP Server</value>
+  </data>
+  <data name="NTP_ServerConnected" xml:space="preserve">
+    <value>NTP Server Connected</value>
+  </data>
+  <data name="PBX_Conectada" xml:space="preserve">
+    <value>PBX Connected</value>
+  </data>
+  <data name="PBX_Desconectada" xml:space="preserve">
+    <value>PBX Disconnected</value>
+  </data>
+  <data name="PBX_Desconocida" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="SACTA_LAN1_OFF" xml:space="preserve">
+    <value>SACTA LAN1 Disconnected</value>
+  </data>
+  <data name="SACTA_LAN1_ON" xml:space="preserve">
+    <value>SACTA LAN1 Connected</value>
+  </data>
+  <data name="SACTA_LAN2_OFF" xml:space="preserve">
+    <value>SACTA LAN2 Disconnected</value>
+  </data>
+  <data name="SACTA_LAN2_ON" xml:space="preserve">
+    <value>SACTA LAN2 Connected</value>
+  </data>
+  <data name="TOP_NoExiste" xml:space="preserve">
+    <value>CWP not found</value>
+  </data>
+  <data name="TOP_NoSincronizado" xml:space="preserve">
+    <value>Not Synchronized</value>
+  </data>
+  <data name="TOP_Sincronizado" xml:space="preserve">
+    <value>Synchronized</value>
+  </data>
+  <data name="CLUSTER_ERROR_01" xml:space="preserve">
+    <value>Node ({0}:{1})
+Error reading data</value>
+  </data>
+  <data name="CLUSTER_ERROR_02" xml:space="preserve">
+    <value>Node ({0}:{1})
+Does not respond</value>
+  </data>
+  <data name="CLUSTER_ERROR_03" xml:space="preserve">
+    <value>Node ({0}:{1})
+Error requesting data</value>
+  </data>
+  <data name="NoSincronizado" xml:space="preserve">
+    <value>Not Synchronized</value>
+  </data>
+  <data name="Sincronizado" xml:space="preserve">
+    <value>Synchronized</value>
+  </data>
+  <data name="WEB_DIS_CAUSE_01" xml:space="preserve">
+    <value>Database connection error</value>
+  </data>
+  <data name="WEB_DIS_CUASE_02" xml:space="preserve">
+    <value>Service inactive (slave)</value>
+  </data>
+  <data name="GW_CFGL_MODULE" xml:space="preserve">
+    <value>Local configuration module</value>
+  </data>
+  <data name="GW_GLOBAL_MODULE" xml:space="preserve">
+    <value>Gateway</value>
+  </data>
+  <data name="GW_SIP_MODULE" xml:space="preserve">
+    <value>SIP module</value>
+  </data>
+  <data name="GW_SNMP_MODULE" xml:space="preserve">
+    <value>SNMP Module</value>
+  </data>
+  <data name="EquiposExternos" xml:space="preserve">
+    <value>External Equipments</value>
+  </data>
+</root>

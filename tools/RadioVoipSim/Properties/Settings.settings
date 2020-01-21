@@ -1,0 +1,36 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="RadioVoipSim.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="IpBase" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">192.168.1.205</Value>
+    </Setting>
+    <Setting Name="SipPort" Type="System.UInt32" Scope="Application">
+      <Value Profile="(Default)">7060</Value>
+    </Setting>
+    <Setting Name="CoresipLogLevel" Type="System.UInt32" Scope="Application">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="SqhQueueOn" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="SqhQueueOff" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="FileWavPlayer" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Resources\Hold.wav</Value>
+    </Setting>
+    <Setting Name="config" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;RX1-AGL#0&lt;/string&gt;
+  &lt;string&gt;TX1-AGL#1#RX1-AGL&lt;/string&gt;
+  &lt;string&gt;RX2-AGL#0&lt;/string&gt;
+  &lt;string&gt;TXRX2-AGL#1#TXRX2-AGL&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="RssiQidx" Type="System.UInt32" Scope="Application">
+      <Value Profile="(Default)">15</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,66 @@
+GENERAL.
+
+SNMP-AGENT
+
+	[x] Obtener 'de verdad' tipo y estado de LANES del servidor.
+	[x] Incluir en la Supervision de 'Subsistemas' ED137...
+		[x] Telefonos IP Externos...
+		[x] Radio ITF IP Externos...
+		[x] Grabadores...
+OTROS
+	[x] Activar / Desactivar el almacenamiento de PTT/SQH
+	[] A veces en RESET, se queda algun proceso/hilo activo que genera excepciones no controladas. 
+	[x] Poner el ID de configuracion en la página...
+	[] Discriminar las pasarelas REDAN, para no supervisarlas.
+	
+INSTALADOR
+	[x] Siempre borrar el CONFIG...
+
+PETICIONES AENA.
+
+[x] Hardware:
+	[x] Posiciones.
+		[x] Estado general
+		[x] Estado lanes						=> Tabla de Puestos.
+		[x] Estado cliente sincronismo NTP		=> ???.
+
+	[x] Servidores:      
+		[x] Estado general ambos servidores
+		[x] Estado lanes						=> Tabla de Estado General.
+		[x] Estado cliente sincronismo NTP		=> ???.
+		[x] Señalización servidor operativo
+
+	[x] Pasarelas:
+		[x] Estado general
+		[x] Estado tarjetas procesadora			=> Tabla Pasarelas.
+		[x] Estado tarjetas interfaz			=> Tabla de Pasarelas.
+		[x] Estado servicios configurados		=> Tabla de Interfaces LEGACY.
+		[x] Estado lanes						=> Tabla de Pasarelas.
+		[x] Estado cliente sincronismo NTP		=> ???.
+ 
+[] Configuración/Software:
+	[x] Direcciones IP sistema
+		[x] Servidores.
+		[x] Puestos.
+		[x] Pasarelas. 
+		[x] Equipos Externos.
+	[x] URIs sistema.						
+		[x] Puestos (Sectores)					=> Tabla de Puestos.
+			SELECT s.IdTop, s.IdSector, a.IdAbonado FROM sectoressectorizacion s, usuariosabonados a WHERE s.Idsectorizacion='TNF' AND a.IdSector = s.IdSector;
+		[x] Interfaces Radio en Pasarelas		=> Tabla de Interfaces Legacy.
+		[x] Interfaces Telefonía en Pasarelas.	=> Tabla de Interfaces Legacy.
+		[x] Equipos Externos.					=> Tablas de Equipos Externos.
+	[x] Visualización estado nodeBOX
+	[x] Visualización estado proxy IP
+	[x] Estado enlaces con Sacta
+	[] Listado de sesiones SIP con su estado correspondiente (establecida, caída) y señalización de alarma cuando corresponda.
+		[x] Radio.
+		[-] Telefonía.							=> No tiene sentido, lo han copiado de REDAN. Esta información no está centralizada...
+
+[] Documentacion
+	[] Revisar Manual de Usuario.
+		[] Documentacion MIB
+	[] Revisar Protocolo de Pruebas.
+
+
+	

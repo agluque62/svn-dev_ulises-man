@@ -1,0 +1,233 @@
+{
+	"id": "PresenceServer",
+	"mode": "Master",
+	"conf": "09/10/2018 16:52:07",
+	"proxies": [{
+			"id": "ACC-BCN",
+			"type": 7,
+			"endp": "192.168.0.53:5060",
+			"status": 0,
+			"ver": 1
+		}, {
+			"id": "ACC-CAN",
+			"type": 7,
+			"endp": "10.40.60.129:5060",
+			"status": 3,
+			"ver": 0
+		}, {
+			"id": "ACC-CAN",
+			"type": 8,
+			"endp": "10.40.61.129:5060",
+			"status": 3,
+			"ver": 0
+		}, {
+			"id": "ACC-MAD",
+			"type": 7,
+			"endp": "10.12.61.35:5060",
+			"status": 3,
+			"ver": 0
+		}, {
+			"id": "ACC-MAD",
+			"type": 6,
+			"endp": "10.12.61.36:5060",
+			"status": 0,
+			"ver": 0
+		}, {
+			"id": "TorreNorte",
+			"type": 5,
+			"endp": "10.12.60.36:5060",
+			"status": 0,
+			"ver": 0
+		}
+	],
+	"internals": [{
+			"id": "TorreNorte",
+			"type": 5,
+			"main": true,
+			"connected": false,
+			"endp": "10.12.60.36:5060",
+			"pres": "10.12.60.36:8080",
+			"subs": [{
+					"id": "SIP0001",
+					"uri": "<sip:SIP0001@10.12.60.36:5060>",
+					"status": 3,
+					"ver": 0
+				}, {
+					"id": "SIP0002",
+					"uri": "<sip:SIP0002@10.12.60.36:5060>",
+					"status": 3,
+					"ver": 0
+				}
+			]
+		}
+	],
+	"externals": [{
+			"id": "ACC-BCN",
+			"type": 3,
+			"main": true,
+			"connected": true,
+			"endp": "192.168.0.53:5060",
+			"pres": "10.12.60.130:8060",
+			"subs": [{
+					"id": "315001",
+					"uri": "<sip:315001@10.12.60.130:8060>",
+					"status": 0,
+					"ver": 1
+				}, {
+					"id": "315002",
+					"uri": "<sip:315002@10.12.60.130:8060>",
+					"status": 0,
+					"ver": 1
+				}
+			]
+		}, {
+			"id": "ACC-CAN",
+			"type": 3,
+			"main": true,
+			"connected": false,
+			"endp": "10.40.60.129:5060",
+			"pres": "none",
+			"subs": [{
+					"id": "315701",
+					"uri": "Not Presence Server",
+					"status": 3,
+					"ver": 0
+				}, {
+					"id": "315703",
+					"uri": "Not Presence Server",
+					"status": 3,
+					"ver": 0
+				}
+			]
+		}, {
+			"id": "ACC-CAN",
+			"type": 3,
+			"main": false,
+			"connected": false,
+			"endp": "10.40.61.129:5060",
+			"pres": "10.40.60.129:5060",
+			"subs": [{
+					"id": "315701",
+					"uri": "<sip:315701@10.40.60.129:5060>",
+					"status": 3,
+					"ver": 0
+				}, {
+					"id": "315703",
+					"uri": "<sip:315703@10.40.60.129:5060>",
+					"status": 3,
+					"ver": 0
+				}
+			]
+		}, {
+			"id": "ACC-MAD",
+			"type": 3,
+			"main": true,
+			"connected": false,
+			"endp": "10.12.61.35:5060",
+			"pres": "none",
+			"subs": [{
+					"id": "314001",
+					"uri": "Not Presence Server",
+					"status": 3,
+					"ver": 0
+				}, {
+					"id": "314002",
+					"uri": "Not Presence Server",
+					"status": 3,
+					"ver": 0
+				}, {
+					"id": "318001",
+					"uri": "Not Presence Server",
+					"status": 3,
+					"ver": 0
+				}
+			]
+		}, {
+			"id": "ACC-MAD",
+			"type": 3,
+			"main": false,
+			"connected": false,
+			"endp": "10.12.61.36:5060",
+			"pres": "none",
+			"subs": [{
+					"id": "314001",
+					"uri": "Not Presence Server",
+					"status": 3,
+					"ver": 0
+				}, {
+					"id": "314002",
+					"uri": "Not Presence Server",
+					"status": 3,
+					"ver": 0
+				}, {
+					"id": "318001",
+					"uri": "Not Presence Server",
+					"status": 3,
+					"ver": 0
+				}
+			]
+		}
+	],
+	"PersistenceOfStates": [{
+			"res": "<sip:315001@192.168.0.53:5060>",
+			"std": 0
+		}, {
+			"res": "<sip:315002@192.168.0.53:5060>",
+			"std": 0
+		}, {
+			"res": "<sip:315701@10.40.60.129:5060>",
+			"std": 3
+		}, {
+			"res": "<sip:315703@10.40.60.129:5060>",
+			"std": 3
+		}, {
+			"res": "<sip:315701@10.40.61.129:5060>",
+			"std": 3
+		}, {
+			"res": "<sip:315703@10.40.61.129:5060>",
+			"std": 3
+		}, {
+			"res": "<sip:314001@10.12.61.35:5060>",
+			"std": 3
+		}, {
+			"res": "<sip:314002@10.12.61.35:5060>",
+			"std": 3
+		}, {
+			"res": "<sip:318001@10.12.61.35:5060>",
+			"std": 3
+		}, {
+			"res": "<sip:314001@10.12.61.36:5060>",
+			"std": 3
+		}, {
+			"res": "<sip:314002@10.12.61.36:5060>",
+			"std": 3
+		}, {
+			"res": "<sip:318001@10.12.61.36:5060>",
+			"std": 3
+		}, {
+			"res": "SIP0001",
+			"std": 3
+		}, {
+			"res": "SIP0002",
+			"std": 3
+		}, {
+			"res": "<ACC-BCN,ExternalProxy,[192.168.0.53:5060]>",
+			"std": 0
+		}, {
+			"res": "<ACC-CAN,ExternalProxy,[10.40.60.129:5060]>",
+			"std": 3
+		}, {
+			"res": "<ACC-CAN,ExternalAltProxy,[10.40.61.129:5060]>",
+			"std": 3
+		}, {
+			"res": "<ACC-MAD,ExternalProxy,[10.12.61.35:5060]>",
+			"std": 3
+		}, {
+			"res": "<ACC-MAD,ExternalAltProxy,[10.12.61.36:5060]>",
+			"std": 3
+		}, {
+			"res": "<TorreNorte,InternalProxy,[10.12.60.36:5060]>",
+			"std": 3
+		}
+	]
+}

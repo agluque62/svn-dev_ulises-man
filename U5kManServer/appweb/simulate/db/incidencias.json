@@ -1,0 +1,440 @@
+﻿{
+	"lista": 
+	[
+	  {
+		"id":1,
+		"desc":"Equipo HF conectado",
+		"alarm":null
+	  },
+	  {
+		"id":2,
+		"desc":"Error en equipo HF",
+		"alarm":1
+	  },
+	  {
+		"id":3,
+		"desc":"Equipo HF desconectado",
+		"alarm":1
+	  },
+	  {
+		"id":4,
+		"desc":"Equipo HF asignado",
+		"alarm":null
+	  },
+	  {
+		"id":5,
+		"desc":"Equipo HF liberado",
+		"alarm":null
+	  },
+	  {
+		"id":6,
+		"desc":"Error HF general",
+		"alarm":1
+	  },
+	  {
+		"id":7,
+		"desc":"Error HF asignación",
+		"alarm":1
+	  },
+	  {
+		"id":8,
+		"desc":"Error HF desasignación",
+		"alarm":1
+	  },
+	  {
+		"id":9,
+		"desc":"Error HF asignación múltiple",
+		"alarm":1
+	  },
+	  {
+		"id":10,
+		"desc":"Error HF preparaci�n SELCAL",
+		"alarm":1
+	  },
+	  {
+		"id":11,
+		"desc":"U5KI_NBX_002",
+		"alarm":null
+	  },
+	  {
+		"id":12,
+		"desc":"U5KI_NBX_003",
+		"alarm":null
+	  },
+	  {
+		"id":96,
+		"desc":"Cambio de día.",
+		"alarm":0
+	  },
+	  {
+		"id":101,
+		"desc":"Selección SCV.",
+		"alarm":null
+	  },
+	  {
+		"id":105,
+		"desc":"Carga de sectorización.",
+		"alarm":null
+	  },
+	  {
+		"id":106,
+		"desc":"Error carga sectorización.",
+		"alarm":0
+	  },
+	  {
+		"id":108,
+		"desc":"Rechazo sectorización. No están todos los sectores reales.",
+		"alarm":0
+	  },
+	  {
+		"id":109,
+		"desc":"Sectorización automática implantada.",
+		"alarm":null
+	  },
+	  {
+		"id":110,
+		"desc":"Sectorización automática rechazada.",
+		"alarm":0
+	  },
+	  {
+		"id":111,
+		"desc":"Sector asignado a posición.",
+		"alarm":null
+	  },
+	  {
+		"id":112,
+		"desc":"Sector desasignado de la posición.",
+		"alarm":null
+	  },
+	  {
+		"id":113,
+		"desc":"Rechazo sectorización. 1 + 1 no activo.",
+		"alarm":null
+	  },
+	  {
+		"id":201,
+		"desc":"Servidor 1 activo.",
+		"alarm":0
+	  },
+	  {
+		"id":203,
+		"desc":"Servidor 2 activo.",
+		"alarm":0
+	  },
+	  {
+		"id":1001,
+		"desc":"Entrada TOP.",
+		"alarm":0
+	  },
+	  {
+		"id":1003,
+		"desc":"Conexión jacks ejecutivo.",
+		"alarm":0
+	  },
+	  {
+		"id":1005,
+		"desc":"Conexión jacks ayudante.",
+		"alarm":0
+	  },
+	  {
+		"id":1007,
+		"desc":"Conexión altavoz.",
+		"alarm":0
+	  },
+	  {
+		"id":1009,
+		"desc":"Panel pasa a operación.",
+		"alarm":0
+	  },
+	  {
+		"id":1011,
+		"desc":"Página de frecuencias seleccionada.",
+		"alarm":null
+	  },
+	  {
+		"id":1012,
+		"desc":"Selección recurso radio.",
+		"alarm":null
+	  },
+	  {
+		"id":1013,
+		"desc":"Estado selección.",
+		"alarm":null
+	  },
+	  {
+		"id":1014,
+		"desc":"Estado PTT.",
+		"alarm":null
+	  },
+	  {
+		"id":1015,
+		"desc":"Facilidad seleccionada.",
+		"alarm":null
+	  },
+	  {
+		"id":1016,
+		"desc":"Llamada entrante Posicion.",
+		"alarm":null
+	  },
+	  {
+		"id":1017,
+		"desc":"Llamada saliente Posicion.",
+		"alarm":null
+	  },
+	  {
+		"id":1018,
+		"desc":"Estado Recepción.",
+		"alarm":0
+	  },
+	  {
+		"id":1019,
+		"desc":"Fin llamada Posicion.",
+		"alarm":null
+	  },
+	  {
+		"id":1020,
+		"desc":"Llamada telefonía establecida",
+		"alarm":null
+	  },
+	  {
+		"id":1021,
+		"desc":"Función Briefing",
+		"alarm":null
+	  },
+	  {
+		"id":1022,
+		"desc":"Reproducción GLP",
+		"alarm":null
+	  },
+	  {
+		"id":2001,
+		"desc":"Entrada GW.",
+		"alarm":0
+	  },
+	  {
+		"id":2003,
+		"desc":"Conexión Recurso Radio.",
+		"alarm":null
+	  },
+	  {
+		"id":2005,
+		"desc":"Conexión Recurso Telefonía.",
+		"alarm":null
+	  },
+	  {
+		"id":2007,
+		"desc":"Conexión tarjeta interfaz",
+		"alarm":0
+	  },
+	  {
+		"id":2009,
+		"desc":"Conexi�n Recurso R2.",
+		"alarm":null
+	  },
+	  {
+		"id":2010,
+		"desc":"Desconexión Recurso R2.",
+		"alarm":1
+	  },
+	  {
+		"id":2012,
+		"desc":"Error protocolo LCN.",
+		"alarm":1
+	  },
+	  {
+		"id":2013,
+		"desc":"Conexión Recurso LCN.",
+		"alarm":null
+	  },
+	  {
+		"id":2020,
+		"desc":"Llamada entrante R2.",
+		"alarm":null
+	  },
+	  {
+		"id":2021,
+		"desc":"Fin llamada entrante R2.",
+		"alarm":null
+	  },
+	  {
+		"id":2022,
+		"desc":"Llamada saliente R2.",
+		"alarm":null
+	  },
+	  {
+		"id":2023,
+		"desc":"Fin llamada saliente R2.",
+		"alarm":null
+	  },
+	  {
+		"id":2024,
+		"desc":"Llamada prueba R2.",
+		"alarm":null
+	  },
+	  {
+		"id":2025,
+		"desc":"Error protocolo R2.",
+		"alarm":1
+	  },
+	  {
+		"id":2030,
+		"desc":"Llamada entrante LCN.",
+		"alarm":null
+	  },
+	  {
+		"id":2031,
+		"desc":"Fin llamada entrante LCN.",
+		"alarm":null
+	  },
+	  {
+		"id":2032,
+		"desc":"Llamada saliente LCN.",
+		"alarm":null
+	  },
+	  {
+		"id":2033,
+		"desc":"Fin llamada saliente LCN.",
+		"alarm":null
+	  },
+	  {
+		"id":2040,
+		"desc":"Llamada entrante telefonía.",
+		"alarm":null
+	  },
+	  {
+		"id":2041,
+		"desc":"Fin llamada entrante telefonía.",
+		"alarm":null
+	  },
+	  {
+		"id":2042,
+		"desc":"Llamada saliente telefonía.",
+		"alarm":null
+	  },
+	  {
+		"id":2043,
+		"desc":"Fin llamada saliente telefonía.",
+		"alarm":null
+	  },
+	  {
+		"id":2050,
+		"desc":"PTT On.",
+		"alarm":null
+	  },
+	  {
+		"id":2051,
+		"desc":"PTT Off.",
+		"alarm":null
+	  },
+	  {
+		"id":2052,
+		"desc":"SQ On.",
+		"alarm":null
+	  },
+	  {
+		"id":2053,
+		"desc":"SQ Off.",
+		"alarm":null
+	  },
+	  {
+		"id":2100,
+		"desc":"Selección Principal/Reserva",
+		"alarm":null
+	  },
+	  {
+		"id":3001,
+		"desc":"Entrada Equipo Externo.",
+		"alarm":0
+	  },
+	  {
+		"id":202,
+		"desc":"Servidor 1 caído.",
+		"alarm":1
+	  },
+	  {
+		"id":204,
+		"desc":"Servidor 2 caído.",
+		"alarm":1
+	  },
+	  {
+		"id":1002,
+		"desc":"Caída TOP.",
+		"alarm":1
+	  },
+	  {
+		"id":1004,
+		"desc":"Desconexión jacks ejecutivo.",
+		"alarm":0
+	  },
+	  {
+		"id":1006,
+		"desc":"Desconexión jacks ayudante.",
+		"alarm":0
+	  },
+	  {
+		"id":1008,
+		"desc":"Desconexión altavoz.",
+		"alarm":1
+	  },
+	  {
+		"id":1010,
+		"desc":"Panel pasa a standby.",
+		"alarm":0
+	  },
+	  {
+		"id":2002,
+		"desc":"Caída GW.",
+		"alarm":1
+	  },
+	  {
+		"id":2004,
+		"desc":"Desconexión Recurso Radio.",
+		"alarm":1
+	  },
+	  {
+		"id":2006,
+		"desc":"Desconexión Recurso Telefonía.",
+		"alarm":1
+	  },
+	  {
+		"id":2008,
+		"desc":"Desconexión tarjeta interfaz",
+		"alarm":1
+	  },
+	  {
+		"id":2014,
+		"desc":"Desconexión Recurso LCN.",
+		"alarm":1
+	  },
+	  {
+		"id":3002,
+		"desc":"Caída Equipo Externo.",
+		"alarm":1
+	  },
+	  {
+		"id":3003,
+		"desc":"Otra de Equipo Externo.",
+		"alarm":1
+	  },
+	  {
+		"id":3050,
+		"desc":"Incidencia N+M #1",
+		"alarm":0
+	  },
+	  {
+		"id":3051,
+		"desc":"Incidencia N+M #2",
+		"alarm":0
+	  },
+	  {
+		"id":3052,
+		"desc":"Incidencia N+M #3",
+		"alarm":0
+	  },
+	  {
+		"id":3053,
+		"desc":"Incidencia N+M #4",
+		"alarm":0
+	  }
+	]
+}

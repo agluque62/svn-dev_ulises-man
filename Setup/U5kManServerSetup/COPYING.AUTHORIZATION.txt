@@ -1,0 +1,2 @@
+
+Código fuente modificado del SW GNU y bajo COPYING.LESSER disponible libremente bajo petición por escrito a NÚCLEO a la siguiente dirección: C/Virgilio 2, 28223 Pozuelo de Alarcón, Madrid (Spain).

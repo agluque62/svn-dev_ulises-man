@@ -1,0 +1,496 @@
+<h3 translate>Hardware</h3>
+<section id="_tabs">
+    <ul class="nav nav-tabs">
+        <li data-ng-class="{'active': ctrl.pagina()==0}">
+            <a href="" data-ng-click="ctrl.pagina(0)" translate>SPV_OPC_01</a>
+        </li>
+        <li data-ng-class="{'active': ctrl.pagina()==1}">
+            <a href="" data-ng-click="ctrl.pagina(1)" translate>SPV_OPC_02</a>
+        </li>
+        <li data-ng-class="{'active': ctrl.pagina()==2}">
+            <a href="" data-ng-click="ctrl.pagina(2)" translate>SPV_OPC_03</a>
+        </li>
+        <li data-ng-class="{'active': ctrl.pagina()==3}">
+            <a href="" data-ng-click="ctrl.pagina(3)" translate>Servicios Centralizados</a>
+        </li>
+        <li data-ng-class="{'active': ctrl.pagina()==4}" ng-show="ctrl.std.pbx.enable==1">
+            <a href="" data-ng-click="ctrl.pagina(4)" translate>SPV_OPC_04</a>
+        </li>
+        <li data-ng-class="{'active': ctrl.pagina()==5}">
+            <a href="" data-ng-click="ctrl.pagina(5)" translate>Recursos Externos</a>
+        </li>
+    </ul>
+</section>
+<section id="_contenido" class="hw">
+    <!-- Pantalla de Estado General -->
+    <div id="spvGlobal" data-ng-show="ctrl.pagina()==0">
+        <h1><strong translate>SPV_GLOBAL_01</strong></h1>
+        <div class="row">
+            <div class="col-md-4">
+                <a ng-href="{{ctrl.serv_url()}}" class="thumbnail" ng-show="ctrl.std.sv1.enable==1">
+                    <img ng-src="./images/_server.jpg" alt="Server-1" class="{{ctrl.serv_std_class(0, ctrl.std.sv1)}}" height="128">
+                    <div class="div_titulo">{{ctrl.std.sv1.name}}</div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a ng-href="{{ctrl.serv_url()}}" class="thumbnail" ng-show="ctrl.std.sv2.enable==1">
+                    <img ng-src="./images/_server.jpg" alt="Server-2" class="{{ctrl.serv_std_class(1, ctrl.std.sv2)}}" height="128">
+                    <div class="div_titulo">{{ctrl.std.sv2.name}}</div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a ng-href="{{ctrl.std.ntp.url}}" class="thumbnail" ng-show="ctrl.std.ntp.enable==1">
+                    <img ng-src="./images/_ntp.jpg" alt="Ntp" class="{{ctrl.std_class(ctrl.std.ntp)}}" height="128">
+                    <div class="div_titulo">{{ctrl.std.ntp.name}}</div>
+                </a>
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="col-md-4">
+                <a ng-href="{{ctrl.std.cwp.url}}" class="thumbnail" ng-click="ctrl.pagina(1)" ng-show="ctrl.std.cwp.enable==1">
+                    <img ng-src="./images/_paneles.jpg" alt="Paneles" class="{{ctrl.std_class(ctrl.std.cwp)}}" height="128">
+                    <div class="div_titulo">{{ctrl.std.cwp.name}}</div>
+                </a>
+            </div>
+
+            <div class="col-md-4" >
+
+                <a ng-href="" class="thumbnail" ng-show="ctrl.nmxSplitted()==false">
+                    <img ng-src="./images/radioserver.jpg" alt="Nodebox" class="{{ctrl.nbx_mixed_std_class()}}" width="70%;"
+                         ng-click="ctrl.pagina(3)">
+                    <div class="div_titulo">{{ctrl.nbx_mixed_name()}}</div>
+                </a>
+
+                <table class="table" ng-show="ctrl.nmxSplitted()==true">
+                    <tr>
+                        <td class="text-center">
+                            <!--<p class="text-info text-center" translate>Radio</p>-->
+
+                            <a ng-href="" class="thumbnail">
+                                <div class="nbx-img-container">
+                                    <img ng-src="./images/radio-server-new.png" alt="Radio" class="{{ctrl.nbx_radio_std_class()}}" ng-click="ctrl.pagina(3)" width="100%">
+                                    <div class="nbx-img-bottom-right">{{ctrl.nbx_radio_count()}}</div>
+                                </div>
+                                <div class="nbxip">
+                                    <p>{{ctrl.nbx_radio_name()}}</p>
+                                </div>
+                            </a>
+
+                        </td>
+                        <td class="text-center">
+                            <!--                        <p class="text-info text-center" translate>Telefonia</p>-->
+                            <a ng-href="" class="thumbnail">
+                                <div class="nbx-img-container">
+
+                                    <img ng-src="./images/phone-focus.jpg" alt="Telefonia" class="{{ctrl.nbx_phone_std_class()}}" ng-click="ctrl.pagina(3)" width="100%">
+                                    <div class="nbx-img-bottom-right">{{ctrl.nbx_phone_count()}}</div>
+                                </div>
+                                <div class="nbxip">
+                                    <p>{{ctrl.nbx_phone_name()}}</p>
+                                </div>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <div class="col-md-4">
+                <a ng-href="{{ctrl.std.sv1.gws}}" ng-click="ctrl.pagina(2)" class="thumbnail" ng-show="ctrl.std.gws.enable==1">
+                    <img ng-src="./images/_pasarelas.jpg" alt="Pasarelas" class="{{ctrl.std_class(ctrl.std.gws)}}" height="128">
+                    <div class="div_titulo">{{ctrl.std.gws.name}}</div>
+                </a>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <a target="_blank" ng-href="{{ctrl.std.pbx.url}}" class="thumbnail" ng-show="ctrl.std.pbx.enable==1">
+                    <img ng-src="./images/pabxip.jpg" alt="Pabx" class="{{ctrl.std_class(ctrl.std.pbx)}}" height="128">
+                    <div class="div_titulo">{{ctrl.std.pbx.name}}</div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a ng-href="{{ctrl.std.ext.url}}" class="thumbnail" ng-show="ctrl.std.ext.enable==1" ng-click="ctrl.pagina(5)">
+                    <img ng-src="./images/extern2.jpg" alt="Externos" class="{{ctrl.std_class(ctrl.std.ext)}}" height="128">
+                    <div class="div_titulo">{{ctrl.std.ext.name}}</div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <table class="table" ng-show="ctrl.std.sct1.enable==1 || ctrl.std.sct2.enable==1">
+                    <tr>
+                        <td class="text-info text-center" translate>SACTA-1</td>
+                        <td class="text-info text-center" translate>SACTA-2</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><img ng-src="./images/_sacta.jpg" class="{{ctrl.std_class(ctrl.std.sct1)}}" height="96"></td>
+                        <td class="text-center"><img ng-src="./images/_sacta.jpg" class="{{ctrl.std_class(ctrl.std.sct2)}}" height="96"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="text-center">
+                            <button id="startstopsacta" type="button" ng-click="ctrl.SactaServiceStartStop(ctrl.std.sactaservicerunning)"
+                                    class="{{ctrl.SactaServiceStd(ctrl.std.sactaservicerunning).clase}}">
+                                {{ctrl.SactaServiceStd(ctrl.std.sactaservicerunning).text}}
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+        </div>
+    </div>
+
+    <!-- Pantalla de Estado de Operadores -->
+    <div id="spvOperadores" data-ng-show="ctrl.pagina()==1">
+        <h1 title="Header"><strong translate>SPV_CWP_01</strong></h1>
+        <div class="row" ng-repeat="cwp in ctrl.cwps track by $index" ng-if="$index % 6 == 0">
+            <div class="col-md-2" ng-repeat="i in [$index, $index + 1, $index + 2, $index + 3, $index + 4, $index + 5]"
+                 ng-if="ctrl.cwps[i] != null">
+
+                <span uib-dropdown on-toggle="toggled(open)" ng-show="true">
+                    <a href="" uib-dropdown-toggle class="tops text-center">Control</a>
+                    <ul class="dropdown-menu" aria-labelledby="simple-dropdown" role="menu" ng-show="ctrl.cwps[i].std!=0">
+                        <li role="menuitem"><a href ng-click="ctrl.ope_version_show(ctrl.cwps[i])" translate>SPV_GWS_04</a></li>
+                    </ul>
+                </span>
+
+                <a ng-href="" class="thumbnail" ng-show="true">
+                    <img ng-src="./images/Operador.png" alt="" class="{{ctrl.std_class(ctrl.cwps[i])}}"
+                         bs-popover
+                         data-content="{{ctrl.ope_detail(ctrl.cwps[i])}}"
+                         ng-click="ctrl.popover_click($event)"
+                         oncontextmenu="alert('oncontextmenu: ' + ctrl.cwps[i].name)">
+                    <p class="text-info text-center mt-1">{{ctrl.cwps[i].name}}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pantalla de Estado de Pasarelas -->
+    <div id="spvPasarelas" data-ng-show="ctrl.pagina()==2">
+        <h1><strong translate>SPV_GWS_01</strong></h1>
+        <div class="row" ng-repeat="gw in ctrl.gws track by $index" ng-if="$index % 6 == 0">
+            <div class="col-md-2" ng-repeat="i in [$index, $index + 1, $index + 2, $index + 3, $index + 4, $index + 5]"
+                 ng-if="ctrl.gws[i] != null">
+                <span id="control" uib-dropdown on-toggle="toggled(open)" ng-show="true">
+                    <a href="" id="simple-dropdown" uib-dropdown-toggle>
+                        <p translate>SPV_GWS_02</p>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="simple-dropdown" role="menu">
+                        <!--                        <li role="menuitem" ng-show="ctrl.gws[i].std != 0"><a href ng-click="ctrl.gw_ir(ctrl.gws[i])" translate>Ir a...</a></li>-->
+                        <li role="menuitem"><a href ng-click="ctrl.gw_open(ctrl.gws[i])" translate>SPV_GWS_03</a></li>
+                        <li role="menuitem" ng-show="ctrl.gws[i].std!=0"><a href ng-click="ctrl.gw_version(ctrl.gws[i])" translate>SPV_GWS_04</a></li>
+                        <li class="divider" ng-show="{{ctrl.gws[i].tipo!=0 && ctrl.gws[i].std!=0}}"></li>
+                        <li role="menuitem" ng-show="{{ctrl.gws[i].tipo!=0 && ctrl.gws[i].std!=0}}"><a href ng-click="ctrl.gw_control_pr(ctrl.gws[i])" translate>SPV_GWS_05</a></li>
+                    </ul>
+                </span>
+                <a ng-href="" class="thumbnail" ng-show="true" ng-click="">
+                    <img ng-src='{{ctrl.gw_img(ctrl.gws[i])}}' alt="" class="{{ctrl.std_class(ctrl.gws[i])}}"
+                         bs-popover
+                         data-content="{{ctrl.gw_detail(ctrl.gws[i])}}"
+                         ng-click="ctrl.popover_click($event)" />
+                    <p class="text-info text-center mt-1">{{ctrl.gws[i].name}}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pantalla de Estado de Nodeboxes -->
+    <div id="spvNodebox" data-ng-show="ctrl.pagina()==3">
+        <h1><strong translate>Elementos con Servicios Centralizados</strong></h1>
+
+        <div class="row" ng-repeat="equ in ctrl.std.csi.mixed.phsl track by $index" ng-if="$index % 3 == 0" ng-show="ctrl.nmxSplitted()==false">
+            <div class="col-md-4" ng-repeat="i in [$index, $index + 1, $index + 2]"
+                 ng-if="ctrl.std.csi.mixed.phsl[i] != null">
+                <a target="_blank" ng-href="{{ctrl.std.csi.mixed.phsl[i].Value.url}}" class="thumbnail" ng-show="true"
+                   style=":hover {text-decoration: none;}">
+                    <img ng-src="./images/radioserver.jpg" alt="" class="{{ctrl.nbx_mixed_list_class()}}" width="70%">
+                    <p class="text-info text-center mt-1">{{ctrl.std.csi.mixed.phsl[i].Value.ip}}</p>
+                    <div ng-bind-html="ctrl.nbx_mixed_info_services(ctrl.std.csi.mixed.phsl[i].Value)"></div>
+                </a>
+            </div>
+        </div>
+
+        <div ng-show="ctrl.nmxSplitted()==true">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="text-info text-center"><strong translate>Radio</strong></p>
+
+                    <div class="row" ng-repeat="equ in ctrl.std.csi.radio.rdsl track by $index" ng-if="$index % 2 == 0">
+                        <div class="col-md-6" ng-repeat="i in [$index, $index + 1]"
+                             ng-if="ctrl.std.csi.radio.rdsl[i] != null">
+                            <a target="_blank" ng-href="{{ctrl.std.csi.radio.rdsl[i].Value.url}}" class="thumbnail" ng-show="true"
+                               style=":hover {text-decoration: none;}">
+                                <img ng-src="./images/radio-server-new.png" alt="" class="{{ctrl.nbx_radio_list_class()}}">
+                                <p class="text-info text-center mt-1">{{ctrl.std.csi.radio.rdsl[i].Value.ip}}</p>
+                                <div ng-bind-html="ctrl.nbx_radio_info_services(ctrl.std.csi.radio.rdsl[i].Value)"></div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <p class="text-info text-center"><strong translate>Telefonia</strong></p>
+
+                    <div class="row" ng-repeat="equ in ctrl.std.csi.phone.phsl track by $index" ng-if="$index % 2 == 0">
+                        <div class="col-md-6" ng-repeat="i in [$index, $index + 1]"
+                             ng-if="ctrl.std.csi.phone.phsl[i] != null">
+                            <a target="_blank" ng-href="{{ctrl.std.csi.phone.phsl[i].Value.url}}" class="thumbnail" ng-show="true"
+                               style=":hover {text-decoration: none;}">
+                                <img ng-src="./images/phone-focus.jpg" alt="" class="{{ctrl.nbx_phone_list_class()}}">
+                                <p class="text-info text-center mt-1">{{ctrl.std.csi.phone.phsl[i].Value.ip}}</p>
+                                <div ng-bind-html="ctrl.nbx_phone_info_services(ctrl.std.csi.phone.phsl[i].Value)"></div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- Pantalla de Estado de Abonados PABX -->
+    <div id="spvAbonados" data-ng-show="ctrl.pagina()==4">
+        <h1><strong translate>SPV_ABN_01</strong></h1>
+        <div class="row" ng-repeat="equ in ctrl.pbxab track by $index" ng-if="$index % 6 == 0">
+            <div class="col-md-2" ng-repeat="i in [$index, $index + 1, $index + 2, $index + 3, $index + 4, $index + 5]"
+                 ng-if="ctrl.pbxab[i] != null">
+                <a ng-href="" class="thumbnail" ng-show="true">
+                    <img ng-src="./images/voiptel.jpg" alt="" class="{{ctrl.std_class(ctrl.pbxab[i])}}">
+                    <p class="text-info text-center mt-1">{{ctrl.pbxab[i].name}}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pantalla de Estado de Equipos Externos (Voip) -->
+    <div id="spvEquiposExt" data-ng-show="ctrl.pagina()==5">
+        <h1><strong translate>Recursos Externos</strong></h1>
+        <div class="row" ng-repeat="equ in ctrl.exteq_grps track by $index" ng-if="$index % 6 == 0">
+            <div class="col-md-2" ng-repeat="i in [$index, $index + 1, $index + 2, $index + 3, $index + 4, $index + 5]"
+                 ng-if="ctrl.exteq_grps[i] != null">
+                <a ng-href="" class="thumbnail" ng-show="true">
+                    <img ng-src="{{ctrl.exteq_img(ctrl.exteq_grps[i])}}" alt=""
+                         class="{{ctrl.exteq_std_class(ctrl.exteq_grps[i])}}"
+                         width="70" height="35"
+                         bs-popover
+                         data-content="{{ctrl.exteq_detail(ctrl.exteq_grps[i])}}"
+                         ng-click="ctrl.popover_click($event)">
+                    <p class="text-info text-center mt-1">{{ctrl.exteq_grps[i].name}}</p>
+                </a>
+            </div>
+        </div>
+        <div class="text-center">
+            <ul class="pagination">
+                <li ng-class="{'active': ctrl.exteq_grp==-1}"><a href="" ng-click='ctrl.exteq_grupo(-1)' translate>Todos</a></li>
+                <li ng-class="{'active': ctrl.exteq_grp==0}"><a href="" ng-click='ctrl.exteq_grupo(0)' translate>Telefonia</a></li>
+                <li ng-class="{'active': ctrl.exteq_grp==1}"><a href="" ng-click='ctrl.exteq_grupo(1)' translate>Receptores Radio</a></li>
+                <li ng-class="{'active': ctrl.exteq_grp==2}"><a href="" ng-click='ctrl.exteq_grupo(2)' translate>Transmisores Radio</a></li>
+                <li ng-class="{'active': ctrl.exteq_grp==3}"><a href="" ng-click='ctrl.exteq_grupo(3)' translate>Grabadores</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Pantalla Modal de Datos de Pasarela -->
+    <div id="gwDataModal" class="modal fade" role="dialog" tabindex='-1'>
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{ctrl.gw_detail_title()}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="Estado Global">
+                        <p translate>SPV_GWD_01</p>
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th translate>SPV_GWD_02</th>
+                                    <th translate>SPV_GWD_04</th>
+                                    <th translate>SPV_GWD_05</th>
+                                    <th translate>LAN1-LAN2</th>
+                                    <!--                                    <th translate>SPV_GWD_06</th>-->
+                                    <!--                                    <th translate>SPV_GWD_07</th>-->
+                                    <th translate>SPV_GWD_03</th>
+                                    <th translate>SIP</th>
+                                    <th translate>CFG</th>
+                                    <th translate>SNMP</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr data-ng-repeat="dt in ctrl.gwgen" class="{{ctrl.lserv.class_okfallo(dt.fa==1 && dt.lan1==1 && dt.lan2==1)}}">
+                                    <td>{{ctrl.lserv.texto_tipogw(dt.tipo)}}</td>
+                                    <td>{{dt.cpu}}</td>
+                                    <td>{{dt.ip}}</td>
+                                    <td>{{ctrl.lserv.texto_okfallo(dt.lan1)+"-"+ctrl.lserv.texto_okfallo(dt.lan2)}}</td>
+                                    <!--                                    <td>{{ctrl.lserv.texto_okfallo(dt.lan2)}}</td>-->
+                                    <td>{{ctrl.lserv.texto_okfallo(dt.fa)}}</td>
+                                    <td>{{ctrl.lserv.texto_inservice_outservice(dt.sipMod)}}</td>
+                                    <td>{{ctrl.lserv.texto_inservice_outservice(dt.cfgMod)}}</td>
+                                    <td>{{ctrl.lserv.texto_inservice_outservice(dt.snmpMod)}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="Esclavas">
+                        <p translate>Tarjetas</p>
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th translate>0</th>
+                                    <th translate>1</th>
+                                    <th translate>2</th>
+                                    <th translate>3</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="{{ctrl.lserv.class_okfallo(ctrl.tars[0].cfg==ctrl.tars[0].not)}}">{{ctrl.tars[0].not==1 ? "IA4" : "---"}}</td>
+                                    <td class="{{ctrl.lserv.class_okfallo(ctrl.tars[1].cfg==ctrl.tars[1].not)}}">{{ctrl.tars[1].not==1 ? "IA4" : "---"}}</td>
+                                    <td class="{{ctrl.lserv.class_okfallo(ctrl.tars[2].cfg==ctrl.tars[2].not)}}">{{ctrl.tars[2].not==1 ? "IA4" : "---"}}</td>
+                                    <td class="{{ctrl.lserv.class_okfallo(ctrl.tars[3].cfg==ctrl.tars[3].not)}}">{{ctrl.tars[3].not==1 ? "IA4" : "---"}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="Estado de Interfaces">
+                        <p translate>SPV_GWD_08</p>
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th translate>SPV_GWD_09</th>
+                                    <th translate>SPV_GWD_10</th>
+                                    <th translate>SPV_GWD_11</th>
+                                    <th translate>SPV_GWD_12</th>
+                                    <th translate>SPV_GWD_13</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr data-ng-repeat="itf in ctrl.itfs" class="{{ctrl.lserv.class_estado(itf.cfg, itf.not, itf.std)}}">
+                                    <td>{{ctrl.lserv.slot_itf($index)}}</td>
+                                    <td>{{itf.name}}</td>
+                                    <td>{{ctrl.lserv.texto_recurso_cfg(itf.cfg)}}</td>
+                                    <td>{{ctrl.lserv.texto_recurso_notificado(itf.not)}}</td>
+                                    <td>{{ctrl.lserv.texto_estado(itf.std)}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" translate>SPV_GWD_14</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pantalla Modal Versiones de Pasarela -->
+    <div id="gwVersionModal_old" class="modal fade" role="dialog" tabindex='-1'>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{ctrl.gw_detail_title()}}</h4>
+                    <h4 translate>SPV_GWV_01</h4>
+                </div>
+                <div class="modal-body">
+                    <p data-ng-repeat="line in ctrl.version">{{line.line}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" translate>SPV_GWV_02</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pantalla Modal Versiones de Pasarela -->
+    <div id="gwVersionModal" class="modal fade" role="dialog" tabindex='-1'>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{ctrl.gw_detail_title()}}</h4>
+                    <h4 translate>SPV_GWV_01</h4>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group">
+                        <li class="list-group-item ndf-ver-01">{{"Ulises G 5000. Version " + ctrl.version.Version + " (" + ctrl.version.Fecha + ")"}}</li>
+                        <li class="list-group-item">
+                            <ul class="list-group">
+                                <li class="list-group-item" data-ng_repeat="comp in ctrl.version.Components">
+                                    <button type="button" class="btn btn-default ndf-ver-02" data-toggle="collapse" data-target="#comp-{{$index}}">
+                                        {{comp.Id + " Ver " + ctrl.version.Version}}
+                                    </button>
+                                    <div id="comp-{{$index}}" class="collapse in">
+                                        <ul class="list-group">
+                                            <li class="list-group-item  ndf-ver-03" data-ng_repeat="file in comp.Files">
+                                                <div class="row">
+                                                    <!--                                                    <div class="col-md-3">{{ctrl.verfname(file.Path)}}</div>-->
+                                                    <div class="col-md-4 text-primary">{{ctrl.verfname(file.Path)}}</div>
+                                                    <div class="col-md-2 text-success">{{file.Size}}</div>
+                                                    <div class="col-md-2 text-success">{{file.Date}}</div>
+                                                    <div class="col-md-3 text-success">{{file.Hash}}</div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default bhis" ng_click="ctrl.export_gw_version()" translate>Exportar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" translate>SPV_GWV_02</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pantalla Modal Versiones de OPE -->
+    <div id="opeVersiones" class="modal fade" role="dialog" tabindex='-1'>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{ctrl.ope_shown.name}}</h4>
+                    <h4 translate>SPV_GWV_01</h4>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group">
+                        <li class="list-group-item ndf-ver-01">{{"Ulises V 5000. Version " + ctrl.ope_version.Version + " (" + ctrl.ope_version.Fecha + ")"}}</li>
+                        <li class="list-group-item">
+                            <ul class="list-group">
+                                <li class="list-group-item" data-ng_repeat="comp in ctrl.ope_version.Components">
+                                    <button type="button" class="btn btn-default ndf-ver-02" data-toggle="collapse" data-target="#ocomp-{{$index}}">
+                                        {{comp.Name + " Ver " + ctrl.ope_version.Version}}
+                                    </button>
+                                    <div id="ocomp-{{$index}}" class="collapse in">
+                                        <ul class="list-group">
+                                            <li class="list-group-item  ndf-ver-03" data-ng_repeat="file in comp.Files">
+                                                <div class="row">
+                                                    <div class="col-md-4 text-primary">{{file.Path.substring(file.Path.lastIndexOf("\\") + 1)}}</div>
+                                                    <div class="col-md-2 text-success">{{file.Size}}</div>
+                                                    <div class="col-md-2 text-success">{{file.Date}}</div>
+                                                    <div class="col-md-3 text-success">{{file.MD5}}</div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default bhis" ng_click="ctrl.export_ope_version()" translate>Exportar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" translate>SPV_GWV_02</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+

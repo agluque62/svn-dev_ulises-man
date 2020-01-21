@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <Property Id="DIRIP" Value="127.0.0.1" >
+      <RegistrySearch Id='UV5KI_MTTO_DIRIP' Root='HKLM'
+                     Key='SOFTWARE\Wix\UV5KI_MTTO'
+                     Name='DIRIP_Property' Type='raw' />
+    </Property>
+    
+    <!--<Property Id="PABXIP" Value="127.0.0.1">
+      <RegistrySearch Id='UV5KI_MTTO_PABXIP' Root='HKLM'
+                     Key='SOFTWARE\Wix\UV5KI_MTTO'
+                     Name='PABXIP_Property' Type='raw' />
+    </Property>-->
+
+    <Property Id="MYSQLIP" Value="127.0.0.1">
+      <RegistrySearch Id='UV5KI_MTTO_MYSQLIP' Root='HKLM'
+                     Key='SOFTWARE\Wix\UV5KI_MTTO'
+                     Name='MYSQLIP_Property' Type='raw' />
+    </Property>
+    <Property Id="LANG" Value="es">
+      <RegistrySearch Id='UV5KI_MTTO_LANG' Root='HKLM'
+                     Key='SOFTWARE\Wix\UV5KI_MTTO'
+                     Name='LANG_Property' Type='raw' />
+    </Property>
+
+    <!-- Puerto SNMP del Agente -->
+    <Property Id="SNMPAGPORT" Value="161">
+      <RegistrySearch Id='UV5KI_MTTO_SNMPAGPORT' Root='HKLM'
+                     Key='SOFTWARE\Wix\UV5KI_MTTO'
+                     Name='SNMPAGPORT_Property' Type='raw' />
+    </Property>
+    <!-- Endpoint de los traps RMON -->
+    <Property Id="SNMPRMONSERVER" Value="127.0.0.1">
+      <RegistrySearch Id='UV5KI_MTTO_SNMPRMONSERVER' Root='HKLM'
+                     Key='SOFTWARE\Wix\UV5KI_MTTO'
+                     Name='SNMPRMONSERVER_Property' Type='raw' />
+    </Property>
+
+    <Property Id="CONFLOCAL" Value="http://localhost:8090/index.html#/?user=init"></Property>
+    
+    <Property Id="GDT" Value="0">
+      <RegistrySearch Id='UV5KI_MTTO_GDT' Root='HKLM'
+                     Key='SOFTWARE\Wix\UV5KI_MTTO'
+                     Name='GDT_Property' Type='raw' />
+    </Property>
+
+    <CustomAction Id="SetOpenURL" Property="WixShellExecTarget" Value="[CONFLOCAL]" />
+    <CustomAction Id="OpenURL" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" Return="ignore" />
+    <CustomAction Id='Md5Mark' Directory="INSTALLFOLDER"
+                  Execute='deferred'
+                  Impersonate='no'
+                  ExeCommand='"[INSTALLFOLDER]sfk.exe" select "[COMPANYFOLDER][INSTALLFOLDER_NAME]" .exe .dll +md5gento "[INSTALLFOLDER]md5mark_[PVERSION].md5"'
+                  Return='check' />
+
+    <UI>
+      <Dialog Id="OptionsDlg" Width="370" Height="270" Title="[ProductName] Setup" NoMinimize="yes" >
+
+        <Control Id="IPLabel" Type="Text" X="45"  Y="72" Width="100" Height="15" TabSkip="no" Text="!(loc.OptionsDlgIpLabel)" />
+        <Control Id="IPEdit"  Type="Edit" X="150" Y="70" Width="100" Height="18" Property="DIRIP" Text="{80}" />
+
+        <!--<Control Id="PabxIPLabel" Type="Text" X="45" Y="80" Width="100" Height="15" TabSkip="no" Text="!(loc.OptionsDlgPabxIPLabel)" />
+        <Control Id="PabxIPEdit" Type="Edit" X="45" Y="92" Width="220" Height="18" Property="PABXIP" Text="{80}" />-->
+
+        <Control Id="MySQLIPLabel" Type="Text" X="45"  Y="92" Width="100" Height="15" TabSkip="no" Text="!(loc.OptionsDlgMySQLIPLabel)" />
+        <Control Id="MySQLIPEdit"  Type="Edit" X="150" Y="90" Width="100" Height="18" Property="MYSQLIP" Text="{80}" />
+
+        <Control Id="LangLabel" Type="Text"     X="45"  Y="112" Width="100" Height="15" TabSkip="no" Text="Idioma" />
+        <Control Id="LangCheck" Type="ComboBox" X="150" Y="110" Width="100" Height="18" Property="LANG" ComboList="yes" >
+          <ComboBox Property="LANG">
+            <ListItem Value="es" Text="Castellano" />
+            <ListItem Value="en" Text="Inglés" />
+            <ListItem Value="fr" Text="Francés" />
+          </ComboBox>
+        </Control>
+        <!-- Puerto SNMP del Agente -->
+        <Control Id="SNMPAGPORT_Label" Type="Text" X="45"  Y="132" Width="100" Height="15" TabSkip="no" Text="Puerto SNMP del Agente" />
+        <Control Id="SNMPAGPORT_Edit"  Type="Edit" X="150" Y="130" Width="100" Height="18" Property="SNMPAGPORT" Text="{80}" />
+        <!-- Servidor RMON -->
+        <Control Id="SNMPRMONSERVER_Label" Type="Text" X="45" Y="152" Width="100" Height="15" TabSkip="no" Text="Servidor RMON (ip:puerto)" />
+        <Control Id="SNMPRMONSERVER_Edit"  Type="Edit" X="150" Y="150" Width="100" Height="18" Property="SNMPRMONSERVER" Text="{80}" />
+        <!-- Tipo de Pasarelas duales -->
+        <Control Id="GdtLabel" Type="Text" X="45" Y="172" Width="100" Height="15" TabSkip="no" Text="Tipo GW DUAL" />
+        <Control Id="GdtOptions" Type="ComboBox" X="150" Y="170" Width="100" Height="18" Property="GDT" ComboList="yes" >
+          <ComboBox Property="GDT">
+            <ListItem Value="0" Text="Doble CPU" />
+            <ListItem Value="1" Text="Doble Pasarela" />
+          </ComboBox>
+        </Control>
+        <!--<Control Id="CfgLabel" Type="Text" X="45" Y="140" Width="100" Height="15" TabSkip="no" Text="!(loc.OptionsDlgClusterLabel)" />
+        <Control Id="CfgEdit" Type="Edit" X="45" Y="152" Width="220" Height="18" Property="CLUSTERURL" Text="{80}" />
+
+        <Control Id="SactaLabel" Type="Text" X="45" Y="170" Width="100" Height="15" TabSkip="no" Text="!(loc.OptionsDlgSactaLabel)" />
+        <Control Id="SactaEdit" Type="Edit" X="45" Y="182" Width="220" Height="18" Property="PABXIP" Text="{80}" />
+
+        <Control Id="ClusterLabel" Type="Text" X="45" Y="200" Width="100" Height="15" TabSkip="no" Text="!(loc.OptionsDlgClusterLabel)" />
+        <Control Id="ClusterEdit" Type="Edit" X="45" Y="212" Width="220" Height="18" Property="MYSQLIP" Text="{80}" />-->
+
+        <Control Id="Back" Type="PushButton" X="180" Y="243" Width="56" Height="17" Text="!(loc.WixUIBack)"/>
+        <Control Id="Next" Type="PushButton" X="236" Y="243" Width="56" Height="17" Default="yes" Text="!(loc.WixUINext)" />
+        <Control Id="Cancel" Type="PushButton" X="304" Y="243" Width="56" Height="17" Cancel="yes" Text="!(loc.WixUICancel)" />
+
+        <Control Id="BannerBitmap" Type="Bitmap" X="0" Y="0" Width="370" Height="44" TabSkip="no" Text="WixUI_Bmp_Banner" />
+        <Control Id="Description" Type="Text" X="25" Y="23" Width="280" Height="15" Transparent="yes" NoPrefix="yes">
+          <Text>!(loc.OptionsDlgDescription)</Text>
+        </Control>
+        <Control Id="BottomLine" Type="Line" X="0" Y="234" Width="370" Height="0" />
+        <Control Id="Title" Type="Text" X="15" Y="6" Width="200" Height="15" Transparent="yes" NoPrefix="yes">
+          <Text>{\WixUI_Font_Title}!(loc.OptionsDlgTitle)</Text>
+        </Control>
+        <Control Id="BannerLine" Type="Line" X="0" Y="44" Width="370" Height="0" />
+      </Dialog>
+    </UI>
+
+    <UI Id="MyWixUI_Minimal">
+
+      <TextStyle Id="WixUI_Font_Normal" FaceName="Tahoma" Size="8" />
+      <TextStyle Id="WixUI_Font_Bigger" FaceName="Tahoma" Size="12" />
+      <TextStyle Id="WixUI_Font_Title" FaceName="Tahoma" Size="9" Bold="yes" />
+
+      <Property Id="DefaultUIFont" Value="WixUI_Font_Normal" />
+      <Property Id="WixUI_Mode" Value="Mondo" />
+
+      <DialogRef Id="ErrorDlg" />
+      <DialogRef Id="FatalError" />
+      <DialogRef Id="FilesInUse" />
+      <DialogRef Id="MsiRMFilesInUse" />
+      <DialogRef Id="PrepareDlg" />
+      <DialogRef Id="ProgressDlg" />
+      <DialogRef Id="ResumeDlg" />
+      <DialogRef Id="UserExit" />
+
+      <Publish Dialog="ExitDialog" Control="Finish" Event="EndDialog" Value="Return" Order="999">1</Publish>
+
+      <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="LicenseAgreementDlg">NOT Installed AND NOT PATCH</Publish>
+      <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg">Installed AND PATCH</Publish>
+
+      <Publish Dialog="LicenseAgreementDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg">1</Publish>
+      <Publish Dialog="LicenseAgreementDlg" Control="Next" Event="NewDialog" Value="OptionsDlg" Order="2">LicenseAccepted = "1"</Publish>
+
+      <Publish Dialog="SetupTypeDlg" Control="Back" Event="NewDialog" Value="LicenseAgreementDlg">1</Publish>
+      <Publish Dialog="SetupTypeDlg" Control="TypicalButton" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
+      <Publish Dialog="SetupTypeDlg" Control="CustomButton" Event="NewDialog" Value="CustomizeDlg">1</Publish>
+      <Publish Dialog="SetupTypeDlg" Control="CompleteButton" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
+
+      <Publish Dialog="CustomizeDlg" Control="Back" Event="NewDialog" Value="MaintenanceTypeDlg" Order="1">WixUI_InstallMode = "Change"</Publish>
+      <Publish Dialog="CustomizeDlg" Control="Back" Event="NewDialog" Value="SetupTypeDlg" Order="2">WixUI_InstallMode = "InstallCustom"</Publish>
+      <Publish Dialog="CustomizeDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
+
+      <!--<Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="CustomizeDlg" Order="1">WixUI_InstallMode = "InstallCustom"</Publish>
+      <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="SetupTypeDlg" Order="2">WixUI_InstallMode = "InstallTypical" OR WixUI_InstallMode = "InstallComplete"</Publish>
+      <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="CustomizeDlg" Order="3">WixUI_InstallMode = "Change"</Publish>
+      <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="MaintenanceTypeDlg" Order="4">WixUI_InstallMode = "Repair" OR WixUI_InstallMode = "Remove"</Publish>
+      <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg" Order="2">WixUI_InstallMode = "Update"</Publish>-->
+      <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="OptionsDlg" Order="3">1</Publish>
+
+      <Publish Dialog="MaintenanceWelcomeDlg" Control="Next" Event="NewDialog" Value="MaintenanceTypeDlg">1</Publish>
+
+      <Publish Dialog="MaintenanceTypeDlg" Control="ChangeButton" Event="NewDialog" Value="CustomizeDlg">1</Publish>
+      <Publish Dialog="MaintenanceTypeDlg" Control="RepairButton" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
+      <Publish Dialog="MaintenanceTypeDlg" Control="RemoveButton" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
+      <Publish Dialog="MaintenanceTypeDlg" Control="Back" Event="NewDialog" Value="MaintenanceWelcomeDlg">1</Publish>
+
+      <Publish Dialog="OptionsDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg">1</Publish>
+      <Publish Dialog="OptionsDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
+      <Publish Dialog="OptionsDlg" Control="Cancel" Event="SpawnDialog" Value="CancelDlg">1</Publish>
+
+    </UI>
+
+    <InstallExecuteSequence>
+      <!-- Launch webpage during full uninstall, but not upgrade -->
+      <Custom Action="SetOpenURL" After="InstallFinalize">NOT Installed AND NOT REMOVE</Custom>
+      <Custom Action="OpenURL" After="SetOpenURL">1</Custom>
+      <Custom Action="Md5Mark" Before="InstallFinalize">NOT Installed AND NOT REMOVE</Custom>
+    </InstallExecuteSequence>
+
+  </Fragment>
+
+</Wix>

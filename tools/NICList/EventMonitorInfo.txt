@@ -1,0 +1,204 @@
+DownEventRecord: <Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'>
+	<System>
+		<Provider Name='yukonw7'/>
+		<EventID Qualifiers='24583'>83</EventID>
+		<Level>4</Level>
+		<Task>0</Task>
+		<Keywords>0x80000000000000</Keywords>
+		<TimeCreated SystemTime='2016-09-08T06:54:08.881080900Z'/>
+		<EventRecordID>110142</EventRecordID>
+		<Channel>System</Channel>
+		<Computer>PICT04</Computer>
+		<Security/>
+	</System>
+	<EventData>
+		<Data>\Device\NDMP5</Data>
+		<Data>\DEVICE\{0D3D218C-76C9-49C1-A2CA-0695C547FD13}</Data>
+		<Binary>000008000200380000000000530007600000000000000000000000000000000000000000000000000001DAF0F4490000</Binary>
+	</EventData>
+</Event>
+UpEventRecord: <Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'>
+	<System>
+		<Provider Name='yukonw7'/>
+		<EventID Qualifiers='24583'>123</EventID>
+		<Level>4</Level>
+		<Task>0</Task>
+		<Keywords>0x80000000000000</Keywords>
+		<TimeCreated SystemTime='2016-09-08T06:54:19.390681000Z'/>
+		<EventRecordID>110144</EventRecordID>
+		<Channel>System</Channel>
+		<Computer>PICT04</Computer>
+		<Security/>
+	</System>
+	<EventData>
+		<Data>\Device\NDMP5</Data>
+		<Data>\DEVICE\{0D3D218C-76C9-49C1-A2CA-0695C547FD13}</Data>
+		<Binary>0000080002003800000000007B0007600000000000000000000000000000000000000000000000000001DAF0F4490000</Binary>
+	</EventData>
+</Event>
+DownEventRecord: <Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'>
+	<System>
+		<Provider Name='yukonw7'/>
+		<EventID Qualifiers='24583'>83</EventID>
+		<Level>4</Level>
+		<Task>0</Task>
+		<Keywords>0x80000000000000</Keywords>
+		<TimeCreated SystemTime='2016-09-08T06:54:24.472481000Z'/>
+		<EventRecordID>110148</EventRecordID>
+		<Channel>System</Channel>
+		<Computer>PICT04</Computer>
+		<Security/>
+	</System>
+	<EventData>
+		<Data>\Device\NDMP6</Data>
+		<Data>\DEVICE\{CB27F6D0-11B8-4DC3-AC41-17A49DFA88F1}</Data>
+		<Binary>000008000200380000000000530007600000000000000000000000000000000000000000000000000001DAF0F44A0000</Binary>
+	</EventData>
+</Event>
+UpEventRecord: <Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'>
+	<System>
+		<Provider Name='yukonw7'/>
+		<EventID Qualifiers='24583'>123</EventID>
+		<Level>4</Level>
+		<Task>0</Task>
+		<Keywords>0x80000000000000</Keywords>
+		<TimeCreated SystemTime='2016-09-08T06:54:30.647281000Z'/>
+		<EventRecordID>110150</EventRecordID>
+		<Channel>System</Channel>
+		<Computer>PICT04</Computer>
+		<Security/>
+	</System>
+	<EventData>
+		<Data>\Device\NDMP6</Data>
+		<Data>\DEVICE\{CB27F6D0-11B8-4DC3-AC41-17A49DFA88F1}</Data>
+		<Binary>0000080002003800000000007B0007600000000000000000000000000000000000000000000000000001DAF0F44A0000</Binary>
+	</EventData>
+</Event>
+ScanForDevices....
+Device \\PICT04\root\cimv2:Win32_NetworkAdapter.DeviceID="7"
+	AdapterType: Ethernet 802.3
+	AdapterTypeId: 0
+	AutoSense: N/A
+	Availability: 3
+	Caption: [00000007] Marvell Yukon 88E8071 PCI-E Gigabit Ethernet Controller
+	ConfigManagerErrorCode: 0
+	ConfigManagerUserConfig: False
+	CreationClassName: Win32_NetworkAdapter
+	Description: Marvell Yukon 88E8071 PCI-E Gigabit Ethernet Controller
+	DeviceID: 7
+	ErrorCleared: N/A
+	ErrorDescription: N/A
+	GUID: N/A
+	Index: 7
+	InstallDate: N/A
+	Installed: True
+	InterfaceIndex: 19
+	LastErrorCode: N/A
+	MACAddress: 00:01:DA:F0:F4:49
+	Manufacturer: Marvell
+	MaxNumberControlled: 0
+	MaxSpeed: N/A
+	Name: Marvell Yukon 88E8071 PCI-E Gigabit Ethernet Controller
+	NetConnectionID: N/A
+	NetConnectionStatus: N/A
+	NetEnabled: N/A
+	NetworkAddresses: N/A
+	PermanentAddress: N/A
+	PhysicalAdapter: False
+	PNPDeviceID: PCI\VEN_11AB&DEV_436B&SUBSYS_00BA11AB&REV_16\4&45F2A70&0&00E1
+	PowerManagementCapabilities: N/A
+	PowerManagementSupported: False
+	ProductName: Marvell Yukon 88E8071 PCI-E Gigabit Ethernet Controller
+	ServiceName: yukonw7
+	Speed: N/A
+	Status: N/A
+	StatusInfo: N/A
+	SystemCreationClassName: Win32_ComputerSystem
+	SystemName: PICT04
+	TimeOfLastReset: 20160801072505.125599+120
+
+Device \\PICT04\root\cimv2:Win32_NetworkAdapter.DeviceID="11"
+	AdapterType: Ethernet 802.3
+	AdapterTypeId: 0
+	AutoSense: N/A
+	Availability: 3
+	Caption: [00000011] Marvell Yukon 88E8071 PCI-E Gigabit Ethernet Controller
+	ConfigManagerErrorCode: 0
+	ConfigManagerUserConfig: False
+	CreationClassName: Win32_NetworkAdapter
+	Description: Marvell Yukon 88E8071 PCI-E Gigabit Ethernet Controller
+	DeviceID: 11
+	ErrorCleared: N/A
+	ErrorDescription: N/A
+	GUID: N/A
+	Index: 11
+	InstallDate: N/A
+	Installed: True
+	InterfaceIndex: 20
+	LastErrorCode: N/A
+	MACAddress: 00:01:DA:F0:F4:4A
+	Manufacturer: Marvell
+	MaxNumberControlled: 0
+	MaxSpeed: N/A
+	Name: Marvell Yukon 88E8071 PCI-E Gigabit Ethernet Controller
+	NetConnectionID: N/A
+	NetConnectionStatus: N/A
+	NetEnabled: N/A
+	NetworkAddresses: N/A
+	PermanentAddress: N/A
+	PhysicalAdapter: False
+	PNPDeviceID: PCI\VEN_11AB&DEV_436B&SUBSYS_00BA11AB&REV_16\4&4FEBEEB&0&00E2
+	PowerManagementCapabilities: N/A
+	PowerManagementSupported: False
+	ProductName: Marvell Yukon 88E8071 PCI-E Gigabit Ethernet Controller
+	ServiceName: yukonw7
+	Speed: N/A
+	Status: N/A
+	StatusInfo: N/A
+	SystemCreationClassName: Win32_ComputerSystem
+	SystemName: PICT04
+	TimeOfLastReset: 20160801072505.125599+120
+
+Device \\PICT04\root\cimv2:Win32_NetworkAdapter.DeviceID="17"
+	AdapterType: Ethernet 802.3
+	AdapterTypeId: 0
+	AutoSense: N/A
+	Availability: 3
+	Caption: [00000017] Marvell Link Aggregation Virtual Adapter
+	ConfigManagerErrorCode: 0
+	ConfigManagerUserConfig: False
+	CreationClassName: Win32_NetworkAdapter
+	Description: Marvell Link Aggregation Virtual Adapter
+	DeviceID: 17
+	ErrorCleared: N/A
+	ErrorDescription: N/A
+	GUID: {11CF69D4-2755-4C95-83A5-F9EB14511FAE}
+	Index: 17
+	InstallDate: N/A
+	Installed: True
+	InterfaceIndex: 21
+	LastErrorCode: N/A
+	MACAddress: 00:01:DA:F0:F4:49
+	Manufacturer: Marvell
+	MaxNumberControlled: 0
+	MaxSpeed: N/A
+	Name: TEAM: Team_Basic
+	NetConnectionID: Conexión de área local 3
+	NetConnectionStatus: 2
+	NetEnabled: True
+	NetworkAddresses: N/A
+	PermanentAddress: N/A
+	PhysicalAdapter: True
+	PNPDeviceID: ROOT\SK_LAGG_MINIPORT\0000
+	PowerManagementCapabilities: N/A
+	PowerManagementSupported: False
+	ProductName: Marvell Link Aggregation Virtual Adapter
+	ServiceName: SkLAGGMiniport
+	Speed: 2000000000
+	Status: N/A
+	StatusInfo: N/A
+	SystemCreationClassName: Win32_ComputerSystem
+	SystemName: PICT04
+	TimeOfLastReset: 20160801072505.125599+120
+
+

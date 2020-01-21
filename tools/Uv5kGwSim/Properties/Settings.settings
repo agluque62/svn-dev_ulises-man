@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Uv5kGwSim.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="IpServidor" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">192.168.0.129</Value>
+    </Setting>
+    <Setting Name="PortSnmpServidor" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">162</Value>
+    </Setting>
+    <Setting Name="dual" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="CgwaIp" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">192.168.0.212</Value>
+    </Setting>
+    <Setting Name="CgwaPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">10161</Value>
+    </Setting>
+    <Setting Name="CgwbIp" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">192.168.0.213</Value>
+    </Setting>
+    <Setting Name="CgwbPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">20161</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

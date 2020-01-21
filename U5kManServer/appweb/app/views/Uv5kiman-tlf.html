@@ -1,0 +1,186 @@
+<h3 translate>Presencia Telefonia</h3>
+<section id="_tabs">
+    <ul class="nav nav-tabs">
+        <li data-ng-class="{'active': ctrl.pagina()==0}">
+            <a href="" data-ng-click="ctrl.pagina(0)" translate>Proxies</a>
+        </li>
+        <li data-ng-class="{'active': ctrl.pagina()==1}">
+            <a href="" data-ng-click="ctrl.pagina(1)" translate>Interfaces Analogicas</a>
+        </li>
+        <li data-ng-class="{'active': ctrl.pagina()==2}">
+            <a href="" data-ng-click="ctrl.pagina(2)" translate>Abonados PBX</a>
+        </li>
+        <li data-ng-class="{'active': ctrl.pagina()==3}">
+            <a href="" data-ng-click="ctrl.pagina(3)" translate>Abonados ATS Externos</a>
+        </li>
+    </ul>
+</section>
+<section id="_contenido">
+
+    <div id="tlfProxies" data-ng-show="ctrl.pagina()==0">
+        <!--<h4 class="text-center "><small class="text-info" translate>Proxies</small></h4>-->
+        <div class="stdfrec pv-0">
+            <ul class="list-group" style="margin-top: 10px; margin-bottom: 10px;">
+                <li class="list-group-item" data-ng_repeat="cgw in ctrl.info.tifx | filter: {tp: 4}" ng-init="ipbx = $index">
+                    <ul class="list-group" style="margin-top: 2px; margin-bottom: 2px;">
+                        <li class="list-group-item">
+                            <div class="row bg-primary">
+                                <div class="col-md-2" translate>Dependencia</div>
+                                <div class="col-md-2" translate>Tipo</div>
+                                <div class="col-md-4" translate>Endpoint</div>
+                                <div class="col-md-2" translate>Estado</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" data-ng_repeat="proxy in cgw.res" ng-init="ires = $index">
+                            <div class="row" ng-class="ctrl.ProxyStatusColor(proxy.std)">
+                                <div class="col-md-2">{{proxy.dep}}</div>
+                                <div class="col-md-2">{{ctrl.ProxyTypeText(proxy.tp)}}</div>
+                                <div class="col-md-4">{{proxy.id}}</div>
+                                <div class="col-md-2">{{ctrl.ProxyStatusText(proxy.std)}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="tflAnalogica" data-ng-show="ctrl.pagina()==1">
+        <!--<h4 class="text-center "><small class="text-info" translate>Interfaces Analogicas</small></h4>-->
+        <div class="stdfrec pv-0">
+            <ul class="list-group" style="margin-top: 10px; margin-bottom: 10px;">
+                <li class="list-group-item">
+                    <div class="row bg-primary">
+                        <div class="col-md-2" translate>CGW</div>
+                        <div class="col-md-2" translate>IP</div>
+                        <!--<div class="col-md-1 level-1" translate>Version</div>-->
+                    </div>
+                </li>
+                <li class="list-group-item" data-ng_repeat="cgw in ctrl.info.tifx | filter: {tp: 1}" ng-init="itifx = $index">
+                    <div class="row text-primary">
+                        <div class="col-md-2">{{cgw.id}}</div>
+                        <div class="col-md-2">{{cgw.ip}}</div>
+                        <!--<div class="col-md-1 level-1">{{cgw.ver}}</div>-->
+                        <div class="col-md-6">
+                            <button type="button"
+                                    class="btn btn-default"
+                                    data-toggle="collapse"
+                                    data-target="#rec-{{itifx}}">
+                                {{ctrl.txtNRecursos(cgw)}}
+                            </button>
+                            <div id="rec-{{itifx}}" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <div class="row bg-info">
+                                            <div class="col-md-2 level-1">Tp</div>
+                                            <!--<div class="col-md-1 level-2">P</div>-->
+                                            <!--<div class="col-md-1 level-2">V</div>-->
+                                            <div class="col-md-6 level-1">Id</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" data-ng_repeat="res in cgw.res" ng-init="ires = $index">
+                                        <div class="row">
+                                            <div class="col-md-2 level-1">{{res.tp}}</div>
+                                            <!--<div class="col-md-1 level-2">{{res.prio}}</div>-->
+                                            <!--<div class="col-md-1 level-2">{{res.ver}}</div>-->
+                                            <div class="col-md-6 level-1">{{res.id}}</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+    <div id="tlfPbx" data-ng-show="ctrl.pagina()==2">
+        <!--<h4 class="text-center "><small class="text-info" translate>Abonados PBX</small></h4>-->
+        <div class="stdfrec pv-0">
+            <ul class="list-group" style="margin-top: 10px; margin-bottom: 10px;">
+                <li class="list-group-item">
+                    <div class="row bg-primary">
+                        <div class="col-md-2" translate>PABX-IP</div>
+                        <!--<div class="col-md-1 level-1" translate>Version</div>-->
+                    </div>
+                </li>
+                <li class="list-group-item" data-ng_repeat="cgw in ctrl.info.tifx | filter: {tp: 5}" ng-init="ipbx = $index">
+                    <div class="row text-primary">
+                        <div class="col-md-2">{{cgw.id}}</div>
+                        <!--<div class="col-md-1 level-1">{{cgw.ver}}</div>-->
+                        <div class="col-md-8">
+                            <button type="button"
+                                    class="btn btn-default"
+                                    data-toggle="collapse"
+                                    data-target="#rpbx-{{ipbx}}">
+                                {{ctrl.txtNAbonados(cgw)}}
+                            </button>
+                            <div id="rpbx-{{ipbx}}" class="collapse in">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <div class="row bg-info">
+                                            <div class="col-md-3 level-1" translate>Id</div>
+                                            <div class="col-md-5 level-1" translate>Uri</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" data-ng_repeat="res in cgw.res" ng-init="ires = $index">
+                                        <div class="row">
+                                            <div class="col-md-3 level-1">{{res.id}}</div>
+                                            <div class="col-md-5 level-1">{{ctrl.Uri(res)}}</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+    <div id="tlfExtAts" data-ng-show="ctrl.pagina()==3">
+        <!--<h4 class="text-center "><small class="text-info" translate>Abonados ATS Externos</small></h4>-->
+        <div class="stdfrec pv-0">
+            <ul class="list-group" style="margin-top: 10px; margin-bottom:10px;">
+                <!-- Seleccion de la Dependencia  -->
+                <li class="list-group-item">
+                    <div class="row text-primary">
+                        <div class="col-sm-2">
+                            <select class="form-control" data-ng-model="ctrl.selectedDep">
+                                <option data-ng-repeat="dep in ctrl.dep" value="{{dep}}">{{dep}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="list-group-item" data-ng_repeat="cgw in ctrl.info.tifx | filter: {tp: 3}" ng-init="ipbx = $index">
+
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="row bg-primary">
+                                <div class="col-md-4" translate>Abonado</div>
+                                <div class="col-md-2" translate>Estado</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" data-ng_repeat="proxy in cgw.res | filter: {dep: ctrl.selectedDep}" ng-init="ires = $index">
+                            <div class="row" ng-class="ctrl.ProxyStatusColor(proxy.std)">
+                                <div class="col-md-4">{{proxy.id}}</div>
+                                <div class="col-md-2">{{ctrl.ProxyStatusText(proxy.std)}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+
+
+
+    </div>
+
+</section>

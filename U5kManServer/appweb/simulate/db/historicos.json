@@ -1,0 +1,2255 @@
+{
+	"lista":
+	[
+	  {
+		"idhw":"PICT12",
+		"hwtp":0,
+		"id":1001,
+		"date":"15/12/2015 11:51",
+		"acknw":"",
+		"desc":"Entr�e TOP",
+		"user":""
+	  },
+	  {
+		"idhw":"PICT12",
+		"hwtp":0,
+		"id":1009,
+		"date":"15/12/2015 11:51",
+		"acknw":"",
+		"desc":"Panneau en marche. Post: PICT12",
+		"user":""
+	  },
+	  {
+		"idhw":"PICT12",
+		"hwtp":0,
+		"id":1003,
+		"date":"15/12/2015 11:51",
+		"acknw":"",
+		"desc":"Liaison jacks ex�cutif Post: PICT12",
+		"user":""
+	  },
+	  {
+		"idhw":"PICT12",
+		"hwtp":0,
+		"id":1007,
+		"date":"15/12/2015 11:51",
+		"acknw":"",
+		"desc":"Liaison haut-parleur AI. Post: PICT12",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"15/12/2015 0:00",
+		"acknw":"",
+		"desc":"Changement de la journ�e",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"15/12/2015 0:00",
+		"acknw":"",
+		"desc":"Changement de la journ�e",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"15/12/2015 0:00",
+		"acknw":"",
+		"desc":"Changement de la journ�e",
+		"user":""
+	  },
+	  {
+		"idhw":"PICT12",
+		"hwtp":0,
+		"id":1001,
+		"date":"15/12/2015 14:11",
+		"acknw":"",
+		"desc":"Entr�e TOP",
+		"user":""
+	  },
+	  {
+		"idhw":"PICT12",
+		"hwtp":0,
+		"id":1009,
+		"date":"15/12/2015 14:11",
+		"acknw":"",
+		"desc":"Panneau en marche. Post: PICT12",
+		"user":""
+	  },
+	  {
+		"idhw":"PICT12",
+		"hwtp":0,
+		"id":1007,
+		"date":"15/12/2015 14:11",
+		"acknw":"",
+		"desc":"Liaison haut-parleur Radio. Post: PICT12",
+		"user":""
+	  },
+	  {
+		"idhw":"PICT12",
+		"hwtp":0,
+		"id":1007,
+		"date":"15/12/2015 14:11",
+		"acknw":"",
+		"desc":"Liaison haut-parleur AI. Post: PICT12",
+		"user":""
+	  },
+	  {
+		"idhw":"PICT12",
+		"hwtp":0,
+		"id":1008,
+		"date":"15/12/2015 14:12",
+		"acknw":"",
+		"desc":"D�branchement haut-parleur Radio. Post: PICT12",
+		"user":""
+	  },
+	  {
+		"idhw":"PICT12",
+		"hwtp":0,
+		"id":1002,
+		"date":"15/12/2015 14:13",
+		"acknw":"",
+		"desc":"Top coup�e",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"16/12/2015 0:00",
+		"acknw":"",
+		"desc":"Changement de la journ�e",
+		"user":""
+	  },
+	  {
+		"idhw":"PICT12",
+		"hwtp":0,
+		"id":1001,
+		"date":"16/12/2015 10:53",
+		"acknw":"",
+		"desc":"Entr�e TOP",
+		"user":""
+	  },
+	  {
+		"idhw":"PICT12",
+		"hwtp":0,
+		"id":1009,
+		"date":"16/12/2015 10:53",
+		"acknw":"",
+		"desc":"Panneau en marche. Post: PICT12",
+		"user":""
+	  },
+	  {
+		"idhw":"PICT12",
+		"hwtp":0,
+		"id":1007,
+		"date":"16/12/2015 10:53",
+		"acknw":"",
+		"desc":"Liaison haut-parleur Radio. Post: PICT12",
+		"user":""
+	  },
+	  {
+		"idhw":"PICT12",
+		"hwtp":0,
+		"id":1007,
+		"date":"16/12/2015 10:53",
+		"acknw":"",
+		"desc":"Liaison haut-parleur AI. Post: PICT12",
+		"user":""
+	  },
+	  {
+		"idhw":"PICT12",
+		"hwtp":0,
+		"id":1008,
+		"date":"16/12/2015 10:53",
+		"acknw":"16/12/2015 10:53",
+		"desc":"D�branchement haut-parleur Radio. Post: PICT12",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"PICT12",
+		"hwtp":0,
+		"id":1007,
+		"date":"16/12/2015 10:53",
+		"acknw":"",
+		"desc":"Liaison haut-parleur Radio. Post: PICT12",
+		"user":""
+	  },
+	  {
+		"idhw":"PICT12",
+		"hwtp":0,
+		"id":1008,
+		"date":"16/12/2015 10:53",
+		"acknw":"16/12/2015 10:53",
+		"desc":"D�branchement haut-parleur AI. Post: PICT12",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"PICT12",
+		"hwtp":0,
+		"id":1007,
+		"date":"16/12/2015 10:53",
+		"acknw":"",
+		"desc":"Liaison haut-parleur AI. Post: PICT12",
+		"user":""
+	  },
+	  {
+		"idhw":"PICT12",
+		"hwtp":0,
+		"id":1008,
+		"date":"16/12/2015 10:53",
+		"acknw":"16/12/2015 10:53",
+		"desc":"D�branchement haut-parleur AI. Post: PICT12",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"PICT12",
+		"hwtp":0,
+		"id":1008,
+		"date":"16/12/2015 10:54",
+		"acknw":"16/12/2015 10:55",
+		"desc":"D�branchement haut-parleur Radio. Post: PICT12",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"PICT12",
+		"hwtp":0,
+		"id":1007,
+		"date":"16/12/2015 10:54",
+		"acknw":"",
+		"desc":"Liaison haut-parleur Radio. Post: PICT12",
+		"user":""
+	  },
+	  {
+		"idhw":"PICT12",
+		"hwtp":0,
+		"id":1007,
+		"date":"16/12/2015 10:55",
+		"acknw":"",
+		"desc":"Liaison haut-parleur AI. Post: PICT12",
+		"user":""
+	  },
+	  {
+		"idhw":"PICT12",
+		"hwtp":0,
+		"id":1008,
+		"date":"16/12/2015 10:55",
+		"acknw":"16/12/2015 10:55",
+		"desc":"D�branchement haut-parleur AI. Post: PICT12",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"18/12/2015 0:00",
+		"acknw":"",
+		"desc":"Changement de la journ�e",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"18/12/2015 0:00",
+		"acknw":"",
+		"desc":"Changement de la journ�e",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"18/12/2015 0:00",
+		"acknw":"",
+		"desc":"Changement de la journ�e",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"18/12/2015 0:00",
+		"acknw":"",
+		"desc":"Changement de la journ�e",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"18/12/2015 0:00",
+		"acknw":"",
+		"desc":"Changement de la journ�e",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"18/12/2015 0:00",
+		"acknw":"",
+		"desc":"Changement de la journ�e",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"18/12/2015 0:00",
+		"acknw":"",
+		"desc":"Changement de la journ�e",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"18/12/2015 0:00",
+		"acknw":"",
+		"desc":"Changement de la journ�e",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"18/12/2015 0:00",
+		"acknw":"",
+		"desc":"Changement de la journ�e",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"18/12/2015 0:00",
+		"acknw":"",
+		"desc":"Changement de la journ�e",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"18/12/2015 0:00",
+		"acknw":"",
+		"desc":"Changement de la journ�e",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"21/12/2015 0:00",
+		"acknw":"",
+		"desc":"Changement de la journ�e",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"21/12/2015 0:00",
+		"acknw":"",
+		"desc":"Changement de la journ�e",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"21/12/2015 0:00",
+		"acknw":"",
+		"desc":"Changement de la journ�e",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"21/12/2015 0:00",
+		"acknw":"",
+		"desc":"Changement de la journ�e",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"14/01/2016 0:00",
+		"acknw":"",
+		"desc":"Cambio de d�a",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"14/01/2016 0:00",
+		"acknw":"",
+		"desc":"Cambio de d�a",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"14/01/2016 0:00",
+		"acknw":"",
+		"desc":"Cambio de d�a",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"14/01/2016 0:00",
+		"acknw":"",
+		"desc":"Cambio de d�a",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"14/01/2016 0:00",
+		"acknw":"",
+		"desc":"Cambio de d�a",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"14/01/2016 0:00",
+		"acknw":"",
+		"desc":"Cambio de d�a",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 12:47",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 12:47",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-B pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 12:47",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 12:47",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-B pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 12:48",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 12:48",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-B pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 12:48",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 12:48",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-B pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"14/01/2016 0:00",
+		"acknw":"",
+		"desc":"Cambio de d�a",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 12:49",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 12:49",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 12:49",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 12:49",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-B pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 12:50",
+		"acknw":"14/01/2016 12:51",
+		"desc":"Ca�da GW.",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 12:50",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 12:50",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 12:51",
+		"acknw":"14/01/2016 12:51",
+		"desc":"Ca�da GW.",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 12:51",
+		"acknw":"14/01/2016 12:51",
+		"desc":"Ca�da GW.",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"14/01/2016 0:00",
+		"acknw":"",
+		"desc":"Cambio de d�a",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 12:54",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 12:54",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 12:54",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 12:54",
+		"acknw":"",
+		"desc":"Ca�da GW.",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 12:54",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-B pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 12:54",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 12:55",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 12:55",
+		"acknw":"",
+		"desc":"Ca�da GW.",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 12:55",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 12:55",
+		"acknw":"",
+		"desc":"Ca�da GW.",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 12:55",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-B pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 12:56",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 12:56",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 12:56",
+		"acknw":"",
+		"desc":"Ca�da GW.",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 12:56",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 12:56",
+		"acknw":"",
+		"desc":"Ca�da GW.",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 12:56",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-B pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 12:57",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 12:57",
+		"acknw":"",
+		"desc":"Ca�da GW.",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 12:57",
+		"acknw":"",
+		"desc":"Ca�da GW.",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"14/01/2016 0:00",
+		"acknw":"",
+		"desc":"Cambio de d�a",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 12:59",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 12:59",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 12:59",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 12:59",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-B pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 12:59",
+		"acknw":"14/01/2016 14:00",
+		"desc":"Ca�da GW.",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 12:59",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 13:39",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 13:39",
+		"acknw":"14/01/2016 14:00",
+		"desc":"Ca�da GW.",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 13:39",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 14:01",
+		"acknw":"",
+		"desc":"Ca�da GW.",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 14:01",
+		"acknw":"",
+		"desc":"Ca�da GW.",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 14:01",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 14:01",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 14:01",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"14/01/2016 0:00",
+		"acknw":"",
+		"desc":"Cambio de d�a",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 14:03",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 14:03",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 14:03",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 14:05",
+		"acknw":"14/01/2016 14:05",
+		"desc":"Ca�da GW.",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 14:05",
+		"acknw":"14/01/2016 14:05",
+		"desc":"Ca�da GW.",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 14:05",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 14:05",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 14:05",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 14:07",
+		"acknw":"14/01/2016 14:07",
+		"desc":"Ca�da GW.",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 14:07",
+		"acknw":"14/01/2016 14:07",
+		"desc":"Ca�da GW.",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 14:07",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 14:07",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 14:07",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 14:09",
+		"acknw":"14/01/2016 14:10",
+		"desc":"Ca�da GW.",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 14:09",
+		"acknw":"14/01/2016 14:10",
+		"desc":"Ca�da GW.",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 14:11",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 14:11",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 14:11",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 14:21",
+		"acknw":"14/01/2016 14:22",
+		"desc":"Ca�da GW.",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 14:21",
+		"acknw":"14/01/2016 14:21",
+		"desc":"Ca�da GW.",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 14:22",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 14:22",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 14:22",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 14:25",
+		"acknw":"14/01/2016 14:25",
+		"desc":"Ca�da GW.",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 14:25",
+		"acknw":"14/01/2016 14:25",
+		"desc":"Ca�da GW.",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 14:29",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 14:29",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 14:29",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 14:29",
+		"acknw":"14/01/2016 14:30",
+		"desc":"Ca�da GW.",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 14:29",
+		"acknw":"14/01/2016 14:30",
+		"desc":"Ca�da GW.",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 14:31",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 14:31",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 14:31",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 14:32",
+		"acknw":"14/01/2016 14:33",
+		"desc":"Ca�da GW.",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 14:32",
+		"acknw":"14/01/2016 14:33",
+		"desc":"Ca�da GW.",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 14:34",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 14:34",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 14:34",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 14:34",
+		"acknw":"14/01/2016 14:59",
+		"desc":"Ca�da GW.",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 14:34",
+		"acknw":"14/01/2016 14:59",
+		"desc":"Ca�da GW.",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 14:41",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 14:41",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 14:41",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 14:41",
+		"acknw":"14/01/2016 14:59",
+		"desc":"Ca�da GW.",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 14:41",
+		"acknw":"14/01/2016 14:59",
+		"desc":"Ca�da GW.",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 14:41",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 14:41",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 14:41",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 14:42",
+		"acknw":"14/01/2016 14:59",
+		"desc":"Ca�da GW.",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 14:42",
+		"acknw":"14/01/2016 14:49",
+		"desc":"Ca�da GW.",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"14/01/2016 0:00",
+		"acknw":"",
+		"desc":"Cambio de d�a",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 15:04",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 15:04",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"14/01/2016 0:00",
+		"acknw":"",
+		"desc":"Cambio de d�a",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 15:07",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 15:07",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:07",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 0",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:07",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 1",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:07",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 2",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:07",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 3",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 15:07",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:07",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 0",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:07",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 1",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:07",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 2",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:07",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 3",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 15:08",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-B pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 15:08",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Reserva",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"14/01/2016 0:00",
+		"acknw":"",
+		"desc":"Cambio de d�a",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 15:10",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 15:10",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:10",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 0",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:10",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 1",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:10",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 2",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:10",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 3",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 15:10",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:10",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 0",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:10",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 1",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:10",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 2",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:10",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 3",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 15:11",
+		"acknw":"",
+		"desc":"Ca�da GW.",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 15:12",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:12",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 0",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:12",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 1",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:12",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 2",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:12",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 3",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 15:13",
+		"acknw":"",
+		"desc":"Ca�da GW.",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 15:13",
+		"acknw":"",
+		"desc":"Ca�da GW.",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 15:13",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 15:13",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:13",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 0",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:13",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 1",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:13",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 2",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:13",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 3",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 15:13",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:13",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 0",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:13",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 1",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:13",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 2",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:13",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 3",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 15:14",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Reserva",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 15:14",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-B pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 15:14",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 15:14",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-B pasa a Reserva",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"14/01/2016 0:00",
+		"acknw":"",
+		"desc":"Cambio de d�a",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 15:19",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 15:19",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:19",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 0",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:19",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 1",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:19",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 2",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:19",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 3",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 15:19",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:19",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 0",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:19",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 1",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:19",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 2",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:19",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 3",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 15:19",
+		"acknw":"14/01/2016 15:23",
+		"desc":"Ca�da GW.",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 15:19",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-B pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 15:19",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:19",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 0",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:19",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 1",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:19",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 2",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:19",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 3",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 15:20",
+		"acknw":"14/01/2016 15:22",
+		"desc":"Ca�da GW.",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 15:20",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 15:20",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:20",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 0",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:20",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 1",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:20",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 2",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:20",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 3",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 15:21",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-B pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 15:21",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Reserva",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2002,
+		"date":"14/01/2016 15:21",
+		"acknw":"14/01/2016 15:22",
+		"desc":"Ca�da GW.",
+		"user":"debug"
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 15:21",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 15:22",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:22",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 0",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:22",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 1",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:22",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 2",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:22",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 3",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"14/01/2016 0:00",
+		"acknw":"",
+		"desc":"Cambio de d�a",
+		"user":""
+	  },
+	  {
+		"idhw":"MANT",
+		"hwtp":4,
+		"id":96,
+		"date":"14/01/2016 0:00",
+		"acknw":"",
+		"desc":"Cambio de d�a",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 15:29",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2100,
+		"date":"14/01/2016 15:29",
+		"acknw":"",
+		"desc":"Pasarela TIFX24-A pasa a Principal",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:29",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 0",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:29",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 1",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:29",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 2",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-A",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:29",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 3",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2001,
+		"date":"14/01/2016 15:29",
+		"acknw":"",
+		"desc":"Entrada GW",
+		"user":""
+	  },
+	  {
+		"idhw":"TIFX24-B",
+		"hwtp":1,
+		"id":2007,
+		"date":"14/01/2016 15:29",
+		"acknw":"",
+		"desc":"Conexi�n tarjeta interfaz: Slot 0",
+		"user":""
+	  }
+	]
+}

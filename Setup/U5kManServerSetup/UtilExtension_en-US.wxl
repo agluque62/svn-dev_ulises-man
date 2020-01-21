@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization Culture="en-US" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+  <String Id="msierrUSRFailedUserCreate" Overridable="yes">Fallo al Crear Usuario.  ([2]   [3]   [4]   [5])</String>
+  <String Id="msierrUSRFailedUserCreatePswd" Overridable="yes">Fallo al Crear Usuario. Clave Incorrecta.  ([2]   [3]   [4]   [5])</String>
+  <String Id="msierrUSRFailedUserGroupAdd" Overridable="yes">Fallo al añadir Usuario a Grupo.  ([2]   [3]   [4]   [5])</String>
+  <String Id="msierrUSRFailedUserCreateExists" Overridable="yes">Fallo al Crear Usuario. Usuario ya Existente.  ([2]   [3]   [4]   [5])</String>
+
+  <String Id="msierrSMBFailedCreate" Overridable="yes">Failed to create network share.  ([2]   [3]   [4]   [5])</String>
+  <String Id="msierrSMBFailedDrop" Overridable="yes">Failed to drop network share.  ([2]   [3]   [4]   [5])</String>
+
+  <String Id="msierrPERFMONFailedRegisterDLL" Overridable="yes">Failed to register DLL with PerfMon.  ([2]   [3]   [4]   [5])</String>
+  <String Id="msierrPERFMONFailedUnregisterDLL" Overridable="yes">Failed to unregister DLL with PerfMon.  ([2]   [3]   [4]   [5])</String>
+
+  <String Id="msierrInstallPerfCounterData" Overridable="yes">Failed to install performance counters.  ([2]   [3]   [4]   [5])</String>
+  <String Id="msierrUninstallPerfCounterData" Overridable="yes">Failed to uninstall performance counters.  ([2]   [3]   [4]   [5])</String>
+
+  <String Id="msierrSecureObjectsFailedCreateSD" Overridable="yes">Failed to create security descriptor for [3]\[4], system error: [2]</String>
+  <String Id="msierrSecureObjectsFailedSet" Overridable="yes">Failed to set security descriptor on object [3], system error: [2]</String>
+  <String Id="msierrSecureObjectsUnknownType" Overridable="yes">Unknown Object Type [3], system error: [2]</String>
+
+  <String Id="msierrXmlFileFailedRead" Overridable="yes">There was a failure while configuring XML files.</String>
+  <String Id="msierrXmlFileFailedOpen" Overridable="yes">Failed to open XML file [3], system error: [2]</String>
+  <String Id="msierrXmlFileFailedSelect" Overridable="yes">Failed to find node: [3] in XML file: [4], system error: [2]</String>
+  <String Id="msierrXmlFileFailedSave" Overridable="yes">Failed to save changes to XML file [3], system error: [2]</String>
+
+  <String Id="msierrXmlConfigFailedRead" Overridable="yes">There was a failure while configuring XML files.</String>
+  <String Id="msierrXmlConfigFailedOpen" Overridable="yes">Failed to open XML file [3], system error: [2]</String>
+  <String Id="msierrXmlConfigFailedSelect" Overridable="yes">Failed to find node: [3] in XML file: [4], system error: [2]</String>
+  <String Id="msierrXmlConfigFailedSave" Overridable="yes">Failed to save changes to XML file [3], system error: [2]</String>
+
+  <String Id="OptionsDlgIpLabel" Overridable="yes">&amp;Direccion IP</String>
+  <String Id="OptionsDlgPabxIPLabel" Overridable="yes">&amp;IP de PABX</String>
+  <String Id="OptionsDlgMySQLIPLabel" Overridable="yes">&amp;IP del Servidor MySQL</String>
+  <String Id="OptionsDlgCfgLabel" Overridable="yes">Servicio de Configuracion</String>
+  <String Id="OptionsDlgSactaLabel" Overridable="yes">Servicio de Sacta</String>
+  <String Id="OptionsDlgClusterLabel" Overridable="yes">URL de Mantenimiento de CLUSTER</String>
+  <String Id="OptionsDlgDescription" Overridable="yes">Introduzca la informacion del servidor</String>
+  <String Id="OptionsDlgTitle" Overridable="yes">Configuracion de Servidor</String>
+
+
+</WixLocalization>

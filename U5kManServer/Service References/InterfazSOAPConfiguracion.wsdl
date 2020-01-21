@@ -1,0 +1,2972 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://CD40.es/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://CD40.es/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://CD40.es/">
+      <s:element name="GetVersionConfiguracion_XML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id_sistema" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVersionConfiguracion_XMLResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetVersionConfiguracion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id_sistema" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVersionConfiguracionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetVersionConfiguracionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetScvActivo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="idSistema" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetScvActivoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetScvActivoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEstadoCluster">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetEstadoClusterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetEstadoClusterResult" type="tns:EstadoCluster" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="EstadoCluster">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="EstadoNode1" type="tns:EstadoNode" />
+          <s:element minOccurs="1" maxOccurs="1" name="EstadoNode2" type="tns:EstadoNode" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EstadoNode">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Presencia" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Estado" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetListaEnlacesExternos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id_sistema" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="id_usuario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetListaEnlacesExternosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetListaEnlacesExternosResult" type="tns:ArrayOfCfgEnlaceExterno" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCfgEnlaceExterno">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CfgEnlaceExterno" nillable="true" type="tns:CfgEnlaceExterno" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CfgEnlaceExterno">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Literal" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ListaPosicionesEnHmi" type="tns:ArrayOfUnsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="TipoFrecuencia" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExclusividadTxRx" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ListaRecursos" type="tns:ArrayOfCfgRecursoEnlaceExterno" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstadoAsignacion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DestinoAudio" type="tns:ArrayOfString" />
+          <s:element minOccurs="1" maxOccurs="1" name="Prioridad" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="SupervisionPortadora" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="FrecuenciaSintonizada" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MetodoCalculoClimax" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="VentanaSeleccionBss" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SincronizaGrupoClimax" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AudioPrimerSqBss" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="FrecuenciaNoDesasignable" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="VentanaReposoZonaTxDefecto" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="NombreZonaTxDefecto" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PrioridadSesionSIP" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CldSupervisionTime" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MetodosBssOfrecidos" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfUnsignedInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="unsignedInt" type="s:unsignedInt" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCfgRecursoEnlaceExterno">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CfgRecursoEnlaceExterno" nillable="true" type="tns:CfgRecursoEnlaceExterno" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CfgRecursoEnlaceExterno">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IdRecurso" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Tipo" type="s:unsignedInt" />
+          <s:element minOccurs="0" maxOccurs="1" name="Estado" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ModoConfPTT" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumFlujosAudio" type="s:unsignedInt" />
+          <s:element minOccurs="0" maxOccurs="1" name="IdEmplazamiento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NombreZona" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MetodoBss" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="IdMetodoBss" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NameTablaBss" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ValuesTablaBss" type="tns:ArrayOfInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="GrsDelay" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="OffSetFrequency" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnableEventPttSq" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetListaEnlacesInternos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id_sistema" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="id_usuario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetListaEnlacesInternosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetListaEnlacesInternosResult" type="tns:ArrayOfCfgEnlaceInterno" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCfgEnlaceInterno">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CfgEnlaceInterno" nillable="true" type="tns:CfgEnlaceInterno" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CfgEnlaceInterno">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Literal" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PosicionHMI" type="s:unsignedInt" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipoEnlaceInterno" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ListaRecursos" type="tns:ArrayOfCfgRecursoEnlaceInternoConInterface" />
+          <s:element minOccurs="0" maxOccurs="1" name="Dependencia" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Prioridad" type="s:unsignedInt" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrigenR2" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCfgRecursoEnlaceInternoConInterface">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CfgRecursoEnlaceInternoConInterface" nillable="true" type="tns:CfgRecursoEnlaceInternoConInterface" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CfgRecursoEnlaceInternoConInterface">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CfgRecursoEnlaceInterno">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Interface" type="tns:TipoInterface" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="CfgRecursoEnlaceInterno">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Prefijo" type="s:unsignedInt" />
+          <s:element minOccurs="0" maxOccurs="1" name="NombreRecurso" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroAbonado" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="TipoInterface">
+        <s:restriction base="s:string">
+          <s:enumeration value="TI_Radio" />
+          <s:enumeration value="TI_LCEN" />
+          <s:enumeration value="TI_BC" />
+          <s:enumeration value="TI_BL" />
+          <s:enumeration value="TI_AB" />
+          <s:enumeration value="TI_ATS_R2" />
+          <s:enumeration value="TI_ATS_N5" />
+          <s:enumeration value="TI_ATS_QSIG" />
+          <s:enumeration value="TI_ISDN_2BD" />
+          <s:enumeration value="TI_ISDN_30BD" />
+          <s:enumeration value="TI_I_O" />
+          <s:enumeration value="TI_DATOS" />
+          <s:enumeration value="TI_RRC" />
+          <s:enumeration value="TI_EM_PP" />
+          <s:enumeration value="TI_EM_MARC" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="LoginTop">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id_sistema" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="id_hw" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginTopResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginTopResult" type="tns:LoginTerminalVoz" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="LoginTerminalVoz">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ModoLogin" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IdUsuario" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCfgUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id_sistema" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="id_usuario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCfgUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCfgUsuarioResult" type="tns:CfgUsuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CfgUsuario">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Nombre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IdIdentificador" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ListaAbonados" type="tns:ArrayOfNumerosAbonado" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumeroEnlacesInternos" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumeroEnlacesExternos" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sector" type="tns:SectoresSCV" />
+          <s:element minOccurs="0" maxOccurs="1" name="ParametrosDelSector" type="tns:ParametrosSectorSCVKeepAlive" />
+          <s:element minOccurs="0" maxOccurs="1" name="PermisosRedDelSector" type="tns:ArrayOfPermisosRedesSCV" />
+          <s:element minOccurs="0" maxOccurs="1" name="TeclasDelSector" type="tns:TeclasSectorSCV" />
+          <s:element minOccurs="0" maxOccurs="1" name="NivelesDelSector" type="tns:NivelesSCV" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfNumerosAbonado">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="NumerosAbonado" nillable="true" type="tns:NumerosAbonado" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="NumerosAbonado">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Prefijo" type="s:unsignedInt" />
+          <s:element minOccurs="0" maxOccurs="1" name="Numero" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SectoresSCV">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdParejaUCS" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TipoPosicion" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PrioridadR2" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="TipoHMI" type="s:unsignedInt" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Tablas" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="InsertedId" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SectoresAgrupacion">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdAgrupacion" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSector" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdNucleo" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Agrupaciones">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdAgrupacion" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Internos">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSectorizacion" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdNucleo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSector" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdDestino" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdPrefijo" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="PosHMI" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="Prioridad" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="OrigenR2" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PrioridadSIP" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="TipoAcceso" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Literal" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="HFRangoFrecuencias">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdRecurso" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Min" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="Max" type="s:unsignedInt" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="HFParams">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdRecurso" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SipUri" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IpGestor" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Oid" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Frecuencia" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdEmplazamiento" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Puerto" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="Offset" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Canalizacion" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Modulacion" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Potencia" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="TipoEquipo" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="TipoCanal" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="TipoFrecuencia" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="TipoModo" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="PrioridadEquipo" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="FormatoFrecuenciaPrincipal" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="ModeloEquipo" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ParametrosSectorSCV">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="NumLlamadasEntrantesIda" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumLlamadasEnIda" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumFrecPagina" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumPagFrec" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumEnlacesInternosPag" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumPagEnlacesInt" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumEnlacesAI" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="Intrusion" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="Intruido" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ParametrosSectorSCVKeepAlive">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ParametrosSectorSCV">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="KeepAlivePeriod" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="KeepAliveMultiplier" type="s:unsignedInt" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ParametrosSectorRecording">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ParametrosSectorSCVKeepAlive">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="GrabacionEd137" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ParametrosSector">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ParametrosSectorRecording">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSector" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdNucleo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumDestinosInternosPag" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumPagDestinosInt" type="s:unsignedInt" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="TeclasSectorSCV">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="TransConConsultaPrev" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="TransDirecta" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="Conferencia" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="Escucha" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="Retener" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="Captura" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="Redireccion" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="RepeticionUltLlamada" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="RellamadaAut" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="TeclaPrioridad" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="Tecla55mas1" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="Monitoring" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="CoordinadorTF" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="CoordinadorRD" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="IntegracionRDTF" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="LlamadaSelectiva" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="GrupoBSS" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="LTT" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="SayAgain" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="InhabilitacionRedirec" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="Glp" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="TeclasSector">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:TeclasSectorSCV">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSector" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdNucleo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="TroncalesRuta">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdTroncal" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Central" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdRuta" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="SectoresSector">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSector" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdNucleo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSectorOriginal" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="EsDominante" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Altavoces">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdDestino" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="TipoDestino" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdNucleo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSector" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PosHMI" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumAltavoz" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="Estado" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="NivelesSCV">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="CICL" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="CIPL" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="CPICL" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="CPIPL" type="s:unsignedInt" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Niveles">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:NivelesSCV">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSector" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdNucleo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Radio">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSectorizacion" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdNucleo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSector" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PosHMI" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdDestino" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Prioridad" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="PrioridadSIP" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="ModoOperacion" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Cascos" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Literal" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="SupervisionPortadora" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="EstadosRecursos">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSector" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdNucleo" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PosHMI" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdRecurso" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="TipoRecurso" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdDestino" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="TipoDestino" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="Estado" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="DestinosRadioSector">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSector" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdNucleo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdDestino" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="TipoDestino" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="PosHMI" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="Prioridad" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="PrioridadSIP" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="ModoOperacion" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Cascos" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Literal" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="SupervisionPortadora" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="DestinosInternosSector">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdDestino" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="TipoDestino" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdNucleo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSector" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdPrefijo" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="PosHMI" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="Prioridad" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="OrigenR2" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PrioridadSIP" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="TipoAcceso" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Literal" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="GruposTelefonia">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdGrupo" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="DestinosExternosSector">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdDestino" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="TipoDestino" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdNucleo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSector" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdPrefijo" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="PosHMI" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="Prioridad" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="OrigenR2" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PrioridadSIP" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="TipoAcceso" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Literal" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Externos">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSectorizacion" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdNucleo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSector" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdDestino" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdPrefijo" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="PosHMI" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="Prioridad" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="OrigenR2" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PrioridadSIP" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="TipoAcceso" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Literal" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Grupo" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Destinos">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdDestino" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="TipoDestino" type="s:unsignedInt" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="DestinosRadio">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Destinos">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Fk_Metodosbss" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Zonas_IdZonas" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="TipoFrec" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="ExclusividadTXRX" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="Frecuencia" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="MetodoCalculoClimax" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="VentanaSeleccionBss" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="SincronizaGrupoClimax" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="AudioPrimerSqBss" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="MetodosBss" type="tns:ArrayOfMetodosBssDelRecurso" />
+              <s:element minOccurs="1" maxOccurs="1" name="FrecuenciaNoDesasignable" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="VentanaReposoZonaTxDefecto" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="PrioridadSesionSip" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="MetodosBssOfrecidos" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="CldSupervisionTime" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="NombreZonaTxDefecto" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfMetodosBssDelRecurso">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MetodosBssDelRecurso" type="tns:MetodosBssDelRecurso" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MetodosBssDelRecurso">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="idMetodo" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="nombreMetodo" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DestinosTelefonia">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Destinos">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IdPrefijo" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdGrupo" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="DestinosInternos">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:DestinosTelefonia">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSector" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdNucleo" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="DestinosExternos">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:DestinosTelefonia">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdAbonado" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="UsuariosAbonados">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdPrefijo" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdAbonado" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdNucleo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSector" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="RecursosSCV">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdRecurso" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Tipo" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="Interface" type="tns:TipoInterface" />
+              <s:element minOccurs="1" maxOccurs="1" name="SlotPasarela" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumDispositivoSlot" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="ServidorSIP" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Diffserv" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Recursos">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:RecursosSCV">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="TipoRecurso" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdEquipo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdTifX" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PuertoSip" type="s:unsignedInt" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ParametrosRecursoGeneral" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ParametrosLCENSCV">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ParametrosRecursoGeneral">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ListaEnlacesInternos" type="tns:ArrayOfString" />
+              <s:element minOccurs="1" maxOccurs="1" name="T1" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="T1Max" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="T2" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="T2Max" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="T3" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="T4" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="T4Max" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="T5" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="T5Max" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="T6" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="T6Max" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="T8" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="T8Max" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="T9" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="T9Max" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="T10" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="T10Max" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="T11" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="T11Max" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="T12" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="FrqTonoSQ" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="UmbralTonoSQ" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="FrqTonoPTT" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="UmbralTonoPTT" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="RefrescoEstados" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="Timeout" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="LongRafagas" type="s:unsignedInt" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ParametrosRecursoLCEN">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ParametrosLCENSCV">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="GananciaAGCTX" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="GananciaAGCTXdBm" type="s:float" />
+              <s:element minOccurs="1" maxOccurs="1" name="GananciaAGCRX" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="GananciaAGCRXdBm" type="s:float" />
+              <s:element minOccurs="1" maxOccurs="1" name="SupresionSilencio" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="TamRTP" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="Codec" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="GrabacionEd137" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="RecursosLCEN">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ParametrosRecursoLCEN">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdRecurso" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdPrefijo" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="TipoDestino" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdDestino" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ParametrosTFSCV">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ParametrosRecursoGeneral">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ListaEnlacesInternos" type="tns:ArrayOfString" />
+              <s:element minOccurs="0" maxOccurs="1" name="Lado" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Modo" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ParametrosRecursoTelefonia">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ParametrosTFSCV">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="GananciaAGCTX" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="GananciaAGCTXdBm" type="s:float" />
+              <s:element minOccurs="1" maxOccurs="1" name="GananciaAGCRX" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="GananciaAGCRXdBm" type="s:float" />
+              <s:element minOccurs="1" maxOccurs="1" name="SupresionSilencio" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="TamRTP" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="Codec" type="s:unsignedInt" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ParametrosEM">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ParametrosRecursoTelefonia">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="TipoEM" type="tns:Tipo_EM" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:simpleType name="Tipo_EM">
+        <s:restriction base="s:string">
+          <s:enumeration value="Type_I" />
+          <s:enumeration value="Type_II" />
+          <s:enumeration value="Type_III" />
+          <s:enumeration value="Type_IV" />
+          <s:enumeration value="Type_V" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ParametrosGrabacionTf">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ParametrosEM">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="GrabacionEd137" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="RecursosTF">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ParametrosGrabacionTf">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdRecurso" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdPrefijo" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="TipoDestino" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdDestino" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdTroncal" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdRed" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ParametrosRDSCV">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ParametrosRecursoGeneral">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ListaEnlacesRecursosExternos" type="tns:ArrayOfRecursosExternos" />
+              <s:element minOccurs="1" maxOccurs="1" name="EM" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="SQ" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PTT" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="FrqTonoE" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="UmbralTonoE" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="FrqTonoM" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="UmbralTonoM" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="FrqTonoSQ" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="UmbralTonoSQ" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="FrqTonoPTT" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="UmbralTonoPTT" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="BSS" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="NTZ" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="TipoNTZ" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="Cifrado" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="SupervPortadoraTx" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="SupervModuladoraTx" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="ModoConfPTT" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="RepSQyBSS" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="DesactivacionSQ" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="TimeoutPTT" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="UmbralVAD" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="TiempoPTT" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumFlujosAudio" type="s:unsignedInt" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfRecursosExternos">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RecursosExternos" type="tns:RecursosExternos" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RecursosExternos">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Nombre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tipo" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ModoConfirmacionPtt" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="TipoPtt" type="s:unsignedInt" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ParametrosRecursoRadio">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ParametrosRDSCV">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="GananciaAGCTX" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="GananciaAGCTXdBm" type="s:float" />
+              <s:element minOccurs="1" maxOccurs="1" name="GananciaAGCRX" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="GananciaAGCRXdBm" type="s:float" />
+              <s:element minOccurs="1" maxOccurs="1" name="SupresionSilencio" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="TamRTP" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="Codec" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="GrabacionEd137" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ParametrosRecursosRadioKeepAlive">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ParametrosRecursoRadio">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="KeepAlivePeriod" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="KeepAliveMultiplier" type="s:unsignedInt" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ParametrosRecursosRadioKASiccip">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ParametrosRecursosRadioKeepAlive">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="UriRecursoDestino" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="RecursosRadio">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ParametrosRecursosRadioKASiccip">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdRecurso" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="TipoDestino" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdDestino" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdEmplazamiento" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="NameTablaBss" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Tipo" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="MetodoBSS" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Zonas_IdZonas" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Radio_param_idradio_param" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IdTablaBss" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="NombreZona" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="GrsDelay" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="OffSetFrequency" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="EnableEventPttSq" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="Metodos_bss_idmetodos_bss" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="idTIFX" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="DestRad_tipoFrec" type="s:unsignedInt" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="RecursosRadioForGateway">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:RecursosRadio">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ValuesTablaBss" type="tns:ArrayOfInt" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Rutas">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Central" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdRuta" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Tipo" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Orden" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="RangosSCV">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IdPrefijo" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdAbonado" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Inicial" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Final" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Rangos">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:RangosSCV">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Central" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Tipo" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Encaminamientos">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Central" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="CentralPropia" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="Throwswitching" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="NumTest" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="CentralIp" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="SectoresSectorizacion">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSectorizacion" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdNucleo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSector" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdTop" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Troncales">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdTroncal" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="NumTest" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="PermisosRedesSCV">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdRed" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Llamar" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="Recibir" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="PermisosRedes">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:PermisosRedesSCV">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSector" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdNucleo" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Redes">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdRed" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Prefijo" type="s:unsignedInt" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Sectorizaciones">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSectorizacion" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Activa" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="FechaActivacion" type="s:dateTime" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Prefijos">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IdPrefijo" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Nucleos">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdNucleo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Emplazamientos">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdEmplazamiento" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Operadores">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdOperador" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Clave" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="NivelAcceso" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="Nombre" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Apellidos" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Telefono" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="FechaUltimoAcceso" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="Comentarios" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Sistema">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="TiempoPtt" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="TiempoSinJack1" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="TiempoSinJack2" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="TamLiteralEnlExt" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="TamLiteralDA" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="TamLiteralIA" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="TamLiteralAG" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="TamLiteralEmplazamiento" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="VersionIP" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="GrupoMulticastConfiguracion" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PuertoMulticastConfiguracion" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="EstadoScv1" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="EstadoScv2" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="KeepAlivePeriod" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="KeepAliveMultiplier" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumLlamadasEntrantesIda" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumLlamadasEnIda" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumFrecPagina" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumPagFrec" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumEnlacesInternosPag" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumPagEnlacesInt" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumDestinosInternosPag" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumPagDestinosInt" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumEnlacesAI" type="s:unsignedInt" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Top">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdTop" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ModoArranque" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PosicionSacta" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="IpRed1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IpRed2" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ConexionJacksEjecutivo" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="ConexionJacksAyudante" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumAltavoces" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Grabador1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Grabador2" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="TifX">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Tablas">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdTifx" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ModoArranque" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ModoSincronizacion" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="Master" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="SNMPPortLocal" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="SNMPPortRemoto" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="SNMPTraps" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="SIPPortLocal" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="TimeSupervision" type="s:unsignedInt" />
+              <s:element minOccurs="0" maxOccurs="1" name="IpRed1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IpRed2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Grabador1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Grabador2" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Sectores">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:SectoresSCV">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSector" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdNucleo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdNucleoParejaUCS" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdSistemaParejaUCS" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="SectorSimple" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="Tipo" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumSacta" type="s:unsignedInt" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfPermisosRedesSCV">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PermisosRedesSCV" nillable="true" type="tns:PermisosRedesSCV" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCfgPasarela">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id_sistema" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="id_hw" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCfgPasarelaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCfgPasarelaResult" type="tns:CfgPasarela" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CfgPasarela">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Nombre" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumRecursos" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ModoSincronizacion" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MasterSincronizacion" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PuertoLocalSNMP" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="PuertoRemotoSNMP" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="PuertoRemotoTrapsSNMP" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="PuertoLocalSIP" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="PeriodoSupervisionSIP" type="s:unsignedInt" />
+          <s:element minOccurs="0" maxOccurs="1" name="IpGrabador1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IpGrabador2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ListaRecursos" type="tns:ArrayOfRecursosSCV" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfRecursosSCV">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RecursosSCV" nillable="true" type="tns:RecursosSCV" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetParametrosRecursoById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="idSistema" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idRecurso" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="tipo" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetParametrosRecursoByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetParametrosRecursoByIdResult" type="tns:Tablas" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetParametrosRecurso">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="r" type="tns:Recursos" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetParametrosRecursoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetParametrosRecursoResult" type="tns:Tablas" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetConfigSistema">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id_sistema" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetConfigSistemaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetConfigSistemaResult" type="tns:ConfiguracionSistema" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ConfiguracionSistema">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ParametrosGenerales" type="tns:ParametrosGeneralesSistema" />
+          <s:element minOccurs="0" maxOccurs="1" name="PlanNumeracionATS" type="tns:ArrayOfNumeracionATS" />
+          <s:element minOccurs="0" maxOccurs="1" name="PlanDireccionamientoIP" type="tns:ArrayOfDireccionamientoIP" />
+          <s:element minOccurs="0" maxOccurs="1" name="PlanTroncales" type="tns:ArrayOfListaTroncales" />
+          <s:element minOccurs="0" maxOccurs="1" name="PlanRedes" type="tns:ArrayOfListaRedes" />
+          <s:element minOccurs="0" maxOccurs="1" name="PlanAsignacionUsuarios" type="tns:ArrayOfAsignacionUsuariosTV" />
+          <s:element minOccurs="0" maxOccurs="1" name="PlanAsignacionRecursos" type="tns:ArrayOfAsignacionRecursosGW" />
+          <s:element minOccurs="0" maxOccurs="1" name="PlanDireccionamientoSIP" type="tns:ArrayOfDireccionamientoSIP" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ParametrosGeneralesSistema">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="TiempoMaximoPTT" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="TiempoSinJack1" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="TiempoSinJack2" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="TamLiteralEnlExt" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="TamLiteralEnlDA" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="TamLiteralEnlIA" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="TamLiteralEnlAG" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="TamLiteralEmplazamiento" type="s:unsignedInt" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfNumeracionATS">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="NumeracionATS" nillable="true" type="tns:NumeracionATS" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="NumeracionATS">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CentralPropia" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Throwswitching" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="RangosOperador" type="tns:ArrayOfRangosSCV" />
+          <s:element minOccurs="0" maxOccurs="1" name="RangosPrivilegiados" type="tns:ArrayOfRangosSCV" />
+          <s:element minOccurs="0" maxOccurs="1" name="ListaRutas" type="tns:ArrayOfPlanRutas" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumTest" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfRangosSCV">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RangosSCV" nillable="true" type="tns:RangosSCV" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPlanRutas">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PlanRutas" nillable="true" type="tns:PlanRutas" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PlanRutas">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TipoRuta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ListaTroncales" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDireccionamientoIP">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DireccionamientoIP" nillable="true" type="tns:DireccionamientoIP" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DireccionamientoIP">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IdHost" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IpRed1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IpRed2" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TipoHost" type="tns:Tipo_Elemento_HW" />
+          <s:element minOccurs="1" maxOccurs="1" name="Interno" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Min" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="Max" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="Tipo_Elemento_HW">
+        <s:restriction base="s:string">
+          <s:enumeration value="TEH_TOP" />
+          <s:enumeration value="TEH_TIFX" />
+          <s:enumeration value="TEH_EXTERNO_RADIO" />
+          <s:enumeration value="TEH_EXTERNO_TELEFONIA" />
+          <s:enumeration value="TEH_SISTEMA" />
+          <s:enumeration value="TEH_GRABADOR" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfListaTroncales">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ListaTroncales" nillable="true" type="tns:ListaTroncales" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ListaTroncales">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IdTroncal" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroTest" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ListaRecursos" type="tns:ArrayOfPlanRecursos" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPlanRecursos">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PlanRecursos" nillable="true" type="tns:PlanRecursos" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PlanRecursos">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IdRecurso" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Tipo" type="tns:TipoInterface" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfListaRedes">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ListaRedes" nillable="true" type="tns:ListaRedes" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ListaRedes">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IdRed" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Prefijo" type="s:unsignedInt" />
+          <s:element minOccurs="0" maxOccurs="1" name="ListaRecursos" type="tns:ArrayOfPlanRecursos" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAsignacionUsuariosTV">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AsignacionUsuariosTV" nillable="true" type="tns:AsignacionUsuariosTV" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AsignacionUsuariosTV">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IdUsuario" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IdHost" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IpGrabador1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IpGrabador2" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RtspPort" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAsignacionRecursosGW">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AsignacionRecursosGW" nillable="true" type="tns:AsignacionRecursosGW" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AsignacionRecursosGW">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IdRecurso" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IdHost" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SipPort" type="s:unsignedInt" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDireccionamientoSIP">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DireccionamientoSIP" nillable="true" type="tns:DireccionamientoSIP" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DireccionamientoSIP">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IdUsuario" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumerosAbonadoQueAtiende" type="tns:ArrayOfStrNumeroAbonado" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfStrNumeroAbonado">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="StrNumeroAbonado" type="tns:StrNumeroAbonado" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="StrNumeroAbonado">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IdAgrupacion" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Prefijo" type="s:unsignedInt" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroAbonado" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetParametrosGenerales">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id_sistema" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetParametrosGeneralesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetParametrosGeneralesResult" type="tns:ParametrosGeneralesSistema" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPlanNumeracionATS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id_sistema" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPlanNumeracionATSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPlanNumeracionATSResult" type="tns:ArrayOfNumeracionATS" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPlanDireccionamientoIP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id_sistema" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPlanDireccionamientoIPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPlanDireccionamientoIPResult" type="tns:ArrayOfDireccionamientoIP" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPlanTroncales">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id_sistema" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPlanTroncalesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPlanTroncalesResult" type="tns:ArrayOfListaTroncales" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPlanRedes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id_sistema" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPlanRedesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPlanRedesResult" type="tns:ArrayOfListaRedes" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPlanAsignacionUsuarios">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id_sistema" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPlanAsignacionUsuariosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPlanAsignacionUsuariosResult" type="tns:ArrayOfAsignacionUsuariosTV" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPlanAsignacionRecursos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id_sistema" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPlanAsignacionRecursosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPlanAsignacionRecursosResult" type="tns:ArrayOfAsignacionRecursosGW" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPlanDireccionamientoSIP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id_sistema" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPlanDireccionamientoSIPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPlanDireccionamientoSIPResult" type="tns:ArrayOfDireccionamientoSIP" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetParametrosMulticast">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id_sistema" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetParametrosMulticastResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetParametrosMulticastResult" type="tns:ParametrosMulticast" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ParametrosMulticast">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GrupoMulticastConfiguracion" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PuertoMulticastConfiguracion" type="s:unsignedInt" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetPoolHfElement">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id_sistema" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPoolHfElementResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPoolHfElementResult" type="tns:ArrayOfPoolHfElement" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfPoolHfElement">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PoolHfElement" nillable="true" type="tns:PoolHfElement" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PoolHfElement">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SipUri" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IpGestor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Oid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Frecs" type="tns:ArrayOfHfRangoFrecuencias" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfHfRangoFrecuencias">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HfRangoFrecuencias" nillable="true" type="tns:HfRangoFrecuencias" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HfRangoFrecuencias">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="FMin" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="FMax" type="s:unsignedInt" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetPoolNMElements">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id_sistema" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPoolNMElementsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPoolNMElementsResult" type="tns:ArrayOfNode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfNode">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Node" nillable="true" type="tns:Node" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Node">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:PoolHfElement">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="EsReceptor" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="EsTransmisor" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="TipoDeFrecuencia" type="tns:Tipo_Frecuencia" />
+              <s:element minOccurs="0" maxOccurs="1" name="FrecuenciaPrincipal" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="TipoDeCanal" type="tns:Tipo_Canal" />
+              <s:element minOccurs="1" maxOccurs="1" name="FormaDeTrabajo" type="tns:Tipo_Formato_Trabajo" />
+              <s:element minOccurs="1" maxOccurs="1" name="Prioridad" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Puerto" type="s:unsignedInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="Offset" type="tns:GearCarrierOffStatus" />
+              <s:element minOccurs="1" maxOccurs="1" name="Canalizacion" type="tns:GearChannelSpacings" />
+              <s:element minOccurs="1" maxOccurs="1" name="Modulacion" type="tns:GearModulations" />
+              <s:element minOccurs="1" maxOccurs="1" name="NivelDePotencia" type="tns:GearPowerLevels" />
+              <s:element minOccurs="1" maxOccurs="1" name="FormatoFrecuenciaPrincipal" type="tns:Tipo_Formato_Frecuencia" />
+              <s:element minOccurs="1" maxOccurs="1" name="ModeloEquipo" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdEmplazamiento" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:simpleType name="Tipo_Frecuencia">
+        <s:restriction base="s:string">
+          <s:enumeration value="Basica" />
+          <s:enumeration value="HF" />
+          <s:enumeration value="VHF" />
+          <s:enumeration value="UHF" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="Tipo_Canal">
+        <s:restriction base="s:string">
+          <s:enumeration value="Monocanal" />
+          <s:enumeration value="Multicanal" />
+          <s:enumeration value="Otros" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="Tipo_Formato_Trabajo">
+        <s:restriction base="s:string">
+          <s:enumeration value="Principal" />
+          <s:enumeration value="Reserva" />
+          <s:enumeration value="Ambos" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="GearCarrierOffStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="Off" />
+          <s:enumeration value="kHz_7_5" />
+          <s:enumeration value="kHz_5_0" />
+          <s:enumeration value="kHz_2_5" />
+          <s:enumeration value="Hz_0_0" />
+          <s:enumeration value="kHz_minus_2_5" />
+          <s:enumeration value="kHz_minus_5_0" />
+          <s:enumeration value="kHz_minus_7_5" />
+          <s:enumeration value="kHz_8" />
+          <s:enumeration value="kHz_4" />
+          <s:enumeration value="kHz_minus_4" />
+          <s:enumeration value="kHz_minus_8" />
+          <s:enumeration value="kHz_7_3" />
+          <s:enumeration value="kHz_minus_7_3" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="GearChannelSpacings">
+        <s:restriction base="s:string">
+          <s:enumeration value="ChannelSpacingsDefault" />
+          <s:enumeration value="kHz_8_33" />
+          <s:enumeration value="kHz_12_5" />
+          <s:enumeration value="kHz_25_00" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="GearModulations">
+        <s:restriction base="s:string">
+          <s:enumeration value="AM" />
+          <s:enumeration value="Reserved" />
+          <s:enumeration value="ACARS" />
+          <s:enumeration value="VDL2" />
+          <s:enumeration value="AM_CT" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="GearPowerLevels">
+        <s:restriction base="s:string">
+          <s:enumeration value="PowerLevelsDefault" />
+          <s:enumeration value="Low" />
+          <s:enumeration value="Normal" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="Tipo_Formato_Frecuencia">
+        <s:restriction base="s:string">
+          <s:enumeration value="MHz" />
+          <s:enumeration value="Hz" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="EstadoCluster" type="tns:EstadoCluster" />
+      <s:element name="ArrayOfCfgEnlaceExterno" nillable="true" type="tns:ArrayOfCfgEnlaceExterno" />
+      <s:element name="ArrayOfCfgEnlaceInterno" nillable="true" type="tns:ArrayOfCfgEnlaceInterno" />
+      <s:element name="LoginTerminalVoz" nillable="true" type="tns:LoginTerminalVoz" />
+      <s:element name="CfgUsuario" nillable="true" type="tns:CfgUsuario" />
+      <s:element name="CfgPasarela" nillable="true" type="tns:CfgPasarela" />
+      <s:element name="Tablas" nillable="true" type="tns:Tablas" />
+      <s:element name="ConfiguracionSistema" nillable="true" type="tns:ConfiguracionSistema" />
+      <s:element name="ParametrosGeneralesSistema" nillable="true" type="tns:ParametrosGeneralesSistema" />
+      <s:element name="ArrayOfNumeracionATS" nillable="true" type="tns:ArrayOfNumeracionATS" />
+      <s:element name="ArrayOfDireccionamientoIP" nillable="true" type="tns:ArrayOfDireccionamientoIP" />
+      <s:element name="ArrayOfListaTroncales" nillable="true" type="tns:ArrayOfListaTroncales" />
+      <s:element name="ArrayOfListaRedes" nillable="true" type="tns:ArrayOfListaRedes" />
+      <s:element name="ArrayOfAsignacionUsuariosTV" nillable="true" type="tns:ArrayOfAsignacionUsuariosTV" />
+      <s:element name="ArrayOfAsignacionRecursosGW" nillable="true" type="tns:ArrayOfAsignacionRecursosGW" />
+      <s:element name="ArrayOfDireccionamientoSIP" nillable="true" type="tns:ArrayOfDireccionamientoSIP" />
+      <s:element name="ParametrosMulticast" nillable="true" type="tns:ParametrosMulticast" />
+      <s:element name="ArrayOfPoolHfElement" nillable="true" type="tns:ArrayOfPoolHfElement" />
+      <s:element name="ArrayOfNode" nillable="true" type="tns:ArrayOfNode" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetVersionConfiguracion_XMLSoapIn">
+    <wsdl:part name="parameters" element="tns:GetVersionConfiguracion_XML" />
+  </wsdl:message>
+  <wsdl:message name="GetVersionConfiguracion_XMLSoapOut">
+    <wsdl:part name="parameters" element="tns:GetVersionConfiguracion_XMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetVersionConfiguracionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetVersionConfiguracion" />
+  </wsdl:message>
+  <wsdl:message name="GetVersionConfiguracionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetVersionConfiguracionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetScvActivoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetScvActivo" />
+  </wsdl:message>
+  <wsdl:message name="GetScvActivoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetScvActivoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEstadoClusterSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEstadoCluster" />
+  </wsdl:message>
+  <wsdl:message name="GetEstadoClusterSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEstadoClusterResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetListaEnlacesExternosSoapIn">
+    <wsdl:part name="parameters" element="tns:GetListaEnlacesExternos" />
+  </wsdl:message>
+  <wsdl:message name="GetListaEnlacesExternosSoapOut">
+    <wsdl:part name="parameters" element="tns:GetListaEnlacesExternosResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetListaEnlacesInternosSoapIn">
+    <wsdl:part name="parameters" element="tns:GetListaEnlacesInternos" />
+  </wsdl:message>
+  <wsdl:message name="GetListaEnlacesInternosSoapOut">
+    <wsdl:part name="parameters" element="tns:GetListaEnlacesInternosResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginTopSoapIn">
+    <wsdl:part name="parameters" element="tns:LoginTop" />
+  </wsdl:message>
+  <wsdl:message name="LoginTopSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginTopResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCfgUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCfgUsuario" />
+  </wsdl:message>
+  <wsdl:message name="GetCfgUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCfgUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCfgPasarelaSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCfgPasarela" />
+  </wsdl:message>
+  <wsdl:message name="GetCfgPasarelaSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCfgPasarelaResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetParametrosRecursoByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetParametrosRecursoById" />
+  </wsdl:message>
+  <wsdl:message name="GetParametrosRecursoByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetParametrosRecursoByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetParametrosRecursoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetParametrosRecurso" />
+  </wsdl:message>
+  <wsdl:message name="GetParametrosRecursoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetParametrosRecursoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigSistemaSoapIn">
+    <wsdl:part name="parameters" element="tns:GetConfigSistema" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigSistemaSoapOut">
+    <wsdl:part name="parameters" element="tns:GetConfigSistemaResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetParametrosGeneralesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetParametrosGenerales" />
+  </wsdl:message>
+  <wsdl:message name="GetParametrosGeneralesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetParametrosGeneralesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanNumeracionATSSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPlanNumeracionATS" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanNumeracionATSSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPlanNumeracionATSResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanDireccionamientoIPSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPlanDireccionamientoIP" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanDireccionamientoIPSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPlanDireccionamientoIPResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanTroncalesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPlanTroncales" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanTroncalesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPlanTroncalesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanRedesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPlanRedes" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanRedesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPlanRedesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanAsignacionUsuariosSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPlanAsignacionUsuarios" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanAsignacionUsuariosSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPlanAsignacionUsuariosResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanAsignacionRecursosSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPlanAsignacionRecursos" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanAsignacionRecursosSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPlanAsignacionRecursosResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanDireccionamientoSIPSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPlanDireccionamientoSIP" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanDireccionamientoSIPSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPlanDireccionamientoSIPResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetParametrosMulticastSoapIn">
+    <wsdl:part name="parameters" element="tns:GetParametrosMulticast" />
+  </wsdl:message>
+  <wsdl:message name="GetParametrosMulticastSoapOut">
+    <wsdl:part name="parameters" element="tns:GetParametrosMulticastResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPoolHfElementSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPoolHfElement" />
+  </wsdl:message>
+  <wsdl:message name="GetPoolHfElementSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPoolHfElementResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPoolNMElementsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPoolNMElements" />
+  </wsdl:message>
+  <wsdl:message name="GetPoolNMElementsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPoolNMElementsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetVersionConfiguracion_XMLHttpPostIn">
+    <wsdl:part name="id_sistema" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetVersionConfiguracion_XMLHttpPostOut" />
+  <wsdl:message name="GetVersionConfiguracionHttpPostIn">
+    <wsdl:part name="id_sistema" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetVersionConfiguracionHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetScvActivoHttpPostIn">
+    <wsdl:part name="idSistema" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetScvActivoHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEstadoClusterHttpPostIn" />
+  <wsdl:message name="GetEstadoClusterHttpPostOut">
+    <wsdl:part name="Body" element="tns:EstadoCluster" />
+  </wsdl:message>
+  <wsdl:message name="GetListaEnlacesExternosHttpPostIn">
+    <wsdl:part name="id_sistema" type="s:string" />
+    <wsdl:part name="id_usuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetListaEnlacesExternosHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCfgEnlaceExterno" />
+  </wsdl:message>
+  <wsdl:message name="GetListaEnlacesInternosHttpPostIn">
+    <wsdl:part name="id_sistema" type="s:string" />
+    <wsdl:part name="id_usuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetListaEnlacesInternosHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCfgEnlaceInterno" />
+  </wsdl:message>
+  <wsdl:message name="LoginTopHttpPostIn">
+    <wsdl:part name="id_sistema" type="s:string" />
+    <wsdl:part name="id_hw" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoginTopHttpPostOut">
+    <wsdl:part name="Body" element="tns:LoginTerminalVoz" />
+  </wsdl:message>
+  <wsdl:message name="GetCfgUsuarioHttpPostIn">
+    <wsdl:part name="id_sistema" type="s:string" />
+    <wsdl:part name="id_usuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCfgUsuarioHttpPostOut">
+    <wsdl:part name="Body" element="tns:CfgUsuario" />
+  </wsdl:message>
+  <wsdl:message name="GetCfgPasarelaHttpPostIn">
+    <wsdl:part name="id_sistema" type="s:string" />
+    <wsdl:part name="id_hw" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCfgPasarelaHttpPostOut">
+    <wsdl:part name="Body" element="tns:CfgPasarela" />
+  </wsdl:message>
+  <wsdl:message name="GetParametrosRecursoByIdHttpPostIn">
+    <wsdl:part name="idSistema" type="s:string" />
+    <wsdl:part name="idRecurso" type="s:string" />
+    <wsdl:part name="tipo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetParametrosRecursoByIdHttpPostOut">
+    <wsdl:part name="Body" element="tns:Tablas" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigSistemaHttpPostIn">
+    <wsdl:part name="id_sistema" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigSistemaHttpPostOut">
+    <wsdl:part name="Body" element="tns:ConfiguracionSistema" />
+  </wsdl:message>
+  <wsdl:message name="GetParametrosGeneralesHttpPostIn">
+    <wsdl:part name="id_sistema" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetParametrosGeneralesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ParametrosGeneralesSistema" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanNumeracionATSHttpPostIn">
+    <wsdl:part name="id_sistema" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanNumeracionATSHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfNumeracionATS" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanDireccionamientoIPHttpPostIn">
+    <wsdl:part name="id_sistema" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanDireccionamientoIPHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDireccionamientoIP" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanTroncalesHttpPostIn">
+    <wsdl:part name="id_sistema" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanTroncalesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfListaTroncales" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanRedesHttpPostIn">
+    <wsdl:part name="id_sistema" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanRedesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfListaRedes" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanAsignacionUsuariosHttpPostIn">
+    <wsdl:part name="id_sistema" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanAsignacionUsuariosHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfAsignacionUsuariosTV" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanAsignacionRecursosHttpPostIn">
+    <wsdl:part name="id_sistema" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanAsignacionRecursosHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfAsignacionRecursosGW" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanDireccionamientoSIPHttpPostIn">
+    <wsdl:part name="id_sistema" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPlanDireccionamientoSIPHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDireccionamientoSIP" />
+  </wsdl:message>
+  <wsdl:message name="GetParametrosMulticastHttpPostIn">
+    <wsdl:part name="id_sistema" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetParametrosMulticastHttpPostOut">
+    <wsdl:part name="Body" element="tns:ParametrosMulticast" />
+  </wsdl:message>
+  <wsdl:message name="GetPoolHfElementHttpPostIn">
+    <wsdl:part name="id_sistema" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPoolHfElementHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfPoolHfElement" />
+  </wsdl:message>
+  <wsdl:message name="GetPoolNMElementsHttpPostIn">
+    <wsdl:part name="id_sistema" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPoolNMElementsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfNode" />
+  </wsdl:message>
+  <wsdl:portType name="InterfazSOAPConfiguracionSoap">
+    <wsdl:operation name="GetVersionConfiguracion_XML">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador de sistema, devuelve la versión de la configuración activa registrada en la base de datos</wsdl:documentation>
+      <wsdl:input message="tns:GetVersionConfiguracion_XMLSoapIn" />
+      <wsdl:output message="tns:GetVersionConfiguracion_XMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVersionConfiguracion">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador de sistema, devuelve la versión de la configuración activa registrada en la base de datos</wsdl:documentation>
+      <wsdl:input message="tns:GetVersionConfiguracionSoapIn" />
+      <wsdl:output message="tns:GetVersionConfiguracionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetScvActivo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador de sistema, devuelve el Scv [1|2] activo. 0 si error</wsdl:documentation>
+      <wsdl:input message="tns:GetScvActivoSoapIn" />
+      <wsdl:output message="tns:GetScvActivoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEstadoCluster">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Envia el estado de los nodos que componen el cluster</wsdl:documentation>
+      <wsdl:input message="tns:GetEstadoClusterSoapIn" />
+      <wsdl:output message="tns:GetEstadoClusterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListaEnlacesExternos">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador de usuario y el sistema al que pertenece, devuelve la lista de enlaces externos del usuario.</wsdl:documentation>
+      <wsdl:input message="tns:GetListaEnlacesExternosSoapIn" />
+      <wsdl:output message="tns:GetListaEnlacesExternosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListaEnlacesInternos">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador de usuario y el sistema al que pertenece, devuelve la lista de enlaces internos del usuario.</wsdl:documentation>
+      <wsdl:input message="tns:GetListaEnlacesInternosSoapIn" />
+      <wsdl:output message="tns:GetListaEnlacesInternosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginTop">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador hardware del terminal de voz y el sistema al que pertenece, devuelve el identificador de usuario alojado en el mismo y el modo de arranque ('A' o 'M').</wsdl:documentation>
+      <wsdl:input message="tns:LoginTopSoapIn" />
+      <wsdl:output message="tns:LoginTopSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCfgUsuario">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador de usuario y el sistema al que pertenece, devuelve la configuración del usuario.</wsdl:documentation>
+      <wsdl:input message="tns:GetCfgUsuarioSoapIn" />
+      <wsdl:output message="tns:GetCfgUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCfgPasarela">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador hardware de la pasarela y el sistema al que pertenece, devuelve la configuración de la pasarela.</wsdl:documentation>
+      <wsdl:input message="tns:GetCfgPasarelaSoapIn" />
+      <wsdl:output message="tns:GetCfgPasarelaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetParametrosRecursoById">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole un identificador de sistema, un identificador de recurso y el tipo de interfaz (TI_Radio=0, TI_LCEN=1, TI_BC=2, TI_BL=3, TI_AB=4, TI_ATS_R2=5, TI_ATS_N5=6, TI_ATS_QSIG=7, TI_ISDN_2BD=8, TI_ISDN_30BD=9, TI_I_O=10, TI_DATOS=11), retorna los parámetros correspondientes al recurso.</wsdl:documentation>
+      <wsdl:input message="tns:GetParametrosRecursoByIdSoapIn" />
+      <wsdl:output message="tns:GetParametrosRecursoByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetParametrosRecurso">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole un recurso, retorna los parámetros correspondientes.</wsdl:documentation>
+      <wsdl:input message="tns:GetParametrosRecursoSoapIn" />
+      <wsdl:output message="tns:GetParametrosRecursoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigSistema">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador del sistema devuelve el conjunto de parámetros que conforman la configuración común de los distintos elementos del SCV.</wsdl:documentation>
+      <wsdl:input message="tns:GetConfigSistemaSoapIn" />
+      <wsdl:output message="tns:GetConfigSistemaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetParametrosGenerales">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador del sistema devuelve los parámetros generales del sistema.</wsdl:documentation>
+      <wsdl:input message="tns:GetParametrosGeneralesSoapIn" />
+      <wsdl:output message="tns:GetParametrosGeneralesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanNumeracionATS">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador del sistema devuelve el plan de numeración ATS.</wsdl:documentation>
+      <wsdl:input message="tns:GetPlanNumeracionATSSoapIn" />
+      <wsdl:output message="tns:GetPlanNumeracionATSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanDireccionamientoIP">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador del sistema devuelve el plan de direccionamiento IP.</wsdl:documentation>
+      <wsdl:input message="tns:GetPlanDireccionamientoIPSoapIn" />
+      <wsdl:output message="tns:GetPlanDireccionamientoIPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanTroncales">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador del sistema devuelve el plan de troncales.</wsdl:documentation>
+      <wsdl:input message="tns:GetPlanTroncalesSoapIn" />
+      <wsdl:output message="tns:GetPlanTroncalesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanRedes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador del sistema devuelve el plan de redes.</wsdl:documentation>
+      <wsdl:input message="tns:GetPlanRedesSoapIn" />
+      <wsdl:output message="tns:GetPlanRedesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanAsignacionUsuarios">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador del sistema devuelve el plan de asignación de usuarios a terminales de voz.</wsdl:documentation>
+      <wsdl:input message="tns:GetPlanAsignacionUsuariosSoapIn" />
+      <wsdl:output message="tns:GetPlanAsignacionUsuariosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanAsignacionRecursos">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador del sistema devuelve el plan de asignación de recursos a pasarelas.</wsdl:documentation>
+      <wsdl:input message="tns:GetPlanAsignacionRecursosSoapIn" />
+      <wsdl:output message="tns:GetPlanAsignacionRecursosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanDireccionamientoSIP">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador del sistema devuelve el plan de direccionamiento SIP.</wsdl:documentation>
+      <wsdl:input message="tns:GetPlanDireccionamientoSIPSoapIn" />
+      <wsdl:output message="tns:GetPlanDireccionamientoSIPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetParametrosMulticast">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador del sistema, proporciona la dirección multicast y el puerto para notificación de una activación de configuración.</wsdl:documentation>
+      <wsdl:input message="tns:GetParametrosMulticastSoapIn" />
+      <wsdl:output message="tns:GetParametrosMulticastSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPoolHfElement">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Configuración relativa a frecuencias HF Ulises5Ki.</wsdl:documentation>
+      <wsdl:input message="tns:GetPoolHfElementSoapIn" />
+      <wsdl:output message="tns:GetPoolHfElementSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPoolNMElements">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Configuración relativa a los equipos N+M</wsdl:documentation>
+      <wsdl:input message="tns:GetPoolNMElementsSoapIn" />
+      <wsdl:output message="tns:GetPoolNMElementsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="InterfazSOAPConfiguracionHttpPost">
+    <wsdl:operation name="GetVersionConfiguracion_XML">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador de sistema, devuelve la versión de la configuración activa registrada en la base de datos</wsdl:documentation>
+      <wsdl:input message="tns:GetVersionConfiguracion_XMLHttpPostIn" />
+      <wsdl:output message="tns:GetVersionConfiguracion_XMLHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVersionConfiguracion">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador de sistema, devuelve la versión de la configuración activa registrada en la base de datos</wsdl:documentation>
+      <wsdl:input message="tns:GetVersionConfiguracionHttpPostIn" />
+      <wsdl:output message="tns:GetVersionConfiguracionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetScvActivo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador de sistema, devuelve el Scv [1|2] activo. 0 si error</wsdl:documentation>
+      <wsdl:input message="tns:GetScvActivoHttpPostIn" />
+      <wsdl:output message="tns:GetScvActivoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEstadoCluster">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Envia el estado de los nodos que componen el cluster</wsdl:documentation>
+      <wsdl:input message="tns:GetEstadoClusterHttpPostIn" />
+      <wsdl:output message="tns:GetEstadoClusterHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListaEnlacesExternos">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador de usuario y el sistema al que pertenece, devuelve la lista de enlaces externos del usuario.</wsdl:documentation>
+      <wsdl:input message="tns:GetListaEnlacesExternosHttpPostIn" />
+      <wsdl:output message="tns:GetListaEnlacesExternosHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListaEnlacesInternos">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador de usuario y el sistema al que pertenece, devuelve la lista de enlaces internos del usuario.</wsdl:documentation>
+      <wsdl:input message="tns:GetListaEnlacesInternosHttpPostIn" />
+      <wsdl:output message="tns:GetListaEnlacesInternosHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginTop">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador hardware del terminal de voz y el sistema al que pertenece, devuelve el identificador de usuario alojado en el mismo y el modo de arranque ('A' o 'M').</wsdl:documentation>
+      <wsdl:input message="tns:LoginTopHttpPostIn" />
+      <wsdl:output message="tns:LoginTopHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCfgUsuario">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador de usuario y el sistema al que pertenece, devuelve la configuración del usuario.</wsdl:documentation>
+      <wsdl:input message="tns:GetCfgUsuarioHttpPostIn" />
+      <wsdl:output message="tns:GetCfgUsuarioHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCfgPasarela">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador hardware de la pasarela y el sistema al que pertenece, devuelve la configuración de la pasarela.</wsdl:documentation>
+      <wsdl:input message="tns:GetCfgPasarelaHttpPostIn" />
+      <wsdl:output message="tns:GetCfgPasarelaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetParametrosRecursoById">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole un identificador de sistema, un identificador de recurso y el tipo de interfaz (TI_Radio=0, TI_LCEN=1, TI_BC=2, TI_BL=3, TI_AB=4, TI_ATS_R2=5, TI_ATS_N5=6, TI_ATS_QSIG=7, TI_ISDN_2BD=8, TI_ISDN_30BD=9, TI_I_O=10, TI_DATOS=11), retorna los parámetros correspondientes al recurso.</wsdl:documentation>
+      <wsdl:input message="tns:GetParametrosRecursoByIdHttpPostIn" />
+      <wsdl:output message="tns:GetParametrosRecursoByIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigSistema">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador del sistema devuelve el conjunto de parámetros que conforman la configuración común de los distintos elementos del SCV.</wsdl:documentation>
+      <wsdl:input message="tns:GetConfigSistemaHttpPostIn" />
+      <wsdl:output message="tns:GetConfigSistemaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetParametrosGenerales">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador del sistema devuelve los parámetros generales del sistema.</wsdl:documentation>
+      <wsdl:input message="tns:GetParametrosGeneralesHttpPostIn" />
+      <wsdl:output message="tns:GetParametrosGeneralesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanNumeracionATS">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador del sistema devuelve el plan de numeración ATS.</wsdl:documentation>
+      <wsdl:input message="tns:GetPlanNumeracionATSHttpPostIn" />
+      <wsdl:output message="tns:GetPlanNumeracionATSHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanDireccionamientoIP">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador del sistema devuelve el plan de direccionamiento IP.</wsdl:documentation>
+      <wsdl:input message="tns:GetPlanDireccionamientoIPHttpPostIn" />
+      <wsdl:output message="tns:GetPlanDireccionamientoIPHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanTroncales">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador del sistema devuelve el plan de troncales.</wsdl:documentation>
+      <wsdl:input message="tns:GetPlanTroncalesHttpPostIn" />
+      <wsdl:output message="tns:GetPlanTroncalesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanRedes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador del sistema devuelve el plan de redes.</wsdl:documentation>
+      <wsdl:input message="tns:GetPlanRedesHttpPostIn" />
+      <wsdl:output message="tns:GetPlanRedesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanAsignacionUsuarios">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador del sistema devuelve el plan de asignación de usuarios a terminales de voz.</wsdl:documentation>
+      <wsdl:input message="tns:GetPlanAsignacionUsuariosHttpPostIn" />
+      <wsdl:output message="tns:GetPlanAsignacionUsuariosHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanAsignacionRecursos">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador del sistema devuelve el plan de asignación de recursos a pasarelas.</wsdl:documentation>
+      <wsdl:input message="tns:GetPlanAsignacionRecursosHttpPostIn" />
+      <wsdl:output message="tns:GetPlanAsignacionRecursosHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanDireccionamientoSIP">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador del sistema devuelve el plan de direccionamiento SIP.</wsdl:documentation>
+      <wsdl:input message="tns:GetPlanDireccionamientoSIPHttpPostIn" />
+      <wsdl:output message="tns:GetPlanDireccionamientoSIPHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetParametrosMulticast">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pasándole el identificador del sistema, proporciona la dirección multicast y el puerto para notificación de una activación de configuración.</wsdl:documentation>
+      <wsdl:input message="tns:GetParametrosMulticastHttpPostIn" />
+      <wsdl:output message="tns:GetParametrosMulticastHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPoolHfElement">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Configuración relativa a frecuencias HF Ulises5Ki.</wsdl:documentation>
+      <wsdl:input message="tns:GetPoolHfElementHttpPostIn" />
+      <wsdl:output message="tns:GetPoolHfElementHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPoolNMElements">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Configuración relativa a los equipos N+M</wsdl:documentation>
+      <wsdl:input message="tns:GetPoolNMElementsHttpPostIn" />
+      <wsdl:output message="tns:GetPoolNMElementsHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="InterfazSOAPConfiguracionSoap" type="tns:InterfazSOAPConfiguracionSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetVersionConfiguracion_XML">
+      <soap:operation soapAction="http://CD40.es/GetVersionConfiguracion_XML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVersionConfiguracion">
+      <soap:operation soapAction="http://CD40.es/GetVersionConfiguracion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetScvActivo">
+      <soap:operation soapAction="http://CD40.es/GetScvActivo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEstadoCluster">
+      <soap:operation soapAction="http://CD40.es/GetEstadoCluster" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListaEnlacesExternos">
+      <soap:operation soapAction="http://CD40.es/GetListaEnlacesExternos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListaEnlacesInternos">
+      <soap:operation soapAction="http://CD40.es/GetListaEnlacesInternos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginTop">
+      <soap:operation soapAction="http://CD40.es/LoginTop" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCfgUsuario">
+      <soap:operation soapAction="http://CD40.es/GetCfgUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCfgPasarela">
+      <soap:operation soapAction="http://CD40.es/GetCfgPasarela" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParametrosRecursoById">
+      <soap:operation soapAction="http://CD40.es/GetParametrosRecursoById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParametrosRecurso">
+      <soap:operation soapAction="http://CD40.es/GetParametrosRecurso" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigSistema">
+      <soap:operation soapAction="http://CD40.es/GetConfigSistema" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParametrosGenerales">
+      <soap:operation soapAction="http://CD40.es/GetParametrosGenerales" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanNumeracionATS">
+      <soap:operation soapAction="http://CD40.es/GetPlanNumeracionATS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanDireccionamientoIP">
+      <soap:operation soapAction="http://CD40.es/GetPlanDireccionamientoIP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanTroncales">
+      <soap:operation soapAction="http://CD40.es/GetPlanTroncales" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanRedes">
+      <soap:operation soapAction="http://CD40.es/GetPlanRedes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanAsignacionUsuarios">
+      <soap:operation soapAction="http://CD40.es/GetPlanAsignacionUsuarios" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanAsignacionRecursos">
+      <soap:operation soapAction="http://CD40.es/GetPlanAsignacionRecursos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanDireccionamientoSIP">
+      <soap:operation soapAction="http://CD40.es/GetPlanDireccionamientoSIP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParametrosMulticast">
+      <soap:operation soapAction="http://CD40.es/GetParametrosMulticast" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPoolHfElement">
+      <soap:operation soapAction="http://CD40.es/GetPoolHfElement" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPoolNMElements">
+      <soap:operation soapAction="http://CD40.es/GetPoolNMElements" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="InterfazSOAPConfiguracionSoap12" type="tns:InterfazSOAPConfiguracionSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetVersionConfiguracion_XML">
+      <soap12:operation soapAction="http://CD40.es/GetVersionConfiguracion_XML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVersionConfiguracion">
+      <soap12:operation soapAction="http://CD40.es/GetVersionConfiguracion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetScvActivo">
+      <soap12:operation soapAction="http://CD40.es/GetScvActivo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEstadoCluster">
+      <soap12:operation soapAction="http://CD40.es/GetEstadoCluster" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListaEnlacesExternos">
+      <soap12:operation soapAction="http://CD40.es/GetListaEnlacesExternos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListaEnlacesInternos">
+      <soap12:operation soapAction="http://CD40.es/GetListaEnlacesInternos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginTop">
+      <soap12:operation soapAction="http://CD40.es/LoginTop" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCfgUsuario">
+      <soap12:operation soapAction="http://CD40.es/GetCfgUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCfgPasarela">
+      <soap12:operation soapAction="http://CD40.es/GetCfgPasarela" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParametrosRecursoById">
+      <soap12:operation soapAction="http://CD40.es/GetParametrosRecursoById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParametrosRecurso">
+      <soap12:operation soapAction="http://CD40.es/GetParametrosRecurso" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigSistema">
+      <soap12:operation soapAction="http://CD40.es/GetConfigSistema" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParametrosGenerales">
+      <soap12:operation soapAction="http://CD40.es/GetParametrosGenerales" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanNumeracionATS">
+      <soap12:operation soapAction="http://CD40.es/GetPlanNumeracionATS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanDireccionamientoIP">
+      <soap12:operation soapAction="http://CD40.es/GetPlanDireccionamientoIP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanTroncales">
+      <soap12:operation soapAction="http://CD40.es/GetPlanTroncales" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanRedes">
+      <soap12:operation soapAction="http://CD40.es/GetPlanRedes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanAsignacionUsuarios">
+      <soap12:operation soapAction="http://CD40.es/GetPlanAsignacionUsuarios" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanAsignacionRecursos">
+      <soap12:operation soapAction="http://CD40.es/GetPlanAsignacionRecursos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanDireccionamientoSIP">
+      <soap12:operation soapAction="http://CD40.es/GetPlanDireccionamientoSIP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParametrosMulticast">
+      <soap12:operation soapAction="http://CD40.es/GetParametrosMulticast" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPoolHfElement">
+      <soap12:operation soapAction="http://CD40.es/GetPoolHfElement" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPoolNMElements">
+      <soap12:operation soapAction="http://CD40.es/GetPoolNMElements" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="InterfazSOAPConfiguracionHttpPost" type="tns:InterfazSOAPConfiguracionHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetVersionConfiguracion_XML">
+      <http:operation location="/GetVersionConfiguracion_XML" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetVersionConfiguracion">
+      <http:operation location="/GetVersionConfiguracion" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetScvActivo">
+      <http:operation location="/GetScvActivo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEstadoCluster">
+      <http:operation location="/GetEstadoCluster" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListaEnlacesExternos">
+      <http:operation location="/GetListaEnlacesExternos" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListaEnlacesInternos">
+      <http:operation location="/GetListaEnlacesInternos" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginTop">
+      <http:operation location="/LoginTop" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCfgUsuario">
+      <http:operation location="/GetCfgUsuario" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCfgPasarela">
+      <http:operation location="/GetCfgPasarela" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParametrosRecursoById">
+      <http:operation location="/GetParametrosRecursoById" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigSistema">
+      <http:operation location="/GetConfigSistema" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParametrosGenerales">
+      <http:operation location="/GetParametrosGenerales" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanNumeracionATS">
+      <http:operation location="/GetPlanNumeracionATS" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanDireccionamientoIP">
+      <http:operation location="/GetPlanDireccionamientoIP" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanTroncales">
+      <http:operation location="/GetPlanTroncales" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanRedes">
+      <http:operation location="/GetPlanRedes" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanAsignacionUsuarios">
+      <http:operation location="/GetPlanAsignacionUsuarios" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanAsignacionRecursos">
+      <http:operation location="/GetPlanAsignacionRecursos" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlanDireccionamientoSIP">
+      <http:operation location="/GetPlanDireccionamientoSIP" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParametrosMulticast">
+      <http:operation location="/GetParametrosMulticast" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPoolHfElement">
+      <http:operation location="/GetPoolHfElement" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPoolNMElements">
+      <http:operation location="/GetPoolNMElements" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="InterfazSOAPConfiguracion">
+    <wsdl:port name="InterfazSOAPConfiguracionSoap" binding="tns:InterfazSOAPConfiguracionSoap">
+      <soap:address location="http://localhost:51689/InterfazSOAPConfiguracion/InterfazSOAPConfiguracion.asmx" />
+    </wsdl:port>
+    <wsdl:port name="InterfazSOAPConfiguracionSoap12" binding="tns:InterfazSOAPConfiguracionSoap12">
+      <soap12:address location="http://localhost:51689/InterfazSOAPConfiguracion/InterfazSOAPConfiguracion.asmx" />
+    </wsdl:port>
+    <wsdl:port name="InterfazSOAPConfiguracionHttpPost" binding="tns:InterfazSOAPConfiguracionHttpPost">
+      <http:address location="http://localhost:51689/InterfazSOAPConfiguracion/InterfazSOAPConfiguracion.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es" data-ng-app="Uv5kiman">
+<head>
+    <meta name="generator"
+        content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
+    <meta charset="windows-1252" />
+    <meta name="description" content="Plantilla Ulises 5000" />
+    <meta name="keywords" content="HTML5, CSS3, JavaScript" />
+    <title>ULISES V 5000 I. Aplicacion de Mantenimiento</title>
+    <!-- Estilos  -->
+    <link rel="stylesheet" href="./styles/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="./styles/uv5ki-styles.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/daterangepicker.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/alertify/alertify.min.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/alertify/themes/bootstrap.css" />
+</head>
+<body>
+    <div id="agrupar" data-ng-controller="uv5kiGlobalCtrl as ctrl">
+        <header id="cabecera">
+            <div id="_contSupIzq">
+                <div id="_logo" width="90%">
+                    <!-- <img src="./images/nucleo-df-new.jpg" /> -->
+                    <img src="./images/corporativo-a.png" height="85%" />
+                </div>
+            </div>
+            <div id="_tit_ppal">
+                <p translate>INDEX_TITULO</p>
+                <div id="_manual" ng-show="false"><a href="" data-ng-click="ctrl.manual()">Manual</a></div>
+            </div>
+            <div id="_contSupDrcha">
+                <div id="_hfecha">{{ctrl.date}} {{ctrl.hora}}</div>
+                <div id="_hsolohora"><i translate>INDEX_USER</i><b>{{ctrl.user()}}</b></div>
+            </div>
+        </header>
+        <!--<section id="_separador"></section>-->
+        <nav id="_menu" class="container">
+            <h3 translate>INDEX_OPCIONES</h3>
+            <ul class="nav nav-pills nav-stacked">
+                <li data-ng-class="{'active': ctrl.pagina()==0}">
+                    <a href="#/" data-ng-click="ctrl.pagina(0)" translate>Hardware</a>
+                </li>
+                <li data-ng-class="{'active': ctrl.pagina()==1}">
+                    <a href="#/opesp" data-ng-click="ctrl.pagina(1)" translate>Operativa Radio</a>
+                </li>
+                <li data-ng-class="{'active': ctrl.pagina()==4}">
+                    <a href="#/tifxsp" data-ng-click="ctrl.pagina(4)" translate>Presencia Telefonia</a>
+                </li>
+                <li data-ng-class="{'active': ctrl.pagina()==2}">
+                    <a href="#/hist" data-ng-click="ctrl.pagina(2)" translate>INDEX_OPC_HISTORICOS</a>
+                </li>
+                <li data-ng-class="{'active': ctrl.pagina()==3}">
+                    <a href="#/config" data-ng-click="ctrl.pagina(3)" translate>INDEX_OPC_CONFIGURACION</a>
+                </li>
+                <li>
+                    <a href="" data-ng-click="ctrl.about()" translate>Acerca de...</a>
+                </li>
+                <li ng-show="ctrl.retorno()">
+                    <a href="" data-ng-click="ctrl.retorna()" translate>INDEX_OPC_VOLVER</a>
+                </li>
+            </ul>
+        </nav>
+
+        <section id="_ppal">
+            <div data-ng-view></div>
+        </section>
+        <div id="inci">
+            <h1 translate>INDEX_INCI</h1>
+            <table st-table="ctrl.dlistainci" st-safe-src="ctrl.listainci" class="table table-striped" style="margin-bottom: 0">
+                <thead>
+                    <tr>
+                        <th translate>INDEX_INCI_FECHA</th>
+                        <th translate>INDEX_INCI_DESCRIPCION</th>
+                        <th translate>INDEX_INCI_RECONOCER</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="inci in ctrl.dlistainci">
+                        <td>
+                            <div>{{inci.time}}</div>
+                        </td>
+                        <td>
+                            <div>{{ctrl.inci_desc(inci.inci)}}</div>
+                        </td>
+                        <td style="text-align: right;">
+                            <button type="button" ng-click="ctrl.reconoce(inci, true)" class="btn btn-default" translate>INDEX_INCI_RECONOCER</button></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr style="padding:0;">
+                        <td>
+                        </td>
+                        <td></td>
+                        <td style="text-align: right;">
+                            <div id="pag" st-pagination="" st-items-by-page="4" st-displayed-pages="4" ></div>
+                        </td>
+                    </tr>
+                    <tr >
+                        <td>
+                            <button style="float:none" width="24"
+                                class="btn btn-default" 
+                                ng-show="ctrl.listainci.length > 0" 
+                                ng-click="ctrl.ToggleSound()">                                 
+                                <img ng-src='{{ctrl.SoundImg()}}'>
+                            </button>
+                        </td>
+                        <td style="text-align: right">
+							<!-- Control Audio local -->
+							<audio id="myAudio" >
+								<source src="ALARM.wav" type="audio/wav">
+								Your browser does not support the audio element.
+							</audio>
+                            <!--<img ng-src='{{ctrl.SoundImg()}}' alt="" width="24">-->
+                        </td>
+                        <td>
+                            <button height="24px"
+                                class="btn btn-default" 
+                                ng-click="ctrl.reconoce_todas()" 
+                                ng-show="ctrl.listainci.length > 0" translate>
+                                    Reconocer Todas
+                            </button>
+                            <!--<button class="btn btn-default" ng-show="ctrl.listainci.length > 0" onclick="document.getElementById('myAudio').muted=!document.getElementById('myAudio').muted"><img ng-src='{{ctrl.SoundImg()}}' alt="" width="24"></button>-->
+                        </td>
+                    </tr>
+                    </tfoot>
+            </table>
+        </div>
+<!--        <footer id="_pie"> 
+            <div>
+                <p style="width:80%; margin:0;" translate>INDEX_PIE</p>
+                <button width="24" style="float:right" 
+                        class="btn btn-default" >P</button>
+                <button width="24" style="float:right" 
+                        class="btn btn-default" >R</button>
+            </div>
+        </footer>-->
+
+        <footer id="_pie">
+            <div class="row">
+                <div class="col-md-10">
+                    <p style="margin:0;" translate>INDEX_PIE</p>
+                </div>
+                <div class="col-md-2">
+                <button style="float:right; margin-right: 2px;" 
+                        class="{{ctrl.PhoneStdClass()}}" >T</button>
+                <button style="float:right; margin-right: 2px;" 
+                        class="{{ctrl.RadioStdClass()}}" >R</button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- inject-vendor:js -->
+    <script src="./scripts/jquery/jquery-2.1.3.min.js"></script>
+<!--    <script src="./scripts/jquery/jquery-ui.min.js"></script>-->
+    <script src="./scripts/angular/angular.js"></script>
+    <script src="./scripts/angular/angular-cookies.min.js"></script>
+    <script src="./scripts/angular/angular-locale_es.js"></script>
+    <script src="./scripts/angular/angular-route.js"></script>
+    <!-- Para las Traducciones -->
+    <script src="./scripts/angular/angular-translate.min.js"></script>
+    <script src="./scripts/angular/angular-translate-loader-static-files.min.js"></script>
+    <script src="./scripts/angular/angular-sanitize.js"></script>
+
+    <script src="./scripts/bootsstrap/bootstrap.min.js"></script>
+    <script src="./scripts/bootsstrap/ui-bootstrap-tpls-1.2.4.min.js"></script>
+    <script src="./scripts/smart-table.js"></script>
+<!--     <script src="./scripts/datetime-picker.min.js"></script>
+ -->
+<!--    <script type="text/javascript" src="./scripts/moment-with-locales.min.js"></script>-->
+    <script type="text/javascript" src="./scripts/moment.min.js"></script>
+    <script type="text/javascript" src="./scripts/daterangepicker.js"></script>
+    <script type="text/javascript" src="./scripts/alertify.min.js""></script>
+    <script type="text/javascript" src="./scripts/sprintf/sprintf.min.js"></script>
+    <script type="text/javascript" src="./scripts/jsoneditor.min.js"></script>
+
+    <!-- inject-app:js -->	
+    <script src="./app/modules/Uv5kiman.js"></script>
+    <script src="./app/routes/Uv5kiRoutes.js"></script>	
+ 
+ <!-- 
+    <script src="./app/services/uv5kMantService.js"></script>
+    <script src="./app/services/ug5kValidationService.js"></script>
+    <script src="./app/services/Simulador.js"></script>
+    <script src="./app/services/logger.js"></script>
+
+    <script src="./scripts/u5k-prog.js"></script>
+	-->
+
+    <script src="./app/services/Uv5kiman-CommService.js"></script>
+    <script src="./app/services/Uv5kiman-LocalService.js"></script>
+
+	<script src="./app/controllers/Uv5kiman-global-ctrl.js"></script>
+	<script src="./app/controllers/Uv5kiman-superv-ctrl.js"></script>
+	<script src="./app/controllers/Uv5kiman-ope-ctrl.js"></script>
+	<script src="./app/controllers/Uv5kiman-config-ctrl.js"></script>
+	<script src="./app/controllers/Uv5kiman-hist-ctrl.js"></script>
+	<script src="./app/controllers/Uv5kiman-tlf-ctrl.js"></script>
+
+ </body>
+</html>

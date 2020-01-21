@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization Culture="fr-fr" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+	<String Id="msierrUSRFailedUserCreate" Overridable="yes">Échec lors de la création d&apos;utilisateur.  ([2]   [3]   [4]   [5])</String>
+	<String Id="msierrUSRFailedUserCreatePswd" Overridable="yes">Échec de la création de l&apos;utilisateur car mot de passe non valide.  ([2]   [3]   [4]   [5])</String>
+	<String Id="msierrUSRFailedUserGroupAdd" Overridable="yes">Échec de l&apos;ajout de l&apos;utilisateur au groupe.  ([2]   [3]   [4]   [5])</String>
+	<String Id="msierrUSRFailedUserCreateExists" Overridable="yes">Échec de la création de l&apos;utilisateur car cet utilisateur existe déjà.  ([2]   [3]   [4]   [5])</String>
+
+	<String Id="msierrSMBFailedCreate" Overridable="yes">Échec de la création du partage de réseau.  ([2]   [3]   [4]   [5])</String>
+	<String Id="msierrSMBFailedDrop" Overridable="yes">Échec de la suppression du partage du réseau.  ([2]   [3]   [4]   [5])</String>
+
+	<String Id="msierrPERFMONFailedRegisterDLL" Overridable="yes">Échec de l&apos;enregistrement de DLL avec PerfMon.  ([2]   [3]   [4]   [5])</String>
+	<String Id="msierrPERFMONFailedUnregisterDLL" Overridable="yes">Échec du désenregistrement de DLL avec PerfMon.  ([2]   [3]   [4]   [5])</String>
+
+	<String Id="msierrInstallPerfCounterData" Overridable="yes">Échec de l&apos;installation des compteurs de performance.  ([2]   [3]   [4]   [5])</String>
+	<String Id="msierrUninstallPerfCounterData" Overridable="yes">Échec de la désinstallation des compteurs de performance.  ([2]   [3]   [4]   [5])</String>
+
+	<String Id="msierrSecureObjectsFailedCreateSD" Overridable="yes">Échec de la création du descripteur de sécurité pour [3]\[4], erreur système : [2]</String>
+	<String Id="msierrSecureObjectsFailedSet" Overridable="yes">Échec du réglage du descripteur de sécurité sur l&apos;objet [3], erreur système : [2]</String>
+	<String Id="msierrSecureObjectsUnknownType" Overridable="yes">Type d&apos;objet inconnu [3], erreur système : [2]</String>
+
+	<String Id="msierrXmlFileFailedRead" Overridable="yes">Une erreur s&apos;est produite lors de la configuration des fichiers XML.</String>
+	<String Id="msierrXmlFileFailedOpen" Overridable="yes">Échec de l&apos;ouverture du fichier XML [3], erreur système : [2]</String>
+	<String Id="msierrXmlFileFailedSelect" Overridable="yes">Impossible de trouver le nœud : [3] dans le fichier XML : [4], erreur système : [2]</String>
+	<String Id="msierrXmlFileFailedSave" Overridable="yes">Échec de l&apos;enregistrement des modifications dans le fichier XML [3], erreur système : [2]</String>
+
+	<String Id="msierrXmlConfigFailedRead" Overridable="yes">Une erreur s&apos;est produite lors de la configuration des fichiers XML.</String>
+	<String Id="msierrXmlConfigFailedOpen" Overridable="yes">Échec de l&apos;ouverture du fichier XML [3], erreur système : [2]</String>
+	<String Id="msierrXmlConfigFailedSelect" Overridable="yes">Impossible de trouver le nœud : [3] dans le fichier XML : [4], erreur système : [2]</String>
+	<String Id="msierrXmlConfigFailedSave" Overridable="yes">Échec de l&apos;enregistrement des modifications dans le fichier XML [3], erreur système : [2]</String>
+
+  <String Id="OptionsDlgIpLabel" Overridable="yes">&amp;Direccion IP</String>
+  <String Id="OptionsDlgPabxIPLabel" Overridable="yes">&amp;IP de PABX</String>
+  <String Id="OptionsDlgMySQLIPLabel" Overridable="yes">&amp;IP del Servidor MySQL</String>
+  <String Id="OptionsDlgCfgLabel" Overridable="yes">Servicio de Configuracion</String>
+  <String Id="OptionsDlgSactaLabel" Overridable="yes">Servicio de Sacta</String>
+  <String Id="OptionsDlgClusterLabel" Overridable="yes">URL de Mantenimiento de CLUSTER</String>
+  <String Id="OptionsDlgDescription" Overridable="yes">Introduzca la informacion del servidor</String>
+  <String Id="OptionsDlgTitle" Overridable="yes">Configuracion de Servidor</String>
+
+
+</WixLocalization>

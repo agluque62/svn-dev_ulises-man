@@ -1,0 +1,85 @@
+ULISESV5000i DEFINITIONS ::= BEGIN
+
+IMPORTS
+	MODULE-IDENTITY, OBJECT-TYPE, enterprises
+		FROM SNMPv2-SMI
+	mib-2, system, sysName, sysDescr
+		FROM RFC1213-MIB
+	DisplayString, TestAndIncr, TimeStamp
+        FROM SNMPv2-TC;
+		
+modIdentity MODULE-IDENTITY
+		LAST-UPDATED "201607011400Z"
+		ORGANIZATION "NUCLEODF"
+		CONTACT-INFO 
+			"Direccion Tecnica
+			Via de los Poblados 7,
+			Madrid 28033.
+			email: direccion.tecnica@nucleodf.com"
+		DESCRIPTION ""
+		REVISION "201607011400Z"
+			DESCRIPTION
+         ""
+	::= { ulises5000i-snmp-simeq }
+
+						
+-- Parte PRIVADA	
+-- Globales 
+nucleoDF			OBJECT IDENTIFIER ::= { enterprises 7916 }
+ulises5000i			OBJECT IDENTIFIER ::= { nucleoDF 8 }
+-- ulises5000i-scv		OBJECT IDENTIFIER ::= { ulises5000i 1 }
+-- ulises5000i-po		OBJECT IDENTIFIER ::= { ulises5000i 2 }
+-- ulises5000i-gw		OBJECT IDENTIFIER ::= { ulises5000i 3 }
+ulises5000i-simeq		OBJECT IDENTIFIER ::= { ulises5000i 100 }
+ulises5000i-simeq-hf	OBJECT IDENTIFIER ::= { ulises5000i-simeq 1 }
+
+-- Lista de Equipos
+eq01				OBJECT IDENTIFIER ::= { ulises5000i-simeq-hf 1 }
+eq01wcmd			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq01 0 }
+eq01wfre			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq01 5 }
+eq01wmod			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq01 9 }
+eq01rfre			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq01 25 }
+eq01rmod			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq01 29 }
+eq01rstd			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq01 36 }
+							
+eq02				OBJECT IDENTIFIER ::= { ulises5000i-simeq-hf 2 }
+eq02wcmd			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq02 0 }
+eq02wfre			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq02 5 }
+eq02wmod			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq02 9 }
+eq02rfre			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq02 25 }
+eq02rmod			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq02 29 }
+eq02rstd			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq02 36 }
+
+eq03				OBJECT IDENTIFIER ::= { ulises5000i-simeq-hf 3 }
+eq03wcmd			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq03 0 }
+eq03wfre			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq03 5 }
+eq03wmod			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq03 9 }
+eq03rfre			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq03 25 }
+eq03rmod			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq03 29 }
+eq03rstd			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq03 36 }
+
+eq04				OBJECT IDENTIFIER ::= { ulises5000i-simeq-hf 4 }
+eq04wcmd			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq04 0 }
+eq04wfre			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq04 5 }
+eq04wmod			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq04 9 }
+eq04rfre			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq04 25 }
+eq04rmod			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq04 29 }
+eq04rstd			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq04 36 }
+
+eq05				OBJECT IDENTIFIER ::= { ulises5000i-simeq-hf 5 }
+eq05wcmd			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq05 0 }
+eq05wfre			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq05 5 }
+eq05wmod			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq05 9 }
+eq05rfre			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq05 25 }
+eq05rmod			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq05 29 }
+eq05rstd			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq05 36 }
+
+eq06				OBJECT IDENTIFIER ::= { ulises5000i-simeq-hf 6 }
+eq06wcmd			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq06 0 }
+eq06wfre			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq06 5 }
+eq06wmod			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq06 9 }
+eq06rfre			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq06 25 }
+eq06rmod			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq06 29 }
+eq06rstd			OBJECT-TYPE SYNTAX  INTEGER (0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "" ::= { eq06 36 }
+
+END

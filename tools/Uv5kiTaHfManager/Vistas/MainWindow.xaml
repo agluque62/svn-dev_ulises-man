@@ -1,0 +1,40 @@
+﻿<Window x:Class="Uv5kiTaHfManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Uv5kiTaHfManager.ModelosDeVistas"
+        xmlns:ucs="clr-namespace:Uv5kiTaHfManager.Vistas"
+        xmlns:p="clr-namespace:Uv5kiTaHfManager.Properties"
+        Title="titulo" Height="173" Width="310" WindowStyle="None"
+        WindowStartupLocation="CenterScreen">
+       <ucs:HFControlUC></ucs:HFControlUC>
+        <!--<Window.DataContext>
+        <local:MainViewModel x:Name="MainViewModel"/>
+    </Window.DataContext>    
+    <Grid Margin="5,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="40" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="40" />
+        </Grid.ColumnDefinitions>
+        <Label Content="{x:Static p:Resources.Equipos}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Padding="0" Grid.IsSharedSizeScope="True" Foreground="#FF098D1B" VerticalAlignment="Bottom" Margin="5,0,0,0"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="{Binding EquipoSeleccionado.Id}" Padding="5,0,0,0" FontSize="18" FontFamily="Impact" ScrollViewer.CanContentScroll="True" Background="White" Foreground="{Binding ForegroundColorEquipo}" VerticalContentAlignment="Center" BorderThickness="0"/>
+        <Label Content="{x:Static p:Resources.Frecuencias}" Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="3" Padding="0,1" Grid.IsSharedSizeScope="True" Foreground="#FF098D1B" VerticalAlignment="Bottom" Margin="5,0,0,0"/>
+        <Label Grid.Row="1" Grid.Column="4" Content="{Binding FrecuenciaSeleccionada.Id}" Padding="5,0,0,0" FontSize="18" FontFamily="Impact" ScrollViewer.CanContentScroll="True" Background="White" Foreground="Navy" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
+        <Button Grid.Row="1" Grid.Column="2" Content="{x:Static p:Resources.Proximo}" Command="{Binding ProximoEquipo}"> </Button>
+        <Button Grid.Row="1" Grid.Column="6" Content="{x:Static p:Resources.Proximo}" Command="{Binding ProximaFrecuencia}"></Button>
+        <Button Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="3" Content="{x:Static p:Resources.Sintonizar}" Command="{Binding Sintonizar}"></Button>
+        <Button Grid.Row="3" Grid.ColumnSpan="3" Content="{x:Static p:Resources.Salir}" Command="{Binding Salir}"></Button>
+        <Label Grid.Row="4" Grid.ColumnSpan="7" Content="{Binding Mensaje}"></Label>
+    </Grid>-->
+</Window>

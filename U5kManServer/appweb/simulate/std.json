@@ -1,0 +1,143 @@
+{
+	"IamAlive": {},
+	"version": "2.5.9",
+	"cfg": "Disgregada (2019-03-20 11:11:20)",
+	"hf": 0,
+	"recw": 1,
+	"sv1": {
+		"name": "Nodo en (192.168.0.212:6000)\r\nError Solicitando Info\nCluster Error: NoLocalServerNameDetected",
+		"enable": 1,
+		"std": 0,
+		"sel": 0,
+		"url": "http://10.12.60.35/NucleoDF/U5kCfg/Cluster/Default.aspx"
+	},
+	"sv2": {
+		"name": "Nodo en (192.168.0.111:6001)\r\nError Solicitando Info\nCluster Error: NoLocalServerNameDetected",
+		"enable": 1,
+		"std": 0,
+		"sel": 0,
+		"url": "http://10.12.60.35/NucleoDF/U5kCfg/Cluster/Default.aspx"
+	},
+	"cwp": {
+		"name": "Puestos de Operador",
+		"enable": 1,
+		"std": 0,
+		"sel": 0,
+		"url": ""
+	},
+	"gws": {
+		"name": "Pasarelas",
+		"enable": 1,
+		"std": 5,
+		"sel": 0,
+		"url": ""
+	},
+	"pbx": {
+		"name": "10.12.60.36:8080",
+		"enable": 1,
+		"std": 0,
+		"sel": 0,
+		"url": "http://10.12.60.36:8080/pbx/"
+	},
+	"ntp": {
+		"name": "DF1501",
+		"enable": 1,
+		"std": 1,
+		"sel": 0,
+		"url": ""
+	},
+	"sactaservicerunning": false,
+	"sactaserviceenabled": true,
+	"sct1": {
+		"name": "SACTA-1",
+		"enable": 0,
+		"std": 0,
+		"sel": 0,
+		"url": ""
+	},
+	"sct2": {
+		"name": "SACTA-2",
+		"enable": 0,
+		"std": 0,
+		"sel": 0,
+		"url": ""
+	},
+	"ext": {
+		"name": "Equipos Externos",
+		"enable": 1,
+		"std": 6,
+		"sel": 0,
+		"url": ""
+	},
+	"csi": {
+		"radio": {
+			"std": "Alarm",
+			"mas": "10.12.60.35",
+			"rdsl": []
+		},
+		"phone": {
+			"std": "Alarm",
+			"mas": "10.12.60.35",
+			"phsl": []
+		},
+		"mixed": {
+			"std": "Ok",
+			"mas": "10.12.60.35",
+			"phsl": [{
+					"Key": "10.12.60.35#Mixed",
+					"Value": {
+						"ip": "10.12.60.35",
+						"url": "http://10.12.60.35:1023/",
+						"Machine": "NUCLEODF-VM01",
+						"ServerType": "Mixed",
+						"GlobalMaster": "Error",
+						"RadioService": "Master",
+						"CfgService": "Master",
+						"PhoneService": "Error",
+						"TifxService": "Master",
+						"PresenceService": "Master",
+						"WebPort": "1023",
+						"TimeStamp": "2019-03-20T12:48:52.0208005+01:00"
+					}
+				}, {
+					"Key": "192.168.0.71#Mixed",
+					"Value": {
+						"ip": "192.168.0.71",
+						"url": "http://192.168.0.71:1023/",
+						"Machine": "DF1501",
+						"ServerType": "Mixed",
+						"GlobalMaster": "Master",
+						"RadioService": "Slave",
+						"CfgService": "Slave",
+						"PhoneService": "Slave",
+						"TifxService": "Slave",
+						"PresenceService": "Slave",
+						"WebPort": "1023",
+						"TimeStamp": "2019-03-20T12:48:53.1608643+01:00"
+					}
+				}, {
+					"Key": "192.168.0.72#Mixed",
+					"Value": {
+						"ip": "192.168.0.72",
+						"url": "http://192.168.0.72:1023/",
+						"Machine": "DF1501",
+						"ServerType": "Mixed",
+						"GlobalMaster": "Master",
+						"RadioService": "Slave",
+						"CfgService": "Slave",
+						"PhoneService": "Slave",
+						"TifxService": "Slave",
+						"PresenceService": "Slave",
+						"WebPort": "1023",
+						"TimeStamp": "2019-03-20T12:48:53.0548643+01:00"
+					}
+				}
+			]
+		}
+	},
+	"perfil": 0,
+	"lang": "es",
+	"rd_status": 2,
+	"tf_status": 2,
+	"ServiceSite": "NUCLEODF-VM01"
+}

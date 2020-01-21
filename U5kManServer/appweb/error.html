@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta name="generator"
+        content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
+    <meta charset="windows-1252" />
+    <meta name="description" content="Plantilla Ulises 5000" />
+    <meta name="keywords" content="HTML5, CSS3, JavaScript" />
+    <title>ULISES V 5000 I. Aplicacion de Mantenimiento</title>
+    <!-- Estilos  -->
+    <link rel="stylesheet" href="./styles/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="./styles/uv5ki-styles.css" />
+</head>
+<body>
+    <div id="agrupar">
+        <header id="cabecera">
+            <div id="_contSupIzq">
+                <div id="_logo">
+                    <!-- <img src="./images/nucleo-df-new.jpg" /> -->
+                    <!--<img src="./images/corporativo.png" height="85%" />-->
+                    <img src="./images/corporativo-a.png" height="85%" />
+                </div>
+            </div>
+            <div id="_tit_ppal">
+                <span lang="es">ULISES V 5000 I. Aplicacion de Mantenimiento</span>
+                <span lang="en">ULISES V 5000 I. Maintenance Application</span>
+                <span lang="fr">ULISES V 5000 I. Maintenance Applicative</span>
+            </div>
+            <div id="_contSupDrcha">
+            </div>
+        </header>
+
+        <section id="_ppalerror">
+            <div id="img">
+                <img src="./images/noaccess.jpg" height="128" width="128"/>
+            </div>
+            <h2>
+                <span lang="es">Acceso Denegado !!</span>
+                <span lang="en">Access Denied !!</span>
+                <span lang="fr">Acces Refuse !!</span>
+            </h2>
+        </section>
+
+        <footer id="_pie">
+            <span lang="es">Nucleo Copyright @ 2015-2019. Todos los Derechos Reservados</span>
+            <span lang="en">Nucleo Copyright @ 2015-2019. All rights reserved</span>
+            <span lang="fr">Nucleo Copyright @ 2015-2019. Tous droits reserves</span>
+        </footer>
+
+        <script src="./scripts/jquery/jquery-2.1.3.min.js"></script>
+        <script>
+            $(document).ready(function () {
+
+                var userLang = navigator.languages[0];
+                var language = userLang.indexOf("en") == 0 ? "en" : userLang.indexOf("fr") == 0 ? "fr" : "es";
+
+                $("[lang]").each(function () {
+                    if ($(this).attr("lang") == language)
+                        $(this).show();
+                    else
+                        $(this).hide();
+                });
+
+            });
+        </script>
+</body>
+</html>
+

@@ -1,0 +1,192 @@
+{ 
+	"lista" : [
+	{
+		"name" : "pos-1",
+		"ip" : "192.168.2.21",
+		"std" : 0,
+		"panel" : 0,
+		"jack_exe" : 0,
+		"jack_ayu" : 0,
+		"alt_r" : 1,
+		"alt_t" : 1,
+		"lan1" : 1,
+		"lan2" : 0
+	}, {
+		"name" : "PICT01",
+		"ip" : "192.168.2.22",
+		"std" : 1,
+		"panel" : 1,
+		"jack_exe" : 1,
+		"jack_ayu" : 0,
+		"alt_r" : 1,
+		"alt_t" : 1,
+		"lan1" : 1,
+		"lan2" : 0
+	}, {
+		"name" : "pos-3",
+		"ip" : "192.168.2.23",
+		"std" : 2,
+		"panel" : 1,
+		"jack_exe" : 0,
+		"jack_ayu" : 1,
+		"alt_r" : 1,
+		"alt_t" : 1,
+		"lan1" : 1,
+		"lan2" : 0
+	}, {
+		"name" : "pos-4",
+		"ip" : "192.168.2.24",
+		"std" : 3,
+		"panel" : 1,
+		"jack_exe" : 0,
+		"jack_ayu" : 1,
+		"alt_r" : 1,
+		"alt_t" : 1,
+		"lan1" : 1,
+		"lan2" : 0
+	}, {
+		"name" : "pos-5",
+		"ip" : "192.168.2.25",
+		"std" : 4,
+		"panel" : 1,
+		"jack_exe" : 0,
+		"jack_ayu" : 1,
+		"alt_r" : 1,
+		"alt_t" : 1,
+		"lan1" : 1,
+		"lan2" : 0
+	}, {
+		"name" : "pos-6",
+		"ip" : "192.168.2.26",
+		"std" : 5,
+		"panel" : 1,
+		"jack_exe" : 0,
+		"jack_ayu" : 1,
+		"alt_r" : 1,
+		"alt_t" : 1,
+		"lan1" : 1,
+		"lan2" : 0
+	}, {
+		"name" : "pos-7",
+		"ip" : "192.168.2.27",
+		"std" : 6,
+		"panel" : 1,
+		"jack_exe" : 0,
+		"jack_ayu" : 1,
+		"alt_r" : 1,
+		"alt_t" : 1,
+		"lan1" : 1,
+		"lan2" : 1
+	}, {
+		"name" : "pos-8",
+		"ip" : "192.168.2.28",
+		"std" : 7,
+		"panel" : 1,
+		"jack_exe" : 0,
+		"jack_ayu" : 1,
+		"alt_r" : 1,
+		"alt_t" : 1,
+		"lan1" : 1,
+		"lan2" : 0
+	}, {
+		"name" : "pos-9",
+		"ip" : "192.168.2.29",
+		"std" : 1,
+		"panel" : 1,
+		"jack_exe" : 0,
+		"jack_ayu" : 1,
+		"alt_r" : 1,
+		"alt_t" : 1,
+		"lan1" : 1,
+		"lan2" : 0
+	}, {
+		"name" : "pos-10",
+		"ip" : "192.168.2.30",
+		"std" : 0,
+		"panel" : 1,
+		"jack_exe" : 0,
+		"jack_ayu" : 1,
+		"alt_r" : 1,
+		"alt_t" : 1,
+		"lan1" : 1,
+		"lan2" : 0
+	}, {
+		"name" : "pos-11",
+		"ip" : "192.168.2.31",
+		"std" : 0,
+		"panel" : 1,
+		"jack_exe" : 0,
+		"jack_ayu" : 1,
+		"alt_r" : 1,
+		"alt_t" : 1,
+		"lan1" : 1,
+		"lan2" : 0
+	}, {
+		"name" : "pos-12",
+		"ip" : "192.168.2.32",
+		"std" : 0,
+		"panel" : 1,
+		"jack_exe" : 0,
+		"jack_ayu" : 1,
+		"alt_r" : 1,
+		"alt_t" : 1,
+		"lan1" : 1,
+		"lan2" : 0
+	}, {
+		"name" : "pos-13",
+		"ip" : "192.168.2.33",
+		"std" : 0,
+		"panel" : 1,
+		"jack_exe" : 0,
+		"jack_ayu" : 1,
+		"alt_r" : 1,
+		"alt_t" : 1,
+		"lan1" : 1,
+		"lan2" : 0
+	}, {
+		"name" : "pos-14",
+		"ip" : "192.168.2.34",
+		"std" : 0,
+		"panel" : 1,
+		"jack_exe" : 0,
+		"jack_ayu" : 1,
+		"alt_r" : 1,
+		"alt_t" : 1,
+		"lan1" : 1,
+		"lan2" : 0
+	}, {
+		"name" : "pos-15",
+		"ip" : "192.168.2.35",
+		"std" : 0,
+		"panel" : 1,
+		"jack_exe" : 0,
+		"jack_ayu" : 1,
+		"alt_r" : 1,
+		"alt_t" : 1,
+		"lan1" : 1,
+		"lan2" : 0
+	}, {
+		"name" : "pos-16",
+		"ip" : "192.168.2.36",
+		"std" : 0,
+		"panel" : 1,
+		"jack_exe" : 0,
+		"jack_ayu" : 1,
+		"alt_r" : 1,
+		"alt_t" : 1,
+		"lan1" : 1,
+		"lan2" : 0
+	}, {
+		"name" : "pos-17",
+		"ip" : "192.168.2.37",
+		"std" : 0,
+		"panel" : 1,
+		"jack_exe" : 0,
+		"jack_ayu" : 1,
+		"alt_r" : 1,
+		"alt_t" : 1,
+		"lan1" : 1,
+		"lan2" : 0
+	}
+	]
+}

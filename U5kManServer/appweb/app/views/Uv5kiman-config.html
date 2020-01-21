@@ -1,0 +1,329 @@
+<h3 translate>INDEX_OPC_CONFIGURACION</h3>
+<section id="_tabs">
+    <ul class="nav nav-tabs">
+        <li data-ng-class="{'active': ctrl.pagina()==0}">
+            <a href="" data-ng-click="ctrl.pagina(0)" translate>CFG_OPC_01</a>
+        </li>
+        <li data-ng-class="{'active': ctrl.pagina()==1}">
+            <a href="" data-ng-click="ctrl.pagina(1)" translate>CFG_OPC_02</a>
+        </li>
+        <li data-ng-class="{'active': ctrl.pagina()==2}">
+            <a href="" data-ng-click="ctrl.pagina(2)" translate>CFG_OPC_03</a>
+        </li>
+        <li data-ng-class="{'active': ctrl.pagina()==3}">
+            <a href="" data-ng-click="ctrl.pagina(3)" translate>Agente SNMP</a>
+        </li>
+        <li data-ng-class="{'active': ctrl.pagina()==4}" ng-show="ctrl.sacta_enable()">
+            <a href="" data-ng-click="ctrl.pagina(4)" translate>Servicio SACTA</a>
+        </li>
+    </ul>
+</section>
+<section id="_contenido">
+    <div id="cfgGestion" data-ng-show="ctrl.pagina()==0">
+      <h1><strong translate>CFG_ETQ_01</strong></h1>
+      <div class="text-left">
+        <table class="table table-condensed table-bordered">
+          <tr>
+            <td translate class=" text-primary col-xs-3"><label class="form-control-static">CFG_ETQ_02</label></td>
+            <td class="text-success col-xs-6">{{ctrl.options.version}}</td>
+              <td class="text-right"><button type="button" class="btn btn-default" ng-click="ctrl.VersionDetailShow()" translate>Detalle</button></td>
+          </tr>
+          <tr >
+            <td translate class="text-primary col-xs-3">CFG_ETQ_03</td><td class="text-success col-xs-6">{{ctrl.options.bdt}}</td><td></td>
+          </tr>
+        </table>
+      </div>
+      <div class="text-right">
+          <button type="button" 
+            class="btn btn-primary"
+              ng-show="false" 
+            ng-click="ctrl.logs()"><i >LOGS</i>
+          </button>    
+          <button type="button" 
+            class="btn btn-primary" 
+            ng-click="ctrl.reset()"><i translate>CFG_ETQ_04</i>
+          </button>    
+      </div>
+    </div>
+
+    <div id="cfgIncidencias" data-ng-show="ctrl.pagina()==1">
+        <h1><strong translate>CFG_ETQ_05</strong></h1>
+        <div class="text-left">
+          <table class="table table-condensed table-striped table-bordered">
+            <tr ng-repeat="inci in ctrl.ginci track by $index" ng-if="$index % 2 == 0">
+              <td class="text-primary">
+                <div class="checkbox" ng-if="ctrl.ginci[$index] != null">
+                  <label>
+                    <input type="checkbox" 
+                      ng-model="ctrl.ginci[$index].alarm"
+                      />{{ctrl.ginci[$index].desc}}
+                  </label>
+                </div>
+              </td>
+              <td class="text-primary">
+                <div class="checkbox" ng-if="ctrl.ginci[$index+1] != null">
+                  <label>
+                    <input type="checkbox" 
+                      ng-model="ctrl.ginci[$index+1].alarm"
+                      />{{ctrl.ginci[$index+1].desc}}
+                  </label>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="text-center">
+          <ul class="pagination">
+            <li ng-class="{'active': ctrl.grupo==0}"><a href="" ng-click='ctrl.Grupo(0)' translate>CFG_TB1_01</a></li>
+            <li ng-class="{'active': ctrl.grupo==1}"><a href="" ng-click='ctrl.Grupo(1)' translate>CFG_TB1_02</a></li>
+            <li ng-class="{'active': ctrl.grupo==2}"><a href="" ng-click='ctrl.Grupo(2)' translate>CFG_TB1_03</a></li>
+            <li ng-class="{'active': ctrl.grupo==3}"><a href="" ng-click='ctrl.Grupo(3)' translate>CFG_TB1_04</a></li>
+            <li ng-class="{'active': ctrl.grupo==4}" ng-show="ctrl.show_hf"><a href="" ng-click='ctrl.Grupo(4)' translate>CFG_TB1_05</a></li>
+            <li ng-class="{'active': ctrl.grupo==5}"><a href="" ng-click='ctrl.Grupo(5)' translate>CFG_TB1_06</a></li>
+          </ul>
+        </div>
+        <div class="text-right">
+          <button type="button" 
+            class="btn btn-primary" 
+            ng-click="ctrl.salvar()" translate>CFG_ETQ_06
+          </button>    
+        </div>
+    </div>
+    
+    <div class="cfgServidor" data-ng-show="ctrl.pagina()==2">
+      <h1><strong translate>CFG_ETQ_07</strong></h1>
+      <div class="text-left">
+        <table class="table table-striped table-bordered">
+          <tr ng-repeat="opt in ctrl.options.lconf">
+            <td class="text-primary"><label  class="form-control-static">{{opt.id}}</label></td>
+            <td ng-switch on="opt.tp" >
+              <span ng-switch-when="0">
+                <span class="error" ng-show="false" translate>CFG_ETQ_08</span>
+                <input class="form-control input-sm text-success" type="text" ng-model="opt.val" ng-blur="ctrl.autosave()" />
+              </span>
+              <select ng-switch-when="1" class="form-control input-sm text-success" ng-model="opt.val" ng-blur="vm.autosave()">
+                <option ng-repeat="valor in opt.opt" 
+                  ng-selected="{{$index==opt.val}}" 
+                  value="{{$index}}">{{valor}}
+                </option>
+              </select>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="text-right">
+          <button type="button" 
+            class="btn btn-primary" 
+            ng-click="ctrl.options_save()" translate>CFG_ETQ_09
+          </button>    
+      </div>
+    </div>
+
+    <div class="cfgServidor" data-ng-show="ctrl.pagina()==3">
+      <h1><strong translate>Opciones del Agente SNMP</strong></h1>
+      <div class="text-left">
+        <table class="table table-striped table-bordered">
+          <tr ng-repeat="opt in ctrl.snmpoptions" data-ng-show="ctrl.snmp_option_show(opt)">
+            <td class="text-primary"><label class="form-control-static">{{opt.id}}</label></td>
+            <td ng-switch on="opt.tp" >
+              <span ng-switch-when="0">
+                <span class="error" ng-show="false" translate>CFG_ETQ_08</span>
+                <input class="form-control input-sm text-success" type="text" ng-model="opt.val" ng-blur="ctrl.autosave()" />
+              </span>
+              <select ng-switch-when="1" class="form-control input-sm text-success" ng-model="opt.val" ng-blur="vm.autosave()">
+                <option ng-repeat="valor in opt.opt" 
+                  ng-selected="{{$index==opt.val}}" 
+                  value="{{$index}}">{{valor}}
+                </option>
+              </select>
+            </td>
+          </tr>
+          <tr ng-repeat="user in ctrl.snmpv3users" data-ng-show="ctrl.snmp_option_show({show: 2})">
+              <td class="text-primary"></td>
+              <td>
+                  <div class="text-right">
+<!--                      <select class="form-control input-sm text-success snmpuserstype" ng-model="user.tipo" ng-blur="vm.autosave()">
+                          <option value="0" translate>No AUTH, No PRIV</option>
+                          <option value="1" translate>AUTH, No PRIV</option>
+                          <option value="2" translate>AUTH, PRIV</option>
+                      </select>-->
+                      <label  class="text-primary form-control-static snmpuserstype">{{user.user}}</label>
+                      <label  class="text-primary form-control-static snmpuserstype">{{ctrl.snmp_user_tp(user)}}</label>
+                      <button type="button" class="btn btn-default" ng-click="ctrl.snmp_user_newormod(user)" translate>Mod</button>
+                      <button type="button" class="btn btn-danger" ng-click="ctrl.snmp_user_delete(user)" translate>Del</button>
+                  </div>
+              </td>
+          </tr>
+        </table>
+      </div>
+      <div class="text-right btngen">
+          <button type="button" class="btn btn-primary" data-ng-show="ctrl.snmp_option_show({show: 2})"
+            ng-click="ctrl.snmp_user_newormod()" translate>Nuevo Usuario</button>    
+          <button type="button" 
+            class="btn btn-primary" 
+            ng-click="ctrl.snmp_options_save()" translate>CFG_ETQ_09</button>    
+      </div>
+    </div>
+
+
+    <div class="cfgServidor sacta" data-ng-show="ctrl.pagina()==4" ng-show="ctrl.sacta_enable()">
+      <h1><strong translate>Configuracion de Servicio SACTA</strong></h1>
+      <form name="sacta_form" class="text-left text-primary" ng-show="ctrl.sacta_cfg!=null">
+          <div class="row">
+              <div class="col-md-3" translate>Tick Presencia</div>
+              <div class="col-md-3"><input class="form-control input-sm text-success" type="text" ng-model="ctrl.sacta_cfg.TickPresencia" nu-number min="1000" max="9999" /></div>
+              <div class="col-md-3" translate>Timeout Presencia</div>
+              <div class="col-md-3"><input class="form-control input-sm text-success" type="text" ng-model="ctrl.sacta_cfg.TimeoutPresencia" nu-number min="15000" max="60000" /></div>
+          </div>
+          <div class="row sacta-cab bg-primary">
+              <div class="col-md-5" translate>SCV</div>
+              <div class="col-md-7" translate>SACTA</div>
+          </div>
+          <div class="row">
+              <div class="col-md-2" translate>Dominio</div>
+              <div class="col-md-3"><input class="form-control input-sm text-success" type="text" ng-model="ctrl.sacta_cfg.scv.Domain" nu-number min="1" max="9999" /></div>
+              <div class="col-md-2" translate>Dominio</div>
+              <div class="col-md-3"><input class="form-control input-sm text-success" type="text" ng-model="ctrl.sacta_cfg.sacta.Domain" nu-number min="1" max="9999" /></div>
+          </div>
+          <div class="row">
+              <div class="col-md-2" translate>Centro</div>
+              <div class="col-md-3"><input class="form-control input-sm text-success" type="text" ng-model="ctrl.sacta_cfg.scv.Center" nu-number min="1" max="9999" /></div>
+              <div class="col-md-2" translate>Centro</div>
+              <div class="col-md-3"><input class="form-control input-sm text-success" type="text" ng-model="ctrl.sacta_cfg.sacta.Center" nu-number min="1" max="9999" /></div>
+          </div>
+          <div class="row">
+              <div class="col-md-2" translate>Usuario</div>
+              <div class="col-md-3"><input class="form-control input-sm text-success" type="text" ng-model="ctrl.sacta_cfg.scv.User" nu-number min="1" max="65536" /></div>
+              <div class="col-md-2" translate>Grupo</div>
+              <div class="col-md-3"><input class="form-control input-sm text-success" type="text" ng-model="ctrl.sacta_cfg.sacta.GrpUser" nu-number min="1" max="65536" /></div>
+          </div>
+          <div class="row">
+              <div class="col-md-2" translate>Ignorar Sectores</div>
+              <div class="col-md-3"><input class="form-control input-sm text-success" type="text" ng-model="ctrl.sacta_cfg.scv.Ignore" nu-numberlist min="1" max="9999"/></div>
+              <div class="col-md-2" translate>SPSI</div>
+              <div class="col-md-5"><input class="form-control input-sm text-success" type="text" ng-model="ctrl.spsi_users" nu-numberlist min="1" max="65536"/></div>
+          </div>
+          <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-3"></div>
+              <div class="col-md-2" translate>SPV</div>
+              <div class="col-md-5"><input class="form-control input-sm text-success" type="text" ng-model="ctrl.spv_users" nu-numberlist min="1" max="65536"/></div>
+          </div>
+          <div class="row sacta-cab2 bg-info">
+              <div class="col-md-2" translate>SCV-LAN</div>
+              <div class="col-md-3"></div>
+              <div class="col-md-2" translate>LAN1</div>
+              <div class="col-md-2"></div>
+              <div class="col-md-1" translate>LAN2</div>
+              <div class="col-md-2"></div>
+          </div>
+          <div class="row">
+              <div class="col-md-2" translate>Puerto</div>
+              <div class="col-md-3"><input class="form-control input-sm text-success" type="text" ng-model="ctrl.sacta_cfg.scv.udpport" nu-number min="10000" max="20000" /></div>
+              <div class="col-md-2" translate>Puerto</div>
+              <div class="col-md-2"><input class="form-control input-sm text-success" type="text" ng-model="ctrl.sacta_cfg.sacta.lan1.udpport" nu-number min="10000" max="20000"/></div>
+<!--              <div class="col-md-1">Puerto</div>
+              <div class="col-md-2"><input class="form-control input-sm text-success" type="text" ng-model="ctrl.sacta_cfg.sacta.lan2.udpport" nu-number min="10000" max="20000"/></div>-->
+          </div>
+          <div class="row">
+              <div class="col-md-2" translate>Interfaz</div>
+              <div class="col-md-3"><input class="form-control input-sm text-success" type="text" ng-model="ctrl.sacta_cfg.scv.Interfaz" nu-ipadd/></div>
+              <div class="col-md-2" translate>Unicast</div>
+              <div class="col-md-2"><input class="form-control input-sm text-success" type="text" ng-model="ctrl.sacta_cfg.sacta.lan1.ipmask" nu-ipadd/></div>
+              <div class="col-md-1" translate>Unicast</div>
+              <div class="col-md-2"><input class="form-control input-sm text-success" type="text" ng-model="ctrl.sacta_cfg.sacta.lan2.ipmask" nu-ipadd/></div>
+          </div>
+          <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-3"></div>
+              <div class="col-md-2" translate>Multicast</div>
+              <div class="col-md-2"><input class="form-control input-sm text-success" type="text" ng-model="ctrl.sacta_cfg.sacta.lan1.mcast" nu-ipadd/></div>
+              <div class="col-md-1" translate>Multicast</div>
+              <div class="col-md-2"><input class="form-control input-sm text-success" type="text" ng-model="ctrl.sacta_cfg.sacta.lan2.mcast" nu-ipadd/></div>
+          </div>
+          <div class="row text-right ctrl">  
+              <button type="button" class="btn btn-primary" ng-disabled="sacta_form.$invalid" ng-click="ctrl.sacta_save()" translate>Salvar</button>    
+          </div>
+      </form>
+      <h1 ng-show="ctrl.sacta_cfg==null" translate>No se puede obtener la configuracion del servidor!!!</h1>
+    </div>
+
+    <div id="UserDetail" class="modal fade" role="dialog" tabindex='-1'>
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" translate>Datos de Usuario</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row" ng-show="true">
+                        <div class="col-md-5"><label  class="text-primary form-control-static" translate>Usuario</label></div>
+                        <div class="col-md-7"><input class="form-control input-sm text-success" type="text" ng-model="ctrl.snmpv3user_onedit.user.user" ng-blur="" /></div>
+                    </div>
+                    <div class="row" ng-show="true">
+                        <div class="col-md-5"><label  class="text-primary form-control-static" translate>Tipo</label></div>
+                        <div class="col-md-7">
+                            <select class="form-control input-sm text-success snmpuserstype" ng-model="ctrl.snmpv3user_onedit.user.tipo" ng-blur="">
+                                <option value="0" translate>NoAuth, NoPriv</option>
+                                <option value="1" translate>Auth, NoPriv</option>
+                                <option value="2" translate>Auth, Priv</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="ctrl.snmpv3user_onedit.user.tipo!=0">
+                        <div class="col-md-5"><label  class="text-primary form-control-static">{{"PWD AUTH"}}</label></div>
+                        <div class="col-md-7"><input class="form-control input-sm text-success" type="password" ng-model="ctrl.snmpv3user_onedit.user.pwd1" ng-blur="" /></div>
+                    </div>
+                    <div class="row" ng-show="ctrl.snmpv3user_onedit.user.tipo==2">
+                        <div class="col-md-5"><label  class="text-primary form-control-static">{{"PWD PRIV"}}</label></div>
+                        <div class="col-md-7"><input class="form-control input-sm text-success" type="password" ng-model="ctrl.snmpv3user_onedit.user.pwd2" ng-blur="" /></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default bhis" data-dismiss="modal" translate>Cancelar</button>
+                    <button type="button" class="btn btn-default bhis" ng_click="ctrl.on_snmp_user_edit_ok()" translate>Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="VersionDetail" class="modal fade" role="dialog" tabindex='-1'>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" translate>Detalle de Version Software Instalada</h4>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group">
+                        <li class="list-group-item ndf-ver-01">{{"Ulises V 5000 (" + ctrl.versiones[ctrl.versiones_index].Server + ") Version " + ctrl.versiones[ctrl.versiones_index].Version + " (" + ctrl.versiones[ctrl.versiones_index].Fecha + ")"}}</li>
+                        <li class="list-group-item">
+                            <ul class="list-group">
+                                <li class="list-group-item" data-ng_repeat="comp in ctrl.versiones[ctrl.versiones_index].Components">
+                                    <button type="button" class="btn btn-default ndf-ver-02" data-toggle="collapse" data-target="#comp-{{$index}}">{{comp.Name + " Ver " + ctrl.versiones[ctrl.versiones_index].Version}}</button>
+                                    <div id="comp-{{$index}}" class="collapse in">
+                                        <ul class="list-group">
+                                            <li class="list-group-item  ndf-ver-03" data-ng_repeat="file in comp.Files">
+                                                <div class="row">
+                                                    <div class="col-md-4 text-primary">{{file.Path.substring(file.Path.lastIndexOf("\\") + 1)}}</div>
+                                                    <div class="col-md-2 text-success">{{file.Size}}</div>
+                                                    <div class="col-md-2 text-success">{{file.Date}}</div>
+                                                    <div class="col-md-3 text-success">{{file.MD5}}</div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default bhis"  ng_click="ctrl.versiones_index = 0" ng-show="ctrl.versiones[0]" translate>{{ctrl.versiones[0].Server}}</button>
+                    <button type="button" class="btn btn-default bhis"  ng_click="ctrl.versiones_index = 1" ng-show="ctrl.versiones[1]" translate>{{ctrl.versiones[1].Server}}</button>
+                    <button type="button" class="btn btn-default bhis"  ng_click="ctrl.versiones_export()" translate>Exportar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" translate>SPV_GWV_02</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

@@ -1,0 +1,18 @@
+﻿<Window x:Class="AudioDevicesSimulator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:AudioDevicesSimulator.ViewModel"
+        xmlns:ucs="clr-namespace:AudioDevicesSimulator.Views"
+        xmlns:p="clr-namespace:AudioDevicesSimulator.Properties"
+        Title="Audio Devices Simulator 1.0.0" Height="274" Width="312" >
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ucs:UserControlMain Grid.Row="0 " Grid.Column="0" Margin="0,0,0,0" ></ucs:UserControlMain>
+    </Grid>
+</Window>
+        

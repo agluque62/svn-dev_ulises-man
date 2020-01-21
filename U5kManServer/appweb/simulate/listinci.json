@@ -1,0 +1,16 @@
+{ 
+	"HashCode": 3,
+	"lista": 
+	[
+			{
+			"time" : "23/10, 08-10-00",
+			"inci" : "Texto asociado a la Incidencia-1"
+		} , {
+			"time" : "23/10, 08-10-01",
+			"inci" : "Texto asociado a la Incidencia-2"
+		}, {
+			"time" : "23/10, 08-10-02",
+			"inci" : "Texto asociado a la Incidencia-3"
+		}
+]
+}

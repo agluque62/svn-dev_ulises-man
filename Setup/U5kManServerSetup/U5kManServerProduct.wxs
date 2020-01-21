@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <Product
+    Id="*"
+    Name="U5kManServer"
+    Language="1033"
+    Version="!(bind.fileVersion.U5kManServer_exe)"
+    Manufacturer="NucleoCC"
+    UpgradeCode="55dc56f3-459f-48ff-8c86-7fe468622b8d">
+
+    <Package InstallerVersion="200"
+             Compressed="yes"
+             InstallScope="perMachine" />
+
+    <Property Id="NETFRAMEWORK452">
+      <RegistrySearch Id="NetFramework" Root="HKLM" Type="raw" Name="Release" Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full"/>
+    </Property>
+    <Property Id="COMPANYFOLDER_NAME" Value="NucleoCC"></Property>
+    <Property Id="INSTALLFOLDER_NAME" Value="UlisesV5000SSM"></Property>
+    <Property Id="PVERSION" Value="!(bind.fileVersion.U5kManServer_exe)"></Property>
+    <Property Id="MSIUSEREALADMINDETECTION" Value="1" />
+    
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." AllowSameVersionUpgrades="yes" />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Condition Message="Esta aplicacion requiere .NET Framework 4.5.2. Instale .NET Framework 4.5.2 y reintente la instalacion de Ug5kDbBackupService.">
+      <![CDATA[Installed OR NETFRAMEWORK452>="#379893"]]>
+    </Condition>
+
+    <Feature Id="ProductFeature" Title="U5kManServerSetup" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+      <ComponentGroupRef Id="WebAppComponents"/>
+      <ComponentGroupRef Id="uvki-tools"/>
+      <ComponentGroupRef Id="EnComponents" />
+      <ComponentGroupRef Id="FrComponents" />
+      <ComponentRef Id="CreateProgramFolder" />
+      <ComponentGroupRef Id="license"/>
+    </Feature>
+    
+    <Feature Id="ProductConfig" Title="U5kManServerConfig" Level="1">
+      <ComponentGroupRef Id="server-config" />
+    </Feature>
+
+    <WixVariable Id="WixUIDialogBmp"  Value="bkg-image.jpg" Overridable="yes"/>
+    <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+    <!--<WixVariable Id="WixUIBannerBmp" Value="nubanner.bmp" Overridable="yes"/>-->
+    <WixVariable Id="WixUIBannerBmp" Value="banner-image.jpg" Overridable="yes"/>
+
+    <UIRef Id="MyWixUI_Minimal"/>
+      <!--<UIRef Id="WixUI_FeatureTree"/>-->
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="COMPANYFOLDER" Name="NucleoCC">
+          <Directory Id="INSTALLFOLDER" Name="UlisesV5000SSM" >
+            <Component Id="CreateProgramFolder" Guid="{101A449D-B8F2-4B36-880F-0BFC46AF3FA3}">
+              <CreateFolder>
+                <util:PermissionEx User="Users" GenericAll="yes" />
+              </CreateFolder>
+            </Component>
+            <Directory Id="LogFolder" Name="logs" />
+            <Directory Id="EN" Name="en-US" />
+            <Directory Id="FR" Name="fr-FR" />
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER" Source="..\..\U5kManServer\bin\Release">
+      <Component Id ="U5kManServer_exe" Guid="{3D5856C2-7D73-4FB4-B917-CFBD5275225C}">
+        <File Id="U5kManServer_exe" Name="U5kManServer.exe" />
+        <ServiceInstall Id="ServiceInstaller"
+          Type="ownProcess"
+          Name="U5kManServerService"
+          DisplayName="U5kManServerService"
+          Description="ULISES V 5000 I. Servidor de Mantenimiento."
+          Start="auto"
+          Account="LocalSystem"
+          ErrorControl="ignore"
+          Interactive="no">
+          <util:ServiceConfig
+                  FirstFailureActionType='restart'
+                  SecondFailureActionType='restart'
+                  ThirdFailureActionType='restart'
+                  RestartServiceDelayInSeconds='30'
+                  ResetPeriodInDays='1'/>
+        <ServiceDependency Id="dot3svc"/>
+        </ServiceInstall>
+        <ServiceControl Id="StartService"
+          Start="install"
+          Stop="both"
+          Remove="uninstall"
+          Name="U5kManServerService"
+          Wait="yes">
+        </ServiceControl>
+      </Component>
+      <Component Id ="U5kBaseDatos" Guid="{50C5C7B9-26B5-4259-922B-BA4102C81DAE}">
+        <File Id="U5kBaseDatos" Name="U5kBaseDatos.dll"></File>
+      </Component>
+      <Component Id ="U5kManMibRevC" Guid="*">
+        <File Id="U5kManMibRevC" Name="U5kManMibRevC.dll"></File>
+      </Component>
+      <Component Id ="Utilities" Guid="{3DDB3D4E-4996-463C-BA03-6A8E4A89173A}">
+        <File Id="Utilities" Name="Utilities.dll"></File>
+      </Component>      
+      <Component Id ="Idiomas" Guid="{430B066D-0652-4BAD-9B06-B1150DD69B6B}">
+        <File Id="Idiomas" Name="idiomas.dll"></File>
+      </Component>      
+      <Component Id ="ClusterLib" Guid="{1A3752F3-20E9-4355-A109-3B13423B93FA}">
+        <File Id="ClusterLib" Name="Clusterlib.dll"></File>
+      </Component>
+      <Component Id ="NLog" Guid="{9EB1BA42-BC3C-452E-99BC-6BD399C403EE}">
+        <File Id="NLog" Name="NLog.dll"></File>
+        <util:RemoveFolderEx Id="RemoveLogFolder" On="uninstall" Property="LogFolder" />
+      </Component>
+      <!--<Component Id ="SharpSnmpLib.Full" Guid="{1785C811-8C51-4EE7-89DA-33CA6F8C077E}">
+        <File Id="SharpSnmpLib.Full" Name="SharpSnmpLib.Full.dll"></File>
+      </Component>
+      <Component Id ="SharpSnmpLib.Portable" Guid="{BE115EE5-E235-4505-9636-26DBD3809AB7}">
+        <File Id="SharpSnmpLib.Portable" Name="SharpSnmpLib.Portable.dll"></File>
+      </Component>
+      -->
+      <Component Id ="SharpSnmpLib" Guid="*">
+        <File Id="SharpSnmpLib" Name="SharpSnmpLib.dll"></File>
+      </Component>
+      <Component Id ="MySql.Data" Guid="{6CF6C0C7-F4C9-41D4-B534-D2AE7CF658AE}">
+        <File Id="MySql.Data" Name="MySql.Data.dll"></File>
+      </Component>
+      <Component Id ="System.Data.SQLite" Guid="{5083D3F3-F907-442D-BE78-62F022E4BB82}">
+        <File Id="System.Data.SQLite" Name="System.Data.SQLite.dll"></File>
+      </Component>
+      <Component Id ="Newtonsoft.Json" Guid="{DC9238EC-63C1-4C14-AC2D-3681D74A8235}">
+        <File Id="Newtonsoft.Json" Name="Newtonsoft.Json.dll"></File>
+      </Component>
+      <Component Id ="WebSocket4Net" Guid="{03DD8BB7-8CC6-45D4-BDE0-DF1B93D0631E}">
+        <File Id="WebSocket4Net" Name="WebSocket4Net.dll"></File>
+      </Component>
+      <Component Id ="naudio" Guid="{D3B36273-3C95-4C3A-9802-F776D269AE8B}">
+        <File Id="naudio" Name="naudio.dll"></File>
+      </Component>
+      <Component Id ="AlarmWav" Guid="{9789A62A-78D3-4B0A-B5EF-D6A5257A1F85}">
+        <File Id="AlarmWav" Name="ALARM.wav"></File>
+      </Component>
+      <Component Id ="Uv5kMib" Guid="{1DB0B851-E569-42FF-A89A-D45FB48C447F}">
+        <File Id="Uv5kMib" Name="ndf.uv5k.137b5.mib"></File>
+      </Component>
+      <Component Id ="Uv5kMib1" Guid="*">
+        <File Id="Uv5kMib1" Name="ndf.uv5k.137c5.mib"></File>
+      </Component>
+      <Component Id ="Rfc1213Mib" Guid="{286316A3-0ADA-49B3-ABF6-B1A6CBCF6642}">
+        <File Id="Rfc1213Mib" Name="RFC1213-MIB"></File>
+      </Component>
+      <Component Id ="RfcRmonMib" Guid="*">
+        <File Id="RfcRmonMib" Name="RMON-MIB"></File>
+      </Component>
+      <Component Id ="tbConvInci" Guid="{06262E12-99DA-4824-A97A-ED2DD770B043}">
+        <File Id="tbConvInci" Name="tbConvInci.txt"></File>
+      </Component>
+      <Component Id ="versiones" Guid="{C001AD2B-9F45-4F0F-8480-EFE9618CD88C}">
+        <File Id="versiones" Name="versiones.json"></File>
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id='EnComponents' Directory='EN' Source='..\..\U5kManServer\bin\Release\en-US'>
+      <Component Id='En.idiomas.resources' Guid='{ED83C6B9-36D8-49B9-8DD9-94AE2F653C01}'>
+        <File Id='En.idiomas.resources' Name='idiomas.resources.dll' />
+      </Component>
+    </ComponentGroup>
+    <ComponentGroup Id='FrComponents' Directory='FR' Source='..\..\U5kManServer\bin\Release\fr-FR'>
+      <Component Id='Fr.idiomas.resources' Guid='{D20B13AF-80DA-4AC5-9AFF-FFAE43F22289}'>
+        <File Id='Fr.idiomas.resources.dll' Name='idiomas.resources.dll' />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id='uvki-tools' Directory="INSTALLFOLDER" Source=".">
+      <Component Id ="sfk" Guid="{A6105BEC-2EDE-4ED3-8B9D-13405DB6ACA8}">
+        <File Id="sfk.exe" Name="sfk.exe"></File>
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="server-config" Directory="INSTALLFOLDER" Source="..\..\U5kManServer\bin\Release">
+      <Component Id="serv_config" Guid="{B3015E96-529A-4FC0-A8D7-8A0E9470AB82}" >
+        <File Id="U5kManServer.config" Name="U5kManServer.exe.config" />
+        <util:XmlFile Id="TipoBdt" Action="setValue"
+                        File = "[#U5kManServer.config]"
+                        ElementPath="/configuration/applicationSettings/U5kManServer.Properties.u5kManServer/setting[\[]@name='TipoBdt'[\]]/value"
+                        Value="0"/>
+        <util:XmlFile Id="Tipoweb" Action="setValue"
+                        File = "[#U5kManServer.config]"
+                        ElementPath="/configuration/applicationSettings/U5kManServer.Properties.u5kManServer/setting[\[]@name='TipoWeb'[\]]/value"
+                        Value="1"/>
+        <util:XmlFile Id="GwsUnificadas" Action="setValue"
+                        File = "[#U5kManServer.config]"
+                        ElementPath="/configuration/applicationSettings/U5kManServer.Properties.u5kManServer/setting[\[]@name='GwsUnificadas'[\]]/value"
+                        Value="1"/>
+        <util:XmlFile Id="MiDireccionIP" Action="setValue"
+                        File = "[#U5kManServer.config]"
+                        ElementPath="/configuration/applicationSettings/U5kManServer.Properties.u5kManServer/setting[\[]@name='MiDireccionIP'[\]]/value"
+                        Value="[DIRIP]"/>
+        
+        <!--<util:XmlFile Id="PabxIp" Action="setValue"
+                        File = "[#U5kManServer.config]"
+                        ElementPath="/configuration/applicationSettings/U5kManServer.Properties.u5kManServer/setting[\[]@name='PabxIp'[\]]/value"
+                        Value="[PABXIP]"/>-->
+        
+        <util:XmlFile Id="MySqlServer" Action="setValue"
+                        File = "[#U5kManServer.config]"
+                        ElementPath="/configuration/applicationSettings/U5kManServer.Properties.u5kManServer/setting[\[]@name='MySqlServer'[\]]/value"
+                        Value="[MYSQLIP]"/>
+        <util:XmlFile Id="Lang" Action="setValue"
+                        File = "[#U5kManServer.config]"
+                        ElementPath="/configuration/userSettings/U5kManServer.Properties.u5kManServer/setting[\[]@name='Idioma'[\]]/value"
+                        Value="[LANG]"/>
+        <!--<util:XmlFile Id="SnmpAgentPort" Action="setValue"
+                        File = "[#U5kManServer.config]"
+                        ElementPath="/configuration/applicationSettings/U5kManServer.Properties.u5kManServer/setting[\[]@name='SnmpAgentPort'[\]]/value"
+                        Value="161"/>
+        <util:XmlFile Id="SnmpAgentListenTrapPort" Action="setValue"
+                        File = "[#U5kManServer.config]"
+                        ElementPath="/configuration/applicationSettings/U5kManServer.Properties.u5kManServer/setting[\[]@name='SnmpAgentListenTrapPort'[\]]/value"
+                        Value="162"/>-->
+        <util:XmlFile Id="AgSnmpPort" Action="setValue"
+                        File = "[#U5kManServer.config]"
+                        ElementPath="/configuration/userSettings/U5kManServer.Properties.u5kManServer/setting[\[]@name='Snmp_AgentPort'[\]]/value"
+                        Value="[SNMPAGPORT]"/>
+        <util:XmlFile Id="Gdt" Action="setValue"
+                        File = "[#U5kManServer.config]"
+                        ElementPath="/configuration/applicationSettings/U5kManServer.Properties.u5kManServer/setting[\[]@name='GatewaysDualityType'[\]]/value"
+                        Value="[GDT]"/>
+        <util:XmlFile Id="SnmpRmonServer" Action="setValue"
+                        File = "[#U5kManServer.config]"
+                        ElementPath="/configuration/applicationSettings/U5kManServer.Properties.u5kManServer/setting[\[]@name='SnmpRMONTrapReceiver'[\]]/value"
+                        Value="[SNMPRMONSERVER]"/>
+      </Component>
+      <Component Id="nlog_config" Guid="{6B208E0B-DADA-4740-9C73-190B2FC69AB5}">
+        <File Id="NLog.config" Name="NLog.config"></File>
+      </Component>
+      <Component Id="mtto_registry" Guid="{EEC7ECC6-D215-4061-89ED-92AE6509C28C}" Permanent="yes">
+        <RegistryKey Id="mtto_registry_entries" Root="HKLM" Key="SOFTWARE\Wix\UV5KI_MTTO" Action="create">
+          <RegistryValue Name='DIRIP_Property' Value='[DIRIP]' Type='string' />
+
+          <!--<RegistryValue Name='PABXIP_Property' Value='[PABXIP]' Type='string' />-->
+          <RegistryValue Name='MYSQLIP_Property' Value='[MYSQLIP]' Type='string' />
+
+          <RegistryValue Name='LANG_Property' Value='[LANG]' Type='string' />
+          <RegistryValue Name='SNMPAGPORT_Property' Value='[SNMPAGPORT]' Type='string' />
+          <RegistryValue Name='SNMPRMONSERVER_Property' Value='[SNMPRMONSERVER]' Type='string' />
+          
+          <RegistryValue Name='GDT_Property' Value='[GDT]' Type='string' />
+        </RegistryKey>
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id='license' Directory='INSTALLFOLDER' Source='.'>
+      <Component Id='copying' Guid='{AAAF39D0-FA06-421E-AFB0-2085956D392C}'>
+        <File Id='copying_txt' Name='COPYING.txt'></File>
+      </Component>
+      <Component Id='copyinglesser' Guid='{95E01346-6EAE-49BF-957E-91610C6D7CF4}'>
+        <File Id='copyinglesser_txt' Name='COPYING.LESSER.txt'></File>
+      </Component>
+      <Component Id='copyingauth' Guid='{9EDAB064-6274-44CC-9E49-4B9E9FEBDBAC}'>
+        <File Id='copyingauth_txt' Name='COPYING.AUTHORIZATION.txt'></File>
+      </Component>
+      <Component Id='licenseos' Guid='{B788AEA5-878C-4782-9ADE-DA114DE58B65}'>
+        <File Id='licenseos_txt' Name='LICENCIAS DE CODIGO ABIERTO.docx'></File>
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

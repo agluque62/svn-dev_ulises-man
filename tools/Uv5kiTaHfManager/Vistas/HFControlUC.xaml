@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="Uv5kiTaHfManager.Vistas.HFControlUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Uv5kiTaHfManager.ModelosDeVistas"
+             xmlns:p="clr-namespace:Uv5kiTaHfManager.Properties"
+             mc:Ignorable="d" 
+             d:DesignHeight="163" d:DesignWidth="300" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}">
+    <UserControl.DataContext>
+        <local:MainViewModel x:Name="MainViewModel"/>
+    </UserControl.DataContext>
+    <Grid>
+        <Button HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="132" Height="55" Command="{Binding ProximoEquipo}">
+            <StackPanel>
+                <TextBlock Text="{Binding EquipoSeleccionado.Id}" HorizontalAlignment="Center" FontSize="24" Foreground="{Binding ForegroundColorEquipo}"/>
+                <TextBlock Text="{Binding EquipoSeleccionado.FrecuenciaSeleccionada}" HorizontalAlignment="Center" FontSize="10"/>
+            </StackPanel>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="147,10,0,0" VerticalAlignment="Top" Width="143" Height="55" Command="{Binding ProximaFrecuencia}" >
+            <StackPanel>
+                <TextBlock Text="{Binding FrecuenciaSeleccionada.Id}" HorizontalAlignment="Center" FontSize="24"/>
+                <TextBlock Text="Mhz" HorizontalAlignment="Center" FontSize="10"/>
+            </StackPanel>
+        </Button>
+        <Button Content="{x:Static p:Resources.Salir}" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Width="82" Height="55" Command="{Binding Salir}"/>
+        <Button Content="{x:Static p:Resources.Sintonizar}" HorizontalAlignment="Left" Margin="147,70,0,0" VerticalAlignment="Top" Width="143" Height="55" Command="{Binding Sintonizar}"/>
+        <Label Content="{Binding Mensaje}" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" Width="280"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,20 @@
+Tareas para Transcionar del parche 6 al 7
+
+	[x] Actualizar el instalador para la opcion de puerto de escucha snmp e iconos corporativos.
+	[x] Personalizar la aplicacion WEB con la nueva imagen corporativa.
+	[x] MTTO. Elimino el fichero appweb.wxs, ya que es un producto de la compilacion...
+	[] Actualizar el método de acceso a las variables globales con el de la version 2.5.10
+
+	[x] Funciones comprometidas en parche 7
+		[x] Señalización acústica de alarmas en los BROWSERS
+		[x] Modos de Emergencia en Telefonia / Radio.
+
+	[x] Incidencias resueltas o nueva funcionalidad no incorporadas (Desde Agosto/2018)
+		[x] Corregido error de identificacion de nodos CLUSTER, cuando el servicio de MTTO arrancaba antes que el servicio del cluster...
+		[x] Opción de presencia de los cables de grabacion en los puestos.
+		[x] Incidencia #3837. No se registran el Estado PTT que aparece como seleccionable
+		[x] Error en Copy de pasarela fisica, que originaba una mala visualilzación del estado de la fuente de alimentacion
+
+	[] Incidencias Observadas.
+		[] A veces no arranca el WEB service porque persiste ocupado el puerto de servicio
+

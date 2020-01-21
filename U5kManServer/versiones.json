@@ -1,0 +1,88 @@
+{
+	"Server": "SERV01",
+	"Version" : "2.6.0",
+	"Fecha": "2-3-2020",
+	"Components" : [
+		{
+			"Name": "UV5K-SGM Gestor Cluster",
+			"Files" : [
+				{
+					"Path": "..\\UlisesV5000Cluster\\ClusterLib.dll",
+					"Date": "",
+					"Size": "",
+					"MD5": ""
+				},
+				{
+					"Path": "..\\UlisesV5000Cluster\\ClusterSrv.exe",
+					"Date": "",
+					"Size": "",
+					"MD5": ""
+				}
+			]
+		},
+		{
+			"Name": "UV5K-SGM Configuracion",
+			"Files" : [
+				{
+					"Path": "c:\\inetpub\\wwwroot\\NucleoDF\\U5kCfg\\bin\\App_code.dll",
+					"MD5": "",
+					"Date": "",
+					"Size": ""
+				},
+				{
+					"Path": "c:\\inetpub\\wwwroot\\NucleoDF\\U5kCfg\\Servicios\\bin\\bdcd40.dll",
+					"MD5": "",
+					"Date": "",
+					"Size": ""
+				},
+				{
+					"Path": "c:\\inetpub\\wwwroot\\NucleoDF\\U5kCfg\\Servicios\\bin\\sectorizaciondll.dll",
+					"MD5": "",
+					"Date": "",
+					"Size": ""
+				},
+				{
+					"Path": "c:\\inetpub\\wwwroot\\NucleoDF\\U5kCfg\\InterfazSOAPConfiguracion\\bin\\UtilitiesCD40.dll",
+					"MD5": "",
+					"Date": "",
+					"Size": ""
+				},
+				{
+					"Path": "c:\\inetpub\\wwwroot\\NucleoDF\\U5kCfg\\InterfazSacta\\bin\\sacta.dll",
+					"MD5": "",
+					"Date": "",
+					"Size": ""
+				}
+			]
+		},
+		{
+			"Name": "UV5K-SGM Mantenimiento",
+			"Files" : [
+				{
+					"Path": ".\\U5kManServer.exe",
+					"MD5": "",
+					"Date": "",
+					"Size": ""
+				},
+				{
+					"Path": ".\\U5kBaseDatos.dll",
+					"MD5": "",
+					"Date": "",
+					"Size": ""
+				},
+				{
+					"Path": ".\\Utilities.dll",
+					"MD5": "",
+					"Date": "",
+					"Size": ""
+				},
+        {
+          "Path": ".\\U5kManMibRevC.dll",
+          "MD5": "",
+          "Date": "",
+          "Size": ""
+        }
+			]
+		}
+	]
+}

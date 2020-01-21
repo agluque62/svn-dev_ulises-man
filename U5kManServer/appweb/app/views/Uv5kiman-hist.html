@@ -1,0 +1,346 @@
+<h3 translate>HST_TITLE</h3>
+<section id="_tabs">
+    <ul class="nav nav-tabs">
+        <li data-ng-class="{'active': ctrl.pagina()==0}">
+            <a href="" data-ng-click="ctrl.pagina(0)" translate>HST_OPC_01</a>
+        </li>
+        <li data-ng-class="{'active': ctrl.pagina()==1}">
+            <a href="" data-ng-click="ctrl.pagina(1)" translate>HST_OPC_02</a>
+        </li>
+    </ul>
+</section>
+<section id="_contenido">
+    <div id="hisGestor" data-ng-show="ctrl.pagina()==0">
+        <div id="fhis">
+            <div class="row">
+                <div class="col-md-1 bg-info" translate>HST_TB1_01</div>
+                <div class="col-md-1 bg-info" translate>HST_TB1_02</div>
+                <div class="col-md-2 bg-info" translate>HST_TB1_03</div>
+                <div class="col-md-2 bg-info" translate>HST_TB1_04</div>
+                <div class="col-md-3 bg-info" translate>HST_TB1_05</div>
+                <div class="col-md-2 bg-info" translate>Contiene</div>
+                <div class="col-md-1 bg-info" translate>...</div>
+            </div>
+            <div class="row">
+                <div class="col-md-1 text-info">{{ctrl.ls.LogFilter().dtDesde.toLocaleString()}}</div>
+                <div class="col-md-1 text-info">{{ctrl.ls.LogFilter().dtHasta.toLocaleString()}}</div>
+                <div class="col-md-2 text-info">{{ctrl.textoGrpSel()}}</div>
+                <div class="col-md-2 text-info">{{ctrl.ls.LogFilter().Mat}}</div>
+                <div class="col-md-3 text-info">{{ctrl.textoInciSel()}}</div>
+                <div class="col-md-2 text-info">{{ctrl.textoTexto()}}</div>
+                <div class="col-md-1 text-info">
+                    <button id="btnFil1" type="button" class="btn btn-default" ng-click="ctrl.setfiltro()"><i translate>Filtro</i></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="tbhis">
+            <table st-table="ctrl.dlhis" st-safe-src="ctrl.lhis" class="hisTable table table-striped">
+                <thead>
+                    <tr>
+                        <th translate>HST_TB3_01</th>
+                        <th translate>HST_TB3_02</th>
+                        <th translate>HST_TB3_03</th>
+                        <th translate>HST_TB3_04</th>
+                        <th translate>HST_TB3_05</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="inci in ctrl.dlhis" class="hisRow">
+                        <td>
+                            <div>{{inci.date}}</div>
+                        </td>
+                        <td>
+                            <div>{{inci.idhw}}</div>
+                        </td>
+                        <td>
+                            <div>{{inci.desc}}</div>
+                        </td>
+                        <td>
+                            <div>{{inci.acknw}}</div>
+                        </td>
+                        <td>
+                            <div>{{inci.user}}</div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr style="padding: 0;">
+                        <td colspan="2" ><p class="text-left text-primary" >{{ctrl.hist_reg_txt()}}</p></td>
+                        <td style="text-align: right;" colspan="3" class="text-center">
+                            <div id="pag" st-pagination=""
+                                st-items-by-page="ctrl.itemsPage"
+                                st-displayed-pages="10">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td colspan="3">
+                            <div id="chis">
+                                <button id="btnConsulta1" type="button"
+                                        class="btn btn-default"
+                                        ng-click="ctrl.getHistorico()">
+                                    <i translate>HST_BT1_01</i>
+                                </button>
+                                <button type="button"
+                                        class="btn btn-default"
+                                        ng-show="ctrl.lhis.length > 0"
+                                        ng-click="ctrl.clearhis()">
+                                    <i translate>HST_BT1_02</i>
+                                </button>
+                                <button type="button"
+                                        class="btn btn-default"
+                                        ng-show="ctrl.lhis.length > 0"
+                                        ng-click="ctrl.toPdf()">
+                                    <i translate>HST_BT1_03</i>
+                                </button>
+                                <button type="button"
+                                        class="btn btn-default"
+                                        ng-show="ctrl.lhis.length > 0"
+                                        ng-click="ctrl.toExcel()">
+                                    <i translate>Excel</i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <!--
+        <div id="chis" class="row">
+            <div class="col-md-12">
+                <button id="btnConsulta1" type="button"
+                    class="btn btn-default btnhis"
+                    ng-click="ctrl.getHistorico()">
+                    <i translate>HST_BT1_01</i>
+                </button>
+                <button type="button"
+                    class="btn btn-default"
+                    ng-show="ctrl.lhis.length > 0"
+                    ng-click="ctrl.clearhis()">
+                    <i translate>HST_BT1_02</i>
+                </button>
+                <button type="button"
+                    class="btn btn-default"
+                    ng-show="ctrl.lhis.length > 0"
+                    ng-click="ctrl.toPdf()">
+                    <i translate>HST_BT1_03</i>
+                </button>
+            </div>
+        </div>
+        -->
+    </div>
+
+    <div id="estGestor" data-ng-show="ctrl.pagina()==1">
+        <div id="fest">
+            <table class="filTable" ng-show="false">
+                <tr>
+                    <th translate>HST_TB1_01</th>
+                    <th translate>HST_TB1_02</th>
+                    <th translate>HST_TB1_03</th>
+                    <th translate>HST_TB1_04</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="input-group">
+                            <input type="datetime-local" class="form-control" ng-model="ctrl.ls.StsFilter().dtDesde" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-group">
+                            <input type="datetime-local" class="form-control" ng-model="ctrl.ls.StsFilter().dtHasta" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-group">
+                            <select name="tpMat"
+                                ng-model="ctrl.ls.StsFilter().tpMat"
+                                class="form-control"
+                                ng-change="ctrl.OnTpMatChange()">
+                                <option value="0" translate>HST_TB2_02</option>
+                                <option value="1" translate>HST_TB2_03</option>
+                                <option value="2" translate>Radios IP</option>
+                                <option value="3" translate>Telef IP</option>
+                                <option value="5" translate>Grabadores</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-group">
+                            <select name="Mat" ng-model="ctrl.ls.StsFilter().Mat" class="form-control"
+                                ng-options="obj.id as obj.id for obj in ctrl.est.mat">
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <button type="button"
+                            class="btn btn-default btnhis"
+                            ng-click="ctrl.getEstadistica()">
+                            <i translate>HST_BT1_01</i>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+            <div class="row">
+                <div class="col-md-3" translate>HST_TB1_01</div>
+                <div class="col-md-3" translate>HST_TB1_02</div>
+                <div class="col-md-2" translate>HST_TB1_03</div>
+                <div class="col-md-2" translate>HST_TB1_04</div>
+                <div class="col-md-1" translate></div>
+            </div>
+            <div class="row">
+                <div class="col-md-3" ><input type="datetime-local" class="form-control" ng-model="ctrl.ls.StsFilter().dtDesde" /></div>
+                <div class="col-md-3" ><input type="datetime-local" class="form-control" ng-model="ctrl.ls.StsFilter().dtHasta" /></div>
+                <div class="col-md-2" >
+                    <select ng-model="ctrl.ls.StsFilter().tpMat" class="form-control" ng-change="ctrl.OnEstTpMatChange()">
+                        <option value="0" translate>HST_TB2_02</option>
+                        <option value="1" translate>HST_TB2_03</option>
+                        <option value="2" translate>Radios IP</option>
+                        <option value="3" translate>Telef IP</option>
+                        <option value="4" translate>Grabadores</option>
+                    </select>
+                </div>
+                <div class="col-md-2" >
+                    <select ng-model="ctrl.ls.StsFilter().Mat" class="form-control" ng-options="obj as obj for obj in ctrl.est.mat">
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-default btnhis" ng-click="ctrl.getEstadistica()"><i translate>HST_BT1_01</i></button>
+                </div>
+            </div>
+        </div>
+        <div id="tbest" ng-show="ctrl.est.lest.lenght!=0">
+            <table st-table="ctrl.est.lest" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th translate>Parametro</th>
+                        <th translate>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="item in ctrl.est.lest">
+                        <td>
+                            <div>{{item.texto}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.valor}}</div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+            <div id="btest">
+                <button type="button"
+                    class="btn btn-default"
+                    ng-show="ctrl.est.lest.length > 0"
+                    ng-click="ctrl.clearest()">
+                    <i translate>HST_BT1_02</i>
+                </button>
+                <button type="button"
+                    class="btn btn-default"
+                    ng-show="ctrl.est.lest.length > 0"
+                    ng-click="ctrl.toPDFest()">
+                    <i translate>HST_BT1_03</i>
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Nueva Version con otro DP -->
+    <!-- Pantalla Modal Filtro Historicos -->
+    <div id="hfiltroModal" class="modal fade" role="dialog" tabindex='-1'>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" translate>HST_TXT_01</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-7" id="datepicker" >
+                            <i translate>Rango de Fechas</i>
+                            <div class="input-group">
+                                <input class="form-control" type="text" id="daterange" style="font-size: 85%" />
+                            </div>
+<!--                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>-->
+                        </div>
+                        <div class="col-md-5">
+                            <i translate>Limite Registros</i>
+                            <div class="input-group col-xs-8">
+                            <select class="form-control" ng-model = "ctrl.ls.LogFilter().limit">
+                                <option value="1000" translate>1000</option>
+                                <option value="2000" translate>2000</option>
+                                <option value="3000" translate>3000</option>
+                                <option value="4000" translate>4000</option>
+                                <option value="5000" translate>5000</option>
+                            </select>
+                        </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <i translate>HST_TB1_03</i>
+                            <div class="input-group">
+                                <select name="tpMat"
+                                    ng-model="ctrl.ls.LogFilter().tpMat"
+                                    class="form-control"
+                                    ng-change="ctrl.OnTpMatChange()">
+                                    <option value="6" translate>HST_TB2_07</option>
+                                    <option value="0" translate>HST_TB2_01</option>
+                                    <option value="1" translate>HST_TB2_02</option>
+                                    <option value="2" translate>HST_TB2_03</option>
+                                    <option value="3" ng-show="ctrl.show_hf" translate>HST_TB2_04</option>
+                                    <option value="4" translate>HST_TB2_05</option>
+                                    <option value="5" translate>HST_TB2_06</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <i translate>HST_TB1_04</i>
+                            <div class="input-group col-xs-8">
+                              <input type="text" class="form-control input-sm" ng-model="ctrl.ls.LogFilter().Mat" />
+                              <div class="dropdown input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle input-sm" 
+                                    data-toggle="dropdown" 
+                                    booaria-haspopup="true" aria-expanded="false"
+                                    ng-disabled="ctrl.mat.length==0"><span class="caret"></span></button>
+                                <ul class="dropdown-menu dropdown-menu-right" role="menu"">
+                                  <li ng-repeat="obj in ctrl.mat"><a href="" data-ng-click="ctrl.filmat(obj.id)">{{obj.id}}</a></li>
+                                </ul>        
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <i translate>HST_TB1_05</i>
+                            <div class="input-group">
+                                <select id="list_inci" name="Inci" ng-model="ctrl.ls.LogFilter().Inci" class="form-control"
+                                    ng-options="obj.id as obj.desc for obj in ctrl.inci" multiple>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <i translate>Contiene</i>
+                            <div class="input-group col-xs-8">
+                                <input type="text"  class="form-control input-sm" ng-model="ctrl.ls.LogFilter().txt"</input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default bhis" ng-click="ctrl.linci_clear()" translate>HST_BT1_06</button>
+                    <button type="button" class="btn btn-default bhis" data-dismiss="modal" ng_click="ctrl.clearhis()" translate>HST_BT1_05</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./jsPDF/dist/jspdf.min.js"></script>
+    <script type="text/javascript">
+    </script>
+
+</section>

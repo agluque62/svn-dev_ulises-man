@@ -1,0 +1,13 @@
+{
+	"sv1": {"name": "Servidor-1", "enable": 1, "std": 1, "sel": 1, "url": "http://www.google.es"},
+	"sv2": {"name": "Servidor-2", "enable": 1, "std": 1, "sel": 2, "url": "http://www.google.es"},
+	"gws": {"name": "Pasarelas", "enable": 1, "std": 1, "sel": 1, "url": ""},
+	"cwp": {"name": "Puestos de Operador", "enable": 1, "sel": 1, "std": 1, "url": ""},
+	"nbx": {"name": "Nodebox", "enable": 1, "std": 1, "sel": 1, "url": "http://www.google.es"},
+	"pbx": {"name": "PABX", "enable": 1, "std": 1, "sel": 1, "url": "http://www.google.es"},
+	"ntp": {"name": "Servidor NTP", "enable": 1, "sel": 1, "std": 1, "url": ""},
+	"sct1": {"name": "SACTA-1", "enable": 1, "std": 1, "sel": 1, "url": ""},
+	"sct2": {"name": "SACTA-2", "enable": 1, "std": 0, "sel": 1, "url": ""},
+	"version": "1.5.0",
+	"cfg": "03/11/2015"
+}

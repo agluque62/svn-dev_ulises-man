@@ -1,0 +1,75 @@
+{
+	"Components": [{
+			"Files": [{
+					"Path": ".\\hmi.exe",
+					"Date": "06/07/2017",
+					"Size": "75776",
+					"MD5": "8E2167DFD58EEBE4EDF214480BBD9008"
+				}, {
+					"Path": ".\\cd40.module.dll",
+					"Date": "06/07/2017",
+					"Size": "330752",
+					"MD5": "63C8F6866207183C23D8CA8A131ACF6E"
+				}, {
+					"Path": ".\\model.module.dll",
+					"Date": "06/07/2017",
+					"Size": "164864",
+					"MD5": "13C881B3EB285C6637780AF4033A5CF8"
+				}, {
+					"Path": ".\\Presentation.Twr.dll",
+					"Date": "06/07/2017",
+					"Size": "1675776",
+					"MD5": "E56180A1D48DE2ACB34EFB15267AAE72"
+				}, {
+					"Path": ".\\Presentation.Asecna.dll",
+					"Date": "06/07/2017",
+					"Size": "1756160",
+					"MD5": "19046EFF21763D183E305BC354538A45"
+				}, {
+					"Path": ".\\U5ki.Infrastructure.dll",
+					"Date": "06/07/2017",
+					"Size": "190464",
+					"MD5": "F8C25845E50851BDE9BA01A21BB0EC71"
+				}, {
+					"Path": ".\\coresip-voter.dll",
+					"Date": "30/06/2017",
+					"Size": "1487360",
+					"MD5": "DA31C0473B7EB8AC006FFB38B60BFAEB"
+				}, {
+					"Path": ".\\Utilities.dll",
+					"Date": "06/07/2017",
+					"Size": "74240",
+					"MD5": "08E1026E4A63120EDE325A8A28D51347"
+				}, {
+					"Path": ".\\Infrastructure.Interface.dll",
+					"Date": "06/07/2017",
+					"Size": "10752",
+					"MD5": "EF2A8AB98C2C31F826F810567104F320"
+				}, {
+					"Path": ".\\Infrastructure.Library.dll",
+					"Date": "06/07/2017",
+					"Size": "42496",
+					"MD5": "FD60356F7708675F0E0EAA9991B5815D"
+				}, {
+					"Path": ".\\winaudio.ini",
+					"Date": "24/02/2017",
+					"Size": "713",
+					"MD5": "E0B22CD99EAB9BE3080AA841BAC2275E"
+				}
+			],
+			"Name": "UV5K-HMI Terminal de Audio"
+		}, {
+			"Files": [{
+					"Path": ".\\Ed137b4Service\\ED137B4WindowsService.exe",
+					"Date": "24/02/2017",
+					"Size": "9728",
+					"MD5": "B277A9280A06972785A2EF247012B7AF"
+				}
+			],
+			"Name": "UV5K-HMI Gestor de Grabaciones ED137"
+		}
+	],
+	"Server": "NUCLEODF-VM01",
+	"Version": "2.5.4",
+	"Fecha": "14/07/2017"
+}

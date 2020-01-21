@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MCastGen.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ipFrom" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.0.71</Value>
+    </Setting>
+    <Setting Name="ipTo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">224.100.10.1</Value>
+    </Setting>
+    <Setting Name="udpPort" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="tifxName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">CGW01</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

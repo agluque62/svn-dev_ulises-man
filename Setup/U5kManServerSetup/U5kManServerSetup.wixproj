@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>3.10</ProductVersion>
+    <ProjectGuid>d565f872-eab7-4dc2-9956-25b2ad77e2f7</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>U5kManServerSetup</OutputName>
+    <OutputType>Package</OutputType>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Debug;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>SourcePath=$(SolutionDir)U5kManServer\appweb</DefineConstants>
+    <Cultures>en-US;es-ES;fr-FR</Cultures>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="appweb.wxs" />
+    <Compile Include="U5kManServerProduct.wxs" />
+    <Compile Include="WixUI_U5kManServerProduct.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUtilExtension">
+      <HintPath>$(WixExtDir)\WixUtilExtension.dll</HintPath>
+      <Name>WixUtilExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="banner-image.jpg" />
+    <Content Include="bkg-image.jpg" />
+    <Content Include="COPYING.AUTHORIZATION.txt" />
+    <Content Include="COPYING.LESSER.txt" />
+    <Content Include="COPYING.txt" />
+    <Content Include="LICENCIAS DE CODIGO ABIERTO.docx" />
+    <Content Include="License.rtf" />
+    <Content Include="sfk.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UtilExtension_en-US.wxl" />
+    <EmbeddedResource Include="UtilExtension_fr-FR.wxl" />
+    <EmbeddedResource Include="UtilExtension_es-es.wxl" />
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" />
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets.
+	<Target Name="BeforeBuild">
+	</Target>
+	<Target Name="AfterBuild">
+	</Target>
+	-->
+  <Target Name="BeforeBuild">
+    <HeatDirectory DirectoryRefId="INSTALLFOLDER" OutputFile="appweb.wxs" Directory="..\..\U5kManServer\appweb" ComponentGroupName="WebAppComponents" ToolPath="$(WixToolPath)" PreprocessorVariable="var.SourcePath" AutogenerateGuids="true">
+    </HeatDirectory>
+  </Target>
+</Project>

@@ -1,0 +1,22 @@
+{
+	"gdt": 1,
+	"lista": [
+	{"name": "TIFX-10", "tipo": 0, "std": 0, "main": 0, "ip": "192.168.0.10", "lan1": 1, "lan2": 0, "cpu0": 0, "cpu1": 0 },
+	{"name": "TIFX-11", "tipo": 0, "std": 1, "main": 0, "ip": "192.168.0.15", "lan1": 1, "lan2": 1, "cpu0": 0, "cpu1": 0 },
+	{"name": "TIFX-12", "tipo": 0, "std": 2, "main": 0, "ip": "192.168.0.20", "lan1": 1, "lan2": 0, "cpu0": 0, "cpu1": 0 },
+	{"name": "TIFX-13", "tipo": 0, "std": 3, "main": 0, "ip": "192.168.0.25", "lan1": 1, "lan2": 1, "cpu0": 0, "cpu1": 0 },
+	{"name": "TIFX-14", "tipo": 1, "std": 1, "main": 0, "ip": "192.168.0.30", "lan1": 1, "lan2": 1, "cpu0": 1, "cpu1": 2 },
+	{"name": "TIFX-15", "tipo": 1, "std": 5, "main": 1, "ip": "192.168.0.35", "lan1": 1, "lan2": 2, "cpu0": 2, "cpu1": 1 },
+	{"name": "TIFX-16", "tipo": 1, "std": 1, "main": 1, "ip": "192.168.0.40", "lan1": 1, "lan2": 1, "cpu0": 1, "cpu1": 0 },
+	{"name": "TIFX-17", "tipo": 1, "std": 2, "main": 0, "ip": "192.168.0.45", "lan1": 1, "lan2": 0, "cpu0": 0, "cpu1": 1 },
+	{"name": "TIFX-18", "tipo": 1, "std": 0, "main": 1, "ip": "192.168.0.50", "lan1": 1, "lan2": 1, "cpu0": 1, "cpu1": 1 },
+	{"name": "TIFX-19", "tipo": 1, "std": 0, "main": 0, "ip": "192.168.0.55", "lan1": 1, "lan2": 2, "cpu0": 2, "cpu1": 2 },
+	{"name": "TIFX-20", "tipo": 1, "std": 0, "main": 1, "ip": "192.168.0.60", "lan1": 1, "lan2": 1, "cpu0": 0, "cpu1": 0 },
+	{"name": "TIFX-21", "tipo": 0, "std": 0, "main": 0, "ip": "192.168.0.65", "lan1": 1, "lan2": 1, "cpu0": 0, "cpu1": 0 },
+	{"name": "TIFX-22", "tipo": 0, "std": 0, "main": 0, "ip": "192.168.0.70", "lan1": 1, "lan2": 1, "cpu0": 0, "cpu1": 0 },
+	{"name": "TIFX-23", "tipo": 0, "std": 0, "main": 0, "ip": "192.168.0.75", "lan1": 1, "lan2": 1, "cpu0": 0, "cpu1": 0 },
+	{"name": "TIFX-24", "tipo": 0, "std": 0, "main": 0, "ip": "192.168.0.80", "lan1": 1, "lan2": 1, "cpu0": 0, "cpu1": 0 },
+	{"name": "TIFX-25", "tipo": 0, "std": 0, "main": 0, "ip": "192.168.0.85", "lan1": 1, "lan2": 1, "cpu0": 0, "cpu1": 0 },
+	{"name": "TIFX-26", "tipo": 0, "std": 0, "main": 0, "ip": "192.168.0.90", "lan1": 1, "lan2": 1, "cpu0": 0, "cpu1": 0 }
+	]
+}

@@ -1,0 +1,42 @@
+NOTAS
+
+	[x] Para agregar una referencia al servicio WEB
+
+		[x] Obtener la descripcion (WSDL)
+		[x] Utilizar la Herramienta wsdl.exe de Visual Studio.
+		[x] Generar la clase de interfaz
+
+			wsdl /out:myProxyClass.cs fichero.wsdl
+
+		[x] Agregar la clase al proyecto.
+
+	[ ] Para dar permisos al web-service
+		[ ] netsh http add urlacl http://+:8080/u5kman user=Everyone 
+		
+
+	[ ] Para dar permiso a las paginas web del nodebox.
+		[ ] netsh http add urlacl http://+:1023/ user=Everyone 
+
+
+IDEAS PARA PROXIMAS VERSIONES.
+	[ ] Presentacion por Recursos.
+		[ ] Radio.
+		[ ] Telefonia.
+		[ ] IpNativo.
+
+	[ ] Página de Estadística.
+
+
+Version 2.1.1
+
+	- Servidor.
+		- Scan NBX en proceso independiente.
+
+	- Páginas
+		- Identificador de version.
+		- Refrescos parciales (ajax)
+
+
+	
+	
+	

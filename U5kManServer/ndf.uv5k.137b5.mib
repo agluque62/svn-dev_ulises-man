@@ -1,0 +1,795 @@
+ULISESV5000I-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+	MODULE-IDENTITY, OBJECT-TYPE, enterprises, Integer32
+		FROM SNMPv2-SMI
+	OBJECT-GROUP, MODULE-COMPLIANCE
+        FROM SNMPv2-CONF	
+	DisplayString
+        FROM SNMPv2-TC;
+		
+uv5kiPublic MODULE-IDENTITY
+		LAST-UPDATED "201706051400Z"
+		ORGANIZATION "NUCLEODF"
+		CONTACT-INFO 
+			"Direccion Tecnica
+			Via de los Poblados 7,
+			Madrid 28033.
+			email: direccion.tecnica@nucleodf.com"
+		DESCRIPTION "Ulises V5000"
+		REVISION "201706051400Z"
+			DESCRIPTION
+         "..."
+	::= { enterprises 7916 8 1 5}
+
+-- Parte PRIVADA	
+-- Globales 
+nucleoDF			
+	OBJECT IDENTIFIER ::= { enterprises 7916 }
+ulises5000i			
+	OBJECT IDENTIFIER ::= { nucleoDF 8 }
+ulisesv5000i		
+	OBJECT IDENTIFIER ::= { ulises5000i 1 }
+uv5kiMIBConformance
+    OBJECT IDENTIFIER ::= { ulisesv5000i 99 }
+uv5kiMIBGroups  
+	OBJECT IDENTIFIER ::= { uv5kiMIBConformance 1 }
+uv5kiMIBCompliance
+	OBJECT IDENTIFIER ::= { uv5kiMIBConformance 2 }
+snmpBasicComplianceRev2 MODULE-COMPLIANCE
+    STATUS  current
+    DESCRIPTION
+            "..."
+    MODULE  -- this module
+        MANDATORY-GROUPS { cfgGroup, stdEstadoGeneral, stdPuestos,
+			stdPasarelas, stdRadioLegacy, stdTelefLegacy, stdRadioExt,
+			stdTelefExt, stdRecExt, stdPbx, stdRadioSes, stdRadioNmm}
+    ::= { uv5kiMIBCompliance 1 }	
+--
+-- Configuracion del Sistema
+--
+config			OBJECT IDENTIFIER 	::= { uv5kiPublic 1 }
+cfgGroup OBJECT-GROUP
+    OBJECTS { cfgServDual,
+              cfgPbx,
+              cfgSacta,
+              cfgNtpServer }
+    STATUS  current
+    DESCRIPTION "..."
+    ::= { uv5kiMIBGroups 1 }	
+cfgServDual		OBJECT-TYPE 
+	SYNTAX  INTEGER {nodual(0),dual(1)}	
+	MAX-ACCESS read-only 
+	STATUS  current DESCRIPTION "Servidor Dual" 
+	::= { config 1 }
+cfgPbx			OBJECT-TYPE 
+	SYNTAX INTEGER	{no(0),si(1)} 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "Supervision PABX" 
+	::= { config 2 }
+cfgSacta		OBJECT-TYPE 
+	SYNTAX  INTEGER	{no(0),si(1)} 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "Supervision SACTA" 
+	::= { config 3 }
+cfgNtpServer	OBJECT-TYPE 
+	SYNTAX  INTEGER	{no(0),si(1)} 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "Supervision Referencia Horaria" 
+	::= { config 4 }
+-- Estados Generales.
+stdEstadoGeneral OBJECT-GROUP
+    OBJECTS { stdVersion,
+              stdCfgact,
+              stdgNum,
+              stdgDisp,
+              stdgIp,
+              stdgStd,
+              stdgLans,
+              stdgSync
+			  }
+    STATUS  current
+    DESCRIPTION "..."
+    ::= { uv5kiMIBGroups 2 }
+stdgral			OBJECT IDENTIFIER 	::= { uv5kiPublic 2 }
+stdVersion		OBJECT-TYPE 	
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "Version del Servicio de Mantenimiento" 
+	::= { stdgral 1 }
+stdCfgact		OBJECT-TYPE 	
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "Version de la configuracion SCV Activa" 
+	::= { stdgral 2 }
+stdgTb			OBJECT IDENTIFIER 	::= { stdgral 3 }
+stdgNum 		OBJECT-TYPE 
+	SYNTAX  Integer32 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { stdgTb 1 }
+stdgEntry 		OBJECT-TYPE 	
+	SYNTAX  SEQStdgSeq 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION "..." 
+	INDEX   { stdgIndice } 
+	::= { stdgTable 1 }
+stdgIndice		OBJECT-TYPE 	
+	SYNTAX  Integer32 (0..15) 
+	MAX-ACCESS not-accessible
+	STATUS  current 
+	DESCRIPTION "..." 	
+	::= { stdgEntry 1 }
+stdgDisp		OBJECT-TYPE 	
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { stdgEntry 2 }
+stdgIp			OBJECT-TYPE 	
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { stdgEntry 3 }
+stdgStd			OBJECT-TYPE 
+	SYNTAX  INTEGER	{noinfo(0), ok(1), avisoRec(2), alarmaRec(3), aviso(4), alarma(5), error(6), ppal(7), rsva(8) } 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { stdgEntry 4 }
+stdgLans		OBJECT-TYPE 
+	SYNTAX  OCTET STRING (SIZE(8)) 
+	MAX-ACCESS read-only 
+	STATUS current 
+	DESCRIPTION "Estado LANES. LAN1..LAN8" 
+	::= { stdgEntry 5 }
+stdgSync		OBJECT-TYPE 	
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "Estado Cliente NTP" 
+	::= { stdgEntry 6 }
+SEQStdgSeq		::= SEQUENCE {stdgIndice INTEGER, stdgDisp DisplayString, stdgIp DisplayString, stdgStd INTEGER, stdgLans OCTET STRING, stdgSync DisplayString }
+stdgTable		OBJECT-TYPE 	
+	SYNTAX  SEQUENCE OF SEQStdgSeq 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION  "..." 
+	::= { stdgTb 2 }
+-- Puestos...
+stdPuestos OBJECT-GROUP
+    OBJECTS { puestosStdg,
+              puestosNum,
+              puestosDisp,
+              puestosIp,
+              puestosStd,
+              puestosLans,
+              puestosSync,
+			  puestosUris
+			  }
+    STATUS  current
+    DESCRIPTION "..."
+    ::= { uv5kiMIBGroups 3 }
+puestos			OBJECT IDENTIFIER 	::= { uv5kiPublic 3 }
+puestosStdg		OBJECT-TYPE 
+	SYNTAX  INTEGER	{noinfo(0), ok(1), avisoRec(2), alarmaRec(3), aviso(4), alarma(5), error(6) } 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." ::= { puestos 1 }
+puestosTb		OBJECT IDENTIFIER 	::= { puestos 2 }
+puestosNum		OBJECT-TYPE 
+	SYNTAX  Integer32 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { puestosTb 1 }
+puestosEntry		OBJECT-TYPE 	
+	SYNTAX  SEQPuestosSeq 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION "..." 
+	INDEX   { puestosIndice } 
+	::= { puestosTable 1 }
+puestosIndice	OBJECT-TYPE 	
+	SYNTAX  Integer32 (0..63) 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION "..." 	
+	::= { puestosEntry 1 }
+puestosDisp		OBJECT-TYPE 	
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { puestosEntry 2 }
+puestosIp		OBJECT-TYPE 	
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { puestosEntry 3 }
+puestosStd		OBJECT-TYPE 
+	SYNTAX  INTEGER	{noinfo(0), ok(1), avisoRec(2), alarmaRec(3), aviso(4), alarma(5), error(6) } 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { puestosEntry 4 }
+puestosLans		OBJECT-TYPE 
+	SYNTAX  OCTET STRING (SIZE(8)) 
+	MAX-ACCESS read-only 
+	STATUS current 
+	DESCRIPTION "Estado LANES. LAN1..LAN8" 
+	::= { puestosEntry 5 }
+puestosSync		OBJECT-TYPE 	
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "Estado Cliente NTP" 
+	::= { puestosEntry 6 }
+puestosUris		OBJECT-TYPE 	
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "URIS asignadas al puesto" 
+	::= { puestosEntry 7 }
+SEQPuestosSeq	::= SEQUENCE {puestosIndice INTEGER, puestosDisp DisplayString, puestosIp DisplayString, puestosStd INTEGER, puestosLans OCTET STRING, puestosSync DisplayString, puestosUris DisplayString }
+puestosTable	OBJECT-TYPE 	
+	SYNTAX  SEQUENCE OF SEQPuestosSeq 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION  "..." 
+	::= { puestosTb 2 }
+
+-- Pasarelas
+pasarelas		OBJECT IDENTIFIER 	::= { uv5kiPublic 4 }
+stdPasarelas OBJECT-GROUP
+    OBJECTS { pasarelasStdg,
+              pasarelasNum,
+              pasarelasDisp,
+              pasarelasIp,
+              pasarelasStd,
+              pasarelasLans,
+              pasarelasSync,
+			  pasarelasHw
+			  }
+    STATUS  current
+    DESCRIPTION "..."
+    ::= { uv5kiMIBGroups 4 }
+pasarelasStdg	OBJECT-TYPE SYNTAX  
+	INTEGER	{noinfo(0), ok(1), avisoRec(2), alarmaRec(3), aviso(4), alarma(5), error(6) } 
+	MAX-ACCESS read-only  
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { pasarelas 1 }
+pasarelasTb		OBJECT IDENTIFIER 	::= { pasarelas 2 }
+pasarelasNum	OBJECT-TYPE 
+	SYNTAX  Integer32 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { pasarelasTb 1 }
+pasarelasEntry	OBJECT-TYPE 	
+	SYNTAX  SEQPasarelasSeq 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION "..." 
+	INDEX   { pasarelasIndice } 
+	::= { pasarelasTable 1 }
+pasarelasIndice		OBJECT-TYPE 	
+	SYNTAX  Integer32(0..128) 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION "..." 	
+	::= { pasarelasEntry 1 }
+pasarelasDisp	OBJECT-TYPE 	
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { pasarelasEntry 2 }
+pasarelasIp		OBJECT-TYPE 	
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { pasarelasEntry 3 }
+pasarelasStd	OBJECT-TYPE 
+	SYNTAX  INTEGER	{noinfo(0), ok(1), avisoRec(2), alarmaRec(3), aviso(4), alarma(5), error(6) } 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { pasarelasEntry 4 }
+pasarelasLans	OBJECT-TYPE 
+	SYNTAX  OCTET STRING (SIZE(8)) 
+	MAX-ACCESS read-only 
+	STATUS current 
+	DESCRIPTION "Estado LANES. LAN1..LAN8" 
+	::= { pasarelasEntry 5 }
+pasarelasSync	OBJECT-TYPE 	
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "Estado Cliente NTP" 
+	::= { pasarelasEntry 6 }
+pasarelasHw		OBJECT-TYPE 
+	SYNTAX  OCTET STRING (SIZE(6)) 
+	MAX-ACCESS read-only 
+	STATUS current 
+	DESCRIPTION "Estado Tarjetas CGW1-IA41-IA42-IA43-IA44-CGW2" 
+	::= { pasarelasEntry 7 }
+SEQPasarelasSeq	::= SEQUENCE {pasarelasIndice INTEGER, pasarelasDisp DisplayString, pasarelasIp DisplayString, pasarelasStd INTEGER, pasarelasLans OCTET STRING, pasarelasSync DisplayString, pasarelasHw OCTET STRING }
+pasarelasTable	OBJECT-TYPE 	
+	SYNTAX  SEQUENCE OF SEQPasarelasSeq 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION  "..." 
+	::= { pasarelasTb 2 }
+-- Radio LEGACY
+radioTb			OBJECT IDENTIFIER 	::= { pasarelas 3 }
+stdRadioLegacy OBJECT-GROUP
+    OBJECTS { radioNum,
+              radioDisp,
+              radioStd,
+              radioUri
+			  }
+    STATUS  current
+    DESCRIPTION "..."
+    ::= { uv5kiMIBGroups 5 }
+radioNum		OBJECT-TYPE 
+	SYNTAX  Integer32 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { radioTb 1 }
+radioEntry		OBJECT-TYPE 	
+	SYNTAX  SEQRadioSeq 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION "..." 
+	INDEX   { radioIndice } 
+	::= { radioTable 1 }
+radioIndice		OBJECT-TYPE 	
+	SYNTAX  Integer32(0..256) 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION "..." 	
+	::= { radioEntry 1 }
+radioDisp		OBJECT-TYPE 	
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { radioEntry 2 }
+radioStd		OBJECT-TYPE 
+	SYNTAX  INTEGER	{noinfo(0), ok(1), avisoRec(2), alarmaRec(3), aviso(4), alarma(5), error(6) } 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { radioEntry 3 }
+radioUri		OBJECT-TYPE 	
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { radioEntry 4 }
+SEQRadioSeq		::= SEQUENCE {radioIndice INTEGER, radioDisp DisplayString, radioStd INTEGER, radioUri DisplayString }
+radioTable		OBJECT-TYPE 	
+	SYNTAX  SEQUENCE OF SEQRadioSeq 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION  "..." 
+	::= { radioTb 2 }
+--
+-- Tabla Interfaces Telefonicas Legacy
+-- 
+telefTb			OBJECT IDENTIFIER 	::= { pasarelas 4 }
+stdTelefLegacy OBJECT-GROUP
+    OBJECTS { telefNum,
+              telefDisp,
+			  telefTipo,
+              telefStd,
+              telefUri
+			  }
+    STATUS  current
+    DESCRIPTION "..."
+    ::= { uv5kiMIBGroups 6 }
+telefNum		OBJECT-TYPE 
+	SYNTAX  Integer32 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { telefTb 1 }
+telefEntry		OBJECT-TYPE 	
+	SYNTAX  SEQTelefSeq 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION "..." 
+	INDEX   { telefIndice } 
+	::= { telefTable 1 }
+telefIndice		OBJECT-TYPE 	
+	SYNTAX  Integer32 (0..1024) 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION "..." 	
+	::= { telefEntry 1 }
+telefDisp		OBJECT-TYPE 
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { telefEntry 2 }
+telefTipo		OBJECT-TYPE 
+	SYNTAX  INTEGER	{lce(1), bc(2), bl(3), ab(4), r2(5), n5(6), em1(50), em2(51)} 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { telefEntry 3 }
+telefStd		OBJECT-TYPE 
+	SYNTAX  INTEGER	{noinfo(0), ok(1), avisoRec(2), alarmaRec(3), aviso(4), alarma(5), error(6) } 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { telefEntry 4 }
+telefUri		OBJECT-TYPE 	
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { telefEntry 5 }
+SEQTelefSeq		::= SEQUENCE {telefIndice INTEGER, telefDisp DisplayString, telefTipo INTEGER, telefStd INTEGER, telefUri DisplayString  }
+telefTable		OBJECT-TYPE 	
+	SYNTAX  SEQUENCE OF SEQTelefSeq 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION  "..." 
+	::= { telefTb 2 }
+
+--
+-- Radios Externas.
+--
+externos		OBJECT IDENTIFIER 	::= { uv5kiPublic 5 }
+stdRadioExt OBJECT-GROUP
+    OBJECTS { radioExtNum,
+              radioExtDisp,
+			  radioExtIp,
+              radioExtStd,
+              radioExtUri
+			  }
+    STATUS  current
+    DESCRIPTION "..."
+    ::= { uv5kiMIBGroups 7 }
+radioExtTb		OBJECT IDENTIFIER 	::= { externos 1 }
+radioExtNum		OBJECT-TYPE 
+	SYNTAX  Integer32 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { radioExtTb 1 }
+radioExtEntry	OBJECT-TYPE 	
+	SYNTAX  SEQRadioExtSeq 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION "..." 
+	INDEX   { radioExtIndice } 
+	::= { radioExtTable 1 }
+radioExtIndice	OBJECT-TYPE 	
+	SYNTAX  Integer32(0..256) 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION "..." 	
+	::= { radioExtEntry 1 }
+radioExtDisp	OBJECT-TYPE 	
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { radioExtEntry 2 }
+radioExtIp		OBJECT-TYPE 	
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { radioExtEntry 3 }
+radioExtStd		OBJECT-TYPE 
+	SYNTAX  INTEGER	{noinfo(0), ok(1), avisoRec(2), alarmaRec(3), aviso(4), alarma(5), error(6) } 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { radioExtEntry 4 }
+radioExtUri		OBJECT-TYPE 	
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { radioExtEntry 5 }
+SEQRadioExtSeq	::= SEQUENCE {radioExtIndice INTEGER, radioExtDisp DisplayString, radioExtIp DisplayString, radioExtStd INTEGER, radioExtUri DisplayString }
+radioExtTable	OBJECT-TYPE 	
+	SYNTAX  SEQUENCE OF SEQRadioExtSeq 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION  "..." 
+	::= { radioExtTb 2 }
+--
+-- Telefonia IP 
+-- 
+telefExtTb			OBJECT IDENTIFIER 	::= { externos 2 }
+stdTelefExt OBJECT-GROUP
+    OBJECTS { telefExtNum,
+              telefExtDisp,
+			  telefExtIp,
+              telefExtStd,
+              telefExtUri
+			  }
+    STATUS  current
+    DESCRIPTION "..."
+    ::= { uv5kiMIBGroups 8 }
+telefExtNum		OBJECT-TYPE 
+	SYNTAX  Integer32 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { telefExtTb 1 }
+telefExtEntry	OBJECT-TYPE 
+	SYNTAX  SEQTelefExtSeq 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION "..." 
+	INDEX   { telefExtIndice } 
+	::= { telefExtTable 1 }
+telefExtIndice	OBJECT-TYPE 
+	SYNTAX  Integer32(0..1024) 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION "..." 	
+	::= { telefExtEntry 1 }
+telefExtDisp	OBJECT-TYPE 
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { telefExtEntry 2 }
+telefExtIp		OBJECT-TYPE 
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { telefExtEntry 3 }
+telefExtStd		OBJECT-TYPE 
+	SYNTAX  INTEGER	{noinfo(0), ok(1), avisoRec(2), alarmaRec(3), aviso(4), alarma(5), error(6) } 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { telefExtEntry 4 }
+telefExtUri		OBJECT-TYPE 
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." ::= { telefExtEntry 5 }
+SEQTelefExtSeq	::= SEQUENCE {telefExtIndice INTEGER, telefExtDisp DisplayString, telefExtIp DisplayString, telefExtStd INTEGER, telefExtUri DisplayString }
+telefExtTable	OBJECT-TYPE 
+	SYNTAX  SEQUENCE OF SEQTelefExtSeq 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION  "..." 
+	::= { telefExtTb 2 }
+--
+-- Grabadores... 
+--
+recsExtTb			OBJECT IDENTIFIER 	::= { externos 3 }
+stdRecExt OBJECT-GROUP
+    OBJECTS { recsExtNum,
+              recsExtDisp,
+			  recsExtIp,
+              recsExtStd
+			  }
+    STATUS  current
+    DESCRIPTION "..."
+    ::= { uv5kiMIBGroups 9 }
+recsExtNum		OBJECT-TYPE 
+	SYNTAX  Integer32 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { recsExtTb 1 }
+recsExtEntry		OBJECT-TYPE 
+	SYNTAX  SEQRecsExtSeq 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION "..." 
+	INDEX   { recsExtIndice } 
+	::= { recsExtTable 1 }
+recsExtIndice	OBJECT-TYPE 
+	SYNTAX  Integer32(0..1024) 
+	MAX-ACCESS not-accessible
+	STATUS  current 
+	DESCRIPTION "..." 	
+	::= { recsExtEntry 1 }
+recsExtDisp		OBJECT-TYPE 
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { recsExtEntry 2 }
+recsExtIp		OBJECT-TYPE 
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { recsExtEntry 3 }
+recsExtStd		OBJECT-TYPE 
+	SYNTAX  INTEGER	{noinfo(0), ok(1), avisoRec(2), alarmaRec(3), aviso(4), alarma(5), error(6) } 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { recsExtEntry 4 }
+SEQRecsExtSeq	::= SEQUENCE {recsExtIndice INTEGER, recsExtDisp DisplayString, recsExtIp DisplayString, recsExtStd INTEGER }
+recsExtTable	OBJECT-TYPE 
+	SYNTAX  SEQUENCE OF SEQRecsExtSeq 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION  "..." 
+	::= { recsExtTb 2 }
+--
+-- Abonados PBX
+---
+pbx		OBJECT IDENTIFIER 	::= { uv5kiPublic 6 }
+stdPbx OBJECT-GROUP
+    OBJECTS { pbxStdg,
+			  abonsNum,
+              abonsDisp,
+			  abonsIp,
+              abonsStd
+			  }
+    STATUS  current
+    DESCRIPTION "..."
+    ::= { uv5kiMIBGroups 10 }
+pbxStdg		OBJECT-TYPE 
+	SYNTAX  INTEGER	{noinfo(0), ok(1), avisoRec(2), alarmaRec(3), aviso(4), alarma(5), error(6) } 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { pbx 1 }
+abonsTb		OBJECT IDENTIFIER 	::= { pbx 2 }
+abonsNum	OBJECT-TYPE 
+	SYNTAX  Integer32 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { abonsTb 1 }
+abonsEntry	OBJECT-TYPE 	
+	SYNTAX  SEQAbonsSeq 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION "..." 
+	INDEX   { abonsIndice } 
+	::= { abonsTable 1 }
+abonsIndice	OBJECT-TYPE 	
+	SYNTAX  Integer32(0..1024) 
+	MAX-ACCESS not-accessible
+	STATUS  current 
+	DESCRIPTION "..." 	
+	::= { abonsEntry 1 }
+abonsDisp	OBJECT-TYPE 	
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { abonsEntry 2 }
+abonsIp		OBJECT-TYPE 	
+	SYNTAX  DisplayString 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { abonsEntry 3 }
+abonsStd	OBJECT-TYPE 
+	SYNTAX  INTEGER	{noinfo(0), ok(1), avisoRec(2), alarmaRec(3), aviso(4), alarma(5), error(6) } 
+	MAX-ACCESS read-only 
+	STATUS  current 
+	DESCRIPTION "..." 
+	::= { abonsEntry 4 }
+SEQAbonsSeq	::= SEQUENCE {abonsIndice INTEGER, abonsDisp DisplayString, abonsIp DisplayString, abonsStd INTEGER }
+abonsTable	OBJECT-TYPE 	
+	SYNTAX  SEQUENCE OF SEQAbonsSeq 
+	MAX-ACCESS not-accessible 
+	STATUS  current 
+	DESCRIPTION  "..." 
+	::= { abonsTb 2 }
+
+radio			OBJECT IDENTIFIER 	::= { uv5kiPublic 7 }
+--
+-- Sesiones Radio
+--
+stdRadioSes OBJECT-GROUP
+    OBJECTS { rdsesNum,
+              rdsesFrec,
+              rdsesFtipo,
+			  rdsesPrio,
+			  rdsesFstd,
+              rdsesClimaxMc,
+              rdsesBssWin,
+			  rdsesUri,
+			  rdsesTipo,
+              rdsesStd,
+              rdsesTxRtp,
+			  rdsesTxCld,
+			  rdsesTxOwd,
+              rdsesRxRtp,
+              rdsesRxQidx
+			  }
+    STATUS  current
+    DESCRIPTION "..."
+    ::= { uv5kiMIBGroups 11 }
+rdsesTb		OBJECT IDENTIFIER 	::= { radio 1 }
+rdsesNum	OBJECT-TYPE SYNTAX  Integer32 MAX-ACCESS read-only STATUS  current DESCRIPTION "..." ::= { rdsesTb 1 }
+rdsesEntry	OBJECT-TYPE SYNTAX  SEQRdsesSeq MAX-ACCESS not-accessible STATUS  current DESCRIPTION "..." INDEX   { rdsesIndice } ::= { rdsesTable 1 }
+rdsesIndice	OBJECT-TYPE SYNTAX  Integer32(0..1024) MAX-ACCESS not-accessible STATUS  current DESCRIPTION "..." 	::= { rdsesEntry 1 }
+rdsesFrec	OBJECT-TYPE SYNTAX  DisplayString MAX-ACCESS read-only STATUS  current DESCRIPTION "Frecuencia" ::= { rdsesEntry 2 }
+rdsesFtipo	OBJECT-TYPE SYNTAX  INTEGER	{normal(0), unomasuno(1), fd(2), me(3) } MAX-ACCESS read-only STATUS  current DESCRIPTION "Tipo de Frecuencia" ::= { rdsesEntry 3 }
+rdsesPrio	OBJECT-TYPE SYNTAX  INTEGER	{normal(0), emergencia(1)} MAX-ACCESS read-only STATUS  current DESCRIPTION "Prioridad de Session" ::= { rdsesEntry 4 }
+rdsesFstd	OBJECT-TYPE SYNTAX  INTEGER	{noDisponible(0), disponible(1), degradada(2)} MAX-ACCESS read-only STATUS  current DESCRIPTION "Estado de Frecuencia" ::= { rdsesEntry 5 }
+rdsesClimaxMc	OBJECT-TYPE SYNTAX  INTEGER	{relativo(0), absoluto(1)} MAX-ACCESS read-only STATUS  current DESCRIPTION "Modo Calculo Climax" ::= { rdsesEntry 6 }
+rdsesBssWin	OBJECT-TYPE SYNTAX  Integer32	(50..2000) MAX-ACCESS read-only STATUS  current DESCRIPTION "Ventana BSS" ::= { rdsesEntry 7 }
+rdsesUri	OBJECT-TYPE SYNTAX  DisplayString MAX-ACCESS read-only STATUS  current DESCRIPTION "URI de la Sesion" ::= { rdsesEntry 8 }
+rdsesTipo	OBJECT-TYPE SYNTAX  DisplayString MAX-ACCESS read-only STATUS  current DESCRIPTION "Tipo de Sesion" ::= { rdsesEntry 9 }
+rdsesStd	OBJECT-TYPE SYNTAX  INTEGER	{desconectada(0),conectada(1)} MAX-ACCESS read-only STATUS  current DESCRIPTION "Estado de Sesion" ::= { rdsesEntry 10 }
+rdsesTxRtp	OBJECT-TYPE SYNTAX  Integer32	(5062..7000) MAX-ACCESS read-only STATUS  current DESCRIPTION "Puerto RTP TX" ::= { rdsesEntry 11 }
+rdsesTxCld	OBJECT-TYPE SYNTAX  Integer32	(0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "CLD Calculado" ::= { rdsesEntry 12 }
+rdsesTxOwd	OBJECT-TYPE SYNTAX  Integer32	(0..1024) MAX-ACCESS read-only STATUS  current DESCRIPTION "OWD Calculado" ::= { rdsesEntry 13 }
+rdsesRxRtp	OBJECT-TYPE SYNTAX  Integer32	(5062..7000) MAX-ACCESS read-only STATUS  current DESCRIPTION "Puerto RTP RX" ::= { rdsesEntry 14 }
+rdsesRxQidx	OBJECT-TYPE SYNTAX  Integer32	(0..15) MAX-ACCESS read-only STATUS  current DESCRIPTION "QIDX Calculado" ::= { rdsesEntry 15 }
+SEQRdsesSeq		::= SEQUENCE {rdsesIndice INTEGER, rdsesFrec DisplayString, rdsesFtipo INTEGER, rdsesPrio INTEGER,
+	rdsesFstd INTEGER, rdsesClimaxMc INTEGER, rdsesBssWin INTEGER, rdsesUri DisplayString, rdsesTipo DisplayString,
+	rdsesStd INTEGER, rdsesTxRtp INTEGER, rdsesTxCld INTEGER, rdsesTxOwd INTEGER, rdsesRxRtp INTEGER, 
+	rdsesRxQidx INTEGER }	
+rdsesTable		OBJECT-TYPE 	SYNTAX  SEQUENCE OF SEQRdsesSeq MAX-ACCESS not-accessible STATUS  current DESCRIPTION  "Tabla de Sesiones Radio" ::= { rdsesTb 2 }
+
+--
+-- Gestor M+N
+--
+stdRadioNmm OBJECT-GROUP
+    OBJECTS { rdnmmNum,
+              rdnmmEqu,
+              rdnmmGrp,
+			  rdnmmMod,
+			  rdnmmTip,
+              rdnmmStd,
+              rdnmmFrec,
+			  rdnmmPrio,
+			  rdnmmSip,
+              rdnmmIp,
+              rdnmmEmp,
+			  rdnmmTfrec
+			  }
+    STATUS  current
+    DESCRIPTION "..."
+    ::= { uv5kiMIBGroups 12 }
+rdnmmTb		OBJECT IDENTIFIER 	::= { radio 2 }
+rdnmmNum	OBJECT-TYPE SYNTAX  Integer32 MAX-ACCESS read-only STATUS  current DESCRIPTION "..." ::= { rdnmmTb 1 }
+rdnmmEntry	OBJECT-TYPE SYNTAX  SEQRdnmmSeq MAX-ACCESS not-accessible STATUS  current DESCRIPTION "..." INDEX   { rdnmmIndice } ::= { rdnmmTable 1 }
+rdnmmIndice	OBJECT-TYPE SYNTAX  Integer32(0..1024) MAX-ACCESS not-accessible STATUS  current DESCRIPTION "..." 	::= { rdnmmEntry 1 }
+rdnmmEqu	OBJECT-TYPE SYNTAX  DisplayString MAX-ACCESS read-only STATUS  current DESCRIPTION "Equipo Radio" ::= { rdnmmEntry 2 }
+rdnmmGrp	OBJECT-TYPE SYNTAX  INTEGER	{vhf(0), uhf(1)} MAX-ACCESS read-only STATUS  current DESCRIPTION "Banda de Frecuencia" ::= { rdnmmEntry 3 }
+rdnmmMod	OBJECT-TYPE SYNTAX  INTEGER	{tx(0), rx(1)} MAX-ACCESS read-only STATUS  current DESCRIPTION "Transmisor o Receptor" ::= { rdnmmEntry 4 }
+rdnmmTip	OBJECT-TYPE SYNTAX  INTEGER	{main(0), standby(1)} MAX-ACCESS read-only STATUS  current DESCRIPTION "Principal o Standby" ::= { rdnmmEntry 5 }
+rdnmmStd	OBJECT-TYPE SYNTAX  INTEGER	{noInicializado(0), disponible(1), asignado(2), fallo(3), noHabilitado(4)} MAX-ACCESS read-only STATUS  current DESCRIPTION "Estado del Equipo" ::= { rdnmmEntry 6 }
+rdnmmFrec	OBJECT-TYPE SYNTAX  DisplayString MAX-ACCESS read-only STATUS  current DESCRIPTION "Frecuencia Asignada" ::= { rdnmmEntry 7 }
+rdnmmPrio	OBJECT-TYPE SYNTAX  Integer32	(0..99) MAX-ACCESS read-only STATUS  current DESCRIPTION "Prioridad Equipo MAIN" ::= { rdnmmEntry 8 }
+rdnmmSip	OBJECT-TYPE SYNTAX  INTEGER	{sipDesconectado(0), sipConectado(1)} MAX-ACCESS read-only STATUS  current DESCRIPTION "Estado de conexion sip asociada" ::= { rdnmmEntry 9 }
+rdnmmIp		OBJECT-TYPE SYNTAX  DisplayString MAX-ACCESS read-only STATUS  current DESCRIPTION "Direccion IP del equipo" ::= { rdnmmEntry 10 }
+rdnmmEmp	OBJECT-TYPE SYNTAX  DisplayString MAX-ACCESS read-only STATUS  current DESCRIPTION "Emplazamiento del equipo" ::= { rdnmmEntry 11 }
+rdnmmTfrec	OBJECT-TYPE SYNTAX  INTEGER	{normal(0), unomasuno(1), fd(2), me(3) } MAX-ACCESS read-only STATUS  current DESCRIPTION "Tipo de Frecuencia" ::= { rdnmmEntry 12 }
+SEQRdnmmSeq		::= SEQUENCE {rdnmmIndice INTEGER, rdnmmEqu DisplayString, rdnmmGrp INTEGER, rdnmmMod INTEGER,
+	rdnmmTip INTEGER, rdnmmStd INTEGER, rdnmmFrec DisplayString, rdnmmPrio INTEGER, rdnmmSip INTEGER,
+	rdnmmIp DisplayString, rdnmmEmp DisplayString, rdnmmTfrec INTEGER }
+rdnmmTable	OBJECT-TYPE 	SYNTAX  SEQUENCE OF SEQRdnmmSeq MAX-ACCESS not-accessible STATUS  current DESCRIPTION  "Tabla de Sesiones Radio" ::= { rdnmmTb 2 }
+
+
+END

@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ADE5CD26-8DE9-4014-9DF2-59585A19227D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>U5kManServer</RootNamespace>
+    <AssemblyName>U5kManServer</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;_LISTANBX_ STD_ACCESS_V1 GW_STD_V1</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;_LISTANBX_ STD_ACCESS_V1 GW_STD_V1</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ClusterLib">
+      <HintPath>Service References\ClusterLib.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.8.0\lib\net35\NAudio.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.2.3\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpSnmpLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=4c00852d3788e005, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lextm.SharpSnmpLib.10.0.11\lib\net452\SharpSnmpLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebSocket4Net, Version=0.14.1.0, Culture=neutral, PublicKeyToken=eb4e154b696bf72a, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebSocket4Net.0.14.1\lib\net45\WebSocket4Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\VersionInfo.cs">
+      <Link>Properties\VersionInfo.cs</Link>
+    </Compile>
+    <Compile Include="FtpClient.cs" />
+    <Compile Include="NAudioWavPlayer.cs" />
+    <Compile Include="Procesos\ExtEquSpv.cs" />
+    <Compile Include="Properties\u5kManServer.cs" />
+    <Compile Include="Services\CentralServicesMonitor.cs" />
+    <Compile Include="Services\PresenceDataService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebAppServer\MainStandbySyncServer.cs" />
+    <Compile Include="Services\PabxItfService.cs" />
+    <Compile Include="Procesos\BaseCode.cs" />
+    <Compile Include="Procesos\GwSnmpExplorer.cs" />
+    <Compile Include="Procesos\HistThread.cs" />
+    <Compile Include="Procesos\MainThread.cs" />
+    <Compile Include="Procesos\NGThread.cs" />
+    <Compile Include="Procesos\TopSnmpExplorer.cs" />
+    <Compile Include="Service References\ServicioInterfazCfg.cs" />
+    <Compile Include="Snmp\EventosRecursos.cs" />
+    <Compile Include="Services\U5kEstadistica.cs" />
+    <Compile Include="U5kManServerInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="U5kManServerInstaller.Designer.cs">
+      <DependentUpon>U5kManServerInstaller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServicioInterfazSacta.cs" />
+    <Compile Include="Snmp\SnmpAgent.cs" />
+    <Compile Include="Snmp\SnmpClient.cs" />
+    <Compile Include="U5kGenericos.cs" />
+    <Compile Include="U5kManMain.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="U5kManMain.Designer.cs">
+      <DependentUpon>U5kManMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Procesos\U5kSnmpSystemAgent.cs" />
+    <Compile Include="Properties\u5kManServer.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>u5kManServer.settings</DependentUpon>
+    </Compile>
+    <Compile Include="U5kManService.cs" />
+    <Compile Include="WebAppServer\U5kManWebApp.cs" />
+    <Compile Include="WebAppServer\U5kManWebAppData.cs" />
+    <Compile Include="WebAppServer\WebAppServer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="appweb\app\controllers\Uv5kiman-ope-ctrl.js" />
+    <Content Include="appweb\app\controllers\Uv5kiman-tlf-ctrl.js" />
+    <Content Include="appweb\app\views\Uv5kiman-ope.html" />
+    <Content Include="appweb\app\views\Uv5kiman-tlf.html" />
+    <Content Include="appweb\COPYING.AUTHORIZATION.txt" />
+    <Content Include="appweb\disabled.html" />
+    <Content Include="appweb\images\audio-recorder.jpg" />
+    <Content Include="appweb\images\corporativo-a.png" />
+    <Content Include="appweb\images\Corporativo.jpg" />
+    <Content Include="appweb\images\Corporativo.png" />
+    <Content Include="appweb\images\extern2.jpg" />
+    <Content Include="appweb\images\extern2.png" />
+    <Content Include="appweb\images\gw-tipo1-1.png" />
+    <Content Include="appweb\images\gw-tipo1-2.png" />
+    <Content Include="appweb\images\gw-tipo1-3.png" />
+    <Content Include="appweb\images\gw-tipo1-4.png" />
+    <Content Include="appweb\images\gw-tipo1-5.png" />
+    <Content Include="appweb\images\gw-tipo1-6.png" />
+    <Content Include="appweb\images\gw-tipo1-7.png" />
+    <Content Include="appweb\images\gw-tipo1-8.png" />
+    <Content Include="appweb\images\gw-tipo2-1.png" />
+    <Content Include="appweb\images\gw-tipo2-2.png" />
+    <Content Include="appweb\images\gw-tipo2-3.png" />
+    <Content Include="appweb\images\gw-tipo2-4.png" />
+    <Content Include="appweb\images\gw-tipo2-5.png" />
+    <Content Include="appweb\images\gw-tipo2-6.png" />
+    <Content Include="appweb\images\gw-tipo2-7.png" />
+    <Content Include="appweb\images\gw-tipo2-8.png" />
+    <Content Include="appweb\images\phone-focus-01.jpg" />
+    <Content Include="appweb\images\phone-focus-02.jpg" />
+    <Content Include="appweb\images\phone-focus.jpg" />
+    <Content Include="appweb\images\radio-server-new.png" />
+    <Content Include="appweb\images\radio.jpg" />
+    <Content Include="appweb\images\radiojt_rx.jpg" />
+    <Content Include="appweb\images\radiorh.jpg" />
+    <Content Include="appweb\images\radiorh_rx.jpg" />
+    <Content Include="appweb\images\radio_rx.jpg" />
+    <Content Include="appweb\images\speakeroff.png" />
+    <Content Include="appweb\images\speakeron.png" />
+    <Content Include="appweb\images\Trama.png" />
+    <Content Include="tbConvInci.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="app.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="ALARM.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="appweb\app\controllers\Uv5kiman-config-ctrl.js" />
+    <Content Include="appweb\app\controllers\Uv5kiman-global-ctrl.js" />
+    <Content Include="appweb\app\controllers\Uv5kiman-hist-ctrl.js" />
+    <Content Include="appweb\app\controllers\Uv5kiman-superv-ctrl.js" />
+    <Content Include="appweb\app\modules\Uv5kiman.js" />
+    <Content Include="appweb\app\routes\Uv5kiRoutes.js" />
+    <Content Include="appweb\app\services\Uv5kiman-CommService.js" />
+    <Content Include="appweb\app\services\Uv5kiman-LocalService.js" />
+    <Content Include="appweb\app\views\Uv5kiman-config.html" />
+    <Content Include="appweb\app\views\Uv5kiman-hist.html" />
+    <Content Include="appweb\app\views\Uv5kiman-superv.html" />
+    <Content Include="appweb\error.html" />
+    <Content Include="appweb\favicon.ico" />
+    <Content Include="appweb\images\Altavoz_Off.bmp" />
+    <Content Include="appweb\images\Altavoz_On.bmp" />
+    <Content Include="appweb\images\gw-tipo0.png" />
+    <Content Include="appweb\images\gw-tipo1.png" />
+    <Content Include="appweb\images\gw-tipo2.png" />
+    <Content Include="appweb\images\gwoff.png" />
+    <Content Include="appweb\images\gwon.png" />
+    <Content Include="appweb\images\gwselect.png" />
+    <Content Include="appweb\images\HMI_Off.jpg" />
+    <Content Include="appweb\images\HMI_On.jpg" />
+    <Content Include="appweb\images\InterfaceAlarma.png" />
+    <Content Include="appweb\images\InterfaceLibre.png" />
+    <Content Include="appweb\images\InterfaceNoPresente.png" />
+    <Content Include="appweb\images\InterfacePresente.png" />
+    <Content Include="appweb\images\Jacks_Off.JPG" />
+    <Content Include="appweb\images\Jacks_On.JPG" />
+    <Content Include="appweb\images\lanoff.png" />
+    <Content Include="appweb\images\lanon.png" />
+    <Content Include="appweb\images\ledicator.png" />
+    <Content Include="appweb\images\ledoff.png" />
+    <Content Include="appweb\images\ledvon.png" />
+    <Content Include="appweb\images\noaccess.jpg" />
+    <Content Include="appweb\images\nucleo-df-new.jpg" />
+    <Content Include="appweb\images\Operador.png" />
+    <Content Include="appweb\images\OperadorAlarma.png" />
+    <Content Include="appweb\images\OperadorOn.png" />
+    <Content Include="appweb\images\pabxip.jpg" />
+    <Content Include="appweb\images\pabxip.png" />
+    <Content Include="appweb\images\radiojt-off.jpg" />
+    <Content Include="appweb\images\radiojt.jpg" />
+    <Content Include="appweb\images\radioserver.jpg" />
+    <Content Include="appweb\images\TifxGris.png" />
+    <Content Include="appweb\images\TifxNaranja.png" />
+    <Content Include="appweb\images\TifxRojo.png" />
+    <Content Include="appweb\images\TifxVerde.png" />
+    <Content Include="appweb\images\voiptel-off.jpg" />
+    <Content Include="appweb\images\voiptel.jpg" />
+    <Content Include="appweb\images\_ntp.jpg" />
+    <Content Include="appweb\images\_paneles.jpg" />
+    <Content Include="appweb\images\_pasarelas.jpg" />
+    <Content Include="appweb\images\_pasarelas_old.jpg" />
+    <Content Include="appweb\images\_sacta.jpg" />
+    <Content Include="appweb\images\_server.jpg" />
+    <Content Include="appweb\index.html" />
+    <Content Include="appweb\jsPDF\dist\jspdf.debug.js" />
+    <Content Include="appweb\jsPDF\dist\jspdf.min.js" />
+    <Content Include="appweb\login.html" />
+    <Content Include="appweb\noserver.html" />
+    <Content Include="appweb\scripts\angular\angular-locale_es.js" />
+    <Content Include="appweb\scripts\angular\angular-route.js" />
+    <Content Include="appweb\scripts\angular\angular.min.js" />
+    <Content Include="appweb\scripts\bootsstrap\bootstrap.js" />
+    <Content Include="appweb\scripts\bootsstrap\bootstrap.min.js" />
+    <Content Include="appweb\scripts\bootsstrap\ui-bootstrap-tpls-0.13.4.min.js" />
+    <Content Include="appweb\scripts\bootsstrap\ui-bootstrap-tpls-1.2.4.min.js" />
+    <Content Include="appweb\scripts\datetime-picker.min.js" />
+    <Content Include="appweb\scripts\jquery\jquery-2.1.3.min.js" />
+    <Content Include="appweb\scripts\ng-table.min.js" />
+    <Content Include="appweb\scripts\ngDialog.min.js" />
+    <Content Include="appweb\scripts\smart-table.js" />
+    <Content Include="appweb\styles\bootstrap\bootstrap-theme.css" />
+    <Content Include="appweb\styles\bootstrap\bootstrap-theme.min.css" />
+    <Content Include="appweb\styles\bootstrap\bootstrap.css" />
+    <Content Include="appweb\styles\bootstrap\bootstrap.min.css" />
+    <Content Include="appweb\styles\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="appweb\styles\ng-table.css" />
+    <Content Include="appweb\styles\ngDialog-theme-default.min.css" />
+    <Content Include="appweb\styles\ngDialog.css" />
+    <Content Include="appweb\styles\uv5ki-styles.css" />
+    <Content Include="appweb\testing.html" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="appweb\languages\en_US.json" />
+    <None Include="appweb\languages\es_ES.json" />
+    <None Include="appweb\languages\fr_FR.json" />
+    <None Include="appweb\scripts\angular\angular.min.js.map" />
+    <None Include="appweb\scripts\angular\smart-table.min.js.map" />
+    <None Include="appweb\simulate\cwp.json" />
+    <None Include="appweb\simulate\db\historicos.json" />
+    <None Include="appweb\simulate\db\incidencias.json" />
+    <None Include="appweb\simulate\db\operadores.json" />
+    <None Include="appweb\simulate\db\pasarelas.json" />
+    <None Include="appweb\simulate\extatssest.json" />
+    <None Include="appweb\simulate\exteq.json" />
+    <None Include="appweb\simulate\gestormn.json" />
+    <None Include="appweb\simulate\gws.json" />
+    <None Include="appweb\simulate\gws\TIFX-11.json" />
+    <None Include="appweb\simulate\gws\TIFX-14.json" />
+    <None Include="appweb\simulate\gws\TIFX-18.json" />
+    <None Include="appweb\simulate\listinci.json" />
+    <None Include="appweb\simulate\options.json" />
+    <None Include="appweb\simulate\pbxab.json" />
+    <None Include="appweb\simulate\sacta.json" />
+    <None Include="appweb\simulate\std.json" />
+    <None Include="appweb\simulate\versiones.json" />
+    <None Include="appweb\styles\bootstrap\bootstrap-theme.css.map" />
+    <None Include="appweb\styles\bootstrap\bootstrap.css.map" />
+    <None Include="appweb\styles\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="appweb\styles\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="appweb\styles\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="appweb\styles\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="ndf.uv5k.137b5.mib">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="ndf.uv5k.137c5.mib">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\u5kManServer.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>u5kManServer.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="RFC1213-MIB">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RMON-MIB">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="versiones.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\idiomas\idiomas.csproj">
+      <Project>{974454ba-3953-4897-ada2-8139eeef5f87}</Project>
+      <Name>idiomas</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\U5kBaseDatos\U5kBaseDatos.csproj">
+      <Project>{bf223179-f940-4433-bbd8-da34d6115124}</Project>
+      <Name>U5kBaseDatos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\U5kManMibRevC\U5kManMibRevC.csproj">
+      <Project>{10a878d1-1c89-4e8f-8b84-d7f05908bf64}</Project>
+      <Name>U5kManMibRevC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\U5kUtilities\Utilities.csproj">
+      <Project>{822f500d-adb8-4bb1-8a1c-e9feaff369b0}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="U5kManMain.resx">
+      <DependentUpon>U5kManMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="U5kManServerInstaller.resx">
+      <DependentUpon>U5kManServerInstaller.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="appweb\app\templates\" />
+    <Folder Include="appweb\jsPDF\docs\" />
+    <Folder Include="appweb\jsPDF\doc\plugins\" />
+    <Folder Include="appweb\jsPDF\doc\symbols\src\" />
+    <Folder Include="appweb\jsPDF\examples\annotation\" />
+    <Folder Include="appweb\jsPDF\examples\bootstrap\css\" />
+    <Folder Include="appweb\jsPDF\examples\bootstrap\img\" />
+    <Folder Include="appweb\jsPDF\examples\bootstrap\js\" />
+    <Folder Include="appweb\jsPDF\examples\context2d\" />
+    <Folder Include="appweb\jsPDF\examples\css\smoothness\images\" />
+    <Folder Include="appweb\jsPDF\examples\html2pdf\images\" />
+    <Folder Include="appweb\jsPDF\examples\images\" />
+    <Folder Include="appweb\jsPDF\examples\js\jquery\" />
+    <Folder Include="appweb\jsPDF\examples\outline\" />
+    <Folder Include="appweb\jsPDF\libs\adler32cs.js\" />
+    <Folder Include="appweb\jsPDF\libs\Blob.js\" />
+    <Folder Include="appweb\jsPDF\libs\Downloadify\images\" />
+    <Folder Include="appweb\jsPDF\libs\Downloadify\js\" />
+    <Folder Include="appweb\jsPDF\libs\Downloadify\media\" />
+    <Folder Include="appweb\jsPDF\libs\Downloadify\src\com\dynamicflash\util\tests\" />
+    <Folder Include="appweb\jsPDF\libs\FileSaver.js\" />
+    <Folder Include="appweb\jsPDF\libs\html2canvas\dist\" />
+    <Folder Include="appweb\jsPDF\libs\html2canvas\src\renderers\" />
+    <Folder Include="appweb\jsPDF\libs\png_support\" />
+    <Folder Include="appweb\jsPDF\libs\require\" />
+    <Folder Include="appweb\jsPDF\plugins\" />
+    <Folder Include="appweb\jsPDF\test\libs\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>mkdir "$(TargetDir)appweb" 
+xcopy /E /Y "$(ProjectDir)appweb" "$(TargetDir)appweb"</PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties appweb_4languages_4es_3ES_1json__JSONSchema="INDEX_OPC_HISTORICOS" />
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

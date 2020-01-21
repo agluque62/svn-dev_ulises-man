@@ -1,0 +1,138 @@
+ULISESV5000i DEFINITIONS ::= BEGIN
+
+IMPORTS
+	MODULE-IDENTITY, OBJECT-TYPE, enterprises
+		FROM SNMPv2-SMI
+	mib-2, system, sysName, sysDescr
+		FROM RFC1213-MIB
+	DisplayString, TestAndIncr, TimeStamp
+        FROM SNMPv2-TC;
+		
+modIdentity MODULE-IDENTITY
+		LAST-UPDATED "201607011400Z"
+		ORGANIZATION "NUCLEODF"
+		CONTACT-INFO 
+			"Direccion Tecnica
+			Via de los Poblados 7,
+			Madrid 28033.
+			email: direccion.tecnica@nucleodf.com"
+		DESCRIPTION ""
+		REVISION "201607011400Z"
+			DESCRIPTION
+         ""
+	::= { ulises5000i-snmp-simeq }
+
+						
+-- Parte PRIVADA	
+-- Globales 
+nucleoDF			OBJECT IDENTIFIER ::= { enterprises 7916 }
+ulises5000i			OBJECT IDENTIFIER ::= { nucleoDF 8 }
+-- ulises5000i-scv		OBJECT IDENTIFIER ::= { ulises5000i 1 }
+-- ulises5000i-po		OBJECT IDENTIFIER ::= { ulises5000i 2 }
+-- ulises5000i-gw		OBJECT IDENTIFIER ::= { ulises5000i 3 }
+ulises5000i-simeq		OBJECT IDENTIFIER ::= { ulises5000i 4 }
+
+-- Tabla de Equipos.
+equipos				OBJECT IDENTIFIER ::= { ulises5000i-simeq 1 }
+preguntar-equipo	OBJECT-TYPE 
+						SYNTAX  DisplayString
+						DESCRIPTION "" 
+							::= { equipos 1 }
+oid-equipo			OBJECT-TYPE 
+						SYNTAX  DisplayString
+						DESCRIPTION "" 
+							::= { equipos 2 }
+
+entrada-equipo		OBJECT-TYPE
+						SYNTAX  ItemEquipo
+						MAX-ACCESS not-accessible
+						STATUS  current
+						DESCRIPTION ""
+						INDEX   { index-equipo }  
+							::= { tabla-equipos 1 }
+						
+index-equipo	OBJECT-TYPE 
+						SYNTAX  INTEGER (0..1024)
+						MAX-ACCESS read-only
+						STATUS  current
+						DESCRIPTION "" 
+							::= { entrada-equipo 1 }
+nombre-equipo	OBJECT-TYPE 
+						SYNTAX  DisplayString
+						MAX-ACCESS read-only STATUS  current
+						DESCRIPTION "" 
+							::= { entrada-equipo 2 }
+							
+tipo-equipo		OBJECT-TYPE 
+						SYNTAX INTEGER {receptor(0), transmisor(1)}
+						MAX-ACCESS read-only STATUS current
+						DESCRIPTION "" 
+							::= {entrada-equipo 3}
+				
+banda-equipo	OBJECT-TYPE SYNTAX INTEGER {vhf(0), uhf(1)}	
+						MAX-ACCESS read-only STATUS  current
+						DESCRIPTION ""
+							::= { entrada-equipo 4 }
+modo-equipo		OBJECT-TYPE 
+						SYNTAX INTEGER {main(0), standby(1)}	
+						MAX-ACCESS read-only STATUS  current
+						DESCRIPTION ""	
+							::= { entrada-equipo 5 }
+							
+frec-equipo		OBJECT-TYPE 
+						SYNTAX DisplayString 	
+						MAX-ACCESS read-only STATUS  current
+						DESCRIPTION ""	
+							::= { entrada-equipo 6 }
+							
+spchann-equipo	OBJECT-TYPE 
+						SYNTAX INTEGER 
+						MAX-ACCESS read-only STATUS  current
+						DESCRIPTION ""	
+							::= { entrada-equipo 7 }
+							
+modul-equipo	OBJECT-TYPE 
+						SYNTAX INTEGER 
+						MAX-ACCESS read-only STATUS  current
+						DESCRIPTION ""	
+							::= { entrada-equipo 8 }
+							
+caroff-equipo	OBJECT-TYPE 
+						SYNTAX INTEGER	
+						MAX-ACCESS read-only STATUS  current
+						DESCRIPTION ""	
+							::= { entrada-equipo 9 }
+							
+power-equipo	OBJECT-TYPE 
+						SYNTAX INTEGER 	
+						MAX-ACCESS read-only STATUS  current
+						DESCRIPTION ""	
+							::= { entrada-equipo 10 }
+							
+status-equipo	OBJECT-TYPE 
+						SYNTAX INTEGER 	
+						MAX-ACCESS read-only STATUS  current
+						DESCRIPTION ""	
+							::= { entrada-equipo 11 }
+							
+-- ItemEquipo 			::= 	SEQUENCE {index-equipo INTEGER, nombre-equipo DisplayString, tipo-equipo INTEGER, banda-equipo INTEGER, modo-equipo INTEGER, frec-equipo INTEGER, spchann-equipo INTEGER, modul-equipo INTEGER, caroff-equipo INTEGER, power-equipo INTEGER}
+ItemEquipo 			::= 	SEQUENCE {
+								index-equipo INTEGER, 
+								nombre-equipo DisplayString, 
+								tipo-equipo INTEGER, 
+								banda-equipo INTEGER, 
+								modo-equipo INTEGER, 
+								frec-equipo DisplayString, 
+								spchann-equipo INTEGER, 
+								modul-equipo INTEGER, 
+								caroff-equipo INTEGER, 
+								power-equipo INTEGER,
+								status-equipo INTEGER }
+
+tabla-equipos 		OBJECT-TYPE
+						SYNTAX  SEQUENCE OF ItemEquipo
+						MAX-ACCESS not-accessible
+						STATUS  current
+						DESCRIPTION  ""			
+							::= { equipos 3 }
+END

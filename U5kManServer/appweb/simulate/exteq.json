@@ -1,0 +1,15 @@
+{
+	"lista":
+	[
+		{"name": "TX_119.000M", "std": 1, "ip1": "192.168.1.101", "ip2": "192.168.2.101", "tipo": 2, "lan1": 1, "lan2":0, "modelo": 1000, "txrx": 1, "std_sip": 0, "uri": "sip:user@ip:port"},
+		{"name": "RX_119.000M", "std": 1, "ip1": "192.168.1.106", "ip2": "192.168.2.106", "tipo": 2, "lan1": 1, "lan2":0, "modelo": 1000, "txrx": 1, "std_sip": 1, "uri": "sip:user@ip:port"},
+		{"name": "TX_120.300M", "std": 0, "ip1": "192.168.1.102", "ip2": "192.168.2.102", "tipo": 2, "lan1": 1, "lan2":0, "modelo": 1000, "txrx": 1, "std_sip": 2, "uri": "sip:user@ip:port"},
+		{"name": "RX_120.300M", "std": 1, "ip1": "192.168.1.107", "ip2": "192.168.2.107", "tipo": 2, "lan1": 1, "lan2":0, "modelo": 1000, "txrx": 1, "std_sip": 3, "uri": "sip:user@ip:port"},
+		{"name": "TX_121.000M", "std": 1, "ip1": "192.168.1.101", "ip2": "192.168.2.101", "tipo": 2, "lan1": 1, "lan2":0, "modelo": 1000, "txrx": 1, "std_sip": 4, "uri": "sip:user@ip:port"},
+		{"name": "RX_121.000M", "std": 1, "ip1": "192.168.1.106", "ip2": "192.168.2.106", "tipo": 2, "lan1": 1, "lan2":0, "modelo": 1000, "txrx": 1, "std_sip": 5, "uri": "sip:user@ip:port"},
+		{"name": "TX_123.300M", "std": 0, "ip1": "192.168.1.102", "ip2": "192.168.2.102", "tipo": 2, "lan1": 1, "lan2":0, "modelo": 1000, "txrx": 1, "std_sip": 6, "uri": "sip:user@ip:port"},
+		{"name": "RX_123.300M", "std": 1, "ip1": "192.168.1.107", "ip2": "192.168.2.107", "tipo": 2, "lan1": 1, "lan2":0, "modelo": 1000, "txrx": 1, "std_sip": 0, "uri": "sip:user@ip:port"},
+		{"name": "TLF_1", "std": 1, "ip1": "192.168.1.107", "ip2": "192.168.2.107", "tipo": 3, "lan1": 1, "lan2":0, "modelo": 1000, "txrx": 1, "std_sip": 4, "uri": "sip:user@ip:port"},
+		{"name": "TLF_2", "std": 0, "ip1": "192.168.1.107", "ip2": "192.168.2.107", "tipo": 3, "lan1": 1, "lan2":0, "modelo": 1000, "txrx": 1, "std_sip": 0, "uri": "sip:user@ip:port"}
+	]
+}

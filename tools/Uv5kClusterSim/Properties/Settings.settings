@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Uv5kClusterSim.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Node1Name" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">DF1502</Value>
+    </Setting>
+    <Setting Name="Node2Name" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">DF1501</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

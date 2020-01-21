@@ -1,0 +1,156 @@
+ULISESV5000i DEFINITIONS ::= BEGIN
+
+IMPORTS
+	MODULE-IDENTITY, OBJECT-TYPE, enterprises
+		FROM SNMPv2-SMI
+	mib-2, system, sysName, sysDescr
+		FROM RFC1213-MIB
+	DisplayString, TestAndIncr, TimeStamp
+        FROM SNMPv2-TC;
+		
+modIdentity MODULE-IDENTITY
+		LAST-UPDATED "201607011400Z"
+		ORGANIZATION "NUCLEODF"
+		CONTACT-INFO 
+			"Direccion Tecnica
+			Via de los Poblados 7,
+			Madrid 28033.
+			email: direccion.tecnica@nucleodf.com"
+		DESCRIPTION ""
+		REVISION "201607011400Z"
+			DESCRIPTION
+         ""
+	::= { ulises5000i-scv-top }
+nucleoDF			OBJECT IDENTIFIER ::= { enterprises 7916 }
+ulises5000i			OBJECT IDENTIFIER ::= { nucleoDF 8 }
+-- ulises5000i-scv		OBJECT IDENTIFIER ::= { ulises5000i 1 }
+ulises5000i-po		OBJECT IDENTIFIER ::= { ulises5000i 2 }
+top-tipo			OBJECT-TYPE 
+						SYNTAX  INTEGER	{ Top(0) }	
+						STATUS  current
+						DESCRIPTION ""
+						::= { ulises5000i-po 1 }
+estado				OBJECT IDENTIFIER 	::= { ulises5000i-po 2 }
+top-st				OBJECT-TYPE 
+						SYNTAX  INTEGER	{ Conectado(1), Desconectado(0), No Inicializado(-1) }	
+						STATUS  current
+						DESCRIPTION ""
+						::= { estado 1 }
+top-pres-alt-rd			OBJECT-TYPE 
+						SYNTAX  INTEGER	{ Conectado(1), Desconectado(0), No Inicializado(-1) }	
+						STATUS  current
+						DESCRIPTION "Altavoz Radio VHF"
+						::= { estado 2 }						
+top-pres-alt-lc			OBJECT-TYPE 
+						SYNTAX  INTEGER	{ Conectado(1), Desconectado(0), No Inicializado(-1) }	
+						STATUS  current
+						DESCRIPTION "Altavoz Linea Caliente"
+						::= { estado 3 }
+top-pres-alt-hf			OBJECT-TYPE 
+						SYNTAX  INTEGER	{ Conectado(1), Desconectado(0), No Inicializado(-1) }	
+						STATUS  current
+						DESCRIPTION "Altavoz Radio HF"
+						::= { estado 4 }						
+top-pres-recw			OBJECT-TYPE 
+						SYNTAX  INTEGER	{ Conectado(1), Desconectado(0), No Inicializado(-1) }	
+						STATUS  current
+						DESCRIPTION "Cable de Grabador Analogico"
+						::= { estado 5 }
+top-almn-jack			OBJECT-TYPE 
+						SYNTAX  INTEGER	{ Conectado(1), Desconectado(0), No Inicializado(-1) }	
+						STATUS  current
+						DESCRIPTION "JACK de Controlador-Alumno"
+						::= { estado 6 }						
+top-inst-jack			OBJECT-TYPE 
+						SYNTAX  INTEGER	{ Conectado(1), Desconectado(0), No Inicializado(-1) }	
+						STATUS  current
+						DESCRIPTION "JACK de Ayudante-Instructor"
+						::= { estado 7 }						
+top-panel		OBJECT-TYPE 
+						SYNTAX  INTEGER	{ Conectado(1), Desconectado(0), No Inicializado(-1) }	
+						STATUS  current
+						DESCRIPTION "Panel de Operador"
+						::= { estado 8 }
+top-lan1			OBJECT-TYPE 
+						SYNTAX  INTEGER	{ Conectada(1), Desconocida(0), Desconectada(2) }	
+						STATUS  current
+						DESCRIPTION "LAN1"
+						::= { estado 9 }						
+top-lan2			OBJECT-TYPE 
+						SYNTAX  INTEGER	{ Conectada(1), Desconocida(0), Desconectada(2) }	
+						STATUS  current
+						DESCRIPTION "LAN2"
+						::= { estado 10 }
+top-ntpclient		OBJECT-TYPE 
+						SYNTAX  DisplayString	
+						STATUS  current
+						DESCRIPTION "LAN2"
+						::= { estado 11 }
+top-swversion		OBJECT-TYPE 
+						SYNTAX  DisplayString	
+						STATUS  current
+						DESCRIPTION "LAN2"
+						::= { estado 12 }
+
+eventos				OBJECT IDENTIFIER 	::= { ulises5000i-po 3 }
+rd-ptt				OBJECT-TYPE
+						SYNTAX  DisplayString
+						MAX-ACCESS read-only
+						STATUS  current
+						DESCRIPTION "PTT"
+						::= { eventos 1 }						
+rd-page				OBJECT-TYPE
+						SYNTAX  INTEGER	{ No Inicializado(-1) }
+						MAX-ACCESS read-only
+						STATUS  current
+						DESCRIPTION "Cambio Pagina Radio"
+						::= { eventos 2 }
+tlf-ocall			OBJECT-TYPE
+						SYNTAX  DisplayString
+						MAX-ACCESS read-only
+						STATUS  current
+						DESCRIPTION "Llamada Saliente Telefonia"
+						::= { eventos 3 }
+tlf-fac				OBJECT-TYPE
+						SYNTAX  DisplayString
+						MAX-ACCESS read-only
+						STATUS  current
+						DESCRIPTION "Facilidad Telefonia"
+						::= { eventos 4 }
+tlf-icall			OBJECT-TYPE
+						SYNTAX  DisplayString
+						MAX-ACCESS read-only
+						STATUS  current
+						DESCRIPTION "Llamada Entrante Telefonia"
+						::= { eventos 5 }
+tlf-end				OBJECT-TYPE
+						SYNTAX  DisplayString
+						MAX-ACCESS read-only
+						STATUS  current
+						DESCRIPTION "Llamada Telefonia Finalizada"
+						::= { eventos 6 }
+tlf-con				OBJECT-TYPE
+						SYNTAX  DisplayString
+						MAX-ACCESS read-only
+						STATUS  current
+						DESCRIPTION "Llamada Telefonia Atendida"
+						::= { eventos 7 }
+briefing			OBJECT-TYPE
+						SYNTAX  DisplayString
+						MAX-ACCESS read-only
+						STATUS  current
+						DESCRIPTION "Sesion Briefing"
+						::= { eventos 8 }
+replay				OBJECT-TYPE
+						SYNTAX  DisplayString
+						MAX-ACCESS read-only
+						STATUS  current
+						DESCRIPTION "Funcion Replay"
+						::= { eventos 9 }
+toptrap				NOTIFICATION-TYPE
+						STATUS  current
+						DESCRIPTION
+							"Evento de Puesto"
+						::= { eventos 10 }						
+						
+END
