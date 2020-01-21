@@ -56,7 +56,7 @@ angular
         var LogF = {
             dtDesde: moment().startOf('day').millisecond(0).toDate(),
             dtHasta: moment().endOf('day').millisecond(0).toDate(),
-            tpMat: "0",
+            tpMat: "6",
             Mat: "",
             txt: "",
             limit: default_logs_limit,

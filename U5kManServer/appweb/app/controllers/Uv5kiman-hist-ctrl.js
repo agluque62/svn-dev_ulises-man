@@ -470,7 +470,7 @@ angular.module("Uv5kiman")
             ctrl.fil = {
                 dtDesde: moment().startOf('day').millisecond(0).toDate(),
                 dtHasta: moment().endOf('day').millisecond(0).toDate(),
-                tpMat: "0",
+                tpMat: "6",
                 Mat: "",
                 txt: "",
                 limit: default_logs_limit,
@@ -479,7 +479,7 @@ angular.module("Uv5kiman")
 
             ctrl.ls.LogFilter().dtDesde = moment().startOf('day').millisecond(0).toDate();
             ctrl.ls.LogFilter().dtHasta = moment().endOf('day').millisecond(0).toDate();
-            ctrl.ls.LogFilter().tpMat = "0";
+            ctrl.ls.LogFilter().tpMat = "6";
             ctrl.ls.LogFilter().Mat = "";
             ctrl.ls.LogFilter().txt = "";
             ctrl.ls.LogFilter().limit = default_logs_limit;
@@ -487,7 +487,7 @@ angular.module("Uv5kiman")
 
             //ctrl.fil.dtDesde.setMilliseconds(0);
             //ctrl.fil.dtHasta.setMilliseconds(0);
-            ctrl.inci = ctrl.linci.filter($lserv.inci_filter_genonly);
+            ctrl.inci = ctrl.linci.filter($lserv.inci_filter_all);
         }
         else if (pag == 1) {
             ctrl.fil = {
