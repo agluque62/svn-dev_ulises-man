@@ -158,7 +158,7 @@ Uv5kiman.config(function ($translateProvider) {
 
 });
 
-/** */
+//** */
  Uv5kiman.directive('fileModel', ['$parse', function ($parse) {
      return {
          restrict: 'A',

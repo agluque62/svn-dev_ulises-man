@@ -27,13 +27,13 @@ angular.module("Uv5kiman")
     ctrl.pbxab = [];
     ctrl.dpbxab = [].concat(ctrl.pbxab);
 
-    /** Servicios del Controlador */
+    //** Servicios del Controlador */
     ctrl.pagina = function (pagina) {
         var menu = $lserv.Submenu(pagina);
         return menu ? menu : 0;
     };
 
-    /** */
+    //** */
     ctrl.std_class = function (item) {
         // return stdc_class[stdc.Ok];
         if (item == undefined)
@@ -45,7 +45,7 @@ angular.module("Uv5kiman")
         return stdc_class[stdc.NoInfo];
     };
 
-    /** Servicios de Estado especificos para los Servidores */
+    //** Servicios de Estado especificos para los Servidores */
     ctrl.serv_std_class = function (serv, item) {
 
         if (item == undefined)
@@ -75,7 +75,7 @@ angular.module("Uv5kiman")
         return ctrl.std.perfil == 3 ? ctrl.std.sv1.url : "";
     };
 
-    /** Retorno el Detalle de los Nodebox Presentes */
+    //** Retorno el Detalle de los Nodebox Presentes */
     ctrl.nbx_detail = function () {
         //ctrl.std.nbxs = [{ name: "192.168.0.10", modo: "Slave" }, { name: "192.168.0.11", modo: "Master" }, { name: "192.168.0.12", modo: "Slave" }];
         //ctrl.std.nbx.url = "http://www.google.es";
@@ -96,7 +96,7 @@ angular.module("Uv5kiman")
         return $lserv.translate("Servidor Radio no Presente");
     };
 
-    /** Establece el modo de presentacion de los NBX */
+    //** Establece el modo de presentacion de los NBX */
     ctrl.nmxSplitted = function () {
         //var splitted = ctrl.std && ctrl.std.version ? (ctrl.std.version == "2.5.9" ? false : true) : false;
         //return splitted;
@@ -221,7 +221,7 @@ angular.module("Uv5kiman")
     };
     /* ******************************/
 
-    /** Rutinas especificas para SACTA */
+    //** Rutinas especificas para SACTA */
     ctrl.SactaServiceStd = function (std) {
         return {
             text: $lserv.translate(std == true ? 'Servicio Arrancado: Detener' : 'Servicio Detenido: Arrancar'),
@@ -276,7 +276,7 @@ angular.module("Uv5kiman")
         }
     };
 
-    /** */
+    //** */
     ctrl.ope_detail = function (item) {
         var detail = "<table>";
         detail += "<tr><td>" + "<strong>IP</strong>" + "</td><td>" + item.ip + "</td></tr>";
@@ -300,7 +300,7 @@ angular.module("Uv5kiman")
         return detail;
     };
 
-    /** */
+    //** */
     function ctrl_ope_detail_lan(lan, std) {
         var detail = "<tr><td>";
         detail += ("<strong>" + lan + "</strong>");
@@ -310,7 +310,7 @@ angular.module("Uv5kiman")
                                   ("<i>" + "Unknown" + "</i>"));
         detail += "</td></tr>";
         return detail;
-    };
+    }
 
     /** Abre y Gestiona la Ventana de Version del operador */
     ctrl.ope_version = {};
@@ -385,11 +385,9 @@ angular.module("Uv5kiman")
         }
     };
 
-    /** Retorna el Detalle de una Pasarela 
-        Texto HTML para POPOVER
-    */
+    //** Retorna el Detalle de una Pasarela Texto HTML para POPOVER */
     ctrl.gw_detail = function (item) {
-        var detail = "<table>"
+        var detail = "<table>";
         detail += "<tr><td>" + "<strong>IP</strong>" + "</td><td>" + item.ip + "</td></tr>";
         if (item.std != 0) {
             detail += "<tr><td>" + "<strong>LAN1</strong>" + "</td><td>" + (item.lan1 == 1 ? $lserv.translate('SCT_MSG_00')/*"Ok"*/ : ("<i>" + $lserv.translate('SCT_MSG_01')/*"Fallo"*/ + "</i>")) + "</td></tr>";
@@ -400,7 +398,7 @@ angular.module("Uv5kiman")
         return detail;
     };
 
-    /** Pone el titulo a la ventana de Detalle de la Pasarela */
+    //** Pone el titulo a la ventana de Detalle de la Pasarela */
     ctrl.gw_detail_title = function () {
         if (ctrl.gwdata.tipo === 0)
             return ctrl.gwdata.name + " (" + ctrl.gwdata.ip + ")";
@@ -409,7 +407,7 @@ angular.module("Uv5kiman")
         }
     };
 
-    /** Abre y Gestiona la ventana de Detalle de la Pasarela */
+    //** Abre y Gestiona la ventana de Detalle de la Pasarela */
     ctrl.gw_open = function (gw) {
         $serv.gw_detail_get(gw).then(function (response) {
             ctrl.gwdata = response.data;
@@ -454,13 +452,13 @@ angular.module("Uv5kiman")
             });
     };
 
-    /** */
+    //** */
     ctrl.gw_ir = function (gw) {
         var win = window.open('http://' + gw.ip + ':8080', '_blank');
         win.focus();
     };
 
-    /** Abre y Gestiona la Ventana de Version de la Pasarela */
+    //** Abre y Gestiona la Ventana de Version de la Pasarela */
     ctrl.gw_version = function (gw) {
         $serv.gw_version_get(gw).then(function (response) {
             console.log(response.data);
@@ -498,12 +496,12 @@ angular.module("Uv5kiman")
         myLink.click();
     };
 
-    /** */
+    //** */
     ctrl.verfname = function (path) {
         return path.substring(path.lastIndexOf('/') + 1);
     };
 
-    /** Mando de Control P/R de Pasarela */
+    //** Mando de Control P/R de Pasarela */
     ctrl.gw_control_pr = function (gw) {
 
         //if (confirm($lserv.translate('SCT_MSG_10')/*"¿Desea ejecutar una conmutacion P/R en la Pasarela "*/ + gw.name + "?") == true) {
@@ -520,7 +518,7 @@ angular.module("Uv5kiman")
             alertify.confirm($lserv.translate('SCT_MSG_10')/*"¿Desea ejecutar una conmutacion P/R en la Pasarela "*/ + gw.name + "?",
                 function () {
                     $serv.gw_pr_change(gw).then(function (response) {
-                        alertify.success($lserv.translate('SCT_MSG_11')/*"Operacion Efectuada Correctamente..."*/)
+                        alertify.success($lserv.translate('SCT_MSG_11')/*"Operacion Efectuada Correctamente..."*/);
                     }
                         , function (response) {
                             console.log(response);
@@ -537,7 +535,7 @@ angular.module("Uv5kiman")
         }
     };
 
-    /** Retorna la Imagen de Equipo Externo */
+    //** Retorna la Imagen de Equipo Externo */
     ctrl.exteq_img = function (item) {
         if (item.tipo == 3)
             return "./images/voiptel.jpg";
@@ -559,7 +557,7 @@ angular.module("Uv5kiman")
 
     /* */
     ctrl.exteq_detail = function (item) {
-        var detail = "<table>"
+        var detail = "<table>";
         detail += "<tr class=\"small\"><td>" + "<strong>IP1</strong>" + "</td><td class=\"hyp-none\">" + item.ip1 + "</td><td>" + (item.lan1 == 1 ? $lserv.translate('SCT_MSG_00')/*"Ok"*/ : ("<i>" + $lserv.translate('SCT_MSG_04')/*"Desconectada"*/ + "</i>")) + "</td></tr>";
         if (item.tipo != 5) {
             /** Los grabadores no tienen agente SIP */
@@ -572,7 +570,7 @@ angular.module("Uv5kiman")
         return detail;
     };
 
-    /** */
+    //** */
     ctrl.exteq_std_class = function (item) {
         if (item == undefined || item.std > 6 || item.std_sip > 6)
             return stdc_class[stdc.NoInfo];
@@ -618,7 +616,7 @@ angular.module("Uv5kiman")
         , function (response) {
             console.log(response);
         });
-    };
+    }
 
     /** */
     function get_cwps() {
@@ -630,7 +628,7 @@ angular.module("Uv5kiman")
         , function (response) {
             console.log(response);
         });
-    };
+    }
 
     /** */
     function get_gws() {
@@ -647,7 +645,7 @@ angular.module("Uv5kiman")
         , function (response) {
             console.log(response);
         });        
-    };
+    }
 
     /** */
     function get_exteq() {
@@ -659,7 +657,7 @@ angular.module("Uv5kiman")
         , function (response) {
             console.log(response);
         });        
-    };
+    }
 
     /** */
     function get_pbxab() {
@@ -670,13 +668,13 @@ angular.module("Uv5kiman")
         , function (response) {
             console.log(response);
         });                
-    };
+    }
 
-    /** TODO... */
+    //** TODO... */
     function new_cwps(data) {
         // return data.length != ctrl.cwps.length;
         return true;
-    };
+    }
 
     /** Funcion Periodica del controlador */
     var timer = $interval(function () {

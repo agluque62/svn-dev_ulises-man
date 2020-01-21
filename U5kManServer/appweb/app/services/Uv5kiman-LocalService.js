@@ -39,8 +39,8 @@ angular
         var perfil = null;
 
         var ConfigServer = { hf: false, sacta: false };
-		
-		var LocalConfigOnServer = {sound: false };
+
+        var LocalConfigOnServer = { sound: false };
 
         var abc = "?$0VxC |KhGcyFS4d-QuoelDn(Iv52#/i:E&BmOL9r{=UfMbtPq7Nw,%1]Y3AsZT)}g_kJ86+aXjH.pz![WR;";
 
@@ -50,7 +50,7 @@ angular
             dtDesde: moment().startOf('year').millisecond(0).toDate(),
             dtHasta: moment().endOf('day').millisecond(0).toDate(),
             tpMat: "0",
-            Mat: '',
+            Mat: ''
         };
         /** Filtro de Historico */
         var LogF = {
@@ -66,7 +66,7 @@ angular
         return {
             StsFilter: function () { return StsF; }
             , LogFilter: function () { return LogF; }
-            , translate: function (key) { return $translate(key);}
+            , translate: function (key) { return $translate(key); }
             , validate: function (tipo, data, max, min) {
                 switch (tipo) {
                     case 0:
@@ -221,7 +221,7 @@ angular
                 else if (std === 0)
                     return $translate('--');
                 return '??';
-            }            
+            }
             , inci_filter_pict: function (inci) {
                 return (inci.id >= 1000 && inci.id < 2000);
             }
@@ -236,7 +236,7 @@ angular
             }
             , inci_filter_gen: function (inci) {
                 return (inci.id >= 50 && inci.id < 1000) ||
-                        (inci.id >= 3000 && inci.id < 3050);
+                    (inci.id >= 3000 && inci.id < 3050);
             }
             , inci_filter_genonly: function (inci) {
                 return (inci.id >= 50 && inci.id < 1000);
@@ -268,11 +268,11 @@ angular
             , html_decode: function (str) {
                 return html(str).text();
             }
-            , url_param_value_get: function (name) {
-                if (name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search))
-                    return decodeURIComponent(name[1]);
-                return "???";
-            }
+            //, url_param_value_get: function (name) {
+            //    if (name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search))
+            //        return decodeURIComponent(name[1]);
+            //    return "???";
+            //}
             , check_access_old: function () {
 
                 //if (user != null && retorno != null)
@@ -311,8 +311,8 @@ angular
                     if ($cookies.get("my-user") == null) {
                         $cookies.put('my-user', "Init");
                     }
-                    else {
-                    }
+                    //else {
+                    //}
                 }
                 console.log("user= " + $cookies.get("my-user"));
 
@@ -333,8 +333,8 @@ angular
                     if (ndfls("user") == null) {
                         ndfls('user', "Init");
                     }
-                    else {
-                    }
+                    //else {
+                    //}
                 }
                 console.log("user= " + ndfls("user"));
 
@@ -375,21 +375,21 @@ angular
             , Submenu: function (menu) {
                 return ndfls('submenu', menu);
             }
-			/** Control de Audio  en Local */
-			, Sound: function (sound) {
-			    if (sound != undefined) {
-			        localStorage.setItem("Uv5kSound", sound);
-			    }
-			    var SoundOnClient = localStorage.getItem("Uv5kSound");
-			    LocalConfigOnServer.sound = SoundOnClient === null ? false : SoundOnClient==='true';
-				return LocalConfigOnServer.sound;
-			}
+            /** Control de Audio  en Local */
+            , Sound: function (sound) {
+                if (sound != undefined) {
+                    localStorage.setItem("Uv5kSound", sound);
+                }
+                var SoundOnClient = localStorage.getItem("Uv5kSound");
+                LocalConfigOnServer.sound = SoundOnClient === null ? false : SoundOnClient === 'true';
+                return LocalConfigOnServer.sound;
+            }
             , GatewayDualityType: function (newtype) {
                 return gwDualityType(newtype);
             }
         };
 
-        /** */
+        //** */
         function CAE_cifrar(mensaje, desplazamiento) {
             var cifrado = "";
             desplazamiento = (!desplazamiento || desplazamiento < 0 || desplazamiento >= abc.length) ? 47 : desplazamiento;
@@ -418,25 +418,25 @@ angular
             return descifrado;
         }
 
-        /** */
+        //** */
         function ip_val(value) {
             if (value != "" && value.match(regx_ipval) == null)
                 return false;
             return true;
         }
 
-        /** XXX.YZ */
+        //** XXX.YZ */
         function vfrec_val(value) {
             return value.match(regx_fid_vhf) != null;
         }
 
-        /** XXX.YZ */
+        //** XXX.YZ */
         function ufrec_val(value) {
             return value.match(regx_fid_uhf) != null;
         }
 
         /** Gestion de la cookie ndfls (almacenamiento local)*/
-        /** Formato es p1=v1##p2=v2## ... */
+        //** Formato es p1=v1##p2=v2## ... */
         function ndfls(key, value) {
             var found = false;
             var lsg = $cookies.get("ndfls");
@@ -458,7 +458,7 @@ angular
                 keyvalues.push(key + "=" + value);
                 found = value;
             }
-                                                                                    
+
             if (value != undefined) {
                 var new_lsg = "";
                 $.each(keyvalues, function (i, val) {
@@ -471,7 +471,7 @@ angular
             return found;
         }
 
-        
+
         function gwDualityType(newtype) {
 
             if (newtype != undefined) {

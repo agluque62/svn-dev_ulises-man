@@ -16,7 +16,7 @@ function config($routeProvider) {
                     $lserv.Submenu(0);
                 }
             }
-			})
+        })
         .when(routeOpeSp, {
             templateUrl: 'app/views/Uv5kiman-ope.html',
             controller: 'uv5kiOpeSpCtrl',
@@ -73,10 +73,10 @@ function config($routeProvider) {
                 }
             }
         })
-     .when(routeNoaccess, {
-		     templateUrl: './error.html'
-		     // templateUrl: 'session-expired.html'
-             }
-		 );
+        .when(routeNoaccess, {
+            templateUrl: './error.html'
+            // templateUrl: 'session-expired.html'
+        }
+        );
 }
 

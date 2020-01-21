@@ -69,7 +69,7 @@ angular.module("Uv5kiman")
         fhis_prepare(true);
     };
 
-    /** Obtiene el Historico del Servidor */
+    //** Obtiene el Historico del Servidor */
     function LogFilterNormalize(filter) {
         var now = moment().endOf('day').toDate();
         if (filter.dtDesde > now ||
@@ -106,7 +106,7 @@ angular.module("Uv5kiman")
       }
     };
 
-    /** */
+    //** */
     ctrl.hist_reg_txt = function () {
         var nreg = ctrl.lhis.length;
         var npag = nreg == 0 ? 0 : Math.ceil(nreg / ctrl.itemsPage);
@@ -128,7 +128,7 @@ angular.module("Uv5kiman")
         $("#hfiltroModal").modal("show");
     };
 
-    /** */
+    //** */
     ctrl.textoInciSel = function () {
         if (ctrl.linci.length == 0) return "";
 
@@ -138,12 +138,12 @@ angular.module("Uv5kiman")
         return txt;
     };
 
-    /** */
+    //** */
     ctrl.textoTexto = function () {
         return ctrl.ls.LogFilter().txt == undefined ? "" : ctrl.ls.LogFilter().txt;
     };
 
-    /** */
+    //** */
     ctrl.textoGrpSel = function () {
         var txtGrupos = [
             $lserv.translate("Generales"),
@@ -303,8 +303,8 @@ angular.module("Uv5kiman")
         var filtro = {
             desde: ctrl.ls.StsFilter().dtDesde,
             hasta: ctrl.ls.StsFilter().dtHasta,
-            tipo:  (ctrl.ls.StsFilter().tpMat).toString(),
-            elementos: elemento==undefined ? [] : [elemento]
+            tipo: (ctrl.ls.StsFilter().tpMat).toString(),
+            elementos: elemento == undefined ? [] : [elemento]
         };
         console.log(filtro);
         /** Normalizar el filtro. */
@@ -320,7 +320,7 @@ angular.module("Uv5kiman")
                 alertify.success($lserv.translate("Error en la peticion"));
             });
         }
-    }
+    };
     /** */
     ctrl.OnEstTpMatChange = function () {
         fest_prepare(true);
@@ -382,7 +382,7 @@ angular.module("Uv5kiman")
 
 
     /** Funciones Internas.. */
-    /** Prepara el los valroes para el filtro de historico */
+    //** Prepara el los valroes para el filtro de historico */
     function fhis_prepare(reset) {
 
         if (reset === true) ctrl.ls.LogFilter().txt = "";
@@ -436,7 +436,7 @@ angular.module("Uv5kiman")
         }
     }
 
-    /** */
+    //** */
     function fest_prepare(reset) {
         var todos = $lserv.translate('HCT_MSG_00');
         var todas = $lserv.translate('HCT_MSG_01');
@@ -464,7 +464,7 @@ angular.module("Uv5kiman")
         }
     }
 
-    /** */
+    //** */
     function filtro_reset(pag) {
         if (pag == 0) {
             ctrl.fil = {
@@ -508,7 +508,7 @@ angular.module("Uv5kiman")
         }
     }
 
-    /** */
+    //** */
     function prepare_lest(data) {
         ctrl.est.lest = [
             {
@@ -624,7 +624,7 @@ angular.module("Uv5kiman")
         return tipos[parseInt(tipo)];
     }
 
-    /** */
+    //** */
     function getDateRanges() {
         var ranges = {};
         ranges[$lserv.translate("Ultima Hora")] = [moment().subtract(1, "hours"), moment().endOf('day')];
@@ -633,7 +633,7 @@ angular.module("Uv5kiman")
         ranges[$lserv.translate("Ultimos 30 Dias")] = [moment().subtract(30, "days"), moment().endOf('day')];
         return ranges;
     }
-    /** */
+    //** */
     function getDaysOfWeek() {
         return [
             $lserv.translate("Do"),
@@ -646,7 +646,7 @@ angular.module("Uv5kiman")
         ];
     }
 
-    /** */
+    //** */
     function getMonthNames() {
         return [
             $lserv.translate("Enero"),

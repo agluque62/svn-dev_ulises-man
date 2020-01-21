@@ -6,7 +6,7 @@ angular.module("Uv5kiman")
     ctrl.pagina = function (pagina) {
         var menu = $lserv.Submenu(pagina);
         return menu ? menu : 0;
-    }
+    };
     ctrl.info = {};
     ctrl.info.tifx = [];
     ctrl.info.pbx = [];
@@ -16,16 +16,16 @@ angular.module("Uv5kiman")
     ctrl.dep = [];
     ctrl.selectedDep = "";
 
-    ctrl.txtNRecursos = function(cgw) {
+    ctrl.txtNRecursos = function (cgw) {
         return $lserv.translate("Recursos") + " (" + cgw.res.length + ")";
-    }
+    };
 
-    ctrl.txtNAbonados = function(cgw) {
+    ctrl.txtNAbonados = function (cgw) {
         return $lserv.translate("Abonados") + " (" + cgw.res.length + ")";
-    }
+    };
 
-    /** */
-    ctrl.ProxyTypeText = function(tp) {
+    //** */
+    ctrl.ProxyTypeText = function (tp) {
         if (tp == 5)
             return $lserv.translate("Local") + "-" + $lserv.translate("Principal");
         else if (tp == 6)
@@ -36,7 +36,7 @@ angular.module("Uv5kiman")
             return $lserv.translate("Externo") + "-" + $lserv.translate("Alternativo");
 
         return $lserv.translate("Desconocido");
-    }
+    };
 
     ctrl.ProxyStatusText = function (tp) {
         if (tp == 3)
@@ -45,7 +45,7 @@ angular.module("Uv5kiman")
             return $lserv.translate("Disponible");
 
         return $lserv.translate("Desconocido");
-    }
+    };
 
     ctrl.ProxyStatusColor = function (tp) {
         if (tp == 3)
@@ -54,11 +54,11 @@ angular.module("Uv5kiman")
             return "text-success";
 
         return "bg-danger text-primary";
-    }
+    };
 
     ctrl.Uri = function (item) {
         return "<sip:" + item.id + "@" + item.dep + ">";
-    }
+    };
 
     /** */
     /** Servicios Pagina TIFX */
@@ -77,7 +77,7 @@ angular.module("Uv5kiman")
 
     }
 
-    /** */
+    //** */
     function tlfTifxDataChanged(data) {
         if (data.constructor === Array && ctrl.info.tifx.constructor === Array) {
             /** Deben ser iguales */

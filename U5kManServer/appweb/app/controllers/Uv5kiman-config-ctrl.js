@@ -30,10 +30,10 @@ angular.module("Uv5kiman")
         if (pagina == 1) ctrl.Grupo(0);
         var menu = $lserv.Submenu(pagina);
         return menu ? menu : 0;
-    }
+    };
 
-    /** */
-    ctrl.Grupo = function(grp) {
+    //** */
+    ctrl.Grupo = function (grp) {
         switch (grp) {
             case 0:
                 ctrl.ginci = ctrl.linci.filter($lserv.inci_filter_genonly);
@@ -59,10 +59,10 @@ angular.module("Uv5kiman")
         }
         ctrl.grupo = grp;
         console.log(ctrl.grupo);
-    }
+    };
 
     /** */
-    ctrl.salvar = function() {
+    ctrl.salvar = function () {
         //if (confirm($lserv.translate('CCT_MSG_00')/*"Desea salvar los cambios efectuados?.\nEl servicio de mantenimiento se Reinciara."*/) == true) {
         //    var obj = { lista: ctrl.linci };
         //    $serv.db_inci_set(obj).then(function(response) {
@@ -80,18 +80,18 @@ angular.module("Uv5kiman")
                     // alert($lserv.translate('CCT_MSG_01')/*"Cambios salvados correctamente"*/);
                     alertify.success($lserv.translate('CCT_MSG_01')/*"Cambios salvados correctamente"*/);
                 }
-                , function (response) {
-                    console.log(response);
-                });
+                    , function (response) {
+                        console.log(response);
+                    });
             },
             function () {
                 alertify.message($lserv.translate("Operacion Cancelada"));
             }
         );
-    }
+    };
 
     /** */
-    ctrl.reset = function() {
+    ctrl.reset = function () {
         //if (confirm($lserv.translate('CCT_MSG_02')/*"Desea Reiniciar el servicio de mantenimiento?"*/)==true) {
         //    $serv.options_set(ctrl.options).then(function(response){
         //        // alert($lserv.translate('CCT_MSG_03')/*"Reinicio de Servicio en Curso"*/);
@@ -107,24 +107,24 @@ angular.module("Uv5kiman")
                     // alert($lserv.translate('CCT_MSG_03')/*"Reinicio de Servicio en Curso"*/);
                     alertify.success($lserv.translate('CCT_MSG_03')/*"Reinicio de Servicio en Curso"*/);
                 }
-                , function (response) {
-                    console.log(response);
-                });
+                    , function (response) {
+                        console.log(response);
+                    });
             },
             function () {
                 alertify.message($lserv.translate("Operacion Cancelada"));
             }
         );
-    }
+    };
 
     /** */
     ctrl.logs = function () {
         var win = window.open('/logs/logfile.txt', '_blank');
         win.focus();
-    }
+    };
 
     /** */
-    ctrl.options_save = function() {
+    ctrl.options_save = function () {
         //if (confirm($lserv.translate('CCT_MSG_04')/*"Desea Salvar la Configuracion del Servicio ?.\nEl servicio de mantenimiento se Reinciara."*/)==true) {
         //    $serv.options_set(ctrl.options).then(function(response){
         //        // alert($lserv.translate('CCT_MSG_05')/*"Configuración Salvada. Reinicio de Servicio en Curso"*/);
@@ -140,15 +140,15 @@ angular.module("Uv5kiman")
                     // alert($lserv.translate('CCT_MSG_05')/*"Configuración Salvada. Reinicio de Servicio en Curso"*/);
                     alertify.success($lserv.translate('CCT_MSG_05')/*"Configuración Salvada. Reinicio de Servicio en Curso"*/);
                 }
-                , function (response) {
-                    console.log(response);
-                });
+                    , function (response) {
+                        console.log(response);
+                    });
             },
             function () {
                 alertify.message($lserv.translate("Operacion Cancelada"));
             }
         );
-    }
+    };
 
     /** */
     ctrl.snmp_options_save = function () {
@@ -160,9 +160,9 @@ angular.module("Uv5kiman")
                 alertify.message($lserv.translate("Operacion Cancelada"));
             }
         );
-    }
+    };
 
-    /** */
+    //** */
     ctrl.snmp_option_show = function (opt) {
         if (opt.show == 0)
             return true;
@@ -173,14 +173,14 @@ angular.module("Uv5kiman")
                 return ctrl.snmpoptions[0].val == "1";
         }
         return true;
-    }
+    };
 
-    /** */
+    //** */
     ctrl.snmp_user_tp = function (user) {
         return user.tipo == 0 ? "No AUTH, No PRIV" : user.tipo == 1 ? "AUTH, No PRIV" : "AUTH, PRIV";
-    }
+    };
 
-    /** */
+    //** */
     ctrl.snmp_user_delete = function (user) {
         alertify.confirm($lserv.translate('Desea Eliminar al usuario ' + user.user),
             function () {
@@ -197,9 +197,9 @@ angular.module("Uv5kiman")
                 alertify.message($lserv.translate("Operacion Cancelada"));
             }
         );
-    }
+    };
 
-    /** */
+    //** */
     ctrl.snmp_user_newormod = function (user) {
         if (!user) {
             ctrl.snmpv3user_onedit = {
@@ -219,7 +219,7 @@ angular.module("Uv5kiman")
             };
         }
         $("#UserDetail").modal("show");
-    }
+    };
 
     /** */
     ctrl.on_snmp_user_edit_ok = function () {
@@ -256,13 +256,13 @@ angular.module("Uv5kiman")
                 alertify.message($lserv.translate("Operacion Cancelada"));
             }
         );
-    }
+    };
 
     /** Zona de configuracion SACTA */
-    /** */
+    //** */
     ctrl.sacta_enable = function () {
         return $lserv.ConfigServerSacta();
-    }
+    };
     /** */
     ctrl.spsi_users = "";
     ctrl.spv_users = "";
@@ -270,22 +270,22 @@ angular.module("Uv5kiman")
 
     ctrl.sacta_save = function () {
         alertify.confirm($lserv.translate('Desea salvar los cambios efectuados '),
-        function () {
-            ctrl.sacta_cfg.sacta.SpiUsers = ctrl.spsi_users;
-            ctrl.sacta_cfg.sacta.SpvUsers = ctrl.spv_users;
-            $serv.sacta_set(ctrl.sacta_cfg).then(function (response) {
-                alertify.success($lserv.translate("Operacion Efectuada"));
+            function () {
+                ctrl.sacta_cfg.sacta.SpiUsers = ctrl.spsi_users;
+                ctrl.sacta_cfg.sacta.SpvUsers = ctrl.spv_users;
+                $serv.sacta_set(ctrl.sacta_cfg).then(function (response) {
+                    alertify.success($lserv.translate("Operacion Efectuada"));
+                },
+                    function (response) {
+                        alertify.error($lserv.translate("Error al ejecutar la operacion"));
+                    }
+                );
             },
-            function (response) {
-                alertify.error($lserv.translate("Error al ejecutar la operacion"));
+            function () {
+                alertify.message($lserv.translate("Operacion Cancelada"));
             }
-         );
-        },
-        function () {
-            alertify.message($lserv.translate("Operacion Cancelada"));
-        }
-    );
-    }
+        );
+    };
 
     /** Arrancar la visualizacion de versiones. */
     ctrl.versiones = [null, null];
@@ -296,28 +296,28 @@ angular.module("Uv5kiman")
             ctrl.versiones_index = ctrl.versiones[0] ? 0 : 1;
             $("#VersionDetail").modal("show");
         }
-        , function (response) {
-            alertify.error($lserv.translate("Error al ejecutar la operacion"));
-        });
-    }
+            , function (response) {
+                alertify.error($lserv.translate("Error al ejecutar la operacion"));
+            });
+    };
 
     /** */
     ctrl.versiones_export = function () {
         var csvData = "Servidor;" +
-                      "Version;" +
-                      "Componente;" +
-                      "Fichero;" +
-                      "Tamano;" +
-                      "Fecha;" +
-                      "Hash\r\n";
+            "Version;" +
+            "Componente;" +
+            "Fichero;" +
+            "Tamano;" +
+            "Fecha;" +
+            "Hash\r\n";
         $.each(ctrl.versiones, function (iserv, serv) {
             if (serv) {
                 $.each(serv.Components, function (index, comp) {
                     $.each(comp.Files, function (index1, file) {
                         var item = (serv.Server + ";") +
-                                   (serv.Version + ";") +
-                                   (comp.Name + ";") +
-                                   (file.Path + ";") + (file.Size + ";") + (file.Date + ";") + (file.MD5 + "\r\n");
+                            (serv.Version + ";") +
+                            (comp.Name + ";") +
+                            (file.Path + ";") + (file.Size + ";") + (file.Date + ";") + (file.MD5 + "\r\n");
                         csvData += item;
                     });
                 });
@@ -328,7 +328,7 @@ angular.module("Uv5kiman")
         myLink.download = 'serv_versiones.csv';
         myLink.href = "data:application/csv," + escape(csvData);
         myLink.click();
-    }
+    };
 
     /** Funciones Internas.. */
     /** */
@@ -352,7 +352,7 @@ angular.module("Uv5kiman")
         });
     }
 
-    /** */
+    //** */
     function snmpv3users_decode(users_in) {
         if (!users_in || users_in.length == 0)
             return [];
@@ -373,7 +373,7 @@ angular.module("Uv5kiman")
         return decoded_users_array;
     }
 
-    /** */
+    //** */
     function snmpv3users_encode(users_in) {
         if (!users_in || users_in.length == 0)
             return [];
