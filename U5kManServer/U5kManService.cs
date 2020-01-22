@@ -1715,6 +1715,7 @@ namespace U5kManServer
                 List<stdPos> paraBorrar = STDTOPS.Select(pos => new stdPos(pos) { name = pos.name, ip = pos.ip, snmpport = pos.snmpport }).ToList();
                 lock (lockConcurrent)
                 {
+                    LogTrace<stdPos>($"Cargando configuración Puestos en Memoria...");
                     foreach (stdPos pos in value)
                     {
                         stdPos local = paraBorrar.Where(p => p.Equals(pos)).FirstOrDefault();
@@ -1722,6 +1723,7 @@ namespace U5kManServer
                         {
                             /** No ha cambiado */
                             paraBorrar.Remove(local);
+                            LogTrace<stdPos>($"Puesto {pos.name} no ha cambiado...");
                         }
                         else
                         {
@@ -1733,7 +1735,16 @@ namespace U5kManServer
                                 if (local1 != null)
                                 {
                                     paraBorrar.Remove(local1);
+                                    LogTrace<stdPos>($"Puesto {pos.name} recargado en memoria...");
                                 }
+                                else
+                                {
+                                    LogTrace<stdPos>($"Puesto {pos.name}: Error en recarga de memoria.");
+                                }
+                            }
+                            else
+                            {
+                                LogTrace<stdPos>($"Puesto {pos.name} añadido a memoria...");
                             }
                             stdpos[pos.name]=pos;                            
                         }
@@ -1742,8 +1753,9 @@ namespace U5kManServer
                     foreach (stdPos pos in paraBorrar)
                     {
                         stdpos.Remove(pos.name);
+                        LogTrace<stdPos>($"Puesto {pos.name} eliminado de memoria...");
                     }
-
+                    LogTrace<stdPos>($"Configuracion de Puesto cargada...");
                 }
             }
         }
@@ -1826,12 +1838,14 @@ namespace U5kManServer
                 List<stdGw> paraBorrar = STDGWS.Select(g => new stdGw(g)).ToList();
                 lock (lockConcurrent)
                 {
+                    LogTrace<stdGw>($"Cargando configuración de Pasarelas en Memoria...");
                     foreach (stdGw gw in value)
                     {
                         stdGw local = paraBorrar.Where(p => p.Equals(gw)).FirstOrDefault();
                         if (local != null)
                         {
                             paraBorrar.Remove(local);
+                            LogTrace<stdGw>($"Pasarela {gw.name} no ha cambiado...");
                         }
                         else
                         {
@@ -1843,7 +1857,16 @@ namespace U5kManServer
                                 if (local != null)
                                 {
                                     paraBorrar.Remove(local);
+                                    LogTrace<stdGw>($"Pasarela {gw.name} ha cambiado...");
                                 }
+                                else
+                                {
+                                    LogTrace<stdGw>($"Pasarela {gw.name}: Error en carga de memoria...");
+                                }
+                            }
+                            else 
+                            {
+                                LogTrace<stdGw>($"Pasarela {gw.name} añadida...");
                             }
                             stdgws[gw.name] = gw;
                         }
@@ -1852,6 +1875,7 @@ namespace U5kManServer
                     foreach (stdGw gw in paraBorrar)
                     {
                         stdgws.Remove(gw.name);
+                        LogTrace<stdGw>($"Pasarela {gw.name} eliminada...");
                     }
                 }
             }
@@ -1934,12 +1958,14 @@ namespace U5kManServer
                 List<EquipoEurocae> paraBorrar = STDEQS.Select(e => new EquipoEurocae(e) { }).ToList();
                 lock (lockConcurrent)
                 {
+                    LogTrace<EquipoEurocae>($"Cargando configuración de Equipos Externos en Memoria...");
                     foreach (var equ in value)
                     {
                         var local = paraBorrar.Where(p => p.Equals(equ)).FirstOrDefault();
                         if (local != null)
                         {
                             paraBorrar.Remove(local);
+                            LogTrace<EquipoEurocae>($"Equipo Externo {equ.Id} no ha cambiado...");
                         }
                         else
                         {
@@ -1951,7 +1977,16 @@ namespace U5kManServer
                                 if (local != null)
                                 {
                                     paraBorrar.Remove(local);
+                                    LogTrace<EquipoEurocae>($"Equipo Externo {equ.Id} ha cambiado...");
                                 }
+                                else
+                                {
+                                    LogTrace<EquipoEurocae>($"Equipo Externo {equ.Id}: Error al cargar en memoria...");
+                                }
+                            }
+                            else
+                            {
+                                LogTrace<EquipoEurocae>($"Equipo Externo {equ.Id} añadido...");
                             }
                             stdequ[equ.Key]= equ;
                         }
@@ -1960,6 +1995,7 @@ namespace U5kManServer
                     foreach (var equ in paraBorrar)
                     {
                         stdequ.Remove(equ.Key);
+                        LogTrace<EquipoEurocae>($"Equipo Externo {equ.Id} eliminado...");
                     }
                 }
             }
@@ -2011,22 +2047,26 @@ namespace U5kManServer
                 List<Uv5kManDestinosPabx.DestinoPabx> paraBorrar = pabxdest.Destinos.Select(e => new Uv5kManDestinosPabx.DestinoPabx(e) { Id = e.Id }).ToList();
                 lock (lockConcurrent)
                 {
+                    LogTrace<Uv5kManDestinosPabx.DestinoPabx>($"Cargando configuración de Abonados PBX en Memoria..."); 
                     foreach (Uv5kManDestinosPabx.DestinoPabx dst in value)
                     {
                         Uv5kManDestinosPabx.DestinoPabx local = paraBorrar.Where(p => p.Equals(dst)).FirstOrDefault();
                         if (local != null)
                         {
                             paraBorrar.Remove(local);
+                            LogTrace<Uv5kManDestinosPabx.DestinoPabx>($"Abonado PBX {dst.Id} No ha cambiado...");
                         }
                         else
                         {
                             pabxdest.Destinos.Add(dst);
+                            LogTrace<Uv5kManDestinosPabx.DestinoPabx>($"Abonado PBX {dst.Id} añadido...");
                         }
                     }
                     // Borrar los restos...
                     foreach (Uv5kManDestinosPabx.DestinoPabx dst in paraBorrar)
                     {
                         pabxdest.Destinos.Remove(pabxdest.Destinos.Find(x => x.Equals(dst)));
+                        LogTrace<Uv5kManDestinosPabx.DestinoPabx>($"Abonado PBX {dst.Id} eliminado...");
                     }
                 }
             }
