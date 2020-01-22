@@ -459,7 +459,7 @@ namespace U5kManServer
                 while (_registros.Count > 0 && nreg < maxreg)
                 {
                     U5kEstadisticaContador contador = _registros.Dequeue();
-                    LogDebug<U5kEstadisticaProc>(
+                    LogTrace<U5kEstadisticaProc>(
                          String.Format("{0} Registrada Actividad de {1} segundos.", contador.Elemento, contador.Valor.TotalSeconds));
 #if DEBUG_01
                     using (StreamWriter fwriter =
@@ -523,7 +523,7 @@ namespace U5kManServer
                         contador.Elemento, new List<string>().ToArray());
                     contador.Activar();
 
-                    LogDebug<U5kEstadisticaProc>(
+                    LogTrace<U5kEstadisticaProc>(
                         String.Format("EventoEstadistica: {0}({1}) => {2}", contador.Elemento, contador.TipoElemento, "Activo" ));
                 }
             }
@@ -536,7 +536,7 @@ namespace U5kManServer
                         contador.Elemento, new List<string>().ToArray());
                     contador.Desactivar();
 
-                    LogDebug<U5kEstadisticaProc>(
+                    LogTrace<U5kEstadisticaProc>(
                         String.Format("EventoEstadistica: {0}({1}) => {2}", contador.Elemento, contador.TipoElemento, "Inactivo"));
                 }
             }

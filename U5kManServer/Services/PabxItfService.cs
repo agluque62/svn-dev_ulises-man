@@ -210,7 +210,7 @@ namespace U5kManServer
             if (IsOperative)
             {
             }
-            LogInfo<PabxItfService>("WebSocket Abierto en " + PabxUrl);
+            LogTrace<PabxItfService>("WebSocket Abierto en " + PabxUrl);
         }
         /// <summary>
         /// 
@@ -223,7 +223,7 @@ namespace U5kManServer
             if (IsOperative)
             {
             }
-            LogError<PabxItfService>("WebSocketError en " + PabxUrl + ": " + e.Exception.Message);
+            LogWarn<PabxItfService>("WebSocketError en " + PabxUrl + ": " + e.Exception.Message);
         }
         /// <summary>
         /// 
@@ -499,8 +499,6 @@ namespace U5kManServer
         /// </summary>
         private void Init()
         {
-            LogInfo<PabxItfService>("INIT");
-
             if (Properties.u5kManServer.Default.PabxSimulada)
                 _pabxStatus = EPabxStatus.epsConectado;
             else
@@ -556,7 +554,7 @@ namespace U5kManServer
                     ProcessUserRegistered(gdata, _event.Parametros);
                     break;
                 default:
-                    LogInfo<PabxItfService>("Evento No Procesado: " + _event.Method);
+                    LogWarn<PabxItfService>("Evento No Procesado: " + _event.Method);
                     break;
             }
         }
@@ -584,7 +582,7 @@ namespace U5kManServer
                     _pabxStatus = EPabxStatus.epsDesconectado;
                     break;
             }
-            LogInfo<PabxItfService>("Server Status=>" + info.Status);
+            LogDebug<PabxItfService>("Server Status=>" + info.Status);
         }
         /// <summary>
         /// 
@@ -605,7 +603,7 @@ namespace U5kManServer
                         U5kBaseDatos.eIncidencias.IPBX_SUBSC_INACTIVE, U5kBaseDatos.eTiposInci.TEH_EXTERNO_TELEFONIA, info.User, Params());
                 }
             });
-            LogDebug<PabxItfService>(String.Format("Procesado Registro Usuario {0}, {1}", Name, info.User, info.Registered));
+            LogTrace<PabxItfService>(String.Format("Procesado Registro Usuario {0}, {1}", Name, info.User, info.Registered));
         }
         /// <summary>
         /// 
@@ -613,7 +611,7 @@ namespace U5kManServer
         /// <param name="info"></param>
         private void ProcessUserStatus(PabxParamInfo info)
         {
-            LogDebug<PabxItfService>(String.Format("Procesado Estado Usuario {1}, Estado: {2}", Name, info.User, info.Status));
+            LogTrace<PabxItfService>(String.Format("Procesado Estado Usuario {1}, Estado: {2}", Name, info.User, info.Status));
         }
         /// <summary>
         /// 

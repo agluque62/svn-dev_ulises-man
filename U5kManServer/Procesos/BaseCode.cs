@@ -94,7 +94,7 @@ namespace NucleoGeneric
             }
             catch (Exception x)
             {
-                LogManager.GetLogger("ExceptionInLog").Error("Exception Logging [[" + message + "]]: ", x);
+                LogManager.GetLogger("ExceptionInLog").Error(x, "Exception Logging [[" + message + "]]: ");
             }
         }
         /// <summary>
@@ -112,7 +112,7 @@ namespace NucleoGeneric
             /** 20181210. Para que el filtro de incidencias repetidas no afecte a los eventos de PTT y SQH */
             LogLevel level = inci == eIncidencias.ITO_PTT ||
                 (inci == eIncidencias.IGW_EVENTO &&
-                Array.FindIndex(parametros, e => (e as string).ToLower().Contains("ptt") || (e as string).ToLower().Contains("sqh")) >= 0) ? LogLevel.Debug : LogLevel.Info;
+                Array.FindIndex(parametros, e => (e as string).ToLower().Contains("ptt") || (e as string).ToLower().Contains("sqh")) >= 0) ? LogLevel.Trace : LogLevel.Debug;
 
             Log<T>(key, level, String.Format("Historico [{0},{1}] de {2}", inci, thw, idhw), inci, thw, idhw, parametros, lineNumber, caller);
         }

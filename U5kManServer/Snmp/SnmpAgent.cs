@@ -564,7 +564,7 @@ namespace U5kManServer
             }
             catch(Exception x)
             {
-                LogError<SnmpAgent>("Error Cerrando Engine SNMP: " + x.Message);
+                LogException<SnmpAgent>("", x);
             }
             finally
             {

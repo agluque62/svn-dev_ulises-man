@@ -30,7 +30,7 @@ namespace U5kManServer
         void LogError(string message, 
             [System.Runtime.CompilerServices.CallerLineNumber] int lineNumber = 0, [System.Runtime.CompilerServices.CallerMemberName] string caller = null)
         {
-            LogError<SnmpClient>(message, lineNumber, caller);
+            LogWarn<SnmpClient>(message, lineNumber, caller);
         }
         /// <summary>
         /// 
