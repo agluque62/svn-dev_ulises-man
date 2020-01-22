@@ -24,7 +24,7 @@ using Newtonsoft.Json.Converters;
 namespace U5kManServer
 {
     enum ClusterPollingMethods { Soap=0, DataBase=1, UdpRequest=2 }
-    class U5kGenericos
+    public class U5kGenericos
     {
         /// <summary>
         /// 
@@ -42,49 +42,53 @@ namespace U5kManServer
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="host"></param>
-        /// <returns>Retorna si esta presente o no</returns>
+
+        static PingReply Ping(string host)
+        {
+            PingReply reply;
+            Ping pingSender = new Ping();
+            PingOptions options = new PingOptions();
+
+            // Use the default Ttl value which is 128, 
+            // but change the fragmentation behavior.
+            options.DontFragment = true;
+
+            // Create a buffer of 32 bytes of data to be transmitted. 
+            string data = "Ulises V 5000i. ManService......";
+            byte[] buffer = Encoding.ASCII.GetBytes(data);
+            int timeout = 200;  // ms
+            reply = pingSender.Send(host, timeout, buffer, options);
+            return reply;
+        }
         public static bool Ping(string host, bool presente)
         {
-            //Ping pingSender = new Ping();
-            //PingOptions options = new PingOptions();
-
-            //// Use the default Ttl value which is 128, 
-            //// but change the fragmentation behavior.
-            //options.DontFragment = true;
-
-            //// Create a buffer of 32 bytes of data to be transmitted. 
-            //string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-            //byte[] buffer = Encoding.ASCII.GetBytes(data);
-            //int timeout = 120;
-            //PingReply reply = pingSender.Send(host, timeout, buffer, options);
-            //return reply.Status == IPStatus.Success ? true : false;
             int maxReint = presente ? 3 : 1;
             int reint = 0;
             PingReply reply;
-
             do
             {
-                Ping pingSender = new Ping();
-                PingOptions options = new PingOptions();
-
-                // Use the default Ttl value which is 128, 
-                // but change the fragmentation behavior.
-                options.DontFragment = true;
-
-                // Create a buffer of 32 bytes of data to be transmitted. 
-                string data = "Ulises V 5000i. ManService......";
-                byte[] buffer = Encoding.ASCII.GetBytes(data);
-                int timeout = 200;  // ms
-                reply = pingSender.Send(host, timeout, buffer, options);
+                reply = Ping(host);
                 reint++;
                 System.Threading.Thread.Sleep(10);
             } while (reply.Status != IPStatus.Success && reint < maxReint);
-
             return reply.Status == IPStatus.Success ? true : false;
+        }
+        public static void Ping(string host, bool presente, Action<bool, IPStatus[]> ResultDelivery)
+        {
+            int maxReint = presente ? 3 : 1;
+            int reint = 0;
+            PingReply reply;
+            List<IPStatus> replies = new List<IPStatus>();
+            do
+            {
+                reply = Ping(host);
+                replies.Add(reply.Status);
+                reint++;
+
+                System.Threading.Thread.Sleep(10);
+            } while (reply.Status != IPStatus.Success && reint < maxReint);
+
+            ResultDelivery(reply.Status == IPStatus.Success ? true : false, replies.ToArray());
         }
 
         /// <summary>
