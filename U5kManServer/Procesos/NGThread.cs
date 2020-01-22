@@ -165,7 +165,7 @@ namespace NucleoGeneric
                 ConfigCultureSet();
                 tm = new TimeMeasurement(Name);
                 cancel = new CancellationTokenSource();
-                LogDebug<NGThread>(String.Format("Starting Thread ({0})", Name));
+                LogTrace<NGThread>(String.Format("Starting Thread ({0})", Name));
                 taskObject = Task.Factory.StartNew(Run);
                 return true;
             }
@@ -175,15 +175,15 @@ namespace NucleoGeneric
         {
             if (cancel != null)
             {
-                LogDebug<NGThread>(String.Format("Stopping Thread ({0})", Name));
+                LogTrace<NGThread>(String.Format("Stopping Thread ({0})", Name));
                 cancel.Cancel();
                 if (!taskObject.Wait((int)timeout.TotalMilliseconds))
                 {
-                    LogFatal<NGThread>(String.Format("Timeout Stopping Thread ({0})", Name));
+                    LogWarn<NGThread>(String.Format("Timeout Stopping Thread ({0})", Name));
                 }
                 else
                 {
-                    LogDebug<NGThread>(String.Format("Thread ({0}) Stopped", Name));
+                    LogTrace<NGThread>(String.Format("Thread ({0}) Stopped", Name));
                 }
             }
         }
@@ -191,7 +191,7 @@ namespace NucleoGeneric
         {
             if (cancel != null)
             {
-                LogDebug<NGThread>(String.Format("Async Stopping Thread ({0})", Name));
+                LogTrace<NGThread>(String.Format("Async Stopping Thread ({0})", Name));
                 cancel.Cancel();
                 cb(taskObject);
             }

@@ -61,7 +61,7 @@ namespace U5kManServer
             }
             catch (Exception x)
             {
-                LogError<U5kSnmpSystemAgent>("Error Arrancando Agente SNMP: " + x.Message);
+                LogException<U5kSnmpSystemAgent>("", x);
                 return false;
             }
         }
@@ -75,7 +75,7 @@ namespace U5kManServer
             }
             catch (Exception x)
             {
-                LogError<U5kSnmpSystemAgent>("Error Arrancando Agente SNMP: " + x.Message);
+                LogException<U5kSnmpSystemAgent>("", x);
             }
         }
 
@@ -190,7 +190,7 @@ namespace U5kManServer
             }
             catch (Exception x)
             {
-                LogError<U5kSnmpSystemAgent>("Error Inicializando Agente SNMP: " + x.Message);
+                LogException<U5kSnmpSystemAgent>("", x);
                 SnmpAgentStop();
                 return false;
             }
@@ -226,7 +226,7 @@ namespace U5kManServer
             }
             catch (Exception x)
             {
-                LogError<U5kSnmpSystemAgent>("Error Arrancando Agente SNMP: " + x.Message);
+                LogException<U5kSnmpSystemAgent>("", x);
                 return false;
             }
         }
@@ -244,7 +244,7 @@ namespace U5kManServer
             }
             catch (Exception x)
             {
-                LogError<U5kSnmpSystemAgent>("Error Arrancando Agente SNMP: " + x.Message);
+                LogException<U5kSnmpSystemAgent>("", x);
             }
         }
         /// <summary>
@@ -455,7 +455,7 @@ namespace U5kManServer
                             }
                                 else
                                 {
-                                    LogError<U5kSnmpSystemAgent>(String.Format("GW OID [{0}] No encontrado para {1}", oidvar, ipfrom));
+                                    LogWarn<U5kSnmpSystemAgent>(String.Format("GW OID [{0}] No encontrado para {1}", oidvar, ipfrom));
                                 }
 #endif
                             }
@@ -469,7 +469,7 @@ namespace U5kManServer
                                 }
                                 else
                                 {
-                                    LogError<U5kSnmpSystemAgent>(String.Format("TOP OID [{0}] No encontrado para {1}", oidvar, ipfrom));
+                                    LogWarn<U5kSnmpSystemAgent>(String.Format("TOP OID [{0}] No encontrado para {1}", oidvar, ipfrom));
                                 }
                             }
                             else
@@ -481,7 +481,7 @@ namespace U5kManServer
                                     GwExplorer.RecibidoTrapGw_unificada(null, null, oidtrap, oidvar, data);
                                 }
 #endif
-                                LogError<U5kSnmpSystemAgent>(String.Format("OID [{0}] No encontrado para {1}", oidvar, ipfrom));
+                                LogWarn<U5kSnmpSystemAgent>(String.Format("OID [{0}] No encontrado para {1}", oidvar, ipfrom));
                             }
                         }
                     }
@@ -586,7 +586,7 @@ namespace U5kManServer
                     break;
 
                 default:
-                    LogInfo<U5kSnmpSystemAgent>(String.Format("Recibido TRAP-TOP OID-No Esperado de {0}.{1}", pos.ip, parametro.ToString()));
+                    LogWarn<U5kSnmpSystemAgent>(String.Format("Recibido TRAP-TOP OID-No Esperado de {0}.{1}", pos.ip, parametro.ToString()));
                     break;
             }
         }
@@ -624,7 +624,7 @@ namespace U5kManServer
             }
             else
             {
-                LogError<U5kSnmpSystemAgent>(String.Format("RecibidoEventoExterno. Error de Formato. OID={0}, VAL={1}", oid, valor));
+                LogWarn<U5kSnmpSystemAgent>(String.Format("RecibidoEventoExterno. Error de Formato. OID={0}, VAL={1}", oid, valor));
             }
 
         }
@@ -897,7 +897,7 @@ namespace U5kManServer
                 }
                 catch
                 {
-                    LogError<U5kSnmpSystemAgent>($"No puedo obtener el servidor RMON: {endpstr}");
+                    LogWarn<U5kSnmpSystemAgent>($"No puedo obtener el servidor RMON: {endpstr}");
                 }
             }
         }

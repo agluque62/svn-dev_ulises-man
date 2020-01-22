@@ -500,7 +500,7 @@ namespace U5kManServer
                         {
                             if (spv_ntp_reint++ > 3)
                             {
-                                LogDebug<MainThread>(String.Format("NTP => NoInfo. IP/Name no Valido: {0}", stdg.stdClock.name));
+                                LogWarn<MainThread>(String.Format("NTP => NoInfo. IP/Name no Valido: {0}", stdg.stdClock.name));
                                 spv_ntp_reint = 0;
                                 stdg.stdClock.Estado = std.NoInfo;
                             }
@@ -929,7 +929,7 @@ namespace U5kManServer
                             catch (Exception x)
                             {
                                 _playing = false;
-                                LogError<MainThread>(x.Message);
+                                LogException<MainThread>("", x);
                             }
                             Thread.Sleep(5000);
                         }

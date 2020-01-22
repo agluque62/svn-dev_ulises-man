@@ -699,7 +699,7 @@ namespace U5kManServer
             OctetString community = new OctetString("public");
 
             if (gw.name == "" && nslot == 0 && ires == 1)
-                LogInfo<GwExplorer>(String.Format("Presencia (1) Slot 0, Recurso 1: {0}", gw.slots[0].rec[1].presente));
+                LogTrace<GwExplorer>(String.Format("Presencia (1) Slot 0, Recurso 1: {0}", gw.slots[0].rec[1].presente));
 
             try
             {
@@ -750,7 +750,7 @@ namespace U5kManServer
                 }
                 else if (ntipo != 9 && ntipo != -1)
                 {
-                    LogError<GwExplorer>(String.Format("Error Explorando Recurso {0}:{1}: Tipo Notificado <{2}> Erroneo.",
+                    LogWarn<GwExplorer>(String.Format("Error Explorando Recurso {0}:{1}: Tipo Notificado <{2}> Erroneo.",
                                 gw.ip, nres, ntipo));
                 }
             }
@@ -864,7 +864,7 @@ namespace U5kManServer
                     break;
 
                 default:
-                    LogTrace<GwExplorer>(String.Format("Recibido TRAP-GW OID-Desconocida de {0}, OID={1}", gw?.ip, oidEnt));
+                    LogWarn<GwExplorer>(String.Format("Recibido TRAP-GW OID-Desconocida de {0}, OID={1}", gw?.ip, oidEnt));
                     break;
             }
         }

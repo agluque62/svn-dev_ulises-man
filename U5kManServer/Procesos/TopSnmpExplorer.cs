@@ -580,7 +580,7 @@ namespace U5kManServer
                 else
                 {
                     // Error OID no encontrado...
-                    LogError<TopSnmpExplorer>(String.Format("TOP OID [{0}] No encontrado", varItem.Id.ToString()));
+                    LogWarn<TopSnmpExplorer>(String.Format("TOP OID [{0}] No encontrado", varItem.Id.ToString()));
                 }
 
             }
