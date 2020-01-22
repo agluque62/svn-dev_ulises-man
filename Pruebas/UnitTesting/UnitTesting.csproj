@@ -70,6 +70,7 @@
     <Compile Include="BackupTest.cs" />
     <Compile Include="ClassReferences\UnitsTestingTypes.cs" />
     <Compile Include="CfgGwsUnitTest.cs" />
+    <Compile Include="ExternalResourcesUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

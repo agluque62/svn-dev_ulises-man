@@ -6,18 +6,19 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 
 using Utilities;
 
 namespace U5kManServer.ExtEquSpvSpace
 {
-    class ExtEquSpv : NucleoGeneric.NGThread/*, IDisposable*/
+    class ExtEquSpv_old : NucleoGeneric.NGThread/*, IDisposable*/
     {
         /// <summary>
         /// 
         /// </summary>
-        public ExtEquSpv()
+        public ExtEquSpv_old()
         {
             Name = "ExtEquSpv";
             /** 20180709. Peticion #3632 */
@@ -41,7 +42,7 @@ namespace U5kManServer.ExtEquSpvSpace
         protected void LocalDispose()
         {
             sips.Dispose();
-            LogDebug<ExtEquSpv>("ExtEquSpv Dispose...");
+            LogDebug<ExtEquSpv_old>("ExtEquSpv Dispose...");
         }
         /// <summary>
         /// 
@@ -87,7 +88,7 @@ namespace U5kManServer.ExtEquSpvSpace
                                     }
                                     catch (Exception x)
                                     {
-                                        LogException<ExtEquSpv>("Supervisando Equipo externo " + equipo.Id, x);
+                                        LogException<ExtEquSpv_old>("Supervisando Equipo externo " + equipo.Id, x);
                                     }
                                 }, TaskCreationOptions.LongRunning));
                             });
@@ -110,7 +111,7 @@ namespace U5kManServer.ExtEquSpvSpace
 
                             tm.StopAndPrint((msg) =>
                             {
-                                LogTrace<ExtEquSpv>(msg);
+                                LogTrace<ExtEquSpv_old>(msg);
                             });
                         }
                     }
@@ -121,14 +122,14 @@ namespace U5kManServer.ExtEquSpvSpace
                             Thread.ResetAbort();
                             break;
                         }
-                        LogException<ExtEquSpv>("SupervisaEquiposExternos", x);
+                        LogException<ExtEquSpv_old>("SupervisaEquiposExternos", x);
                     }
                     GoToSleepInTimer();
                 }
             }
             LocalDispose();
             Dispose();
-            LogInfo<ExtEquSpv>("Finalizado...");
+            LogInfo<ExtEquSpv_old>("Finalizado...");
         }
         /// <summary>
         /// 
@@ -244,7 +245,7 @@ namespace U5kManServer.ExtEquSpvSpace
                     equipo.Tipo == 3 ? U5kBaseDatos.eTiposInci.TEH_EXTERNO_TELEFONIA :
                     equipo.Tipo == 5 ? U5kBaseDatos.eTiposInci.TEH_RECORDER : U5kBaseDatos.eTiposInci.TEH_SISTEMA;
                 string id = equipo.Tipo == 5 ? equipo.Id : equipo.sip_user;
-                RecordEvent<ExtEquSpv>(DateTime.Now,
+                RecordEvent<ExtEquSpv_old>(DateTime.Now,
                     nuevo == std.Ok ? U5kBaseDatos.eIncidencias.IEE_ENTRADA :
                     U5kBaseDatos.eIncidencias.IEE_CAIDA,
                     tinci,
@@ -258,4 +259,253 @@ namespace U5kManServer.ExtEquSpvSpace
         private List<string> AllowedSipResponses = null;
     }
 
+    /// <summary>
+    /// 20200122: Se separa la Supervision del Equipo de la del recurso, para evitar hacer PINES repetidos en equipos con varios recursos.
+    /// </summary>
+    class ExtEquSpv : NucleoGeneric.NGThread/*, IDisposable*/
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public ExtEquSpv()
+        {
+            Name = "ExtEquResSpv";
+            /** 20180709. Peticion #3632 */
+            AllowedSipResponses = new List<string>();
+            if (Properties.u5kManServer.Default.AllowedResponsesToSipOptions != null)
+            {
+                foreach (var item in Properties.u5kManServer.Default.AllowedResponsesToSipOptions)
+                    AllowedSipResponses.Add(item);
+            }
+
+            local_ua = new SipUA() { user = "MTTO", ip = Properties.u5kManServer.Default.MiDireccionIP, port = 7060 };
+            sips = new SipSupervisor(local_ua);
+            sips.NotifyException += (ua, x) =>
+            {
+                LogException<ExtEquSpv>("SipSupervisor" + ua.uri, x);
+            };
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        protected void LocalDispose()
+        {
+            sips.Dispose();
+            LogDebug<ExtEquSpv>("ExtEquSpv Dispose...");
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        protected override void Run()
+        {
+            U5kGenericos.TraceCurrentThread(this.GetType().Name);
+
+            Decimal interval = Properties.u5kManServer.Default.SpvInterval;
+            using (timer = new TaskTimer(new TimeSpan(0, 0, 0, 0, Decimal.ToInt32(interval)), this.Cancel))
+            {
+                while (IsRunning())
+                {
+                    try
+                    {
+                        if (U5kManService._Master == true)
+                        {
+                            Utilities.TimeMeasurement tm = new Utilities.TimeMeasurement("EXT Explorer");
+
+                            // Copia de equipo configurados.
+                            List<EquipoEurocae> localequ = new List<EquipoEurocae>();
+                            GlobalServices.GetWriteAccess((gdata) =>
+                            {
+                                gdata.STDEQS.ForEach(equ =>
+                                {
+                                    localequ.Add(new EquipoEurocae(equ));
+                                });
+                            });
+
+                            /** Agruparlos por equipo */
+                            var grupos = localequ.GroupBy(eq => eq.Ip1)
+                                .ToDictionary(grp => grp.Key, grp => grp.ToList());
+                            List<Task> tasks = new List<Task>();
+
+                            LogTrace<ExtEquSpv>($"Supervisando equipos y recursos externos ({grupos.Count}) ...");
+                            foreach (var grp in grupos)
+                            {
+                                tasks.Add(Task.Factory.StartNew(() =>
+                                {
+                                    try
+                                    {
+                                        SupervisaEquipo(grp.Key, grp.Value);
+                                    }
+                                    catch (Exception x)
+                                    {
+                                        LogException<ExtEquSpv>("", x);
+                                    }
+                                }));
+                            }
+                            var waitingResult = Task.WaitAll(tasks.ToArray(), 9000);
+                            LogTrace<ExtEquSpv>($"Fin de Supervision de equipos y recursos externos ({tasks.Count}, {waitingResult})...");
+
+                            // Actualizo los datos..
+                            GlobalServices.GetWriteAccess((gdata) =>
+                            {
+                                localequ.ForEach(eq =>
+                                {
+                                    if (gdata.EQUDIC.ContainsKey(eq.Key))
+                                    {
+                                        gdata.EQUDIC[eq.Key].CopyFrom(eq);
+                                    }
+                                });
+
+                                SetEstadoGlobalEquipos(gdata, localequ);
+                            });
+
+
+                            tm.StopAndPrint((msg) =>
+                            {
+                                LogTrace<ExtEquSpv>(msg);
+                            });
+                        }
+                    }
+                    catch (Exception x)
+                    {
+                        if (x is ThreadAbortException)
+                        {
+                            Thread.ResetAbort();
+                            break;
+                        }
+                        LogException<ExtEquSpv>("SupervisaEquiposExternos", x);
+                    }
+                    GoToSleepInTimer();
+                }
+            }
+            LocalDispose();
+            Dispose();
+            LogInfo<ExtEquSpv>("Finalizado...");
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        void SetEstadoGlobalEquipos(U5kManStdData gdata, List<EquipoEurocae> stdeqeu)
+        {
+            int equipos = stdeqeu.Count;
+            int equipos_presentes = stdeqeu.Where(e => e.EstadoRed1 == std.Ok).ToList().Count;
+            int equipos_error = stdeqeu.Where(e => e.EstadoRed1 == std.Ok && e.EstadoSip == std.Error).ToList().Count;
+            int equipos_aviso = stdeqeu.Where(e => e.EstadoRed1 == std.Ok && e.EstadoSip == std.Aviso).ToList().Count;
+
+            U5KStdGeneral gen = gdata.STDG;
+            gen.stdGlobalExt =
+                equipos_presentes == 0 ? std.NoInfo :
+                equipos_error != 0 ? std.Error :
+                equipos_aviso != 0 ? std.Aviso :
+                equipos_presentes == equipos ? std.Ok : std.Aviso;
+        }
+
+        protected void SupervisaEquipo(string ip, List<EquipoEurocae> recursos)
+        {
+            LogTrace<ExtEquSpv>($"Supervisando Equipo en {ip}, {recursos.Count}");
+            List<Task> stasks = new List<Task>();
+
+            U5kGenericos.Ping(ip, true, (res, replies) =>
+            {
+                LogTrace<ExtEquSpv>($"PIN {ip} => ({string.Join(",", replies)})");
+                foreach (var recurso in recursos)
+                {
+                    recurso.EstadoRed1 = recurso.EstadoRed2 = ChangeStd(recurso, res ? std.Ok : std.NoInfo); /** Provocará el histórico */
+                    LogTrace<ExtEquSpv>($"Recurso {recurso.Id}, Estado Red => {recurso.EstadoRed1}");
+                    if (recurso.EstadoRed1 == std.Ok)
+                    {
+                        /** Estado Agente SIP */
+                        if (recurso.Tipo == 5)
+                        {
+                            /** Los Grabadores no tienen Agente SIP, Para que se muestre Ok, 
+                                Ponemos que está bien */
+                            recurso.EstadoSip = std.Ok;
+                            LogTrace<ExtEquSpv>($"Recurso Grabacion {recurso.Id} => {recurso.EstadoSip}");
+                        }
+                        else
+                        {
+                            stasks.Add(Task.Factory.StartNew(() =>
+                            {
+                                try
+                                {
+                                    SupervisaRecurso(recurso);
+                                }
+                                catch (Exception x)
+                                {
+                                    LogException<ExtEquSpv>("", x);
+                                }
+                            }));
+                        }
+                    }
+                }
+
+            });
+
+            var waitingResult = Task.WaitAll(stasks.ToArray(), 9000);
+            LogTrace<ExtEquSpv>($"Equipo en {ip}, Supervisado ({stasks.Count}, {waitingResult})");
+        }
+
+        protected void SupervisaRecurso(EquipoEurocae recurso)
+        {
+            SipUA ua = new SipUA()
+            {
+                user = recurso.sip_user,
+                ip = recurso.Ip1,
+                port = recurso.sip_port,
+                radio = (recurso.Tipo == 2)
+            };
+
+            LogTrace<ExtEquSpv>($"Supervisando recurso {recurso.sip_user}");
+            bool sipp = sips?.SipPing(ua) ?? false;
+            if (sipp == true)
+            {
+                if (ua.last_response != null)
+                {
+                    var allowedReponse = AllowedSipResponses.Contains(ua.last_response.Result);
+                    recurso.EstadoSip = allowedReponse ? std.Ok : std.Aviso;
+                    recurso.LastOptionsResponse = ua.last_response.Result;
+                    LogTrace<ExtEquSpv>($"{recurso.sip_user}. SipAgent response {recurso.LastOptionsResponse}, EstadoSip => {recurso.EstadoSip}");
+                }
+                else
+                {
+                    recurso.EstadoSip = std.Error;
+                    recurso.LastOptionsResponse = "";
+                    LogTrace<ExtEquSpv>($"{recurso.sip_user}. SipAgent Respuesta NULA.");
+                }
+            }
+            else
+            {
+                recurso.EstadoSip = std.Error;
+                recurso.LastOptionsResponse = "";
+                LogTrace<ExtEquSpv>($"{recurso.sip_user}. SipAgent no contesta...");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="actual"></param>
+        /// <param name="nuevo"></param>
+        /// <returns></returns>
+        private std ChangeStd(EquipoEurocae equipo, std nuevo)
+        {
+            if (equipo.EstadoRed1 != nuevo)
+            {
+                /** Generar evento */
+                U5kBaseDatos.eTiposInci tinci = equipo.Tipo == 2 ? U5kBaseDatos.eTiposInci.TEH_EXTERNO_RADIO :
+                    equipo.Tipo == 3 ? U5kBaseDatos.eTiposInci.TEH_EXTERNO_TELEFONIA :
+                    equipo.Tipo == 5 ? U5kBaseDatos.eTiposInci.TEH_RECORDER : U5kBaseDatos.eTiposInci.TEH_SISTEMA;
+                string id = equipo.Tipo == 5 ? equipo.Id : equipo.sip_user;
+                RecordEvent<ExtEquSpv>(DateTime.Now,
+                    nuevo == std.Ok ? U5kBaseDatos.eIncidencias.IEE_ENTRADA :
+                    U5kBaseDatos.eIncidencias.IEE_CAIDA,
+                    tinci,
+                    id, Params());
+            }
+            return nuevo;
+        }
+
+        private SipUA local_ua = null;
+        private SipSupervisor sips = null;
+        private List<string> AllowedSipResponses = null;
+    }
 }
