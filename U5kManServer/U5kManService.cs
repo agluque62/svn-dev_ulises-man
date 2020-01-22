@@ -1486,6 +1486,7 @@ namespace U5kManServer
             EstadoRed1 = from.EstadoRed1;
             EstadoRed2 = from.EstadoRed2;
             EstadoSip = from.EstadoSip;
+            LastOptionsResponse = from.LastOptionsResponse;
         }
 
         /** */
