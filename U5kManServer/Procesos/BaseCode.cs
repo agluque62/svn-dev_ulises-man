@@ -399,18 +399,19 @@ namespace NucleoGeneric
         /// Utiliza esta función para realizar un log de tipo ERROR, y adicionalmente enviar una incidencia, con mensajes diferentes entre el del Log y el de la incidencia.
         /// La funcion coge cada uno de los parametros y los separa con comas para que el software en el destino los interprete.
         /// </summary>
-        static public void LogException<T>(/*String from, */String message, Exception ex, bool bRegistroHistorico = false,
+        static public void LogException<T>(String message, Exception ex, bool severity = false, bool bRegistroHistorico = false,
             [System.Runtime.CompilerServices.CallerLineNumber] int lineNumber = 0, [System.Runtime.CompilerServices.CallerMemberName] string caller = null)
         {
             message += " [EXCEPTION ERROR]: " + ex.Message;
             if (null != ex.InnerException)
                 message += " [INNER EXCEPTION ERROR]" + ex.InnerException.Message;
-            Log<T>(/*from, */LogLevel.Error, message, eIncidencias.IGNORE, lineNumber, caller);
+
+            Log<T>(severity ? LogLevel.Error : LogLevel.Warn, message, eIncidencias.IGNORE, lineNumber, caller);
 
             /** */
             if (bRegistroHistorico == true)
             {
-                Log<T>(/*from, */LogLevel.Error, "EXCEPTION ERROR", eIncidencias.IGRL_U5KI_SERVICE_ERROR, new object[] { ex.Message }, lineNumber, caller);
+                Log<T>(severity ? LogLevel.Error : LogLevel.Warn, "EXCEPTION ERROR", eIncidencias.IGRL_U5KI_SERVICE_ERROR, new object[] { ex.Message }, lineNumber, caller);
             }
         }
 

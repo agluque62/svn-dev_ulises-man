@@ -41,7 +41,7 @@ namespace U5kManServer
         void LogException(Exception x, 
             [System.Runtime.CompilerServices.CallerLineNumber] int lineNumber = 0, [System.Runtime.CompilerServices.CallerMemberName] string caller = null)
         {
-            LogException<SnmpClient>("", x, false, lineNumber, caller);
+            LogException<SnmpClient>("", x, false, false, lineNumber, caller);
         }
         /// <summary>
         /// 
