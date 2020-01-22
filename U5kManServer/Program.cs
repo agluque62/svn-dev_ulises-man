@@ -67,7 +67,7 @@ namespace U5kManServer
                 var app = new U5kManMain();
                 app.StartDebug();
 
-                LogWarn<uv5kSgmManProgram>(String.Format("Arrancando Modo Consola en {0}", System.IO.Directory.GetCurrentDirectory()));
+                LogInfo<uv5kSgmManProgram>(String.Format("Arrancando Modo Consola en {0}", System.IO.Directory.GetCurrentDirectory()));
                 System.Console.WriteLine("Version {0}. Press 'q' to Quit.", U5kGenericos.Version);
                 char key;
                 while ((key = Console.ReadKey(true).KeyChar) != 'q')
@@ -119,14 +119,14 @@ namespace U5kManServer
 #endif
                 }
 
-                LogWarn<uv5kSgmManProgram>("Saliendo Modo Consola ...");
+                LogInfo<uv5kSgmManProgram>("Saliendo Modo Consola ...");
                 app.StopDebug();
                 System.Threading.Thread.Sleep(1000);
-                LogWarn<uv5kSgmManProgram>("Fin del Programa");
+                LogInfo<uv5kSgmManProgram>("Fin del Programa");
             }
             else
             {
-                LogWarn<uv5kSgmManProgram>(String.Format("Arrancando en {0}", System.IO.Directory.GetCurrentDirectory()));
+                LogInfo<uv5kSgmManProgram>(String.Format("Arrancando en {0}", System.IO.Directory.GetCurrentDirectory()));
                 ServiceBase[] ServicesToRun;
                 ServicesToRun = new ServiceBase[] { new U5kManMain() };
                 ServiceBase.Run(ServicesToRun);
@@ -141,7 +141,7 @@ namespace U5kManServer
         void MyGlobalExceptionHandler(object sender, UnhandledExceptionEventArgs args)
         {
             Exception x = (Exception)args.ExceptionObject;
-            LogException<uv5kSgmManProgram>("", x);
+            LogException<uv5kSgmManProgram>("MyGlobalExceptionHandler", x, true);
         }
 
         void Test()

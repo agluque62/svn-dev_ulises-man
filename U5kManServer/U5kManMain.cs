@@ -49,9 +49,9 @@ namespace U5kManServer
         {
 #if MASTER_SLAVE
             // thMainService.Start(this);
-            BaseCode.Log<U5kManMain>(NLog.LogLevel.Debug, String.Format("Starting Service"), eIncidencias.IGNORE);
+            BaseCode.Log<U5kManMain>(NLog.LogLevel.Info, String.Format("Starting Service"), eIncidencias.IGNORE);
             thMainService.Start();
-            BaseCode.Log<U5kManMain>(NLog.LogLevel.Debug, String.Format("Service Active"), eIncidencias.IGNORE);
+            BaseCode.Log<U5kManMain>(NLog.LogLevel.Info, String.Format("Service Active"), eIncidencias.IGNORE);
 #else
             _started = ActivateService();
             if (_started == true)
@@ -69,9 +69,9 @@ namespace U5kManServer
 #if MASTER_SLAVE
             //bMainServiceThreadExit = true;
             //thMainService.Join(5000);
-            BaseCode.Log<U5kManMain>(NLog.LogLevel.Debug, String.Format("Finishing service"), eIncidencias.IGNORE);
+            BaseCode.Log<U5kManMain>(NLog.LogLevel.Info, String.Format("Finishing service"), eIncidencias.IGNORE);
             thMainService.Stop(TimeSpan.FromSeconds(20));
-            BaseCode.Log<U5kManMain>(NLog.LogLevel.Debug, String.Format("Service Finished"), eIncidencias.IGNORE);
+            BaseCode.Log<U5kManMain>(NLog.LogLevel.Info, String.Format("Service Finished"), eIncidencias.IGNORE);
 #else
             if (_started)
             {
@@ -363,7 +363,7 @@ namespace U5kManServer
             }
             catch (Exception x)
             {
-                LogException<U5kServiceMain>("", x);
+                LogException<U5kServiceMain>("", x, true);
                 return false;
             }
             return true;
@@ -391,7 +391,7 @@ namespace U5kManServer
                 }
                 catch (Exception x)
                 {
-                    LogException<U5kServiceMain>("", x);
+                    LogException<U5kServiceMain>("", x, true);
                     return false;
                 }
 
@@ -482,7 +482,7 @@ namespace U5kManServer
                     {
                         /** Error: Nombres no coinciden con el de la máquina */
                         ClusterError = U5KStdGeneral.ClusterErrors.NoLocalServerNameDetected;
-                        LogError<U5kServiceMain>(
+                        LogWarn<U5kServiceMain>(
                             String.Format("Error: El nombre del PC no esta en el CLUSTER. Se asume rol de MASTER..."));
                         _Master = true;
                     }
@@ -490,7 +490,7 @@ namespace U5kManServer
                     {
                         /** Error: Nombres Repetidos */
                         ClusterError = U5KStdGeneral.ClusterErrors.RepeatedServerNamesDetected;
-                        LogError<U5kServiceMain>(
+                        LogWarn<U5kServiceMain>(
                             String.Format("Error: Los dos nodos del CLUSTER tienen el mismo nombre. Se asume rol de MASTER..."));
                         _Master = true;
                     }
@@ -503,7 +503,7 @@ namespace U5kManServer
                         {
                             /** Hay Nodos activos y Ningun nodo MASTER */
                             ClusterError = U5KStdGeneral.ClusterErrors.NoMainNodeDetected;
-                            LogError<U5kServiceMain>(
+                            LogWarn<U5kServiceMain>(
                                 String.Format("Error: Hay Nodos activos y Ningun nodo MASTER. Se asume rol de MASTER..."));
                             _Master = true;
                         }
@@ -516,7 +516,7 @@ namespace U5kManServer
 #else
                             _Master = U5kGenericos.IsLocalIp(Properties.u5kManServer.Default.MySqlServer); 
 #endif
-                            LogError<U5kServiceMain>(
+                            LogWarn<U5kServiceMain>(
                                 String.Format("Error: Los dos Nodos estan en MASTER. Se asume rol de {0}, por el criterio de localizacion de la IP virtual ({1})...",
                                 U5kManService._Master ? "MASTER" : "STANDBY", Properties.u5kManServer.Default.MySqlServer));
                         }
@@ -524,7 +524,7 @@ namespace U5kManServer
                         {
                             /** No hay nodos activos */
                             /*stdg.*/ClusterError = U5KStdGeneral.ClusterErrors.NoActiveNodesDetected;
-                            LogError<U5kServiceMain>(
+                            LogWarn<U5kServiceMain>(
                                 String.Format("Error: No hay nodos activos. Se asume rol de MASTER..."));
                             /*U5kManService.*/_Master = true;
                         }
@@ -550,7 +550,7 @@ namespace U5kManServer
                             stdg.cfgVersion = stdg.cfgName = string.Empty;
                             U5kManService._main.InvalidateConfig();
                             bMaster = true;
-                            LogWarn<U5kServiceMain>("Modo PRINCIPAL.");
+                            LogInfo<U5kServiceMain>("Modo PRINCIPAL.");
                         }
                         else if (bMaster && !U5kManService._Master)
                         {
@@ -559,7 +559,7 @@ namespace U5kManServer
                             U5kEstadisticaProc.Estadisticas.FromMasterToSlave();
                             stdg.cfgVersion = stdg.cfgName = string.Empty;
                             bMaster = false;
-                            LogWarn<U5kServiceMain>("Modo RESERVA...");
+                            LogInfo<U5kServiceMain>("Modo RESERVA...");
                         }
                         else if (U5kManService._Master && U5kManService._main.Running == false)
                         {
@@ -773,7 +773,7 @@ namespace U5kManServer
                         U5kiDbHelper.NewBackup(cfg.MySqlServer, cfg.BdtSchema, cfg.MySqlUser, cfg.MySqlPwd, Properties.u5kManServer.Default.MySqlDumpVersion);
                     items.ForEach(item =>
                     {
-                        LogInfo<U5kServiceMain>(item.What);
+                        LogDebug<U5kServiceMain>(item.What);
                         RecordEvent<U5kServiceMain>(item.When, item.IsError ? eIncidencias.IGRL_NBXMNG_EVENT : eIncidencias.IGRL_NBXMNG_ALARM,
                             eTiposInci.TEH_SISTEMA, "BKP", Params(item.What));
                     });
@@ -789,7 +789,7 @@ namespace U5kManServer
         {
             this.timerTest = new System.Threading.Timer(x =>
             {
-                LogInfo<U5kServiceMain>(String.Format("TOTAL MEMORY  [{0:n}].....", (double)GC.GetTotalMemory(true)));
+                LogDebug<U5kServiceMain>(String.Format("TOTAL MEMORY  [{0:n}].....", (double)GC.GetTotalMemory(true)));
                 SetupTimerTest(interval);
             }
             , null, interval, Timeout.InfiniteTimeSpan);
@@ -831,7 +831,7 @@ namespace U5kManServer
             }
             else
             {
-                LogError<U5kServiceMain>(String.Format("ERROR EN LA SUPERVISION DE BASE DE DATOS [DB {0}, MASTER {1}]", U5kManService.Database, U5kManService._Master));
+                LogWarn<U5kServiceMain>(String.Format("ERROR EN LA SUPERVISION DE BASE DE DATOS [DB {0}, MASTER {1}]", U5kManService.Database, U5kManService._Master));
 
                 if (U5kManService._Master)
                 {
@@ -1029,7 +1029,7 @@ namespace U5kManServer
                         }
                         else
                         {
-                            LogError<U5kServiceMain>(
+                            LogWarn<U5kServiceMain>(
                                 String.Format("No se encuentra Interfaz ETH para la ip {0}", MyIp));
                             return;
                         }
@@ -1050,7 +1050,7 @@ namespace U5kManServer
 
                     if (MyStdServer == null)
                     {
-                        LogError<U5kServiceMain>(
+                        LogWarn<U5kServiceMain>(
                             String.Format("No se determina si soy Servidor-1 o Servidor-2: {0} ?? ({1})-({2})",
                             System.Environment.MachineName, stdg.stdServ1.name, stdg.stdServ2.name));
                     }
@@ -1353,7 +1353,7 @@ namespace U5kManServer
         /// <returns></returns>
         public static EstadoCluster GetEstadoCluster(int Nodo1Nodo2)
         {
-            LogInfo<ClusterSim>("GetEstadoCluster SIMULADO!!!");
+            LogDebug<ClusterSim>("GetEstadoCluster SIMULADO!!!");
             if (_except == true)
             {
                 _except = false;

@@ -147,7 +147,7 @@ namespace U5kManServer
             catch (Exception x)
             {
                 _error = true;
-                LogError<Uvki5WavPlayer>(x.Message);
+                LogException<Uvki5WavPlayer>("", x);
             }
         }
 

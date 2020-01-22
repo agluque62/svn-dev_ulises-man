@@ -300,7 +300,7 @@ namespace U5kManServer
                 else
                 {
 #if !_TESTING_
-                    LogError<U5KStdGeneral>(
+                    LogWarn<U5KStdGeneral>(
                         String.Format("No se determina si soy Servidor-1 o Servidor-2: {0} ?? ({1})-({2}). Se asume SERV1",
                         System.Environment.MachineName, stdServ1.name, stdServ2.name));
 #endif
@@ -1596,47 +1596,43 @@ namespace U5kManServer
 #else
         /** 20171023. Rutinas los Clones... */
         Object lockConcurrent = new Object();
-        Semaphore writeAccess = new Semaphore(1, 1);        
-        String ocupadopor = "";
-        System.Diagnostics.Stopwatch tm = new System.Diagnostics.Stopwatch();
-        public bool wrAccAcquire_1(int waitingMilliseconds = 10000,
-            [System.Runtime.CompilerServices.CallerLineNumber] int lineNumber = 0, 
-            [System.Runtime.CompilerServices.CallerMemberName] string caller = null,
-            [System.Runtime.CompilerServices.CallerFilePath] string file = null)
-        {
-            string peticionario = String.Format("[{0}.{1},{2}]", System.IO.Path.GetFileNameWithoutExtension(file), caller, lineNumber);
-            if (writeAccess.WaitOne(waitingMilliseconds) == false)          
-            {
-#if !_TESTING_ && DEBUG
-                LogFatal<U5kManStdData>(String.Format("Timeout SEM ({2}): ({0}=>{1})", peticionario, ocupadopor,waitingMilliseconds));
-#endif
-                return false;
-            }
-            ocupadopor = peticionario;
-            tm.Restart();
-            return true;
-        }
-        public void wrAccRelease_1([System.Runtime.CompilerServices.CallerLineNumber] int lineNumber = 0, [System.Runtime.CompilerServices.CallerMemberName] string caller = null) 
-        {
-            try
-            {
-                tm.Stop();
-#if !_TESTING_
-                NLog.LogManager.GetLogger("sem-hist").Trace("Semaforo ocupado por {0} durante {1} ms", ocupadopor, tm.ElapsedMilliseconds);
-#endif
-                ocupadopor = "";
-                writeAccess.Release();
-            }
-            catch (Exception x)
-            {
-#if !_TESTING_
-#if DEBUG
-                LogFatal<U5kManStdData>(String.Format("{0}. Semaforo ocupado por {1}", x.Message, ocupadopor)/*, x*/);
-#endif
-                LogException<U5kManStdData>( "", x);
-#endif
-            }    
-        }
+        //        Semaphore writeAccess = new Semaphore(1, 1);        
+        //        String ocupadopor = "";
+        //        System.Diagnostics.Stopwatch tm = new System.Diagnostics.Stopwatch();
+        //        public bool wrAccAcquire_1(int waitingMilliseconds = 10000,
+        //            [System.Runtime.CompilerServices.CallerLineNumber] int lineNumber = 0, 
+        //            [System.Runtime.CompilerServices.CallerMemberName] string caller = null,
+        //            [System.Runtime.CompilerServices.CallerFilePath] string file = null)
+        //        {
+        //            string peticionario = String.Format("[{0}.{1},{2}]", System.IO.Path.GetFileNameWithoutExtension(file), caller, lineNumber);
+        //            if (writeAccess.WaitOne(waitingMilliseconds) == false)          
+        //            {
+        //                LogError<U5kManStdData>(String.Format("Timeout SEM ({2}): ({0}=>{1})", peticionario, ocupadopor,waitingMilliseconds));
+        //                return false;
+        //            }
+        //            ocupadopor = peticionario;
+        //            tm.Restart();
+        //            return true;
+        //        }
+        //        public void wrAccRelease_1([System.Runtime.CompilerServices.CallerLineNumber] int lineNumber = 0, [System.Runtime.CompilerServices.CallerMemberName] string caller = null) 
+        //        {
+        //            try
+        //            {
+        //                tm.Stop();
+        //                LogTrace<U5kManStdData>($"Semaforo ocupado por {ocupadopor} durante {tm.ElapsedMilliseconds} ms");
+        //                ocupadopor = "";
+        //                writeAccess.Release();
+        //            }
+        //            catch (Exception x)
+        //            {
+        //#if !_TESTING_
+        //#if DEBUG
+        //                LogFatal<U5kManStdData>(String.Format("{0}. Semaforo ocupado por {1}", x.Message, ocupadopor)/*, x*/);
+        //#endif
+        //                LogException<U5kManStdData>( $"{ x.Message}. Semaforo ocupado por {ocupadopor}",  x);
+        //#endif
+        //            }    
+        //        }
 
         /// <summary>
         /// 
@@ -2509,7 +2505,7 @@ namespace U5kManServer
             }
             catch (Exception x)
             {
-                LogException<U5kServiceMain>( "", x);
+                LogException<U5kServiceMain>("UpdateInciTask", x);
             }
             finally
             {
@@ -2551,7 +2547,7 @@ namespace U5kManServer
             }
             catch (Exception x)
             {
-                LogException<U5kServiceMain>( "", x);
+                LogException<U5kServiceMain>("stMainStandbyChange", x);
             }
         }
 
@@ -2668,7 +2664,7 @@ namespace U5kManServer
             }
             catch (Exception x)
             {
-                LogException<U5kServiceMain>( "", x);
+                LogException<U5kServiceMain>( "Reset", x);
             }
         }
 
@@ -2719,7 +2715,7 @@ namespace U5kManServer
             }
             catch (Exception x)
             {
-                LogException<U5kServiceMain>( "", x);
+                LogException<U5kServiceMain>( "OpenBdt", x);
                 _bdt = null;
             }
         }
