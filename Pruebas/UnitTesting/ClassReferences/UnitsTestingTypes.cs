@@ -10,7 +10,7 @@ namespace UnitTesting
     {
     }
 }
-namespace U5kManServer
+namespace U5kManServer1
 {
     public enum std
     {

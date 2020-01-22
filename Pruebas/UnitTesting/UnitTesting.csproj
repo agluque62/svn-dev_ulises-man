@@ -69,9 +69,9 @@
     <Compile Include="NetworkInformationTests.cs" />
     <Compile Include="BackupTest.cs" />
     <Compile Include="ClassReferences\UnitsTestingTypes.cs" />
+    <Compile Include="CfgGwsUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="ps.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -88,6 +88,10 @@
     <ProjectReference Include="..\..\U5kManMibRevC\U5kManMibRevC.csproj">
       <Project>{10a878d1-1c89-4e8f-8b84-d7f05908bf64}</Project>
       <Name>U5kManMibRevC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\U5kManServer\U5kManServer.csproj">
+      <Project>{ade5cd26-8de9-4014-9df2-59585a19227d}</Project>
+      <Name>U5kManServer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\U5kUtilities\Utilities.csproj">
       <Project>{822f500d-adb8-4bb1-8a1c-e9feaff369b0}</Project>

@@ -201,9 +201,9 @@ namespace U5kBaseDatos
     {
         public int Slot { get; set; }
         public int Pos { get; set; }
-        public uint Tpo { get; set; }
-        public uint Itf { get; set; }
-        public uint Stpo { get; set; } // 0: AudioRx, 1: AudioTx, 2: AudioRxTx, 3: AudioTxHF, 4: MNRx, 5: MNTx
+        public uint Tpo { get; set; }   // 0: Radio, 1: Telefonia, 2: Linea Caliente
+        public uint Itf { get; set; }   // 2: BC, 3: BL, 4: AB, 5: R2, 6: N5 
+        public uint Stpo { get; set; }  // 0: AudioRx, 1: AudioTx, 2: AudioRxTx, 3: AudioTxHF, 4: MNRx, 5: MNTx
     }
 
     /// <summary>
