@@ -1490,7 +1490,8 @@ namespace U5kManServer
         }
 
         /** */
-        public string Key { get => sip_user ?? Id; }
+        //public string Key { get => sip_user ?? Id; }
+        public string Key { get => string.Join("_", sip_user ?? Id, Tipo.ToString()); }
     }
 
     /// <summary>
@@ -1997,7 +1998,7 @@ namespace U5kManServer
                 }
             }
         }
-        public Dictionary<string, EquipoEurocae> EQUDIC { get => stdequ; }
+        public Dictionary<string, EquipoEurocae> EQUDIC { get => stdequ; set => stdequ = value; }
 #endif
         /// <summary>
         /// 

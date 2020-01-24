@@ -13,6 +13,7 @@ using Utilities;
 
 namespace U5kManServer.ExtEquSpvSpace
 {
+#if EXTEQUSPV_NEW 
     class ExtEquSpv_old : NucleoGeneric.NGThread/*, IDisposable*/
     {
         /// <summary>
@@ -258,7 +259,7 @@ namespace U5kManServer.ExtEquSpvSpace
         private SipSupervisor sips = null;
         private List<string> AllowedSipResponses = null;
     }
-
+#else
     /// <summary>
     /// 20200122: Se separa la Supervision del Equipo de la del recurso, para evitar hacer PINES repetidos en equipos con varios recursos.
     /// </summary>
@@ -313,13 +314,7 @@ namespace U5kManServer.ExtEquSpvSpace
 
                             // Copia de equipo configurados.
                             List<EquipoEurocae> localequ = new List<EquipoEurocae>();
-                            GlobalServices.GetWriteAccess((gdata) =>
-                            {
-                                gdata.STDEQS.ForEach(equ =>
-                                {
-                                    localequ.Add(new EquipoEurocae(equ));
-                                });
-                            });
+                            GlobalServices.GetWriteAccess((gdata) => localequ = gdata.STDEQS.Select(eq => eq).ToList());
 
                             /** Agruparlos por equipo */
                             var grupos = localequ.GroupBy(eq => eq.Ip1)
@@ -345,24 +340,13 @@ namespace U5kManServer.ExtEquSpvSpace
                             LogTrace<ExtEquSpv>($"Fin de Supervision de equipos y recursos externos ({tasks.Count}, {waitingResult})...");
 
                             // Actualizo los datos..
-                            GlobalServices.GetWriteAccess((gdata) =>
-                            {
-                                localequ.ForEach(eq =>
-                                {
-                                    if (gdata.EQUDIC.ContainsKey(eq.Key))
-                                    {
-                                        gdata.EQUDIC[eq.Key].CopyFrom(eq);
-                                    }
-                                });
-
+                            GlobalServices.GetWriteAccess((gdata) => 
+                            { 
+                                gdata.EQUDIC = localequ.Select(e => e).ToDictionary(e => e.Key, e => e); 
                                 SetEstadoGlobalEquipos(gdata, localequ);
                             });
 
-
-                            tm.StopAndPrint((msg) =>
-                            {
-                                LogTrace<ExtEquSpv>(msg);
-                            });
+                            tm.StopAndPrint((msg) => LogTrace<ExtEquSpv>(msg));
                         }
                     }
                     catch (Exception x)
@@ -404,7 +388,8 @@ namespace U5kManServer.ExtEquSpvSpace
             LogTrace<ExtEquSpv>($"Supervisando Equipo en {ip}, {recursos.Count}");
             List<Task> stasks = new List<Task>();
 
-            U5kGenericos.Ping(ip, true, (res, replies) =>
+            var presente = recursos[0].EstadoRed1 == std.Ok;
+            U5kGenericos.Ping(ip, presente, (res, replies) =>
             {
                 LogTrace<ExtEquSpv>($"PIN {ip} => ({string.Join(",", replies)})");
                 foreach (var recurso in recursos)
@@ -508,4 +493,5 @@ namespace U5kManServer.ExtEquSpvSpace
         private SipSupervisor sips = null;
         private List<string> AllowedSipResponses = null;
     }
+#endif
 }
