@@ -22,8 +22,8 @@
     </ul>
 </section>
 <section id="_contenido" class="hw">
-    <!-- Pantalla de Estado General -->
-    <div id="spvGlobal" data-ng-show="ctrl.pagina()==0">
+    <!-- Pantalla de Estado General Sin alinear imagenes -->
+    <div id="spvGlobal" data-ng-show="ctrl.pagina()==-1">
         <h1><strong translate>SPV_GLOBAL_01</strong></h1>
         <div class="row">
             <div class="col-md-4">
@@ -55,10 +55,10 @@
                 </a>
             </div>
 
-            <div class="col-md-4" >
+            <div class="col-md-4">
 
                 <a ng-href="" class="thumbnail" ng-show="ctrl.nmxSplitted()==false">
-                    <img ng-src="./images/radioserver.jpg" alt="Nodebox" class="{{ctrl.nbx_mixed_std_class()}}" width="70%;"
+                    <img ng-src="./images/radioserver.jpg" alt="Nodebox" class="{{ctrl.nbx_mixed_std_class()}}" height="128"
                          ng-click="ctrl.pagina(3)">
                     <div class="div_titulo">{{ctrl.nbx_mixed_name()}}</div>
                 </a>
@@ -70,7 +70,7 @@
 
                             <a ng-href="" class="thumbnail">
                                 <div class="nbx-img-container">
-                                    <img ng-src="./images/radio-server-new.png" alt="Radio" class="{{ctrl.nbx_radio_std_class()}}" ng-click="ctrl.pagina(3)" width="100%">
+                                    <img ng-src="./images/radio-server-new.png" alt="Radio" class="{{ctrl.nbx_radio_std_class()}}" ng-click="ctrl.pagina(3)" height="128">
                                     <div class="nbx-img-bottom-right">{{ctrl.nbx_radio_count()}}</div>
                                 </div>
                                 <div class="nbxip">
@@ -84,7 +84,7 @@
                             <a ng-href="" class="thumbnail">
                                 <div class="nbx-img-container">
 
-                                    <img ng-src="./images/phone-focus.jpg" alt="Telefonia" class="{{ctrl.nbx_phone_std_class()}}" ng-click="ctrl.pagina(3)" width="100%">
+                                    <img ng-src="./images/phone-focus.jpg" alt="Telefonia" class="{{ctrl.nbx_phone_std_class()}}" ng-click="ctrl.pagina(3)" height="128">
                                     <div class="nbx-img-bottom-right">{{ctrl.nbx_phone_count()}}</div>
                                 </div>
                                 <div class="nbxip">
@@ -113,7 +113,7 @@
                 </a>
             </div>
             <div class="col-md-4">
-                <a ng-href="{{ctrl.std.ext.url}}" class="thumbnail" ng-show="ctrl.std.ext.enable==1" ng-click="ctrl.pagina(5)">
+                <a ng-href="{{ctrl.std.ext.url}}" ng-show="ctrl.std.ext.enable==1" ng-click="ctrl.pagina(5)" class="thumbnail">
                     <img ng-src="./images/extern2.jpg" alt="Externos" class="{{ctrl.std_class(ctrl.std.ext)}}" height="128">
                     <div class="div_titulo">{{ctrl.std.ext.name}}</div>
                 </a>
@@ -139,10 +139,124 @@
                 </table>
             </div>
         </div>
+    </div>
+    <!-- Pagina de Estado General. Alineada -->
+    <div id="spvGlobal" data-ng-show="ctrl.pagina()==0">
+        <h1><strong translate>SPV_GLOBAL_01</strong></h1>
+        <div class="row">
+            <div class="col-md-4">
+                <a ng-href="{{ctrl.serv_url()}}" class="thumbnail" ng-show="ctrl.std.sv1.enable==1">
+                    <img ng-src="./images/_server.jpg" alt="Server-1" class="{{ctrl.serv_std_class(0, ctrl.std.sv1)}}"  style="max-height:64px;height:64px;width:80%;">
+                    <div class="div_titulo">{{ctrl.std.sv1.name}}</div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a ng-href="{{ctrl.serv_url()}}" class="thumbnail" ng-show="ctrl.std.sv2.enable==1">
+                    <img ng-src="./images/_server.jpg" alt="Server-2" class="{{ctrl.serv_std_class(1, ctrl.std.sv2)}}" style="max-height:64px;height:64px;width:80%;">
+                    <div class="div_titulo">{{ctrl.std.sv2.name}}</div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a ng-href="{{ctrl.std.ntp.url}}" class="thumbnail" ng-show="ctrl.std.ntp.enable==1">
+                    <img ng-src="./images/_ntp.jpg" alt="Ntp" class="{{ctrl.std_class(ctrl.std.ntp)}}" style="max-height:64px;height:64px;width:80%;">
+                    <div class="div_titulo">{{ctrl.std.ntp.name}}</div>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <a ng-href="{{ctrl.std.cwp.url}}" class="thumbnail" ng-click="ctrl.pagina(1)" ng-show="ctrl.std.cwp.enable==1">
+                    <img ng-src="./images/_paneles.jpg" alt="Paneles" class="{{ctrl.std_class(ctrl.std.cwp)}}" style="max-height:64px;height:64px;width:80%;">
+                    <div class="div_titulo">{{ctrl.std.cwp.name}}</div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a ng-href="" class="thumbnail" ng-show="ctrl.nmxSplitted()==false">
+                    <img ng-src="./images/radioserver.jpg" alt="Nodebox" class="{{ctrl.nbx_mixed_std_class()}}" style="max-height:64px;height:64px;width:80%;"
+                         ng-click="ctrl.pagina(3)">
+                    <div class="div_titulo">{{ctrl.nbx_mixed_name()}}</div>
+                </a>
+                <table class="table" ng-show="ctrl.nmxSplitted()==true">
+                    <tr>
+                        <td class="text-center">
+                            <!--<p class="text-info text-center" translate>Radio</p>-->
+
+                            <a ng-href="" class="thumbnail">
+                                <div class="nbx-img-container">
+                                    <img ng-src="./images/radio-server-new.png" alt="Radio" class="{{ctrl.nbx_radio_std_class()}}" ng-click="ctrl.pagina(3)" height="128">
+                                    <div class="nbx-img-bottom-right">{{ctrl.nbx_radio_count()}}</div>
+                                </div>
+                                <div class="nbxip">
+                                    <p>{{ctrl.nbx_radio_name()}}</p>
+                                </div>
+                            </a>
+
+                        </td>
+                        <td class="text-center">
+                            <!--                        <p class="text-info text-center" translate>Telefonia</p>-->
+                            <a ng-href="" class="thumbnail">
+                                <div class="nbx-img-container">
+
+                                    <img ng-src="./images/phone-focus.jpg" alt="Telefonia" class="{{ctrl.nbx_phone_std_class()}}" ng-click="ctrl.pagina(3)" height="128">
+                                    <div class="nbx-img-bottom-right">{{ctrl.nbx_phone_count()}}</div>
+                                </div>
+                                <div class="nbxip">
+                                    <p>{{ctrl.nbx_phone_name()}}</p>
+                                </div>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <div class="col-md-4">
+                <a ng-href="{{ctrl.std.sv1.gws}}" ng-click="ctrl.pagina(2)" class="thumbnail" ng-show="ctrl.std.gws.enable==1">
+                    <img ng-src="./images/_pasarelas.jpg" alt="Pasarelas" class="{{ctrl.std_class(ctrl.std.gws)}}" style="max-height:64px;height:64px;width:80%;">
+                    <div class="div_titulo">{{ctrl.std.gws.name}}</div>
+                </a>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <a target="_blank" ng-href="{{ctrl.std.pbx.url}}" class="thumbnail" ng-show="ctrl.std.pbx.enable==1">
+                    <img ng-src="./images/pabxip.jpg" alt="Pabx" class="{{ctrl.std_class(ctrl.std.pbx)}}" style="max-height:64px;height:64px;width:80%;">
+                    <div class="div_titulo">{{ctrl.std.pbx.name}}</div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a ng-href="{{ctrl.std.ext.url}}" ng-show="ctrl.std.ext.enable==1" ng-click="ctrl.pagina(5)" class="thumbnail">
+                    <img ng-src="./images/extern2.jpg" alt="Externos" class="{{ctrl.std_class(ctrl.std.ext)}}" style="max-height:64px;height:64px;width:80%;">
+                    <div class="div_titulo">{{ctrl.std.ext.name}}</div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <table class="table" ng-show="ctrl.std.sct1.enable==1 || ctrl.std.sct2.enable==1" style="max-height:64px;height:64px;width:80%;margin-left:10%;margin-bottom:0;">
+                        <tr>
+                            <td class="text-info text-center" translate>SACTA-1</td>
+                            <td class="text-info text-center" translate>SACTA-2</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center"><img ng-src="./images/_sacta.jpg" class="{{ctrl.std_class(ctrl.std.sct1)}}" height="64"></td>
+                            <td class="text-center"><img ng-src="./images/_sacta.jpg" class="{{ctrl.std_class(ctrl.std.sct2)}}" height="64"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-center">
+                                <button id="startstopsacta" type="button" ng-click="ctrl.SactaServiceStartStop(ctrl.std.sactaservicerunning)"
+                                        class="{{ctrl.SactaServiceStd(ctrl.std.sactaservicerunning).clase}}">
+                                    {{ctrl.SactaServiceStd(ctrl.std.sactaservicerunning).text}}
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
         <div class="row">
         </div>
     </div>
-
     <!-- Pantalla de Estado de Operadores -->
     <div id="spvOperadores" data-ng-show="ctrl.pagina()==1">
         <h1 title="Header"><strong translate>SPV_CWP_01</strong></h1>
@@ -158,12 +272,12 @@
                 </span>
 
                 <a ng-href="" class="thumbnail" ng-show="true">
-                    <img ng-src="./images/Operador.png" alt="" class="{{ctrl.std_class(ctrl.cwps[i])}}"
+                    <img ng-src="./images/Operador.png" alt="" class="{{ctrl.std_class(ctrl.cwps[i])}}" style="width:80%;"
                          bs-popover
                          data-content="{{ctrl.ope_detail(ctrl.cwps[i])}}"
                          ng-click="ctrl.popover_click($event)"
                          oncontextmenu="alert('oncontextmenu: ' + ctrl.cwps[i].name)">
-                    <p class="text-info text-center mt-1">{{ctrl.cwps[i].name}}</p>
+                    <p class="text-info text-center mt-1" style="margin-bottom:0">{{ctrl.cwps[i].name}}</p>
                 </a>
             </div>
         </div>
@@ -188,11 +302,11 @@
                     </ul>
                 </span>
                 <a ng-href="" class="thumbnail" ng-show="true" ng-click="">
-                    <img ng-src='{{ctrl.gw_img(ctrl.gws[i])}}' alt="" class="{{ctrl.std_class(ctrl.gws[i])}}"
+                    <img ng-src='{{ctrl.gw_img(ctrl.gws[i])}}' alt="" class="{{ctrl.std_class(ctrl.gws[i])}}" style="width: 80%;"
                          bs-popover
                          data-content="{{ctrl.gw_detail(ctrl.gws[i])}}"
                          ng-click="ctrl.popover_click($event)" />
-                    <p class="text-info text-center mt-1">{{ctrl.gws[i].name}}</p>
+                    <p class="text-info text-center mt-1" style="margin-bottom:0;">{{ctrl.gws[i].name}}</p>
                 </a>
             </div>
         </div>
@@ -207,7 +321,7 @@
                  ng-if="ctrl.std.csi.mixed.phsl[i] != null">
                 <a target="_blank" ng-href="{{ctrl.std.csi.mixed.phsl[i].Value.url}}" class="thumbnail" ng-show="true"
                    style=":hover {text-decoration: none;}">
-                    <img ng-src="./images/radioserver.jpg" alt="" class="{{ctrl.nbx_mixed_list_class()}}" width="70%">
+                    <img ng-src="./images/radioserver.jpg" alt="" class="{{ctrl.nbx_mixed_list_class()}}" style="width:70%;">
                     <p class="text-info text-center mt-1">{{ctrl.std.csi.mixed.phsl[i].Value.ip}}</p>
                     <div ng-bind-html="ctrl.nbx_mixed_info_services(ctrl.std.csi.mixed.phsl[i].Value)"></div>
                 </a>
@@ -261,8 +375,8 @@
             <div class="col-md-2" ng-repeat="i in [$index, $index + 1, $index + 2, $index + 3, $index + 4, $index + 5]"
                  ng-if="ctrl.pbxab[i] != null">
                 <a ng-href="" class="thumbnail" ng-show="true">
-                    <img ng-src="./images/voiptel.jpg" alt="" class="{{ctrl.std_class(ctrl.pbxab[i])}}">
-                    <p class="text-info text-center mt-1">{{ctrl.pbxab[i].name}}</p>
+                    <img ng-src="./images/voiptel.jpg" alt="" class="{{ctrl.std_class(ctrl.pbxab[i])}}" style="width:70%;">
+                    <p class="text-info text-center mt-1" style="margin-bottom:0;">{{ctrl.pbxab[i].name}}</p>
                 </a>
             </div>
         </div>
@@ -274,14 +388,14 @@
         <div class="row" ng-repeat="equ in ctrl.exteq_grps track by $index" ng-if="$index % 6 == 0">
             <div class="col-md-2" ng-repeat="i in [$index, $index + 1, $index + 2, $index + 3, $index + 4, $index + 5]"
                  ng-if="ctrl.exteq_grps[i] != null">
-                <a ng-href="" class="thumbnail" ng-show="true">
-                    <img ng-src="{{ctrl.exteq_img(ctrl.exteq_grps[i])}}" alt=""
+                <a ng-href="" class="thumbnail" ng-show="true" >
+                    <img ng-src="{{ctrl.exteq_img(ctrl.exteq_grps[i])}}" alt="" style="width:80%; height:64px;"
                          class="{{ctrl.exteq_std_class(ctrl.exteq_grps[i])}}"
                          width="70" height="35"
                          bs-popover
                          data-content="{{ctrl.exteq_detail(ctrl.exteq_grps[i])}}"
                          ng-click="ctrl.popover_click($event)">
-                    <p class="text-info text-center mt-1">{{ctrl.exteq_grps[i].name}}</p>
+                    <p class="text-info text-center mt-1" style="margin-bottom:0px;">{{ctrl.exteq_grps[i].name}}</p>
                 </a>
             </div>
         </div>
