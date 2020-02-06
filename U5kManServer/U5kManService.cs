@@ -604,8 +604,33 @@ namespace U5kManServer
         #endregion SNMP-MIB-SERVICE
     }
 
+    public class SupervisedItem
+    {
+        Int64 ConsecutiveFailedPollLimit = Properties.u5kManServer.Default.ConsecutiveFailedPollLimit;
+        public Int64 FailedPollCount { get; set; }
+
+        public bool IsPollingTime ()
+        {
+            //return FailedPollCount < ConsecutiveFailedPollLimit ? true : FailedPollCount % 4 == 0;
+            if (FailedPollCount < ConsecutiveFailedPollLimit || FailedPollCount % 4 == 0)
+                return true;
+            FailedPollCount++;
+            return false;
+        }
+        public bool ProcessResult(bool success)
+        {
+            if (success)
+            {
+                FailedPollCount = 0;
+                return true;
+            }
+            FailedPollCount++;
+            return (FailedPollCount >= ConsecutiveFailedPollLimit) ? true : false;
+        }
+    }
+
     [DataContract]
-    public class stdPos 
+    public class stdPos : SupervisedItem
     {
         [DataMember]
         public string name { get; set; }    // = "";
@@ -692,6 +717,8 @@ namespace U5kManServer
             stdg = stdGlobal();
             status_sync = "???";
             uris = new List<string>();
+
+            FailedPollCount = 0;
         }
 
         /// <summary>
@@ -719,6 +746,8 @@ namespace U5kManServer
                 status_sync = last.status_sync;
                 uris = last.uris;
                 sw_version = last.sw_version;
+
+                FailedPollCount = last.FailedPollCount;
 
                 stdg = stdGlobal();
             }
@@ -803,6 +832,8 @@ namespace U5kManServer
             status_sync = from.status_sync;
             uris = from.uris;
             sw_version = from.sw_version;
+
+            FailedPollCount = from.FailedPollCount;
 
             stdg = stdGlobal();
         }

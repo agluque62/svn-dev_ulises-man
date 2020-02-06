@@ -12,7 +12,7 @@ namespace U5kManServer.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.3.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.4.0.0")]
     internal sealed partial class u5kManServer : global::System.Configuration.ApplicationSettingsBase {
         
         private static u5kManServer defaultInstance = ((u5kManServer)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new u5kManServer())));
@@ -843,6 +843,15 @@ namespace U5kManServer.Properties {
         public string TeamingConfigXML {
             get {
                 return ((string)(this["TeamingConfigXML"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int ConsecutiveFailedPollLimit {
+            get {
+                return ((int)(this["ConsecutiveFailedPollLimit"]));
             }
         }
     }

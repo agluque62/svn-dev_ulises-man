@@ -256,12 +256,22 @@ namespace U5kManServer
 
                             foreach (stdPos pos in localpos)
                             {
-                                task.Add(
-                                    Task.Factory.StartNew(() =>
-                                    {
-                                        U5kGenericos.TraceCurrentThread(this.GetType().Name + " " + pos.name);
-                                        ExploraTop2(pos);
-                                    }, TaskCreationOptions.LongRunning));
+                                /** Gestion de los no activos a ellos se le hará polling con menos frecuencia */
+                                LogTrace<TopSnmpExplorer>($"{pos.name}({pos.ip}). Polling ({pos.FailedPollCount}).");
+                                if (pos.IsPollingTime() == true)
+                                {
+                                    task.Add(
+                                        Task.Factory.StartNew(() =>
+                                        {
+                                            U5kGenericos.TraceCurrentThread(this.GetType().Name + " " + pos.name);
+                                            ExploraTop2(pos);
+                                        }, TaskCreationOptions.LongRunning));
+                                    LogTrace<TopSnmpExplorer>($"{pos.name}({pos.ip}). Executed.");
+                                }
+                                else
+                                {
+                                    LogTrace<TopSnmpExplorer>($"{pos.name}({pos.ip}). Skipped");
+                                }
                             }
 
                             // Espero a que acaben todos.
@@ -494,10 +504,12 @@ namespace U5kManServer
                     pos.SnmpTimeout, pos.SnmpReintentos);
 
                 ProcessPos(pos, response);
+                pos.ProcessResult(true);
+                LogTrace<TopSnmpExplorer>(String.Format("{0}({1}) Ok", pos.name, pos.ip));
             }
             catch (Exception x)
             {
-                ProcessException(pos, x);
+                ProcessException(pos, x, pos.ProcessResult(false));
             }
         }
         /// <summary>
@@ -505,11 +517,15 @@ namespace U5kManServer
         /// </summary>
         /// <param name="pos"></param>
         /// <param name="x"></param>
-        protected void ProcessException(stdPos pos, Exception x)
+        protected void ProcessException(stdPos pos, Exception x, bool ProccesFail)
         {
-            EstadoPosicionSet(pos.name, pos, std.NoInfo);
-            pos.Reset();
-            LogException<TopSnmpExplorer>(String.Format("Explorando TOP {0}", pos.ip), x);
+            LogException<TopSnmpExplorer>(String.Format("{0}({1})", pos.name, pos.ip), x);
+            if (ProccesFail)
+            {
+                EstadoPosicionSet(pos.name, pos, std.NoInfo);
+                pos.Reset();
+                LogTrace<TopSnmpExplorer>(String.Format("{0}({1}) Out of service", pos.name, pos.ip));
+            }
         }
         /// <summary>
         /// 
