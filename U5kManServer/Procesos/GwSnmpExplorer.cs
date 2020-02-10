@@ -903,7 +903,7 @@ namespace U5kManServer
                             }
                             else
                             {
-                                LogTrace<GwExplorer>($"GwSip_ Fail ignored : {phgw.name}.");
+                                LogInfo<GwExplorer>($"GwSip_ Fail ignored : {phgw.name}.");
                             }
                         });
                         
@@ -919,7 +919,7 @@ namespace U5kManServer
                                 }
                                 else
                                 {
-                                    LogTrace<GwExplorer>($"GwCfg_ Fail ignored : {phgw.name}.");
+                                    LogInfo<GwExplorer>($"GwCfg_ Fail ignored : {phgw.name}.");
                                 }
                             });
 
@@ -941,7 +941,7 @@ namespace U5kManServer
                                 }
                                 else
                                 {
-                                    LogTrace<GwExplorer>($"GwSnmp Fail ignored : {phgw.name}.");
+                                    LogInfo<GwExplorer>($"GwSnmp Fail ignored : {phgw.name}.");
                                 }
                             });
                         }
@@ -949,7 +949,7 @@ namespace U5kManServer
                 }
                 else
                 {
-                        LogTrace<GwExplorer>($"GwPing Fail ignored : {phgw.name}.");
+                        LogInfo<GwExplorer>($"GwPing Fail ignored : {phgw.name}.");
                 }
             }
             catch (Exception x)

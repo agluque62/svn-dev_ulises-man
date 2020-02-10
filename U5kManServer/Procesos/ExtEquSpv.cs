@@ -436,7 +436,7 @@ namespace U5kManServer.ExtEquSpvSpace
                     }
                     else
                     {
-                        LogTrace<ExtEquSpv>($"Process Fail ignored : {recurso.sip_user}, .");
+                        LogInfo<ExtEquSpv>($"Process Fail ignored : {recurso.sip_user}.");
                     }
                 }
             });

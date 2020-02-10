@@ -526,6 +526,10 @@ namespace U5kManServer
                 pos.Reset();
                 LogTrace<TopSnmpExplorer>(String.Format("{0}({1}) Out of service", pos.name, pos.ip));
             }
+            else
+            {             
+                LogInfo<TopSnmpExplorer>($"Process Fail ignored : {pos.name}.");
+            }
         }
         /// <summary>
         /// 
