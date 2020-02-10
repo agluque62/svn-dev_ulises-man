@@ -608,8 +608,9 @@ namespace U5kManServer
     {
         Int64 ConsecutiveFailedPollLimit = Properties.u5kManServer.Default.ConsecutiveFailedPollLimit;
         public Int64 FailedPollCount { get; set; }
-
-        public SupervisedItem() { FailedPollCount = 0; }
+        
+        public std Std { get; set; }
+        public SupervisedItem() { FailedPollCount = 0; Std = std.NoInfo; }
         public bool IsPollingTime ()
         {
             //return FailedPollCount < ConsecutiveFailedPollLimit ? true : FailedPollCount % 4 == 0;
@@ -627,6 +628,11 @@ namespace U5kManServer
             }
             FailedPollCount++;
             return (FailedPollCount >= ConsecutiveFailedPollLimit) ? true : false;
+        }
+        public void CopyFrom(SupervisedItem other)
+        {
+            FailedPollCount = other.FailedPollCount;
+            Std = other.Std;
         }
     }
 
@@ -812,8 +818,7 @@ namespace U5kManServer
             uris = from.uris;
             sw_version = from.sw_version;
 
-            FailedPollCount = from.FailedPollCount;
-
+            base.CopyFrom(from);
             stdg = stdGlobal();
         }
 
@@ -1016,9 +1021,9 @@ namespace U5kManServer
     /// 
     /// </summary>
     [DataContract]
-    public class stdPhGw
+    public class stdPhGw 
     {
-        public stdPhGw()
+        public stdPhGw() : base()
         {
             lan1 = std.NoInfo;
             lan2 = std.NoInfo;
@@ -1027,42 +1032,15 @@ namespace U5kManServer
             presente = false;
             Seleccionada = false;
 #if GW_STD_V1
-            stdIpConn = stdCfgMod = stdSnmpMod = stdSipMod = std.NoInfo;
+            IpConn = new SupervisedItem();
+            SipMod = new SupervisedItem();
+            CfgMod = new SupervisedItem();
+            SnmpMod = new SupervisedItem();
 #endif
         }
-        public stdPhGw(stdPhGw last)
+        public stdPhGw(stdPhGw last) : this()
         {
-            if (last == null)
-            {
-                lan1 = std.NoInfo;
-                lan2 = std.NoInfo;
-                version = string.Empty;
-                std = std.NoInfo;
-                presente = false;
-                Seleccionada = false;
-#if GW_STD_V1
-                stdIpConn = stdCfgMod = stdSnmpMod = stdSipMod = std.NoInfo;
-#endif
-            }
-            else
-            {
-                lan1 = last.lan1;
-                lan2 = last.lan2;
-                version = last.version;
-                std = last.std;
-                presente = last.presente;
-                Seleccionada = last.Seleccionada;
-                for (int islot = 0; islot < 4; islot++)
-                {
-                    slots[islot].std_online = last.slots[islot].std_online;
-                }
-#if GW_STD_V1
-                stdIpConn = last.stdIpConn;
-                stdCfgMod = last.stdCfgMod;
-                stdSnmpMod = last.stdSnmpMod;
-                stdSipMod = last.stdSipMod;
-#endif
-            }
+            if (last != null) CopyFrom(last);
         }
 
         /// <summary>
@@ -1114,14 +1092,11 @@ namespace U5kManServer
         [DataMember]
         public int snmpport { get; set; }
 #if GW_STD_V1
-        [DataMember]
-        public std stdIpConn { get; set; }
-        [DataMember]
-        public std stdCfgMod { get; set; }
-        [DataMember]
-        public std stdSnmpMod { get; set; }
-        [DataMember]
-        public std stdSipMod { get; set; }
+        public SupervisedItem IpConn { get; set; }
+        public SupervisedItem CfgMod { get; set; }
+        public SupervisedItem SnmpMod { get; set; }
+        public SupervisedItem SipMod { get; set; }
+
         [DataMember]
         public std stdFA { get; set; }
 #endif
@@ -1133,7 +1108,7 @@ namespace U5kManServer
             get
             {
 #if GW_STD_V1
-                if (stdCfgMod != std.Ok || stdSnmpMod != std.Ok || stdSipMod != std.Ok)
+                if (CfgMod.Std != std.Ok || SnmpMod.Std != std.Ok || SipMod.Std != std.Ok)
                     return true;
 #endif
                 foreach (stdSlot slot in slots)
@@ -1161,7 +1136,10 @@ namespace U5kManServer
             }
 
 #if GW_STD_V1
-            stdIpConn = stdCfgMod = stdSnmpMod = stdSipMod = std.NoInfo;
+            IpConn = new SupervisedItem();
+            SipMod = new SupervisedItem();
+            CfgMod = new SupervisedItem();
+            SnmpMod = new SupervisedItem();
 #endif
             version = string.Empty;
         }
@@ -1211,10 +1189,10 @@ namespace U5kManServer
                 slots[ns].CopyFrom(from.slots[ns]);
             }
 #if GW_STD_V1
-            stdIpConn = from.stdIpConn;
-            stdCfgMod = from.stdCfgMod;
-            stdSnmpMod = from.stdSnmpMod;
-            stdSipMod = from.stdSipMod;
+            IpConn.CopyFrom(from.IpConn);
+            SipMod.CopyFrom(from.SipMod);
+            CfgMod.CopyFrom(from.CfgMod);
+            SnmpMod.CopyFrom(from.SnmpMod);
 #endif
             stdFA = from.stdFA;
         }
@@ -1496,7 +1474,7 @@ namespace U5kManServer
             EstadoSip = from.EstadoSip;
             LastOptionsResponse = from.LastOptionsResponse;
 
-            FailedPollCount = from.FailedPollCount;
+            base.CopyFrom(from);
         }
 
         /** */
@@ -1838,7 +1816,7 @@ namespace U5kManServer
         }
 #else
         public List<stdGw> STDGWS { get => stdgws.Values.ToList(); }
-        public Dictionary<string, stdGw> GWSDIC { get => stdgws; }
+        public Dictionary<string, stdGw> GWSDIC { get => stdgws; set => stdgws = value; }
         public List<stdGw> CFGGWS
         {
             set

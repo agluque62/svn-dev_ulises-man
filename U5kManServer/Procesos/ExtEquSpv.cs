@@ -337,11 +337,11 @@ namespace U5kManServer.ExtEquSpvSpace
                                             LogException<ExtEquSpv>("", x);
                                         }
                                     }));
-                                    LogTrace<SupervisedItem>($"PING Executed: {grp.Key}");
+                                    LogTrace<ExtEquSpv>($"PING Executed: {grp.Key}");
                                 }
                                 else
                                 {
-                                    LogTrace<SupervisedItem>($"PING Skipped : {grp.Key}");
+                                    LogTrace<ExtEquSpv>($"PING Skipped : {grp.Key}");
                                 }
                             }
                             var waitingResult = Task.WaitAll(tasks.ToArray(), 9000);
@@ -432,11 +432,11 @@ namespace U5kManServer.ExtEquSpvSpace
                                 }));
                             }
                         }
-                        LogTrace<SupervisedItem>($"Process {(res ? "Ok  " : "Fail")} executed: {recurso.sip_user}.");
+                        LogTrace<ExtEquSpv>($"Process {(res ? "Ok  " : "Fail")} executed: {recurso.sip_user}.");
                     }
                     else
                     {
-                        LogTrace<SupervisedItem>($"Process Fail ignored : {recurso.sip_user}, .");
+                        LogTrace<ExtEquSpv>($"Process Fail ignored : {recurso.sip_user}, .");
                     }
                 }
             });

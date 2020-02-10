@@ -687,9 +687,9 @@ namespace U5kManServer.WebAppServer
                             tars = PhysicalGwTars(pgw),
                             recs = PhysicalGwResources(pgw)
 #if GW_STD_V1
-                            , cfgMod = pgw.stdCfgMod == U5kManServer.std.Ok ? 1 : 0
-                            , sipMod = pgw.stdSipMod == U5kManServer.std.Ok ? 1 : 0
-                            , snmpMod = pgw.stdSnmpMod == U5kManServer.std.Ok ? 1 : 0
+                            , cfgMod = pgw.CfgMod.Std == U5kManServer.std.Ok ? 1 : 0
+                            , sipMod = pgw.SipMod.Std == U5kManServer.std.Ok ? 1 : 0
+                            , snmpMod = pgw.SnmpMod.Std == U5kManServer.std.Ok ? 1 : 0
                             , fa = pgw.stdFA == U5kManServer.std.Ok ? 1 : 0
 #endif
                         });
