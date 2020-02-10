@@ -609,6 +609,7 @@ namespace U5kManServer
         Int64 ConsecutiveFailedPollLimit = Properties.u5kManServer.Default.ConsecutiveFailedPollLimit;
         public Int64 FailedPollCount { get; set; }
 
+        public SupervisedItem() { FailedPollCount = 0; }
         public bool IsPollingTime ()
         {
             //return FailedPollCount < ConsecutiveFailedPollLimit ? true : FailedPollCount % 4 == 0;
@@ -706,7 +707,7 @@ namespace U5kManServer
         /// <summary>
         /// 
         /// </summary>
-        public stdPos()
+        public stdPos() : base()
         {
             name = "";
             ip = "192.168.1.1";
@@ -717,8 +718,6 @@ namespace U5kManServer
             stdg = stdGlobal();
             status_sync = "???";
             uris = new List<string>();
-
-            FailedPollCount = 0;
         }
 
         /// <summary>
@@ -729,27 +728,7 @@ namespace U5kManServer
         {
             if (last != null)
             {
-                name = last.name;
-                ip = last.ip;
-                snmpport = last.snmpport;
-
-                lan1 = last.lan1;
-                lan2 = last.lan2;
-                panel = last.panel;
-                jack_exe = last.jack_exe;
-                jack_ayu = last.jack_ayu;
-                alt_r = last.alt_r;
-                alt_t = last.alt_t;
-                alt_hf = last.alt_hf;
-                rec_w = last.rec_w;
-                stdpos = last.stdpos;
-                status_sync = last.status_sync;
-                uris = last.uris;
-                sw_version = last.sw_version;
-
-                FailedPollCount = last.FailedPollCount;
-
-                stdg = stdGlobal();
+                CopyFrom(last);
             }
         }
 
@@ -1429,7 +1408,7 @@ namespace U5kManServer
     }
 
     [DataContract]
-    public class EquipoEurocae : IEquatable<EquipoEurocae>
+    public class EquipoEurocae : SupervisedItem, IEquatable<EquipoEurocae>
     {
         [DataMember]
         public string Id { get; set; }
@@ -1458,6 +1437,7 @@ namespace U5kManServer
 
         public string LastOptionsResponse { get; set; }
 
+        public EquipoEurocae() : base() { }
         public EquipoEurocae(EquipoEurocae last)
         {
             if (last == null)
@@ -1466,9 +1446,6 @@ namespace U5kManServer
             }
             else
             {
-                //EstadoRed1 = last.EstadoRed1;
-                //EstadoRed2 = last.EstadoRed2;
-                //EstadoSip = last.EstadoSip;
                 CopyFrom(last);
             }
         }
@@ -1518,6 +1495,8 @@ namespace U5kManServer
             EstadoRed2 = from.EstadoRed2;
             EstadoSip = from.EstadoSip;
             LastOptionsResponse = from.LastOptionsResponse;
+
+            FailedPollCount = from.FailedPollCount;
         }
 
         /** */

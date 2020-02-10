@@ -314,7 +314,7 @@ namespace U5kManServer.ExtEquSpvSpace
 
                             // Copia de equipo configurados.
                             List<EquipoEurocae> localequ = new List<EquipoEurocae>();
-                            GlobalServices.GetWriteAccess((gdata) => localequ = gdata.STDEQS.Select(eq => eq).ToList());
+                            GlobalServices.GetWriteAccess((gdata) => localequ = gdata.STDEQS.Select(eq => new EquipoEurocae(eq)).ToList());
 
                             /** Agruparlos por equipo */
                             var grupos = localequ.GroupBy(eq => eq.Ip1)
@@ -324,17 +324,25 @@ namespace U5kManServer.ExtEquSpvSpace
                             LogTrace<ExtEquSpv>($"Supervisando equipos y recursos externos ({grupos.Count}) ...");
                             foreach (var grp in grupos)
                             {
-                                tasks.Add(Task.Factory.StartNew(() =>
+                                if (grp.Value[0].IsPollingTime() == true)
                                 {
-                                    try
+                                    tasks.Add(Task.Factory.StartNew(() =>
                                     {
-                                        SupervisaEquipo(grp.Key, grp.Value);
-                                    }
-                                    catch (Exception x)
-                                    {
-                                        LogException<ExtEquSpv>("", x);
-                                    }
-                                }));
+                                        try
+                                        {
+                                            SupervisaEquipo(grp.Key, grp.Value);
+                                        }
+                                        catch (Exception x)
+                                        {
+                                            LogException<ExtEquSpv>("", x);
+                                        }
+                                    }));
+                                    LogTrace<SupervisedItem>($"PING Executed: {grp.Key}");
+                                }
+                                else
+                                {
+                                    LogTrace<SupervisedItem>($"PING Skipped : {grp.Key}");
+                                }
                             }
                             var waitingResult = Task.WaitAll(tasks.ToArray(), 9000);
                             LogTrace<ExtEquSpv>($"Fin de Supervision de equipos y recursos externos ({tasks.Count}, {waitingResult})...");
@@ -394,35 +402,43 @@ namespace U5kManServer.ExtEquSpvSpace
                 LogTrace<ExtEquSpv>($"PIN {ip} => ({string.Join(",", replies)})");
                 foreach (var recurso in recursos)
                 {
-                    recurso.EstadoRed1 = recurso.EstadoRed2 = ChangeStd(recurso, res ? std.Ok : std.NoInfo); /** Provocará el histórico */
-                    LogTrace<ExtEquSpv>($"Recurso {recurso.Id}, Estado Red => {recurso.EstadoRed1}");
-                    if (recurso.EstadoRed1 == std.Ok)
+                    if (recurso.ProcessResult(res))
                     {
-                        /** Estado Agente SIP */
-                        if (recurso.Tipo == 5)
+                        recurso.EstadoRed1 = recurso.EstadoRed2 = ChangeStd(recurso, res ? std.Ok : std.NoInfo); /** Provocará el histórico */
+                        LogTrace<ExtEquSpv>($"Recurso {recurso.Id}, Estado Red => {recurso.EstadoRed1}");
+
+                        if (recurso.EstadoRed1 == std.Ok)
                         {
-                            /** Los Grabadores no tienen Agente SIP, Para que se muestre Ok, 
-                                Ponemos que está bien */
-                            recurso.EstadoSip = std.Ok;
-                            LogTrace<ExtEquSpv>($"Recurso Grabacion {recurso.Id} => {recurso.EstadoSip}");
-                        }
-                        else
-                        {
-                            stasks.Add(Task.Factory.StartNew(() =>
+                            /** Estado Agente SIP */
+                            if (recurso.Tipo == 5)
                             {
-                                try
+                                /** Los Grabadores no tienen Agente SIP, Para que se muestre Ok, 
+                                    Ponemos que está bien */
+                                recurso.EstadoSip = std.Ok;
+                                LogTrace<ExtEquSpv>($"Recurso Grabacion {recurso.Id} => {recurso.EstadoSip}");
+                            }
+                            else
+                            {
+                                stasks.Add(Task.Factory.StartNew(() =>
                                 {
-                                    SupervisaRecurso(recurso);
-                                }
-                                catch (Exception x)
-                                {
-                                    LogException<ExtEquSpv>("", x);
-                                }
-                            }));
+                                    try
+                                    {
+                                        SupervisaRecurso(recurso);
+                                    }
+                                    catch (Exception x)
+                                    {
+                                        LogException<ExtEquSpv>("", x);
+                                    }
+                                }));
+                            }
                         }
+                        LogTrace<SupervisedItem>($"Process {(res ? "Ok  " : "Fail")} executed: {recurso.sip_user}.");
+                    }
+                    else
+                    {
+                        LogTrace<SupervisedItem>($"Process Fail ignored : {recurso.sip_user}, .");
                     }
                 }
-
             });
 
             var waitingResult = Task.WaitAll(stasks.ToArray(), 9000);
