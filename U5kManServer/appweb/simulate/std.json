@@ -50,15 +50,15 @@
 	"sactaserviceenabled": true,
 	"sct1": {
 		"name": "SACTA-1",
-		"enable": 0,
+		"enable": 1,
 		"std": 0,
 		"sel": 0,
 		"url": ""
 	},
 	"sct2": {
 		"name": "SACTA-2",
-		"enable": 0,
-		"std": 0,
+		"enable": 1,
+		"std": 1,
 		"sel": 0,
 		"url": ""
 	},

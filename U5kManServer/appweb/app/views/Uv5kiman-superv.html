@@ -231,9 +231,9 @@
                     <div class="div_titulo">{{ctrl.std.ext.name}}</div>
                 </a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" ng-show="ctrl.std.sct1.enable==1 || ctrl.std.sct2.enable==1" >
                 <div class="thumbnail">
-                    <table class="table" ng-show="ctrl.std.sct1.enable==1 || ctrl.std.sct2.enable==1" style="max-height:64px;height:64px;width:80%;margin-left:10%;margin-bottom:0;">
+                    <table class="table" style="max-height:64px;height:64px;width:80%;margin-left:10%;margin-bottom:0;">
                         <tr>
                             <td class="text-info text-center" translate>SACTA-1</td>
                             <td class="text-info text-center" translate>SACTA-2</td>

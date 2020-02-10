@@ -621,8 +621,12 @@ angular.module("Uv5kiman")
     /** */
     function get_cwps() {
         $serv.cwps_get().then(function (response) {
-            if (new_cwps(response.data))
-                ctrl.cwps = response.data.lista;
+            var sortedData = Enumerable.from(response.data.lista)
+                .orderBy("$.name")
+                .toArray();
+            if (new_cwps(sortedData)) {                
+                ctrl.cwps = sortedData;
+            }
             // console.log(ctrl.cwps);
         }
         , function (response) {
@@ -650,7 +654,9 @@ angular.module("Uv5kiman")
     /** */
     function get_exteq() {
         $serv.exteq_get().then(function (response) {
-            ctrl.exteq = response.data.lista;
+            ctrl.exteq = Enumerable.from(response.data.lista)
+                .orderBy('$.name')
+                .toArray();
             ctrl.exteq_grupo(ctrl.exteq_grp);
             // console.log(ctrl.exteq);
         }
@@ -698,7 +704,6 @@ angular.module("Uv5kiman")
         get_gws();
         get_pbxab();
         get_exteq();
-
     });
 
     /** Salida del Controlador. Borrado de Variables */

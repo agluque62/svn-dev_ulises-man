@@ -147,7 +147,7 @@ div#agrupar nav#_menu {
     /*background-color: #C1022C;
     color: white;*/
     background-color: #4A7729;
-    color: black;
+    color: white;
     margin-top: 0px;
     padding-left: 10px;
     padding-bottom: 4px;
@@ -217,7 +217,7 @@ section#_ppal
     section#_ppal h3 {
         font-size: 110%;
         background-color: #4A7729/*#C1022C*/;
-        color: black/*white*/;
+        color: white;
         margin-top: 0px;
         padding-left: 10px;
         padding-bottom: 4px;
