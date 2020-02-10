@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ namespace Utilities
         /// <summary>
         /// Encrypts provided string parameter
         /// </summary>
-        public static string DES_Cifrar(string s)
+        public static string DES_Cifrar(string s, string key=DES_cryptoKey)
         {
             if (s == null || s.Length == 0) return string.Empty;
             string result = string.Empty;
@@ -27,7 +28,7 @@ namespace Utilities
                 MD5CryptoServiceProvider MD5 =
                     new MD5CryptoServiceProvider();
                 des.Key =
-                    MD5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(DES_cryptoKey));
+                    MD5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(key));
                 des.IV = DES_IV;
                 result = Convert.ToBase64String(
                     des.CreateEncryptor().TransformFinalBlock(
@@ -44,7 +45,7 @@ namespace Utilities
         /// <summary>
         /// Decrypts provided string parameter
         /// </summary>
-        public static string DES_Decrypt(string s)
+        public static string DES_Descifrar(string s, string key = DES_cryptoKey)
         {
             if (s == null || s.Length == 0) return string.Empty;
             string result = string.Empty;
@@ -56,7 +57,7 @@ namespace Utilities
                 MD5CryptoServiceProvider MD5 =
                     new MD5CryptoServiceProvider();
                 des.Key =
-                    MD5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(DES_cryptoKey));
+                    MD5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(key));
                 des.IV = DES_IV;
                 result = Encoding.ASCII.GetString(
                     des.CreateDecryptor().TransformFinalBlock(
@@ -64,12 +65,21 @@ namespace Utilities
             }
             catch
             {
-                throw;
+                result = "Datos incorrectos...";
             }
 
             return result;
         }
 
+        public static void RSA_GenerateNewKey(Action <string, string> deliveryPoint)
+        {
+            using (var rsa = new RSACryptoServiceProvider())
+            {
+                var xmlPublic = rsa.ToXmlString(false);
+                var xmlPublicAndPrivate = rsa.ToXmlString(true);
+                deliveryPoint(xmlPublic, xmlPublicAndPrivate);
+            }
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -154,10 +164,18 @@ namespace Utilities
         {
             using (var md5 = MD5.Create())
             {
-                using (var stream = System.IO.File.OpenRead(filePath))
+                using (var stream = File.OpenRead(filePath))
                 {
                     return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", string.Empty);
                 }
+            }
+        }
+        public static string StringMd5Hash(string data)
+        {
+            using (var md5 = MD5.Create())
+            {
+                using (var stream = new MemoryStream(Encoding.ASCII.GetBytes(data)))
+                    return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", string.Empty);
             }
         }
     }

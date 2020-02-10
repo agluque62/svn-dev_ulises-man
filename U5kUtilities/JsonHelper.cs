@@ -13,11 +13,11 @@ namespace Utilities
 {
     public class JsonHelper
     {
-        public static JObject SafeJObjectParse(string s)
+        public static dynamic SafeDynamicObjectParse(string s)
         {
             try
             {
-                return JObject.Parse(s);
+                return JsonConvert.DeserializeObject<dynamic>(s);
             }
             catch (Exception)
             {
@@ -34,6 +34,37 @@ namespace Utilities
             {
                 return null;
             }
+        }
+        public static string ToString(object obj, bool format=true)
+        {
+            return JsonConvert.SerializeObject(obj, format ? Formatting.Indented : Formatting.None);
+        }
+        public static T Parse<T>(string s)
+        {
+            try
+            {
+                return JsonConvert.DeserializeObject<T>(s);
+            }
+            catch
+            {
+                return default(T);
+            }
+        }
+        public static string Md5(object s)
+        {
+            return EncryptionHelper.StringMd5Hash(ToString(s));
+        }
+        public static T ArrayConvert<T>(object arr)
+        {
+            try
+            {
+                if (arr is JArray)
+                    return (arr as JArray).ToObject<T>();
+            }
+            catch(Exception )
+            {
+            }
+            return default(T);
         }
     }
 }

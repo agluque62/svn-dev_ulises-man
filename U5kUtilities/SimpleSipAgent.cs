@@ -74,14 +74,19 @@ namespace Utilities
                     remote_ua.last_response = new SipResponse(receivedData);
                     return true;
                 }
+                catch (SocketException x)
+                {
+                    NotifyException?.Invoke(remote_ua, x);
+                    remote_ua.last_response = new SipResponse(null);
+                    return x.SocketErrorCode == SocketError.TimedOut ? false : true;
+                }
                 catch (Exception x)
                 {
-                    if (NotifyException != null)
-                        NotifyException.Invoke(remote_ua, x);
+                    NotifyException?.Invoke(remote_ua, x);
+                    remote_ua.last_response = new SipResponse(null);
                 }
-                remote_ua.last_response = new SipResponse(null);
             }
-            return false;
+            return true;
         }
 
         private SipUA local_ua = null;

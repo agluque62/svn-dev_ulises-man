@@ -150,7 +150,7 @@ namespace Utilities
                 return Servidores.Count == 0 ? "No Meinberg Server" : Servidores.ElementAt(0).Substring(1);
 
             }
-            catch (Exception x)
+            catch (Exception )
             {
                 return String.Format("No Meinberg Client");
             }

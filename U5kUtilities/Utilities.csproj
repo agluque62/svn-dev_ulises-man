@@ -80,7 +80,9 @@
     <Compile Include="EncryptionHelper.cs" />
     <Compile Include="EventQueue.cs" />
     <Compile Include="FSBindingList.cs" />
+    <Compile Include="GeneralHelper.cs" />
     <Compile Include="HttpHelper.cs" />
+    <Compile Include="IPHelper.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="LocalFileAppSettingsProvider.cs" />
     <Compile Include="NICEventMonitor.cs" />

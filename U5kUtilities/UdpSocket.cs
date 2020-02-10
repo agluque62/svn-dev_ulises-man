@@ -202,7 +202,7 @@ namespace Utilities
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 if (!_Disposed)
                 {
