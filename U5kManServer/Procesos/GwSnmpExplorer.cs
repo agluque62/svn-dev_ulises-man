@@ -219,10 +219,10 @@ namespace U5kManServer
             {
                 while (IsRunning())
                 {
-                    List<stdGw> localgws = new List<stdGw>();
-                    try
+                    if (U5kManService._Master == true)
                     {
-                        if (U5kManService._Master == true)
+                        List<stdGw> localgws = new List<stdGw>();
+                        try
                         {
                             Utilities.TimeMeasurement tm = new Utilities.TimeMeasurement("GW Explorer");
 
@@ -275,31 +275,30 @@ namespace U5kManServer
                             // Espero que acaben todos los procesos.
                             Task.WaitAll(task.ToArray(), TimeSpan.FromMilliseconds((double)poolTimeout));
                         }
-                    }
-                    catch (Exception x)
-                    {
-                        if (x is ThreadAbortException)
+                        catch (Exception x)
                         {
-                            Thread.ResetAbort();
-                            break;
-                        }
-                        else if (x is AggregateException)
-                        {
-                            foreach (var excep in (x as AggregateException).InnerExceptions)
+                            if (x is ThreadAbortException)
                             {
-                                LogTrace<GwExplorer>($"Excepcion {excep.Message}");
+                                Thread.ResetAbort();
+                                break;
+                            }
+                            else if (x is AggregateException)
+                            {
+                                foreach (var excep in (x as AggregateException).InnerExceptions)
+                                {
+                                    LogTrace<GwExplorer>($"Excepcion {excep.Message}");
+                                }
+                            }
+                            else
+                            {
+                                LogException<GwExplorer>("Supervisando Pasarelas ", x);
                             }
                         }
-                        else
-                        {
-                            LogException<GwExplorer>("Supervisando Pasarelas ", x);
-                        }
+
+                        tm.StopAndPrint((msg) => LogTrace<GwExplorer>(msg));
+                        /// Copio los datos obtenidos a la tabla...
+                        GlobalServices.GetWriteAccess((gdata) => gdata.GWSDIC = localgws.Select(gw => gw).ToDictionary(gw => gw.name, gw => gw));
                     }
-
-                    tm.StopAndPrint((msg) => LogTrace<GwExplorer>(msg));
-                    /// Copio los datos obtenidos a la tabla...
-                    GlobalServices.GetWriteAccess((gdata) => gdata.GWSDIC = localgws.Select(gw => gw).ToDictionary(gw => gw.name, gw => gw));
-
                     GoToSleepInTimer();
                 }
             }

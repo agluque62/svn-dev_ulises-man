@@ -234,10 +234,10 @@ namespace U5kManServer
                 // Procesos.
                 while (IsRunning())
                 {
-                    List<stdPos> localpos = new List<stdPos>();
-                    try
+                    if (U5kManService._Master == true)
                     {
-                        if (U5kManService._Master == true)
+                        List<stdPos> localpos = new List<stdPos>();
+                        try
                         {
                             TimeMeasurement tm = new TimeMeasurement("Top Explorer");
 
@@ -272,32 +272,29 @@ namespace U5kManServer
 
                             // Espero a que acaben todos.
                             Task.WaitAll(task.ToArray(), TimeSpan.FromMilliseconds((double)poolTimeout));
-
                         }
-                    }
-                    catch (Exception x)
-                    {
-                        if (x is ThreadAbortException)
+                        catch (Exception x)
                         {
-                            Thread.ResetAbort();
-                            break;
-                        }
-                        else if (x is AggregateException)
-                        {
-                            foreach (var excep in (x as AggregateException).InnerExceptions)
+                            if (x is ThreadAbortException)
                             {
-                                LogTrace<TopSnmpExplorer>($"Excepcion {excep.Message}");
+                                Thread.ResetAbort();
+                                break;
+                            }
+                            else if (x is AggregateException)
+                            {
+                                foreach (var excep in (x as AggregateException).InnerExceptions)
+                                {
+                                    LogTrace<TopSnmpExplorer>($"Excepcion {excep.Message}");
+                                }
+                            }
+                            else
+                            {
+                                LogException<TopSnmpExplorer>("Supervisando Pasarelas ", x);
                             }
                         }
-                        else
-                        {
-                            LogException<TopSnmpExplorer>("Supervisando Pasarelas ", x);
-                        }
+                        GlobalServices.GetWriteAccess((data) => data.POSDIC = localpos.Select(p => p).ToDictionary(p => p.name, p => p));
+                        tm.StopAndPrint((msg) => { LogTrace<TopSnmpExplorer>(msg); });
                     }
-
-                    GlobalServices.GetWriteAccess((data) => data.POSDIC = localpos.Select(p => p).ToDictionary(p => p.name, p => p));
-                    tm.StopAndPrint((msg) => { LogTrace<TopSnmpExplorer>(msg); });
-
                     GoToSleepInTimer();
                 }
             }
