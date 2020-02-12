@@ -990,8 +990,14 @@ namespace U5kManServer
                 SipSupervisor sips = new SipSupervisor(locale_ua, timeout);
                 if (sips.SipPing(remote_ua))
                 {
-                    response(true, remote_ua.last_response != null &&
-                        (remote_ua.last_response.Result == "200" || remote_ua.last_response.Result == "503") ? std.Ok : std.Error);
+                    if (remote_ua.last_response == null || remote_ua.last_response.Result == "Error")
+                    {
+                        response(false, std.NoInfo);
+                    }
+                    else
+                    {
+                        response(true, (remote_ua.last_response.Result == "200" || remote_ua.last_response.Result == "503") ? std.Ok : std.Error);
+                    }
                 }
                 else
                 {
