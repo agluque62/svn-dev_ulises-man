@@ -211,12 +211,15 @@ namespace U5kManServer
             //U5kGenericos.SetCurrentCulture();
             LogInfo<GwExplorer>("Arrancado...");
 
-            Decimal interval = Properties.u5kManServer.Default.SpvInterval;
+            Decimal interval = Properties.u5kManServer.Default.SpvInterval;     // Tiempo de Polling,
+            Decimal threadTimeout = 2 * interval / 3;                           // Tiempo de proceso individual.
+            Decimal poolTimeout = 3 * interval / 4;                             // Tiempo máximo del Pool de Procesos.
 
-            using (timer = new TaskTimer(new TimeSpan(0, 0, 0, 0, Decimal.ToInt32(interval)), this.Cancel))
+            using (timer = new TaskTimer(TimeSpan.FromMilliseconds((double)interval), this.Cancel))
             {
                 while (IsRunning())
                 {
+                    List<stdGw> localgws = new List<stdGw>();
                     try
                     {
                         if (U5kManService._Master == true)
@@ -224,45 +227,53 @@ namespace U5kManServer
                             Utilities.TimeMeasurement tm = new Utilities.TimeMeasurement("GW Explorer");
 
                             // Relleno los datos...
-                            List<stdGw> localgws = new List<stdGw>();
                             GlobalServices.GetWriteAccess((gdata) => localgws = gdata.STDGWS.Select(gw => new stdGw(gw)).ToList());
 
                             // Arranco los procesos de exploracion...
                             List<Task> task = new List<Task>();
                             foreach (stdGw gw in localgws)
                             {
-                                task.Add(
-                                    Task.Factory.StartNew(() =>
-                                        {
-                                            try
-                                            {
-                                                U5kGenericos.TraceCurrentThread(this.GetType().Name + " " + gw.name);
-                                                ExploraGw(gw);
-                                            }
-                                            catch (Exception x)
-                                            {
-                                                LogException<GwExplorer>("Supervisando Pasarela " + gw.name, x);
-                                            }
-                                        }, TaskCreationOptions.LongRunning)
-                                );
                                 //task.Add(
-                                //    BackgroundTaskFactory.StartNew(() =>
+                                //    Task.Factory.StartNew(() =>
                                 //        {
-                                //            U5kGenericos.TraceCurrentThread(this.GetType().Name + " " + gw.name);
-                                //            ExploraGw(gw);
-                                //        }, 
-                                //    (excep) =>
-                                //        {
-                                //            LogException<GwExplorer>("Supervisando Pasarela " + gw.name, excep);
-                                //        }, TimeSpan.FromSeconds(5))
-                                //    );
+                                //            try
+                                //            {
+                                //                U5kGenericos.TraceCurrentThread(this.GetType().Name + " " + gw.name);
+                                //                ExploraGw(gw);
+                                //            }
+                                //            catch (Exception x)
+                                //            {
+                                //                LogException<GwExplorer>("Supervisando Pasarela " + gw.name, x);
+                                //            }
+                                //        }, TaskCreationOptions.LongRunning)
+                                //);
+                                task.Add(
+                                    BackgroundTaskFactory.StartNew(gw.name, () =>
+                                        {
+                                            U5kGenericos.TraceCurrentThread(this.GetType().Name + " " + gw.name);
+                                            ExploraGw(gw);
+                                        },
+                                    (id, excep) =>
+                                        {
+                                            LogException<GwExplorer>("Supervisando Pasarela " + gw.name, excep);
+                                        }, TimeSpan.FromMilliseconds((double)threadTimeout))
+                                    );
                             }
-                            
+#if DEBUG1
+                            task.Add(
+                                    BackgroundTaskFactory.StartNew("TESTING", () =>
+                                        {
+                                            Task.Delay(TimeSpan.FromSeconds(10)).Wait();
+                                        },
+                                    (id, excep) =>
+                                        {
+                                            LogTrace<GwExplorer>($"Excepcion Bkthread {id} => {excep.Message}");
+                                        }, TimeSpan.FromSeconds(5))
+                                    );
+#endif
+
                             // Espero que acaben todos los procesos.
-                            Task.WaitAll(task.ToArray(), 9000);
-                            tm.StopAndPrint((msg) => LogTrace<GwExplorer>(msg));
-                            /// Copio los datos obtenidos a la tabla...
-                            GlobalServices.GetWriteAccess((gdata) => gdata.GWSDIC = localgws.Select(gw => gw).ToDictionary(gw => gw.name, gw => gw));
+                            Task.WaitAll(task.ToArray(), TimeSpan.FromMilliseconds((double)poolTimeout));
                         }
                     }
                     catch (Exception x)
@@ -272,8 +283,22 @@ namespace U5kManServer
                             Thread.ResetAbort();
                             break;
                         }
-                        LogException<GwExplorer>("Supervisando Pasarelas ", x);
+                        else if (x is AggregateException)
+                        {
+                            foreach (var excep in (x as AggregateException).InnerExceptions)
+                            {
+                                LogTrace<GwExplorer>($"Excepcion {excep.Message}");
+                            }
+                        }
+                        else
+                        {
+                            LogException<GwExplorer>("Supervisando Pasarelas ", x);
+                        }
                     }
+
+                    tm.StopAndPrint((msg) => LogTrace<GwExplorer>(msg));
+                    /// Copio los datos obtenidos a la tabla...
+                    GlobalServices.GetWriteAccess((gdata) => gdata.GWSDIC = localgws.Select(gw => gw).ToDictionary(gw => gw.name, gw => gw));
 
                     GoToSleepInTimer();
                 }
@@ -548,7 +573,7 @@ namespace U5kManServer
             pgw.lan2 = bond == 0 ? std.NoInfo : eth1 == 1 ? std.Ok : std.Error;
         }
 
-        #region Threads de Exploracion en Paralelo.
+#region Threads de Exploracion en Paralelo.
 
         /// <summary>
         /// Explora una pasarela logica.
@@ -591,7 +616,7 @@ namespace U5kManServer
             }
         }
 
-        #region Exploracion de GW Unificada
+#region Exploracion de GW Unificada
 
         /// <summary>
         /// 
@@ -882,9 +907,9 @@ namespace U5kManServer
             }
         }
 
-        #endregion //
+#endregion //
 
-        #region GW_STD_V1
+#region GW_STD_V1
         /// <summary>
         /// 
         /// </summary>
@@ -1032,24 +1057,6 @@ namespace U5kManServer
                     resp = HttpHelper.Get(page, timeout, null);
                     phgw.version = resp ?? idiomas.strings.GWS_VersionError;
                 }
-
-                //// ... Use HttpClient.
-                //using (HttpClient client = new HttpClient())
-                //using (HttpResponseMessage resp = /*await */client.GetAsync(page).Result)
-                //using (HttpContent content = resp.IsSuccessStatusCode ? resp.Content : null)
-                //{
-                //    if (content != null)
-                //    {
-                //        // ... Read the string.
-                //        string result = /*await */content.ReadAsStringAsync().Result;
-                //        stdRes = result.Contains("Handler por Defecto") ? std.Ok : std.Error;
-                //    }
-                //    else
-                //    {
-                //        stdRes = std.NoInfo;
-                //    }
-                //}
-
             }
             catch (Exception x)
             {
@@ -1141,7 +1148,7 @@ namespace U5kManServer
         }
 
 
-        #endregion
+#endregion
 
         /// <summary>
         /// 
@@ -1155,7 +1162,7 @@ namespace U5kManServer
             // String slots = String.Format("{0},[{1}{2}{3}{4}] 
         }
 
-        #endregion
+#endregion
     }   // clase
 
     /** */
