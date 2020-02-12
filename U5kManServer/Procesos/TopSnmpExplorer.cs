@@ -12,9 +12,7 @@ using U5kBaseDatos;
 using Utilities;
 
 using Lextm.SharpSnmpLib;
-//using Lextm.SharpSnmpLib.Messaging;
-//using Lextm.SharpSnmpLib.Objects;
-//using Lextm.SharpSnmpLib.Pipeline;
+using NucleoGeneric;
 
 namespace U5kManServer
 {
@@ -223,33 +221,27 @@ namespace U5kManServer
         protected override void Run()
         {
             U5kGenericos.TraceCurrentThread(this.GetType().Name);
-            //Decimal count = 1;  // U5kManService._std.stdpos.Count == 0 ? 1 : U5kManService._std.stdpos.Count;
-            //Decimal interval = Properties.u5kManServer.Default.SpvInterval / count;
-            Decimal interval = Properties.u5kManServer.Default.SpvInterval;
+
+            Decimal interval = Properties.u5kManServer.Default.SpvInterval;     // Tiempo de Polling,
+            Decimal threadTimeout = 2 * interval / 3;                           // Tiempo de proceso individual.
+            Decimal poolTimeout = 3 * interval / 4;                             // Tiempo máximo del Pool de Procesos.
 
             //U5kGenericos.SetCurrentCulture();
             LogInfo<TopSnmpExplorer>("Arrancado...");
 
-            using (timer = new TaskTimer(new TimeSpan(0, 0, 0, 0, Decimal.ToInt32(interval)), this.Cancel))
+            using (timer = new TaskTimer(TimeSpan.FromMilliseconds((double)interval), this.Cancel))
             {
                 // Procesos.
                 while (IsRunning())
                 {
+                    List<stdPos> localpos = new List<stdPos>();
                     try
                     {
                         if (U5kManService._Master == true)
                         {
                             TimeMeasurement tm = new TimeMeasurement("Top Explorer");
 
-                            List<stdPos> localpos = new List<stdPos>();
-                            GlobalServices.GetWriteAccess((gdata) =>
-                            {
-                                // Relleno los datos...
-                                gdata.STDTOPS.ForEach(top =>
-                                {
-                                    localpos.Add(new stdPos(top));
-                                });
-                            });
+                            GlobalServices.GetWriteAccess((data) => localpos = data.STDTOPS.Select(pos => new stdPos(pos)).ToList());
 
                             // Arranco los Procesos... 
                             List<Task> task = new List<Task>();
@@ -257,42 +249,30 @@ namespace U5kManServer
                             foreach (stdPos pos in localpos)
                             {
                                 /** Gestion de los no activos a ellos se le hará polling con menos frecuencia */
-                                LogTrace<TopSnmpExplorer>($"{pos.name}({pos.ip}). Polling ({pos.FailedPollCount}).");
-                                if (pos.IsPollingTime() == true)
-                                {
-                                    task.Add(
-                                        Task.Factory.StartNew(() =>
-                                        {
-                                            U5kGenericos.TraceCurrentThread(this.GetType().Name + " " + pos.name);
-                                            ExploraTop2(pos);
-                                        }, TaskCreationOptions.LongRunning));
-                                    LogTrace<TopSnmpExplorer>($"{pos.name}({pos.ip}). Executed.");
-                                }
-                                else
-                                {
-                                    LogTrace<TopSnmpExplorer>($"{pos.name}({pos.ip}). Skipped");
-                                }
+                                //task.Add(
+                                //    Task.Factory.StartNew(() =>
+                                //    {
+                                //        U5kGenericos.TraceCurrentThread(this.GetType().Name + " " + pos.name);
+                                //        ExploraTop2(pos);
+                                //    }, TaskCreationOptions.LongRunning));
+
+                                task.Add(
+                                    BackgroundTaskFactory.StartNew(pos.name, () =>
+                                    {
+                                        U5kGenericos.TraceCurrentThread(this.GetType().Name + " " + pos.name);
+                                        ExploraTop(pos);
+                                    },
+                                    (id, excep) =>
+                                    {
+                                        LogException<TopSnmpExplorer>("Supervisando Pasarela " + pos.name, excep);
+                                    }, TimeSpan.FromMilliseconds((double)threadTimeout))
+                                    );
+
                             }
 
                             // Espero a que acaben todos.
-                            Task.WaitAll(task.ToArray(), 9000);
+                            Task.WaitAll(task.ToArray(), TimeSpan.FromMilliseconds((double)poolTimeout));
 
-                            // Actualizo los datos....
-                            GlobalServices.GetWriteAccess((gdata) =>
-                            {
-                                localpos.ForEach(top =>
-                                {
-                                    if (gdata.POSDIC.ContainsKey(top.name))
-                                    {
-                                        gdata.POSDIC[top.name].CopyFrom(top);
-                                    }
-                                });
-                            });
-
-                            tm.StopAndPrint((msg) =>
-                            {
-                                LogTrace<TopSnmpExplorer>(msg);
-                            });
                         }
                     }
                     catch (Exception x)
@@ -302,7 +282,22 @@ namespace U5kManServer
                             Thread.ResetAbort();
                             break;
                         }
+                        else if (x is AggregateException)
+                        {
+                            foreach (var excep in (x as AggregateException).InnerExceptions)
+                            {
+                                LogTrace<TopSnmpExplorer>($"Excepcion {excep.Message}");
+                            }
+                        }
+                        else
+                        {
+                            LogException<TopSnmpExplorer>("Supervisando Pasarelas ", x);
+                        }
                     }
+
+                    GlobalServices.GetWriteAccess((data) => data.POSDIC = localpos.Select(p => p).ToDictionary(p => p.name, p => p));
+                    tm.StopAndPrint((msg) => { LogTrace<TopSnmpExplorer>(msg); });
+
                     GoToSleepInTimer();
                 }
             }
@@ -489,46 +484,54 @@ namespace U5kManServer
                 Params(pos.lan1 == std.Ok ? "ON" : "OFF", pos.lan2 == std.Ok ? "ON" : "OFF"));
         }
 
-        /// <summary>
-        /// Lo hace con BULK...
-        /// </summary>
-        /// <param name="obj"></param>
-        protected void ExploraTop2(object obj)
+        protected void ExploraTop(object obj)
         {
             stdPos pos = (stdPos)obj;
+            if (pos.IsPollingTime() == true)
+            {
+                LogTrace<TopSnmpExplorer>($"{pos.name}. POLLING executed");
+                SnmpTopPolling(pos, (res) =>
+                {
+                    if (pos.ProcessResult(res) == true)
+                    {
+                        if (!res)
+                        {
+                            EstadoPosicionSet(pos.name, pos, std.NoInfo);
+                            pos.Reset();                
+                            LogTrace<TopSnmpExplorer>($"{pos.name}. Fail.");
+                        }
+                        else
+                        {
+                            LogTrace<TopSnmpExplorer>($"{pos.name}. Ok.");
+                        }
+                    }
+                    else
+                    {
+                        LogInfo<TopSnmpExplorer>($"{pos.name}. Fail Ignored.");
+                    }
+                });
+            }
+            else
+            {
+                LogTrace<TopSnmpExplorer>($"{pos.name}. POLLING Skipped");
+            }
+        }
+        protected void SnmpTopPolling(stdPos pos, Action<bool> response)
+        {
             try
             {
-                IList<Variable> response = new SnmpClient().Get(VersionCode.V2, 
-                    new IPEndPoint(IPAddress.Parse(pos.ip), pos.snmpport), 
-                    new OctetString("public"), _vList, 
+                IList<Variable> onlinedata = new SnmpClient().Get(VersionCode.V2,
+                    new IPEndPoint(IPAddress.Parse(pos.ip), pos.snmpport),
+                    new OctetString("public"), _vList,
                     pos.SnmpTimeout, pos.SnmpReintentos);
 
-                ProcessPos(pos, response);
-                pos.ProcessResult(true);
-                LogTrace<TopSnmpExplorer>(String.Format("{0}({1}) Ok", pos.name, pos.ip));
+                ProcessPos(pos, onlinedata);
+                response(true);
             }
             catch (Exception x)
             {
-                ProcessException(pos, x, pos.ProcessResult(false));
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pos"></param>
-        /// <param name="x"></param>
-        protected void ProcessException(stdPos pos, Exception x, bool ProccesFail)
-        {
-            LogException<TopSnmpExplorer>(String.Format("{0}({1})", pos.name, pos.ip), x);
-            if (ProccesFail)
-            {
-                EstadoPosicionSet(pos.name, pos, std.NoInfo);
-                pos.Reset();
-                LogTrace<TopSnmpExplorer>(String.Format("{0}({1}) Out of service", pos.name, pos.ip));
-            }
-            else
-            {             
-                LogInfo<TopSnmpExplorer>($"Process Fail ignored : {pos.name}.");
+                LogException<TopSnmpExplorer>(String.Format("{0}({1})", pos.name, pos.ip), x);
+                response(false);
             }
         }
         /// <summary>

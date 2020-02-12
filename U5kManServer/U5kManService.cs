@@ -1745,7 +1745,7 @@ namespace U5kManServer
                 }
             }
         }
-        public Dictionary<string, stdPos> POSDIC { get => stdpos; }
+        public Dictionary<string, stdPos> POSDIC { get => stdpos; set => stdpos = value; }
 
         /// <summary>
         /// 
