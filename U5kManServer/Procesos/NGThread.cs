@@ -263,6 +263,29 @@ namespace NucleoGeneric
         protected TimeMeasurement tm = null;
 
     }
+
+    public class BackgroundTaskFactory
+    {
+        static public Task StartNew(string Id, Action routine, Action<string, Exception> error, TimeSpan Timeout)
+        {
+            CancellationTokenSource CancelSource = new CancellationTokenSource(Timeout);
+            return Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    var threadId = System.Threading.Thread.CurrentThread;
+                    using (CancelSource.Token.Register(() => threadId.Abort() ))
+                    {
+                            routine();
+                    }
+                }
+                catch (Exception x)
+                {
+                    error(Id, x);
+                }
+            }, CancelSource.Token);
+        }
+    }
 #endif
 
 }		// PISoftware
