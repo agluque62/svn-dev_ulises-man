@@ -249,9 +249,9 @@ namespace U5kManServer
                             
                             // Espero que acaben todos los procesos.
                             Task.WaitAll(task.ToArray(), 9000);
+                            tm.StopAndPrint((msg) => LogTrace<GwExplorer>(msg));
                             /// Copio los datos obtenidos a la tabla...
                             GlobalServices.GetWriteAccess((gdata) => gdata.GWSDIC = localgws.Select(gw => gw).ToDictionary(gw => gw.name, gw => gw));
-                            tm.StopAndPrint((msg) => LogTrace<GwExplorer>(msg));
                         }
                     }
                     catch (Exception x)
@@ -973,10 +973,10 @@ namespace U5kManServer
         {
             try
             {
-
+                int timeout = Properties.u5kManServer.Default.SipOptionsTimeout;
                 SipUA locale_ua = new SipUA() { user = "MTTO", ip = Properties.u5kManServer.Default.MiDireccionIP, port = 0 };
                 SipUA remote_ua = new SipUA() { user = phgw.name, ip = phgw.ip, port = 5060, radio = true };
-                SipSupervisor sips = new SipSupervisor(locale_ua);
+                SipSupervisor sips = new SipSupervisor(locale_ua, timeout);
                 if (sips.SipPing(remote_ua))
                 {
                     response(true, remote_ua.last_response != null &&

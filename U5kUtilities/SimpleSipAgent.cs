@@ -23,7 +23,7 @@ namespace Utilities
         /// </summary>
         /// <param name="UA"></param>
         /// <param name="Timeout"></param>
-        public SipSupervisor(SipUA UA, int Timeout = 2000)
+        public SipSupervisor(SipUA UA, int Timeout = 500)
         {
             local_ua = UA;
             timeout = Timeout;

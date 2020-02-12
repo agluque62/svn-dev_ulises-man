@@ -854,5 +854,14 @@ namespace U5kManServer.Properties {
                 return ((int)(this["ConsecutiveFailedPollLimit"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        public int SipOptionsTimeout {
+            get {
+                return ((int)(this["SipOptionsTimeout"]));
+            }
+        }
     }
 }

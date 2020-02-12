@@ -280,7 +280,7 @@ namespace U5kManServer.ExtEquSpvSpace
             }
 
             local_ua = new SipUA() { user = "MTTO", ip = Properties.u5kManServer.Default.MiDireccionIP, port = 7060 };
-            sips = new SipSupervisor(local_ua);
+            sips = new SipSupervisor(local_ua, Properties.u5kManServer.Default.SipOptionsTimeout);
             sips.NotifyException += (ua, x) =>
             {
                 LogException<ExtEquSpv>("SipSupervisor" + ua.uri, x);

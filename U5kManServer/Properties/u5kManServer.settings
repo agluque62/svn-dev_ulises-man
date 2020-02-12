@@ -328,5 +328,8 @@
     <Setting Name="ConsecutiveFailedPollLimit" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">2</Value>
     </Setting>
+    <Setting Name="SipOptionsTimeout" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">500</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
