@@ -245,6 +245,17 @@ namespace U5kManServer
                                             }
                                         }, TaskCreationOptions.LongRunning)
                                 );
+                                //task.Add(
+                                //    BackgroundTaskFactory.StartNew(() =>
+                                //        {
+                                //            U5kGenericos.TraceCurrentThread(this.GetType().Name + " " + gw.name);
+                                //            ExploraGw(gw);
+                                //        }, 
+                                //    (excep) =>
+                                //        {
+                                //            LogException<GwExplorer>("Supervisando Pasarela " + gw.name, excep);
+                                //        }, TimeSpan.FromSeconds(5))
+                                //    );
                             }
                             
                             // Espero que acaben todos los procesos.
@@ -984,6 +995,7 @@ namespace U5kManServer
                 }
                 else
                 {
+                    /** No Responde */
                     response(false, std.NoInfo);
                 }
             }
@@ -1004,23 +1016,33 @@ namespace U5kManServer
             try
             {
                 string page = "http://" + phgw.ip + ":8080/test";
-
-                // ... Use HttpClient.
-                using (HttpClient client = new HttpClient())
-                using (HttpResponseMessage resp = /*await */client.GetAsync(page).Result)
-                using (HttpContent content = resp.IsSuccessStatusCode ? resp.Content : null)
+                var timeout = TimeSpan.FromMilliseconds(Properties.u5kManServer.Default.SipOptionsTimeout);
+                var resp = HttpHelper.Get(page, timeout, null);
+                stdRes = resp == null ? std.NoInfo : resp.Contains("Handler por Defecto") ? std.Ok : std.Error;
+                /** Obtiene la version unificada */
+                if (stdRes == std.Ok && (phgw.version == string.Empty || phgw.version == idiomas.strings.GWS_VersionError) )
                 {
-                    if (content != null)
-                    {
-                        // ... Read the string.
-                        string result = /*await */content.ReadAsStringAsync().Result;
-                        stdRes = result.Contains("Handler por Defecto") ? std.Ok : std.Error;
-                    }
-                    else
-                    {
-                        stdRes = std.NoInfo;
-                    }
+                    page = "http://" + phgw.ip + ":8080/mant/lver";
+                    resp = HttpHelper.Get(page, timeout, null);
+                    phgw.version = resp ?? idiomas.strings.GWS_VersionError;
                 }
+
+                //// ... Use HttpClient.
+                //using (HttpClient client = new HttpClient())
+                //using (HttpResponseMessage resp = /*await */client.GetAsync(page).Result)
+                //using (HttpContent content = resp.IsSuccessStatusCode ? resp.Content : null)
+                //{
+                //    if (content != null)
+                //    {
+                //        // ... Read the string.
+                //        string result = /*await */content.ReadAsStringAsync().Result;
+                //        stdRes = result.Contains("Handler por Defecto") ? std.Ok : std.Error;
+                //    }
+                //    else
+                //    {
+                //        stdRes = std.NoInfo;
+                //    }
+                //}
 
             }
             catch (Exception x)
@@ -1031,7 +1053,7 @@ namespace U5kManServer
             }
             finally
             {
-                GetVersion_unificada(phgw);
+                //GetVersion_unificada(phgw);
             }
             response(stdRes != std.NoInfo, stdRes);
         }
