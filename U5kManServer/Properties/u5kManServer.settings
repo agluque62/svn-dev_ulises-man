@@ -331,5 +331,8 @@
     <Setting Name="SipOptionsTimeout" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">500</Value>
     </Setting>
+    <Setting Name="HttpGetTimeout" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

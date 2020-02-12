@@ -441,6 +441,7 @@ namespace U5kManServer.Services
                         try
                         {
                             var currentMasters = DataAndStates.Where(e => e.Value.RadioService == "Master");
+                            var Timeout = TimeSpan.FromMilliseconds(Properties.u5kManServer.Default.HttpGetTimeout);
 
                             if (currentMasters != null && currentMasters.Count() > 0)
                             {
@@ -448,9 +449,9 @@ namespace U5kManServer.Services
 
                                 TraceMsg(2, "Getting Data Of Radio...");
 
-                                string LocalRadioSessionsString = HttpHelper.Get(master.ip, master.WebPort, "/rdsessions", "[]");
-                                string LocalRadioMNDataString = HttpHelper.Get(master.ip, master.WebPort, "/gestormn", "[]");
-                                string LocalHFRadioDataString = HttpHelper.Get(master.ip, master.WebPort, "/rdhf", "{}");
+                                string LocalRadioSessionsString = HttpHelper.Get(master.ip, master.WebPort, "/rdsessions", Timeout, "[]");
+                                string LocalRadioMNDataString = HttpHelper.Get(master.ip, master.WebPort, "/gestormn", Timeout, "[]");
+                                string LocalHFRadioDataString = HttpHelper.Get(master.ip, master.WebPort, "/rdhf", Timeout, "{}");
 
                                 if (GetDataAccess())
                                 {
@@ -507,11 +508,12 @@ namespace U5kManServer.Services
                             if (currentMasters != null && currentMasters.Count() > 0)
                             {
                                 ServerDataAndState master = currentMasters.First().Value;
+                                var Timeout = TimeSpan.FromMilliseconds(Properties.u5kManServer.Default.HttpGetTimeout);
 
                                 TraceMsg(2, "Getting Data Of Telephony...");
 
-                                string LocalPresenceDataString = HttpHelper.Get(master.ip, master.WebPort, "/tifxinfo");
-                                string LocalPhoneDataString = HttpHelper.Get(master.ip, master.WebPort, "/phone");
+                                string LocalPresenceDataString = HttpHelper.Get(master.ip, master.WebPort, "/tifxinfo", Timeout);
+                                string LocalPhoneDataString = HttpHelper.Get(master.ip, master.WebPort, "/phone", Timeout);
 
                                 if (GetDataAccess())
                                 {
