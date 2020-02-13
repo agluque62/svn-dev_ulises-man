@@ -59,9 +59,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="..\..\U5kManServer\Services\CentralServicesMonitor.cs">
-      <Link>ClassReferences\CentralServicesMonitor.cs</Link>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LocalConfigInDbUnitTest.cs" />
     <Compile Include="JSonParsingTest.cs" />
@@ -71,6 +68,7 @@
     <Compile Include="ClassReferences\UnitsTestingTypes.cs" />
     <Compile Include="CfgGwsUnitTest.cs" />
     <Compile Include="ExternalResourcesUnitTest.cs" />
+    <Compile Include="GenericTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

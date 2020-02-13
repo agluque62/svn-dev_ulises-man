@@ -1053,11 +1053,11 @@ namespace U5kManServer
             {
                 string page = "http://" + phgw.ip + ":8080/test";
                 var timeout = TimeSpan.FromMilliseconds(Properties.u5kManServer.Default.SipOptionsTimeout);
-                HttpHelper.Get(page, timeout, (success, message) =>
+                HttpHelper.GetSync(page, timeout, (success, message) =>
                  {
                      if (success)
                      {
-                         stdRes  =message.Contains("Handler por Defecto") ? std.Ok : std.Error;
+                         stdRes  = message.Contains("Handler por Defecto") ? std.Ok : std.Error;
                      }
                      else
                      {
@@ -1073,8 +1073,7 @@ namespace U5kManServer
                 /** Obtiene la version unificada */
                 if (stdRes == std.Ok && (phgw.version == string.Empty || phgw.version == idiomas.strings.GWS_VersionError))
                 {
-                    page = "http://" + phgw.ip + ":8080/mant/lver";
-                    var resp = HttpHelper.Get(page, timeout, null);
+                    var resp = HttpHelper.GetSync(phgw.ip, "8080", "/mant/lver", timeout);
                     phgw.version = resp ?? idiomas.strings.GWS_VersionError;
                 }
             }

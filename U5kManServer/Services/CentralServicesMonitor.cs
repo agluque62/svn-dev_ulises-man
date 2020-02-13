@@ -449,9 +449,9 @@ namespace U5kManServer.Services
 
                                 TraceMsg(2, "Getting Data Of Radio...");
 
-                                string LocalRadioSessionsString = HttpHelper.Get(master.ip, master.WebPort, "/rdsessions", Timeout, "[]");
-                                string LocalRadioMNDataString = HttpHelper.Get(master.ip, master.WebPort, "/gestormn", Timeout, "[]");
-                                string LocalHFRadioDataString = HttpHelper.Get(master.ip, master.WebPort, "/rdhf", Timeout, "{}");
+                                string LocalRadioSessionsString = HttpHelper.GetSync(master.ip, master.WebPort, "/rdsessions", Timeout, "[]");
+                                string LocalRadioMNDataString = HttpHelper.GetSync(master.ip, master.WebPort, "/gestormn", Timeout, "[]");
+                                string LocalHFRadioDataString = HttpHelper.GetSync(master.ip, master.WebPort, "/rdhf", Timeout, "{}");
 
                                 if (GetDataAccess())
                                 {
@@ -512,8 +512,8 @@ namespace U5kManServer.Services
 
                                 TraceMsg(2, "Getting Data Of Telephony...");
 
-                                string LocalPresenceDataString = HttpHelper.Get(master.ip, master.WebPort, "/tifxinfo", Timeout);
-                                string LocalPhoneDataString = HttpHelper.Get(master.ip, master.WebPort, "/phone", Timeout);
+                                string LocalPresenceDataString = HttpHelper.GetSync(master.ip, master.WebPort, "/tifxinfo", Timeout);
+                                string LocalPhoneDataString = HttpHelper.GetSync(master.ip, master.WebPort, "/phone", Timeout);
 
                                 if (GetDataAccess())
                                 {
