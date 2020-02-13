@@ -66,9 +66,18 @@ namespace Utilities
                     return;
                 }
             }
-            catch (Exception)
-            {                // Timeouts...
-               Notify?.Invoke(false, defaultReturn);
+            catch (Exception x)
+            {
+                // Errores
+                var msg = x.Message;
+                if (x is AggregateException)
+                {
+                    foreach(var excep in (x as AggregateException).InnerExceptions)
+                    {
+                        msg += ("\n\t" + excep.Message);
+                    }
+                }
+                Notify?.Invoke(false, msg);
             }
         }
     }
