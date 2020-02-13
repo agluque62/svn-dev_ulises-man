@@ -572,7 +572,7 @@ namespace U5kManServer
             pgw.lan2 = bond == 0 ? std.NoInfo : eth1 == 1 ? std.Ok : std.Error;
         }
 
-#region Threads de Exploracion en Paralelo.
+        #region Threads de Exploracion en Paralelo.
 
         /// <summary>
         /// Explora una pasarela logica.
@@ -615,7 +615,7 @@ namespace U5kManServer
             }
         }
 
-#region Exploracion de GW Unificada
+        #region Exploracion de GW Unificada
 
         /// <summary>
         /// 
@@ -906,9 +906,9 @@ namespace U5kManServer
             }
         }
 
-#endregion //
+        #endregion //
 
-#region GW_STD_V1
+        #region GW_STD_V1
         /// <summary>
         /// 
         /// </summary>
@@ -929,37 +929,42 @@ namespace U5kManServer
                     if (phgw.IpConn.Std == std.Ok)
                     {
                         // Supervision del Modulo SIP...
-                        SipModuleTest(phgw,(res, newStd)=> 
-                        {
-                            if (phgw.SipMod.ProcessResult(res) == true)
-                            {
-                                phgw.SipMod.Std = newStd;                        
-                                LogTrace<GwExplorer>($"GwSip_ {(res ? "Ok  " : "Fail")} executed: {phgw.name}.");
-                            }
-                            else
-                            {
-                                LogInfo<GwExplorer>($"GwSip_ Fail ignored : {phgw.name}.");
-                            }
-                        });
-                        
+                        SipModuleTest(phgw, (res, newStd) =>
+                         {
+                             if (phgw.SipMod.ProcessResult(res) == true)
+                             {
+                                 phgw.SipMod.Std = newStd;
+                                 LogTrace<GwExplorer>($"GwSip_ {(res ? "Ok  " : "Fail")} executed: {phgw.name}.");
+                             }
+                             else
+                             {
+                                 LogInfo<GwExplorer>($"GwSip_ Fail ignored : {phgw.name}.");
+                             }
+                         });
+
                         if (phgw.SipMod.Std == std.Ok)
                         {
                             // Supervision del Modulo de Configuracion...
-                            CfgModuleTest(phgw, (res, newStd)=>
+                            CfgModuleTest(phgw, (res, newStd, mensaje) =>
                             {
                                 if (phgw.CfgMod.ProcessResult(res) == true)
                                 {
                                     phgw.CfgMod.Std = newStd;
-                                    LogTrace<GwExplorer>($"GwCfg_ {(res ? "Ok  " : "Fail")} executed: {phgw.name}.");
+                                    if (res)
+                                        LogTrace<GwExplorer>($"GwCfg_ Ok  executed: {phgw.name}.");
+                                    else
+                                    {
+                                        LogTrace<GwExplorer>($"GwCfg_ Fail EXECUTED: {phgw.name}\n   <{mensaje}>.");
+                                    }
                                 }
                                 else
                                 {
-                                    LogInfo<GwExplorer>($"GwCfg_ Fail ignored : {phgw.name}.");
+                                    LogTrace<GwExplorer>($"GwCfg_ Fail IGNORED: {phgw.name}\n   <{mensaje}>.");
                                 }
                             });
 
                             // Supervision del Modulo SNMP....
-                            SnmpModuleExplore(phgw, (res)=>
+                            SnmpModuleExplore(phgw, (res) =>
                             {
                                 if (phgw.SnmpMod.ProcessResult(res) == true)
                                 {
@@ -984,13 +989,13 @@ namespace U5kManServer
                 }
                 else
                 {
-                        LogInfo<GwExplorer>($"GwPing Fail ignored : {phgw.name}.");
+                    LogInfo<GwExplorer>($"GwPing Fail ignored : {phgw.name}.");
                 }
             }
             catch (Exception x)
             {
                 LogException<GwExplorer>(phgw.name, x);
-                if (phgw.IpConn.ProcessResult(false)==true)
+                if (phgw.IpConn.ProcessResult(false) == true)
                 {
                     phgw.IpConn.Std = std.NoInfo;
                 }
@@ -1040,20 +1045,36 @@ namespace U5kManServer
         /// 
         /// </summary>
         /// <param name="phgw"></param>
-        protected void CfgModuleTest(stdPhGw phgw, Action<bool, std> response)
+        protected void CfgModuleTest(stdPhGw phgw, Action<bool, std, string> response)
         {
             std stdRes = std.NoInfo;
+            var mensaje = "";
             try
             {
                 string page = "http://" + phgw.ip + ":8080/test";
                 var timeout = TimeSpan.FromMilliseconds(Properties.u5kManServer.Default.SipOptionsTimeout);
-                var resp = HttpHelper.Get(page, timeout, null);
-                stdRes = resp == null ? std.NoInfo : resp.Contains("Handler por Defecto") ? std.Ok : std.Error;
+                HttpHelper.Get(page, timeout, (success, message) =>
+                 {
+                     if (success)
+                     {
+                         stdRes  =message.Contains("Handler por Defecto") ? std.Ok : std.Error;
+                     }
+                     else
+                     {
+                         stdRes = std.NoInfo;
+                         mensaje = message;
+                     }
+                 });
+
+
+                //var resp = HttpHelper.Get(page, timeout, null);
+                //stdRes = resp == null ? std.NoInfo : resp.Contains("Handler por Defecto") ? std.Ok : std.Error;
+
                 /** Obtiene la version unificada */
-                if (stdRes == std.Ok && (phgw.version == string.Empty || phgw.version == idiomas.strings.GWS_VersionError) )
+                if (stdRes == std.Ok && (phgw.version == string.Empty || phgw.version == idiomas.strings.GWS_VersionError))
                 {
                     page = "http://" + phgw.ip + ":8080/mant/lver";
-                    resp = HttpHelper.Get(page, timeout, null);
+                    var resp = HttpHelper.Get(page, timeout, null);
                     phgw.version = resp ?? idiomas.strings.GWS_VersionError;
                 }
             }
@@ -1067,7 +1088,7 @@ namespace U5kManServer
             {
                 //GetVersion_unificada(phgw);
             }
-            response(stdRes != std.NoInfo, stdRes);
+            response(stdRes != std.NoInfo, stdRes, mensaje);
         }
         /// <summary>
         /// 
@@ -1147,7 +1168,7 @@ namespace U5kManServer
         }
 
 
-#endregion
+        #endregion
 
         /// <summary>
         /// 
@@ -1161,7 +1182,7 @@ namespace U5kManServer
             // String slots = String.Format("{0},[{1}{2}{3}{4}] 
         }
 
-#endregion
+        #endregion
     }   // clase
 
     /** */
