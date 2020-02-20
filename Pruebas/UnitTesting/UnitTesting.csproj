@@ -69,6 +69,7 @@
     <Compile Include="CfgGwsUnitTest.cs" />
     <Compile Include="ExternalResourcesUnitTest.cs" />
     <Compile Include="GenericTests.cs" />
+    <Compile Include="GwCallLogsParseTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -176,6 +176,11 @@ namespace U5kBaseDatos
         public string idhw { get; set; }
         public int tipo { get; set; }
         public string desc { get; set; }
+
+        public override string ToString()
+        {
+            return $"{fecha}: {id}, {idhw}, {tipo}, {desc}";
+        }
     }
 
     /// <summary>
@@ -1663,6 +1668,9 @@ namespace U5kBaseDatos
             inci = new U5kIncidencia() { id = redanCode, fecha = redanDate, idhw = redanIdhw, tipo=1 };
             parametros = new List<object>();
 
+            if (redanCode == -1)
+                return false;
+
             if (tbConvInci.Count == 0)
                 loadInci();
 
@@ -1705,6 +1713,21 @@ namespace U5kBaseDatos
                 }                
             }
             return false;
+        }
+
+        /** */
+        public void UlisesInci(Action<U5kIncidencia, List<object>> success, Action fail)
+        {
+            U5kIncidencia inci;
+            List<Object> parametros;
+            if (UlisesInci(out inci, out parametros))
+            {
+                success(inci, parametros);
+            }
+            else
+            {
+                fail();
+            }
         }
 
         /// <summary>
@@ -1755,7 +1778,7 @@ namespace U5kBaseDatos
         /// <summary>
         /// 
         /// </summary>
-        protected int redanCode;
+        protected int redanCode=-1;
         protected DateTime redanDate;
         protected string redanSite;
         protected string redanIdhw;
