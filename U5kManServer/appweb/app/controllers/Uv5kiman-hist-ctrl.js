@@ -241,9 +241,10 @@ angular.module("Uv5kiman")
         strData += ("Content;" + ctrl.textoTexto() + "\n");
         strData += "\n";
     /** Tabla */
-        strData += "Date;Item;Description;Ack\n";
+        strData += "Date;Item;Description;Ack-Time;Ack-User;\n";
         ctrl.lhis.forEach(function (inci, index) {
-            strData += (inci.date + ";" + inci.idhw + ";" + inci.desc + ";" + inci.acknw + "-" + inci.user + "\n");
+            var user = inci.user == null ? "" : inci.user;
+            strData += (inci.date + ";" + inci.idhw + ";" + inci.desc + ";" + inci.acknw + ";" + user + "\n");
         });
 
         var now = new Date();
