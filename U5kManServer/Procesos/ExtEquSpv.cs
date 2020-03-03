@@ -463,18 +463,18 @@ namespace U5kManServer.ExtEquSpvSpace
             bool sipp = sips?.SipPing(ua) ?? false;
             if (sipp == true)
             {
-                if (ua.last_response != null)
+                if (ua.last_response == null || ua.last_response.Result=="Error")
+                {
+                    recurso.EstadoSip = std.Error;
+                    recurso.LastOptionsResponse = "";
+                    LogTrace<EquipoEurocae>($"{recurso.sip_user}. SipAgent Respuesta NULA.");
+                }
+                else
                 {
                     var allowedReponse = AllowedSipResponses.Contains(ua.last_response.Result);
                     recurso.EstadoSip = allowedReponse ? std.Ok : std.Aviso;
                     recurso.LastOptionsResponse = ua.last_response.Result;
                     LogTrace<EquipoEurocae>($"{recurso.sip_user}. SipAgent response {recurso.LastOptionsResponse}, EstadoSip => {recurso.EstadoSip}");
-                }
-                else
-                {
-                    recurso.EstadoSip = std.Error;
-                    recurso.LastOptionsResponse = "";
-                    LogTrace<EquipoEurocae>($"{recurso.sip_user}. SipAgent Respuesta NULA.");
                 }
             }
             else
