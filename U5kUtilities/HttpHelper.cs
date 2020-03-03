@@ -80,7 +80,7 @@ namespace Utilities
             {
                 if (success)
                     ret = data;
-            });
+            }, defaultReturn);
             return ret;
         }
         public static void GetSync(string url, TimeSpan timeout, Action<bool, string> Notify, string defaultReturn = "{}")

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
+using System.Diagnostics;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -17,11 +18,12 @@ namespace U5kManServer.Services
 {
     public class CentralServicesMonitor : IDisposable
     {
-        private string _radioMNDataString="[]";
-        private string _presenceDataString= "{}";
-        private string _phoneDataString ="{}";
         private string _radioSessionsString = "[]";
-        private string _hFRadioDataString ="{}";
+        private string _radioMNDataString = "[]";
+        private string _hFRadioDataString = "[]";
+        private string _UnoMasUnoDataString = "[]";
+        private string _presenceDataString = "{}";
+        private string _phoneDataString = "{}";
 
         public class ServerDataAndState
         {
@@ -39,6 +41,21 @@ namespace U5kManServer.Services
             public string WebPort { get; set; }
 
             public DateTime TimeStamp { get; set; }
+
+            public ServerDataAndState()
+            {
+                ip = "";
+                url = "";
+                Machine = "Testing";
+                ServerType = "Mixed";
+                GlobalMaster = "Master";
+                RadioService = "Master";
+                CfgService = "Master";
+                PhoneService = "Master";
+                TifxService = "Master";
+                PresenceService = "Master";
+                WebPort = "1023";
+            }
         };
 
         static TimeSpan smpTimeout = TimeSpan.FromSeconds(10);  // 5
@@ -123,6 +140,60 @@ namespace U5kManServer.Services
             }
             set => _hFRadioDataString = value;
         }
+        public string UnoMasUnoDataString
+        {
+            get
+            {
+                if (GetDataAccess())
+                {
+                    var ret = _UnoMasUnoDataString;
+                    ReleaseDataAccess();
+                    return ret;
+                }
+                return "{}";
+            }
+            set => _UnoMasUnoDataString = value;
+        }
+
+        public void SetRadioMasterForTesting(string ip)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                var nbx = new ServerDataAndState() { ip = ip };
+                var key = string.Format("{0}#{1}", nbx.ip, nbx.ServerType);
+                do
+                {
+                    if (GetDataAccess() == true)
+                    {
+                        nbx.TimeStamp = DateTime.Now;
+                        DataAndStates[key] = nbx;
+                        ReleaseDataAccess();
+                    }
+
+                    Task.Delay(1000).Wait();
+                } while (SpvTask != null);
+
+            });
+
+        }
+        public void GetRadioData(Action<object> response)
+        {
+            JArray mndata = JArray.Parse(RadioMNDataString), 
+                sessions = JArray.Parse(RadioSessionsString), 
+                hfdata = JArray.Parse(HFRadioDataString), 
+                msdata = JArray.Parse(UnoMasUnoDataString);
+            var data = new
+            {
+                mnenable = mndata.Count() > 0 ? 1 : 0,
+                hfenable = hfdata.Count() > 0 ? 1 : 0,
+                msenable = msdata.Count() > 0 ? 1 : 0,
+                sessions,
+                mndata,
+                hfdata,
+                msdata
+            };
+            response(data);
+        }
 
         /** Estados globales */
         public std GlobalRadioStatus
@@ -187,6 +258,7 @@ namespace U5kManServer.Services
 
         public void Dispose()
         {
+
             if (SpvTask != null && GetDataAccess())
             {
                 SpvTask = null;
@@ -214,11 +286,11 @@ namespace U5kManServer.Services
             {
                 var idRadio = RadioServer != null ? RadioServer.ip : "???";
                 var idPhone = PhoneServer != null ? PhoneServer.ip : "???";
-                var stdRadio = RadioServer != null ? 
-                    (RadioServer.ServerType=="Mixed" ? GlobalMixedServiceState.ToString() : GlobalRadioServiceState.ToString()) : 
+                var stdRadio = RadioServer != null ?
+                    (RadioServer.ServerType == "Mixed" ? GlobalMixedServiceState.ToString() : GlobalRadioServiceState.ToString()) :
                     GlobalRadioServiceState.ToString();
-                var stdPhone = PhoneServer != null ? 
-                    (PhoneServer.ServerType=="Mixed" ? GlobalMixedServiceState.ToString() : GlobalPhoneServiceState.ToString()) : 
+                var stdPhone = PhoneServer != null ?
+                    (PhoneServer.ServerType == "Mixed" ? GlobalMixedServiceState.ToString() : GlobalPhoneServiceState.ToString()) :
                     GlobalPhoneServiceState.ToString();
                 ReleaseDataAccess();
 
@@ -234,7 +306,7 @@ namespace U5kManServer.Services
                 {
                     radio = new
                     {
-                        std = GlobalRadioServiceState.ToString(),    
+                        std = GlobalRadioServiceState.ToString(),
                         mas = RadioServer == null ? "" : RadioServer.ip,
                         rdsl = DataAndStates.Where(e => e.Value.ServerType == "Radio").Select(e => e)
                     },
@@ -402,7 +474,7 @@ namespace U5kManServer.Services
         DateTime GlobalStateSupervision(DateTime lastSup)
         {
             TimeSpan ElapsedTime = DateTime.Now - lastSup;
-            if (ElapsedTime > globalStateTick) 
+            if (ElapsedTime > globalStateTick)
             {
                 /** Supervisa el Radio Server */
                 RadioServerState.Supervises(RadioServer, () =>
@@ -452,12 +524,14 @@ namespace U5kManServer.Services
                                 string LocalRadioSessionsString = HttpHelper.GetSync(master.ip, master.WebPort, "/rdsessions", Timeout, "[]");
                                 string LocalRadioMNDataString = HttpHelper.GetSync(master.ip, master.WebPort, "/gestormn", Timeout, "[]");
                                 string LocalHFRadioDataString = HttpHelper.GetSync(master.ip, master.WebPort, "/rdhf", Timeout, "{}");
+                                string LocalUnoMasUnoDataString = HttpHelper.GetSync(master.ip, master.WebPort, "/rd11", Timeout, "[]");
 
                                 if (GetDataAccess())
                                 {
                                     RadioSessionsString = LocalRadioSessionsString;
                                     RadioMNDataString = LocalRadioMNDataString;
                                     HFRadioDataString = LocalHFRadioDataString;
+                                    UnoMasUnoDataString = LocalUnoMasUnoDataString;
 
                                     TraceMsg(2, "Data Of Radio READY...");
                                     ReleaseDataAccess();
@@ -470,9 +544,10 @@ namespace U5kManServer.Services
                                 {
                                     RadioSessionsString = "[]";
                                     RadioMNDataString = "[]";
-                                    HFRadioDataString = "{}";
-                                    TraceMsg(2, "OperationalRadioDataGet. Radio Data Cleared");
+                                    HFRadioDataString = "[]";
+                                    UnoMasUnoDataString = "[]";
 
+                                    TraceMsg(2, "OperationalRadioDataGet. Radio Data Cleared");
                                     ReleaseDataAccess();
                                 }
                             }
@@ -580,7 +655,7 @@ namespace U5kManServer.Services
             get
             {
                 int total = DataAndStates.Where(e => e.Value.ServerType == "Radio").Count();
-                int master = DataAndStates.Where(e => e.Value.ServerType == "Radio" && e.Value.RadioService=="Master").Count();
+                int master = DataAndStates.Where(e => e.Value.ServerType == "Radio" && e.Value.RadioService == "Master").Count();
                 return master == 1 && total > 1 ? ServiceStates.Ok :
                     master == 1 && total == 1 ? ServiceStates.Warning : ServiceStates.Alarm;
             }
@@ -644,7 +719,7 @@ namespace U5kManServer.Services
             Trace?.Invoke(level, msg);
         }
 
-        protected void RaiseInternalEvent(bool alarma=false, string str1="", string str2="", string str3="")
+        protected void RaiseInternalEvent(bool alarma = false, string str1 = "", string str2 = "", string str3 = "")
         {
             Task.Factory.StartNew(() =>
             {

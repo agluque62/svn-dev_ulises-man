@@ -74,8 +74,16 @@ namespace UnitTesting
         {
             PrepareMonitor();
 
+            Wait(2);
+            MonitorOfServices.SetRadioMasterForTesting("10.12.60.35");
             Wait(20);
-            DisposeMonitorOn(60*5);
+
+            MonitorOfServices.GetRadioData((data) =>
+            {
+                File.WriteAllText("RadioData.json",
+                    JsonConvert.SerializeObject(data, Formatting.Indented));
+            });
+            DisposeMonitorOn(1);
         }
     }
 }
