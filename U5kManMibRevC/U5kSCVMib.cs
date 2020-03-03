@@ -3346,6 +3346,612 @@ namespace U5kManMibRevC
                 get { return _elements; }
             }
         }
+        internal sealed class HFTableLen : ScalarObject
+        {
+            /// <summary>
+            /// Initializes a new instance of the <see cref="HFTableLen"/> class.
+            /// </summary>
+            public HFTableLen()
+                : base(OidBase + ".8.1.5.7.3.1.0")
+            {
+            }
+            /// <summary>
+            /// 
+            /// </summary>
+            public override ISnmpData Data
+            {
+                get
+                {
+                    int data = 0;
+                    U5kSCVMib.DataGet((object gdata) =>
+                    {
+                        dynamic ddata = gdata;
+                        data = ddata.STDG.HFTXInfo.Count;
+                    });
+                    return new Integer32(data);
+                }
+                set { throw new AccessFailureException(); }
+            }
+        }
+        internal sealed class HFTable : TableObject, IDisposable
+        {
+            internal sealed class IHfIndex : ScalarObject
+            {
+                readonly ISnmpData _data;
+                /// <summary>
+                /// Initializes a new instance of the <see cref="IHfIndex"/> class.
+                public IHfIndex(int index, object onlineData)
+                    : base(OidBase + ".8.1.5.7.3.2.1.1.{0}", index)
+                {
+                    _data = new Integer32(index);
+                }
+                public override ISnmpData Data
+                {
+                    get { return _data; }
+                    set { throw new AccessFailureException(); }
+                }
+            }
+            internal sealed class SHfId : ScalarObject
+            {
+                private readonly int RowIndex = 0;
+                /// <summary>
+                /// Initializes a new instance of the <see cref="SHfId"/> class.
+                public SHfId(int index, object onlineData)
+                    // ReSharper restore UnusedParameter.Local
+                    : base(OidBase + ".8.1.5.7.3.2.1.2.{0}", index)
+                {
+                    RowIndex = index;
+                }
+                public override ISnmpData Data
+                {
+                    get
+                    {
+                        String DevName = "Error";
+                        U5kSCVMib.DataGet((object gdata) =>
+                        {
+                            dynamic ddata = gdata;
+                            string valor = ddata.STDG.HFTXInfo[RowIndex - 1].id;
+                            DevName = valor ?? "---";
+                        });
+
+                        return new OctetString(DevName);
+                    }
+                    set { throw new AccessFailureException(); }
+                }
+            }
+            internal sealed class SHfGestor : ScalarObject
+            {
+                private readonly int RowIndex = 0;
+                /// <summary>
+                /// Initializes a new instance of the <see cref="SHfGestor"/> class.
+                public SHfGestor(int index, object onlineData)
+                    // ReSharper restore UnusedParameter.Local
+                    : base(OidBase + ".8.1.5.7.3.2.1.3.{0}", index)
+                {
+                    RowIndex = index;
+                }
+                public override ISnmpData Data
+                {
+                    get
+                    {
+                        String Info = default;
+                        U5kSCVMib.DataGet((object gdata) =>
+                        {
+                            dynamic ddata = gdata;
+                            Info = ddata.STDG.HFTXInfo[RowIndex - 1].gestor;
+                        });
+                        return new OctetString(Info);
+                    }
+                    set { throw new AccessFailureException(); }
+                }
+            }
+            internal sealed class SHfOid : ScalarObject
+            {
+                private readonly int RowIndex = 0;
+                /// <summary>
+                /// Initializes a new instance of the <see cref="SHfOid"/> class.
+                public SHfOid(int index, object onlineData)
+                    // ReSharper restore UnusedParameter.Local
+                    : base(OidBase + ".8.1.5.7.3.2.1.4.{0}", index)
+                {
+                    RowIndex = index;
+                }
+                public override ISnmpData Data
+                {
+                    get
+                    {
+                        string Info = default;
+                        U5kSCVMib.DataGet((object gdata) =>
+                        {
+                            dynamic ddata = gdata;
+                            Info = ddata.STDG.HFTXInfo[RowIndex - 1].oid;
+                        });
+                        return new OctetString(Info);
+                    }
+                    set { throw new AccessFailureException(); }
+                }
+            }
+            internal sealed class IHfStd : ScalarObject
+            {
+                private readonly int RowIndex = 0;
+                /// <summary>
+                /// Initializes a new instance of the <see cref="IHfStd"/> class.
+                public IHfStd(int index, object onlineData)
+                    // ReSharper restore UnusedParameter.Local
+                    : base(OidBase + ".8.1.5.7.3.2.1.5.{0}", index)
+                {
+                    RowIndex = index;
+                }
+                public override ISnmpData Data
+                {
+                    get
+                    {
+                        Int32 StdInfo = 0;
+                        U5kSCVMib.DataGet((object gdata) =>
+                        {
+                            dynamic ddata = gdata;
+                            StdInfo = (int)(ddata.STDG.HFTXInfo[RowIndex - 1].std);
+                        });
+                        return new Integer32(StdInfo);
+                    }
+                    set { throw new AccessFailureException(); }
+                }
+            }
+            internal sealed class SHfFrec : ScalarObject
+            {
+                private readonly int RowIndex = 0;
+                /// <summary>
+                /// Initializes a new instance of the <see cref="SHfFrec"/> class.
+                public SHfFrec(int index, object onlineData)
+                    // ReSharper restore UnusedParameter.Local
+                    : base(OidBase + ".8.1.5.7.3.2.1.6.{0}", index)
+                {
+                    RowIndex = index;
+                }
+                public override ISnmpData Data
+                {
+                    get
+                    {
+                        string Info = default;
+                        U5kSCVMib.DataGet((object gdata) =>
+                        {
+                            dynamic ddata = gdata;
+                            Info = ddata.STDG.HFTXInfo[RowIndex - 1].fre;
+                        });
+                        return new OctetString(Info);
+                    }
+                    set { throw new AccessFailureException(); }
+                }
+            }
+            internal sealed class SHfUri : ScalarObject
+            {
+                private readonly int RowIndex = 0;
+                /// <summary>
+                /// Initializes a new instance of the <see cref="SHfUri"/> class.
+                public SHfUri(int index, object onlineData)
+                    // ReSharper restore UnusedParameter.Local
+                    : base(OidBase + ".8.1.5.7.3.2.1.7.{0}", index)
+                {
+                    RowIndex = index;
+                }
+                public override ISnmpData Data
+                {
+                    get
+                    {
+                        String DevName = "Error";
+                        U5kSCVMib.DataGet((object gdata) =>
+                        {
+                            dynamic ddata = gdata;
+                            string valor = ddata.STDG.HFTXInfo[RowIndex - 1].uri;
+                            DevName = valor ?? "---";
+                        });
+
+                        return new OctetString(DevName);
+                    }
+                    set { throw new AccessFailureException(); }
+                }
+            }
+            internal sealed class SHfUser : ScalarObject
+            {
+                private readonly int RowIndex = 0;
+                /// <summary>
+                /// Initializes a new instance of the <see cref="SHfUser"/> class.
+                public SHfUser(int index, object onlineData)
+                    // ReSharper restore UnusedParameter.Local
+                    : base(OidBase + ".8.1.5.7.3.2.1.8.{0}", index)
+                {
+                    RowIndex = index;
+                }
+                public override ISnmpData Data
+                {
+                    get
+                    {
+                        string Info = default;
+                        U5kSCVMib.DataGet((object gdata) =>
+                        {
+                            dynamic ddata = gdata;
+                            var valor = (ddata.STDG.HFTXInfo[RowIndex - 1].user);
+                            Info = valor ?? default;
+                        });
+                        return new OctetString(Info);
+                    }
+                    set { throw new AccessFailureException(); }
+                }
+            }
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="RecTable"/> class.
+            /// </summary>
+            public HFTable()
+            {
+                LoadElements();
+
+                /** Refresca la Tabla  */
+                Task.Factory.StartNew(() =>
+                {
+                    while (supervisor != null && supervisor.WaitOne(TimeSpan.FromSeconds(5)) == false)
+                    {
+                        int count = 0;
+                        U5kSCVMib.DataGet((object gdata) =>
+                        {
+                            dynamic ddata = gdata;
+                            count = ddata.STDG.HFTXInfo.Count;
+                        });
+
+                        if (count != LastCount)
+                            LoadElements();
+                    }
+                });
+            }
+
+            private int LastCount = 0;
+            private readonly IList<ScalarObject> _elements = new List<ScalarObject>();
+            private void LoadElements()
+            {
+                _elements.Clear();
+                var columnTypes = new[]
+                {
+                    typeof(IHfIndex),
+                    typeof(SHfId),
+                    typeof(SHfGestor),
+                    typeof(SHfOid),
+                    typeof(IHfStd),
+                    typeof(SHfFrec),
+                    typeof(SHfUri),
+                    typeof(SHfUser),
+                };
+                int count = 0;
+                U5kSCVMib.DataGet((object gdata) =>
+                {
+                    dynamic ddata = gdata;
+                    count = ddata.STDG.HFTXInfo.Count;
+                });
+
+                foreach (var type in columnTypes)
+                {
+                    for (int i = 0; i < count; i++)
+                    {
+                        _elements.Add((ScalarObject)Activator.CreateInstance(type, new object[] { i + 1, null }));
+                    }
+                }
+                LastCount = count;
+            }
+
+            System.Threading.ManualResetEvent supervisor = new System.Threading.ManualResetEvent(false);
+            public void Dispose()
+            {
+                supervisor?.Set();
+                supervisor = null;
+            }
+
+            protected override IEnumerable<ScalarObject> Objects
+            {
+                get { return _elements; }
+            }
+        }
+        internal sealed class MSTableLen : ScalarObject
+        {
+            /// <summary>
+            /// Initializes a new instance of the <see cref="MSTableLen"/> class.
+            /// </summary>
+            public MSTableLen()
+                : base(OidBase + ".8.1.5.7.4.1.0")
+            {
+            }
+            /// <summary>
+            /// 
+            /// </summary>
+            public override ISnmpData Data
+            {
+                get
+                {
+                    int data = 0;
+                    U5kSCVMib.DataGet((object gdata) =>
+                    {
+                        dynamic ddata = gdata;
+                        data = ddata.STDG.RdUnoMasUnoInfo.Count;
+                    });
+                    return new Integer32(data);
+                }
+                set { throw new AccessFailureException(); }
+            }
+        }
+        internal sealed class MSTable : TableObject, IDisposable
+        {
+            internal sealed class IMSIndex : ScalarObject
+            {
+                readonly ISnmpData _data;
+                /// <summary>
+                /// Initializes a new instance of the <see cref="IMSIndex"/> class.
+                public IMSIndex(int index, object onlineData)
+                    : base(OidBase + ".8.1.5.7.4.2.1.1.{0}", index)
+                {
+                    _data = new Integer32(index);
+                }
+                public override ISnmpData Data
+                {
+                    get { return _data; }
+                    set { throw new AccessFailureException(); }
+                }
+            }
+            internal sealed class SMSId : ScalarObject
+            {
+                private readonly int RowIndex = 0;
+                /// <summary>
+                /// Initializes a new instance of the <see cref="SMSId"/> class.
+                public SMSId(int index, object onlineData)
+                    // ReSharper restore UnusedParameter.Local
+                    : base(OidBase + ".8.1.5.7.4.2.1.2.{0}", index)
+                {
+                    RowIndex = index;
+                }
+                public override ISnmpData Data
+                {
+                    get
+                    {
+                        String DevName = "Error";
+                        U5kSCVMib.DataGet((object gdata) =>
+                        {
+                            dynamic ddata = gdata;
+                            string valor = ddata.STDG.RdUnoMasUnoInfo[RowIndex - 1].id;
+                            DevName = valor ?? "---";
+                        });
+
+                        return new OctetString(DevName);
+                    }
+                    set { throw new AccessFailureException(); }
+                }
+            }
+            internal sealed class SMSFrec : ScalarObject
+            {
+                private readonly int RowIndex = 0;
+                /// <summary>
+                /// Initializes a new instance of the <see cref="SMSFrec"/> class.
+                public SMSFrec(int index, object onlineData)
+                    // ReSharper restore UnusedParameter.Local
+                    : base(OidBase + ".8.1.5.7.4.2.1.3.{0}", index)
+                {
+                    RowIndex = index;
+                }
+                public override ISnmpData Data
+                {
+                    get
+                    {
+                        String Info = default;
+                        U5kSCVMib.DataGet((object gdata) =>
+                        {
+                            dynamic ddata = gdata;
+                            Info = ddata.STDG.RdUnoMasUnoInfo[RowIndex - 1].fr;
+                        });
+                        return new OctetString(Info);
+                    }
+                    set { throw new AccessFailureException(); }
+                }
+            }
+            internal sealed class SMSSite : ScalarObject
+            {
+                private readonly int RowIndex = 0;
+                /// <summary>
+                /// Initializes a new instance of the <see cref="SMSSite"/> class.
+                public SMSSite(int index, object onlineData)
+                    // ReSharper restore UnusedParameter.Local
+                    : base(OidBase + ".8.1.5.7.4.2.1.4.{0}", index)
+                {
+                    RowIndex = index;
+                }
+                public override ISnmpData Data
+                {
+                    get
+                    {
+                        string Info = default;
+                        U5kSCVMib.DataGet((object gdata) =>
+                        {
+                            dynamic ddata = gdata;
+                            Info = ddata.STDG.RdUnoMasUnoInfo[RowIndex - 1].site;
+                        });
+                        return new OctetString(Info);
+                    }
+                    set { throw new AccessFailureException(); }
+                }
+            }
+            internal sealed class IMSTx : ScalarObject
+            {
+                private readonly int RowIndex = 0;
+                /// <summary>
+                /// Initializes a new instance of the <see cref="IMSTx"/> class.
+                public IMSTx(int index, object onlineData)
+                    // ReSharper restore UnusedParameter.Local
+                    : base(OidBase + ".8.1.5.7.4.2.1.5.{0}", index)
+                {
+                    RowIndex = index;
+                }
+                public override ISnmpData Data
+                {
+                    get
+                    {
+                        Int32 StdInfo = 0;
+                        U5kSCVMib.DataGet((object gdata) =>
+                        {
+                            dynamic ddata = gdata;
+                            StdInfo = (int)(ddata.STDG.RdUnoMasUnoInfo[RowIndex - 1].tx);
+                        });
+                        return new Integer32(StdInfo);
+                    }
+                    set { throw new AccessFailureException(); }
+                }
+            }
+            internal sealed class IMSSel : ScalarObject
+            {
+                private readonly int RowIndex = 0;
+                /// <summary>
+                /// Initializes a new instance of the <see cref="IMSSel"/> class.
+                public IMSSel(int index, object onlineData)
+                    // ReSharper restore UnusedParameter.Local
+                    : base(OidBase + ".8.1.5.7.4.2.1.6.{0}", index)
+                {
+                    RowIndex = index;
+                }
+                public override ISnmpData Data
+                {
+                    get
+                    {
+                        int Info = default;
+                        U5kSCVMib.DataGet((object gdata) =>
+                        {
+                            dynamic ddata = gdata;
+                            Info = (int)ddata.STDG.RdUnoMasUnoInfo[RowIndex - 1].sel;
+                        });
+                        return new Integer32(Info);
+                    }
+                    set { throw new AccessFailureException(); }
+                }
+            }
+            internal sealed class IMNSes : ScalarObject
+            {
+                private readonly int RowIndex = 0;
+                /// <summary>
+                /// Initializes a new instance of the <see cref="IMNSes"/> class.
+                public IMNSes(int index, object onlineData)
+                    // ReSharper restore UnusedParameter.Local
+                    : base(OidBase + ".8.1.5.7.4.2.1.7.{0}", index)
+                {
+                    RowIndex = index;
+                }
+                public override ISnmpData Data
+                {
+                    get
+                    {
+                        int DevName = default;
+                        U5kSCVMib.DataGet((object gdata) =>
+                        {
+                            dynamic ddata = gdata;
+                            var valor = (int)ddata.STDG.RdUnoMasUnoInfo[RowIndex - 1].ses;
+                            DevName = valor;
+                        });
+
+                        return new Integer32(DevName);
+                    }
+                    set { throw new AccessFailureException(); }
+                }
+            }
+            internal sealed class SMSUri : ScalarObject
+            {
+                private readonly int RowIndex = 0;
+                /// <summary>
+                /// Initializes a new instance of the <see cref="SMSUri"/> class.
+                public SMSUri(int index, object onlineData)
+                    // ReSharper restore UnusedParameter.Local
+                    : base(OidBase + ".8.1.5.7.4.2.1.8.{0}", index)
+                {
+                    RowIndex = index;
+                }
+                public override ISnmpData Data
+                {
+                    get
+                    {
+                        string Info = default;
+                        U5kSCVMib.DataGet((object gdata) =>
+                        {
+                            dynamic ddata = gdata;
+                            var valor = (ddata.STDG.RdUnoMasUnoInfo[RowIndex - 1].uri);
+                            Info = valor ?? default;
+                        });
+                        return new OctetString(Info);
+                    }
+                    set { throw new AccessFailureException(); }
+                }
+            }
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="RecTable"/> class.
+            /// </summary>
+            public MSTable()
+            {
+                LoadElements();
+
+                /** Refresca la Tabla  */
+                Task.Factory.StartNew(() =>
+                {
+                    while (supervisor != null && supervisor.WaitOne(TimeSpan.FromSeconds(5)) == false)
+                    {
+                        int count = 0;
+                        U5kSCVMib.DataGet((object gdata) =>
+                        {
+                            dynamic ddata = gdata;
+                            count = ddata.STDG.RdUnoMasUnoInfo.Count;
+                        });
+
+                        if (count != LastCount)
+                            LoadElements();
+                    }
+                });
+            }
+
+            private int LastCount = 0;
+            private readonly IList<ScalarObject> _elements = new List<ScalarObject>();
+            private void LoadElements()
+            {
+                _elements.Clear();
+                var columnTypes = new[]
+                {
+                    typeof(IMSIndex),
+                    typeof(SMSId),
+                    typeof(SMSFrec),
+                    typeof(SMSSite),
+                    typeof(IMSTx),
+                    typeof(IMSSel),
+                    typeof(IMNSes),
+                    typeof(SMSUri),
+                };
+                int count = 0;
+                U5kSCVMib.DataGet((object gdata) =>
+                {
+                    dynamic ddata = gdata;
+                    count = ddata.STDG.RdUnoMasUnoInfo.Count;
+                });
+
+                foreach (var type in columnTypes)
+                {
+                    for (int i = 0; i < count; i++)
+                    {
+                        _elements.Add((ScalarObject)Activator.CreateInstance(type, new object[] { i + 1, null }));
+                    }
+                }
+                LastCount = count;
+            }
+
+            System.Threading.ManualResetEvent supervisor = new System.Threading.ManualResetEvent(false);
+            public void Dispose()
+            {
+                supervisor?.Set();
+                supervisor = null;
+            }
+
+            protected override IEnumerable<ScalarObject> Objects
+            {
+                get { return _elements; }
+            }
+        }
 
         /// <summary>
         /// 
@@ -3356,6 +3962,8 @@ namespace U5kManMibRevC
             {
                 new RdSesTableLen(), new RdSesTable(),
                 new MNTableLen(), new MNTable(),
+                new HFTableLen(), new HFTable(),
+                new MSTableLen(), new MSTable()
             };
         }
         public U5kSCVMibRadGroup() : base(U5kSCVMib.OidBase)

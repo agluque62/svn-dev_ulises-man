@@ -151,6 +151,9 @@
       <Component Id ="Uv5kMib1" Guid="*">
         <File Id="Uv5kMib1" Name="ndf.uv5k.137c5.mib"></File>
       </Component>
+      <Component Id ="Uv5kMib2" Guid="*">
+        <File Id="Uv5kMib2" Name="ndf.uv5k.137c5-v1.mib"></File>
+      </Component>
       <Component Id ="Rfc1213Mib" Guid="{286316A3-0ADA-49B3-ABF6-B1A6CBCF6642}">
         <File Id="Rfc1213Mib" Name="RFC1213-MIB"></File>
       </Component>
