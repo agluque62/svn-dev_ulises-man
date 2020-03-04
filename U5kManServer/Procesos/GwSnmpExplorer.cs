@@ -221,7 +221,7 @@ namespace U5kManServer
                 {
                     if (U5kManService._Master == true)
                     {
-                        List<stdGw> localgws = new List<stdGw>();
+                        List<stdGw> localgws = null;        // new List<stdGw>();
                         try
                         {
                             Utilities.TimeMeasurement tm = new Utilities.TimeMeasurement("GW Explorer");
@@ -231,46 +231,20 @@ namespace U5kManServer
 
                             // Arranco los procesos de exploracion...
                             List<Task> task = new List<Task>();
-                            foreach (stdGw gw in localgws)
+                            localgws?.ForEach((gw) =>
                             {
-                                //task.Add(
-                                //    Task.Factory.StartNew(() =>
-                                //        {
-                                //            try
-                                //            {
-                                //                U5kGenericos.TraceCurrentThread(this.GetType().Name + " " + gw.name);
-                                //                ExploraGw(gw);
-                                //            }
-                                //            catch (Exception x)
-                                //            {
-                                //                LogException<GwExplorer>("Supervisando Pasarela " + gw.name, x);
-                                //            }
-                                //        }, TaskCreationOptions.LongRunning)
-                                //);
                                 task.Add(
                                     BackgroundTaskFactory.StartNew(gw.name, () =>
-                                        {
-                                            U5kGenericos.TraceCurrentThread(this.GetType().Name + " " + gw.name);
-                                            ExploraGw(gw);
-                                        },
+                                    {
+                                        U5kGenericos.TraceCurrentThread(this.GetType().Name + " " + gw.name);
+                                        ExploraGw(gw);
+                                    },
                                     (id, excep) =>
-                                        {
-                                            LogException<GwExplorer>("Supervisando Pasarela " + gw.name, excep);
-                                        }, TimeSpan.FromMilliseconds((double)threadTimeout))
+                                    {
+                                        LogException<GwExplorer>("Supervisando Pasarela " + gw.name, excep);
+                                    }, TimeSpan.FromMilliseconds((double)threadTimeout))
                                     );
-                            }
-#if DEBUG1
-                            task.Add(
-                                    BackgroundTaskFactory.StartNew("TESTING", () =>
-                                        {
-                                            Task.Delay(TimeSpan.FromSeconds(10)).Wait();
-                                        },
-                                    (id, excep) =>
-                                        {
-                                            LogTrace<GwExplorer>($"Excepcion Bkthread {id} => {excep.Message}");
-                                        }, TimeSpan.FromSeconds(5))
-                                    );
-#endif
+                            });
 
                             // Espero que acaben todos los procesos.
                             Task.WaitAll(task.ToArray(), TimeSpan.FromMilliseconds((double)poolTimeout));
@@ -297,7 +271,10 @@ namespace U5kManServer
 
                         tm.StopAndPrint((msg) => LogTrace<GwExplorer>(msg));
                         /// Copio los datos obtenidos a la tabla...
-                        GlobalServices.GetWriteAccess((gdata) => gdata.GWSDIC = localgws.Select(gw => gw).ToDictionary(gw => gw.name, gw => gw));
+                        if (localgws != null)
+                        {
+                            GlobalServices.GetWriteAccess((gdata) => gdata.GWSDIC = localgws.Select(gw => gw).ToDictionary(gw => gw.name, gw => gw));
+                        }
                     }
                     GoToSleepInTimer();
                 }

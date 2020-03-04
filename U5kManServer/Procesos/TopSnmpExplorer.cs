@@ -236,7 +236,7 @@ namespace U5kManServer
                 {
                     if (U5kManService._Master == true)
                     {
-                        List<stdPos> localpos = new List<stdPos>();
+                        List<stdPos> localpos = null;   // new List<stdPos>();
                         try
                         {
                             TimeMeasurement tm = new TimeMeasurement("Top Explorer");
@@ -245,17 +245,8 @@ namespace U5kManServer
 
                             // Arranco los Procesos... 
                             List<Task> task = new List<Task>();
-
-                            foreach (stdPos pos in localpos)
+                            localpos?.ForEach((pos) =>
                             {
-                                /** Gestion de los no activos a ellos se le hará polling con menos frecuencia */
-                                //task.Add(
-                                //    Task.Factory.StartNew(() =>
-                                //    {
-                                //        U5kGenericos.TraceCurrentThread(this.GetType().Name + " " + pos.name);
-                                //        ExploraTop2(pos);
-                                //    }, TaskCreationOptions.LongRunning));
-
                                 task.Add(
                                     BackgroundTaskFactory.StartNew(pos.name, () =>
                                     {
@@ -267,9 +258,7 @@ namespace U5kManServer
                                         LogException<TopSnmpExplorer>("Supervisando Pasarela " + pos.name, excep);
                                     }, TimeSpan.FromMilliseconds((double)threadTimeout))
                                     );
-
-                            }
-
+                            });
                             // Espero a que acaben todos.
                             Task.WaitAll(task.ToArray(), TimeSpan.FromMilliseconds((double)poolTimeout));
                         }
@@ -292,7 +281,10 @@ namespace U5kManServer
                                 LogException<TopSnmpExplorer>("Supervisando Pasarelas ", x);
                             }
                         }
-                        GlobalServices.GetWriteAccess((data) => data.POSDIC = localpos.Select(p => p).ToDictionary(p => p.name, p => p));
+                        if (localpos != null)
+                        {
+                            GlobalServices.GetWriteAccess((data) => data.POSDIC = localpos.Select(p => p).ToDictionary(p => p.name, p => p));
+                        }
                         tm.StopAndPrint((msg) => { LogTrace<TopSnmpExplorer>(msg); });
                     }
                     GoToSleepInTimer();

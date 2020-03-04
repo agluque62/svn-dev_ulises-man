@@ -394,6 +394,7 @@ namespace U5kManServer
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             U5kGenericos.TraceCurrentThread(this.GetType().Name + " TimerElapsed");
+            _timer.Enabled = false;
 #if _STATS_INTERNAL_LOCK_
             lock (_locker)
 #endif
@@ -436,6 +437,7 @@ namespace U5kManServer
                     IamAlive1.Message("Estadisticas-T1. Is Alive.");
                 });
             }
+            _timer.Enabled = true;
         }
 
         /// <summary>
@@ -445,6 +447,7 @@ namespace U5kManServer
         private void Timer_Reg_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             U5kGenericos.TraceCurrentThread(this.GetType().Name + " Timer_Reg_Elapsed");
+            _timer_reg.Enabled = false;
 
             int nreg = 0;
             int maxreg = sender == null ? 1000 : 10;
@@ -496,6 +499,7 @@ namespace U5kManServer
                 }
 #endif
             }
+            _timer_reg.Enabled = true;
         }
 
         /// <summary>

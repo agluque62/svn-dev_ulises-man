@@ -5,6 +5,7 @@ using System.ServiceProcess;
 using System.Text;
 
 using System.Threading;
+using System.Threading.Tasks;
 using System.Globalization;
 
 using NucleoGeneric;
@@ -104,9 +105,9 @@ namespace U5kManServer
                     }
                     else if (key == 't')
                     {
-                        // NtpClientStatus ntpc = new NtpClientStatus(Properties.u5kManServer.Default.NtpClient);
-                        // List<string> W32tmStatus = ntpc.Status;
-                        // Test();
+                        // Provocar la toma del semaforo durante mucho tiempo....
+                        LogInfo<uv5kSgmManProgram>("T Key Pressed...");
+                        Task.Factory.StartNew(() => GlobalServices.GetWriteAccess((gdata) => Task.Delay(TimeSpan.FromSeconds(60)).Wait()));
                     }
                     else if (key == 'n')
                     {

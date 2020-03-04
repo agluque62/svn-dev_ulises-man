@@ -312,46 +312,48 @@ namespace U5kManServer.ExtEquSpvSpace
                 {
                     if (U5kManService._Master == true)
                     {
-                        List<EquipoEurocae> localequ = new List<EquipoEurocae>();
+                        List<EquipoEurocae> localequ = null;    // new List<EquipoEurocae>();
                         try
                         {
                             Utilities.TimeMeasurement tm = new Utilities.TimeMeasurement("EXT Explorer");
 
                             // Copia de equipo configurados.
                             GlobalServices.GetWriteAccess((gdata) => localequ = gdata.STDEQS.Select(eq => new EquipoEurocae(eq)).ToList());
-
-                            /** Agruparlos por equipo */
-                            var grupos = localequ.GroupBy(eq => eq.Ip1)
-                                .ToDictionary(grp => grp.Key, grp => grp.ToList());
                             List<Task> tasks = new List<Task>();
 
-                            LogTrace<ExtEquSpv>($"Supervisando equipos y recursos externos ({grupos.Count}) ...");
-                            foreach (var grp in grupos)
+                            /** Agruparlos por equipo */
+                            var grupos = localequ?.GroupBy(eq => eq.Ip1)
+                                .ToDictionary(grp => grp.Key, grp => grp.ToList());
+                            if (grupos != null)
                             {
-                                if (grp.Value[0].IsPollingTime() == true)
+                                LogTrace<ExtEquSpv>($"Supervisando equipos y recursos externos ({grupos.Count}) ...");
+                                foreach (var grp in grupos)
                                 {
-                                    tasks.Add(BackgroundTaskFactory.StartNew(grp.Key, () =>
+                                    if (grp.Value[0].IsPollingTime() == true)
                                     {
-                                        try
+                                        tasks.Add(BackgroundTaskFactory.StartNew(grp.Key, () =>
                                         {
-                                            SupervisaEquipo(grp.Key, grp.Value);
-                                        }
-                                        catch (Exception x)
-                                        {
-                                            LogException<ExtEquSpv>("", x);
-                                        }
-                                    },
-                                    (id, excep) => { },
-                                    TimeSpan.FromMilliseconds((double)threadTimeout)));
-                                    LogTrace<ExtEquSpv>($"PING Executed: {grp.Key}");
+                                            try
+                                            {
+                                                SupervisaEquipo(grp.Key, grp.Value);
+                                            }
+                                            catch (Exception x)
+                                            {
+                                                LogException<ExtEquSpv>("", x);
+                                            }
+                                        },
+                                        (id, excep) => { },
+                                        TimeSpan.FromMilliseconds((double)threadTimeout)));
+                                        LogTrace<ExtEquSpv>($"PING Executed: {grp.Key}");
+                                    }
+                                    else
+                                    {
+                                        LogTrace<ExtEquSpv>($"PING Skipped : {grp.Key}");
+                                    }
                                 }
-                                else
-                                {
-                                    LogTrace<ExtEquSpv>($"PING Skipped : {grp.Key}");
-                                }
+                                var waitingResult = Task.WaitAll(tasks.ToArray(), TimeSpan.FromMilliseconds((double)poolTimeout));
+                                LogTrace<ExtEquSpv>($"Fin de Supervision de equipos y recursos externos ({tasks.Count}, {waitingResult})...");
                             }
-                            var waitingResult = Task.WaitAll(tasks.ToArray(), TimeSpan.FromMilliseconds((double)poolTimeout));
-                            LogTrace<ExtEquSpv>($"Fin de Supervision de equipos y recursos externos ({tasks.Count}, {waitingResult})...");
                         }
                         catch (Exception x)
                         {
@@ -363,11 +365,14 @@ namespace U5kManServer.ExtEquSpvSpace
                             LogException<ExtEquSpv>("SupervisaEquiposExternos", x);
                         }
                         // Actualizo los datos..
-                        GlobalServices.GetWriteAccess((gdata) =>
+                        if (localequ != null)
                         {
-                            gdata.EQUDIC = localequ.Select(e => e).ToDictionary(e => e.Key, e => e);
-                            SetEstadoGlobalEquipos(gdata, localequ);
-                        });
+                            GlobalServices.GetWriteAccess((gdata) =>
+                            {
+                                gdata.EQUDIC = localequ.Select(e => e).ToDictionary(e => e.Key, e => e);
+                                SetEstadoGlobalEquipos(gdata, localequ);
+                            });
+                        }
                         tm.StopAndPrint((msg) => LogTrace<ExtEquSpv>(msg));
                     }
                     GoToSleepInTimer();

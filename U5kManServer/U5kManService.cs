@@ -567,6 +567,9 @@ namespace U5kManServer
                 return data;
             }
         }
+        public List<U5kManService.txHF> HFTXInfo { get => JsonConvert.DeserializeObject<List<U5kManService.txHF>>(Services.CentralServicesMonitor.Monitor.HFRadioDataString); }
+        public List<U5kManService.RdUnoMasUnoInfo> RdUnoMasUnoInfo { get => JsonConvert.DeserializeObject<List<U5kManService.RdUnoMasUnoInfo>>(Services.CentralServicesMonitor.Monitor.UnoMasUnoDataString); }
+
         public object QualityItems
         {
             get
@@ -2326,6 +2329,19 @@ namespace U5kManServer
             public txHF() { }
         }
 
+        /** 20200303. Incluimos la informacion 1+1 */
+        public class RdUnoMasUnoInfo
+        {
+            public string id;       // ID de Equipo
+            public string fr;       // ID de Frecuencia
+            public string site;     // ID de emplazamiento.
+            public int tx;          // 0=>Rx 1=>Tx
+            public int ab;          // No Utilizado.
+            public int sel;         // 0=>Equipo no Seleccionado, 1=>Equipo Seleccionado.
+            public int ses;         // 0=>Equipo No conectado, 1=>Equipo Conectado.
+            public string uri;      // Identificador URI de la sesion.
+        }
+
 
         /** */
 #if _HAY_NODEBOX__
@@ -3043,6 +3059,7 @@ namespace U5kManServer
     /** Servicios Globales */
     public class GlobalServices
     {
+
         public enum mib2OperStatus { down = 2, up = 1, testing = 3 }
         public enum mib2AdminStatus { down = 2, up = 1, testing = 3 }
         /** */
@@ -3086,10 +3103,17 @@ namespace U5kManServer
             }
             else
             {
+#if DEBUG
+                NLog.LogManager.GetLogger("sem-hist").
+                    Error("Global Semaphore timeout for {0}. Occupied By {1}",
+                    FromString(file, caller, lineNumber),
+                    OccupiedBy);
+#else
                 NLog.LogManager.GetLogger("sem-hist").
                     Fatal("Global Semaphore timeout for {0}. Occupied By {1}",
                     FromString(file, caller, lineNumber),
                     OccupiedBy);
+#endif
             }
         }
 
@@ -3159,4 +3183,4 @@ namespace U5kManServer
     }
 
 #endif
-}
+            }
