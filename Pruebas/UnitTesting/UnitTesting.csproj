@@ -70,6 +70,7 @@
     <Compile Include="ExternalResourcesUnitTest.cs" />
     <Compile Include="GenericTests.cs" />
     <Compile Include="GwCallLogsParseTest.cs" />
+    <Compile Include="SactaClientTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -92,6 +93,10 @@
     <ProjectReference Include="..\..\U5kManServer\U5kManServer.csproj">
       <Project>{ade5cd26-8de9-4014-9df2-59585a19227d}</Project>
       <Name>U5kManServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\U5kSacta\U5kSacta.csproj">
+      <Project>{1c930196-6357-4eab-bcb5-0fb654e7dd00}</Project>
+      <Name>U5kSacta</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\U5kUtilities\Utilities.csproj">
       <Project>{822f500d-adb8-4bb1-8a1c-e9feaff369b0}</Project>
