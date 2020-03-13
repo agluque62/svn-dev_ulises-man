@@ -176,7 +176,7 @@ namespace U5kManServer.Services
             });
 
         }
-        public void GetRadioData(Action<object> response)
+        public void GetRadioData(Action<object> reply)
         {
             JArray mndata = JArray.Parse(RadioMNDataString), 
                 sessions = JArray.Parse(RadioSessionsString), 
@@ -192,9 +192,30 @@ namespace U5kManServer.Services
                 hfdata,
                 msdata
             };
-            response(data);
+            reply(data);
         }
-
+        public void RdUnoMasUnoSelect(string rid, Action<bool, string> reply)
+        {
+            if (GetDataAccess())
+            {
+                var master = DataAndStates.Values.Where(e => e.RadioService == "Master").FirstOrDefault();
+                var url = HttpHelper.URL(master.ip, master.WebPort, "/rd11");
+                ReleaseDataAccess();
+                if (master != null)
+                {
+                    HttpHelper.PostSync(url,  new { id = rid }, 
+                        TimeSpan.FromMilliseconds(Properties.u5kManServer.Default.HttpGetTimeout), 
+                        (success, data) => 
+                        {
+                            reply(success, data);
+                        });
+                }
+                else
+                {
+                    reply(false, "No existe Master de Radio Activo.");
+                }
+            }
+        }
         /** Estados globales */
         public std GlobalRadioStatus
         {

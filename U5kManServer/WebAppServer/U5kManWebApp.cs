@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 
+using Utilities;
 namespace U5kManServer.WebAppServer
 {
     class U5kManWebApp : WebAppServer
@@ -55,6 +56,8 @@ namespace U5kManServer.WebAppServer
                     {"/rdsessions",restRdSessions},         // GET
                     {"/gestormn",restRdMNMan},         // GET
                     {"/rdhf",restHFTxData},        // GET
+                    {"/rddata", restRadioData },    // GET
+                    {"/rd11", restRadio11Control }, // POST
                     {"/sacta", restSacta},              // GET & POST
                     {"/sacta/*", restSacta},              // GET & POST
                     {"/extatssest",restExtAtsDest},
@@ -570,6 +573,72 @@ namespace U5kManServer.WebAppServer
             {
                 context.Response.StatusCode = 404;
                 sb.Append(U5kManWebAppData.JSerialize<U5kManWADResultado>(new U5kManWADResultado() { res = context.Request.HttpMethod + idiomas.strings.WAP_MSG_002 /*": Metodo No Permitido"*/ }));
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="sb"></param>
+        /// <param name="gdt"></param>
+        protected void restRadioData(HttpListenerContext context, StringBuilder sb, U5kManStdData gdt)
+        {
+            if (context.Request.HttpMethod == "GET")
+            {
+                Services.CentralServicesMonitor.Monitor.GetRadioData((data) =>
+                {
+                    var strData = U5kManWebAppData.JSerialize(data);
+                    sb.Append(strData);
+                });
+            }
+            else
+            {
+                context.Response.StatusCode = 404;
+                sb.Append(U5kManWebAppData.JSerialize(new { res = context.Request.HttpMethod + idiomas.strings.WAP_MSG_002 /*": Metodo No Permitido"*/ }));
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="sb"></param>
+        /// <param name="gdt"></param>
+        protected void restRadio11Control(HttpListenerContext context, StringBuilder sb, U5kManStdData gdt)
+        {
+            if (context.Request.HttpMethod == "POST")
+            {
+                /** Payload { id: "", ... }*/
+                using (var reader = new StreamReader(context.Request.InputStream, context.Request.ContentEncoding))
+                {
+                    var data = JsonConvert.DeserializeObject(reader.ReadToEnd()) as JObject;
+                    if (JsonHelper.JObjectPropertyExist(data, "id"))
+                    {
+                        var idEquipo = (string)data["id"];
+                        Services.CentralServicesMonitor.Monitor.RdUnoMasUnoSelect(idEquipo, (success, msg) =>
+                        {
+                            if (success)
+                            {
+                                context.Response.StatusCode = 200;
+                                sb.Append(JsonConvert.SerializeObject(new { res = "Operacion Realizada." }));
+                            }
+                            else
+                            {
+                                context.Response.StatusCode = 500;
+                                sb.Append(JsonConvert.SerializeObject(new { res = "Internal Error: " + msg }));
+                            }
+                        });
+                    }
+                    else
+                    {
+                        context.Response.StatusCode = 400;
+                        sb.Append(JsonConvert.SerializeObject(new { res = "Bad Request..." }));
+                    }
+                }
+            }
+            else
+            {
+                context.Response.StatusCode = 404;
+                sb.Append(U5kManWebAppData.JSerialize(new { res = context.Request.HttpMethod + idiomas.strings.WAP_MSG_002 /*": Metodo No Permitido"*/ }));
             }
         }
         /// <summary>

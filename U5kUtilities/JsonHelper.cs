@@ -66,5 +66,9 @@ namespace Utilities
             }
             return default(T);
         }
+        public static  bool JObjectPropertyExist(JObject obj, string prop)
+        {
+            return obj != null && obj[prop] != null;
+        }
     }
 }

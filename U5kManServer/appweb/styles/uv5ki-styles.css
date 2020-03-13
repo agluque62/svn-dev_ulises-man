@@ -1325,3 +1325,10 @@ p.nbxDetail
   right: 2px;
   /*border: 1px solid;*/
 }
+
+/** */
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+    color: gray;
+}

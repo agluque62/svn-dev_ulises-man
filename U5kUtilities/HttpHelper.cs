@@ -9,6 +9,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Net.Http;
 
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Utilities
 {
@@ -71,7 +73,7 @@ namespace Utilities
     {
         public static string URL(string ip, string port, string localpath)
         {
-            return "http://" + ip + ":" + port + localpath;
+            return $"http://{ip}:{port}{localpath}";
         }
         public static string GetSync(string ip, string port, string localpath, TimeSpan timeout, string defaultReturn="{}")
         {
@@ -88,6 +90,7 @@ namespace Utilities
             HttpWebRequest request = WebRequest.CreateHttp(url);
             request.Timeout = (int)timeout.TotalMilliseconds;
             request.Method = "GET";
+            request.Headers["UlisesClient"] = "MTTO";
             try
             {
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
@@ -118,7 +121,63 @@ namespace Utilities
                 Notify?.Invoke(false, x.Message);
             }
         }
-
+        public static string PostSync(string ip, string port, string localpath, object datain, TimeSpan timeout)
+        {
+            string ret = default;
+            PostSync(URL(ip, port, localpath), datain, timeout, (success, data) =>
+            {
+                if (success)
+                    ret = data;
+            });
+            return ret;
+        }
+        public static void PostSync(string url, object data, TimeSpan timeout, Action<bool, string> Notify)
+        {
+            var request = WebRequest.CreateHttp(url);
+            request.Timeout = (int)timeout.TotalMilliseconds;
+            request.Method = "POST";
+            request.ContentType = "application/json;";
+            request.Headers["UlisesClient"] = "MTTO";
+            try
+            {
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    string json = JsonConvert.SerializeObject(data);
+                    streamWriter.Write(json);
+                }
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    using (Stream responseStream = response.GetResponseStream())
+                    {
+                        // Get a reader capable of reading the response stream
+                        using (StreamReader myStreamReader = new StreamReader(responseStream, Encoding.UTF8))
+                        {
+                            // Read stream content as string
+                            string strData = myStreamReader.ReadToEnd();
+                            if (response.StatusCode == HttpStatusCode.OK)
+                            {
+                               Notify?.Invoke(true, strData);
+                            }
+                            else
+                            {
+                                var msg = $"Error: {response.StatusCode}, {strData}";
+                                Notify?.Invoke(false, msg);
+                            }
+                        }
+                    }
+                }
+            }
+            catch(WebException x)
+            {
+                var resp = new StreamReader(x.Response.GetResponseStream()).ReadToEnd();
+                var msg = $"{x.Message}, {resp}";
+                Notify?.Invoke(false, msg);
+            }
+            catch (Exception x)
+            {
+                Notify?.Invoke(false, x.Message);
+            }
+        }
         //public static string GetAsync(string url, string defaultReturn="{}")
         //{
         //    try

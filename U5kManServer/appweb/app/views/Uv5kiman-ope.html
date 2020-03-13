@@ -1,30 +1,27 @@
 <h3 translate>Operativa Radio</h3>
 <section id="_tabs">
     <ul class="nav nav-tabs">
-        <li data-ng-class="{'active': ctrl.pagina()==0}">
+        <li data-ng-class="{'active': ctrl.pagina()==0}" ng-show="true">
             <a href="" data-ng-click="ctrl.pagina(0)" translate>Sesiones Radio</a>
         </li>
-        <li data-ng-class="{'active': ctrl.pagina()==1}">
+        <li data-ng-class="{'active': ctrl.pagina()==1}" ng-show="ctrl.gestormn.length > 0">
             <a href="" data-ng-click="ctrl.pagina(1)" translate>Gestion M+N</a>
         </li>
-        <li data-ng-class="{'active': ctrl.pagina()==2}" ng-show="ctrl.info_telefonia">
-            <a href="" data-ng-click="ctrl.pagina(2)" translate>Interfaces Telefonicas</a>
+        <li data-ng-class="{'active': ctrl.pagina()==2}" ng-show="ctrl.dtUnoMasUno.length > 0">
+            <a href="" data-ng-click="ctrl.pagina(2)" translate>Radio 1+1</a>
         </li>
-        <li data-ng-class="{'active': ctrl.pagina()==3}">
+        <li data-ng-class="{'active': ctrl.pagina()==3}" ng-show="ctrl.gestorhf.length > 0">
             <a href="" data-ng-click="ctrl.pagina(3)" translate>Transmisores HF</a>
-        </li>
-        <li data-ng-class="{'active': ctrl.pagina()==4}" ng-show="false">
-            <a href="" data-ng-click="ctrl.pagina(4)" translate>Destinos ATS/SIP externos</a>
         </li>
     </ul>
 </section>
 <section id="_contenido">
     <!-- Sesiones Radio -->
     <div class="opespv" data-ng-show="ctrl.pagina()==0">
-        <div class="mnman" data-ng-show="(ctrl.frecs.length != 0)" >
-            <ul class="list-group" >
+        <div class="mnman" data-ng-show="(ctrl.frecs.length != 0)">
+            <ul class="list-group">
                 <li class="list-group-item">
-                    <table class="table table-bordered" >
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th translate>Frecuencia</th>
@@ -35,7 +32,7 @@
                         </thead>
                         <tbody>
                             <tr data-ng-repeat="fr in ctrl.frecs" ng-init="ifrec = $index"
-                                class ="pv-1"
+                                class="pv-1"
                                 data-ng-class="ctrl.colorEstadoFrecuencia(fr.fstd)">
                                 <td class="col-md-1">{{fr.frec}}</td>
                                 <td class="col-md-2">{{ctrl.textTipoPrio(fr.ftipo,fr.prio)}}</td>
@@ -44,9 +41,11 @@
                                 <td class="col-md-2">
                                     <div>
                                         <button type="button"
-                                            class="btn btn-default"
-                                            ng-disabled="(ctrl.enableOnFD(fr.ftipo)==false)"
-                                            data-toggle="collapse" data-target="#tpar-{{ifrec}}" translate>Parametros</button>
+                                                class="btn btn-default"
+                                                ng-disabled="(ctrl.enableOnFD(fr.ftipo)==false)"
+                                                data-toggle="collapse" data-target="#tpar-{{ifrec}}" translate>
+                                            Parametros
+                                        </button>
                                         <div id="tpar-{{ifrec}}" class="collapse">
                                             <table class="table table-bordered">
                                                 <tr>
@@ -63,9 +62,11 @@
                                 </td>
                                 <td>
                                     <button type="button"
-                                        class="btn btn-default"
-                                        data-toggle="collapse"
-                                        data-target="#tses-{{ifrec}}" translate>Sesiones</button>
+                                            class="btn btn-default"
+                                            data-toggle="collapse"
+                                            data-target="#tses-{{ifrec}}" translate>
+                                        Sesiones
+                                    </button>
                                     <div id="tses-{{ifrec}}" class="collapse">
                                         <table class="table table-bordered">
                                             <tr data-ng_repeat="ses in fr.ses"
@@ -75,9 +76,11 @@
                                                 <td class="col-md-6">{{ses.uri}}</td>
                                                 <td class="level-1">
                                                     <button type="button" class="btn btn-default"
-                                                        data-toggle="collapse"
-                                                        data-target="#tpses-{{ifrec}}-{{ises}}" translate>Parametros</button>
-                                                    <div id="tpses-{{ifrec}}-{{ises}}" class="collapse" >
+                                                            data-toggle="collapse"
+                                                            data-target="#tpses-{{ifrec}}-{{ises}}" translate>
+                                                        Parametros
+                                                    </button>
+                                                    <div id="tpses-{{ifrec}}-{{ises}}" class="collapse">
                                                         <table class="table table-bordered">
                                                             <tr ng-show="ctrl.showOnTx(ses.tipo)">
                                                                 <td>{{"RTPTx"}}</td>
@@ -121,10 +124,11 @@
                 <!--            Tabla de VHF-->
                 <li class="list-group-item">
                     <button type="button"
-                        class="btn btn-default"
-                        ng-disabled="false"
-                        data-toggle="collapse" data-target="#VHF">
-                        {{ctrl.txtOnVHF()}}</button>
+                            class="btn btn-default"
+                            ng-disabled="false"
+                            data-toggle="collapse" data-target="#VHF">
+                        {{ctrl.txtOnVHF()}}
+                    </button>
                     <div id="VHF" class="collapse in">
                         <h4 class="text-info">{{ctrl.txtMdSelect(ctrl.vhf_mode_select)}}</h4>
                         <table class="table table-bordered table-striped">
@@ -150,13 +154,15 @@
                                     <td>{{eq.sip==0 ? "" : eq.sip==1 ? "No" : eq.sip==2 ? "Disc" : "Conn"}}</td>
                                     <td ng-show="ctrl.control_mnm">
                                         <button class="btn btn-default"
-                                            data-ng-click="ctrl.EnableDisable(eq)"
-                                            data-ng-show="{{ctrl.gearEnableDisableShow(eq.std)}}">
-                                            {{ctrl.txtHabilitar(eq)}}</button>
+                                                data-ng-click="ctrl.EnableDisable(eq)"
+                                                data-ng-show="{{ctrl.gearEnableDisableShow(eq.std)}}">
+                                            {{ctrl.txtHabilitar(eq)}}
+                                        </button>
                                         <button class="btn btn-default"
-                                            data-ng-click="ctrl.Asignar(eq)"
-                                            data-ng-show="{{ctrl.gearAsignarShow(eq)}}">
-                                            {{ctrl.gearAsignarText(eq)}}</button>
+                                                data-ng-click="ctrl.Asignar(eq)"
+                                                data-ng-show="{{ctrl.gearAsignarShow(eq)}}">
+                                            {{ctrl.gearAsignarText(eq)}}
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -164,11 +170,14 @@
                         <!--            Selector de Tx o Rx.-->
                         <ul class="pager mdsel">
                             <li>
-                                <button class="btn btn-xs btn-primary" data-ng-click="ctrl.vhf_mode_select=0" translate>Tx</button></li>
+                                <button class="btn btn-xs btn-primary" data-ng-click="ctrl.vhf_mode_select=0" translate>Tx</button>
+                            </li>
                             <li>
-                                <button class="btn btn-xs btn-primary" data-ng-click="ctrl.vhf_mode_select=1" translate>Rx</button></li>
+                                <button class="btn btn-xs btn-primary" data-ng-click="ctrl.vhf_mode_select=1" translate>Rx</button>
+                            </li>
                             <li>
-                                <button class="btn btn-xs btn-primary" data-ng-click="ctrl.vhf_mode_select=-1" translate>Ambos</button></li>
+                                <button class="btn btn-xs btn-primary" data-ng-click="ctrl.vhf_mode_select=-1" translate>Ambos</button>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -176,10 +185,11 @@
                 <!--            Tabla de UHF-->
                 <li class="list-group-item">
                     <button type="button"
-                        class="btn btn-default"
-                        ng-disabled="false"
-                        data-toggle="collapse" data-target="#UHF">
-                        {{ctrl.txtOnUHF()}}</button>
+                            class="btn btn-default"
+                            ng-disabled="false"
+                            data-toggle="collapse" data-target="#UHF">
+                        {{ctrl.txtOnUHF()}}
+                    </button>
                     <div id="UHF" class="collapse">
                         <h4 class="text-info">{{ctrl.txtMdSelect(ctrl.uhf_mode_select)}}</h4>
                         <table class="table table-bordered table-striped">
@@ -205,13 +215,15 @@
                                     <td>{{eq.sip==0 ? "" : eq.sip==1 ? "No" : eq.sip==2 ? "Disc" : "Conn"}}</td>
                                     <td ng-show="ctrl.control_mnm">
                                         <button class="btn btn-default"
-                                            data-ng-click="ctrl.EnableDisable(eq)"
-                                            data-ng-show="{{ctrl.gearEnableDisableShow(eq.std)}}">
-                                            {{ctrl.txtHabilitar(eq)}}</button>
+                                                data-ng-click="ctrl.EnableDisable(eq)"
+                                                data-ng-show="{{ctrl.gearEnableDisableShow(eq.std)}}">
+                                            {{ctrl.txtHabilitar(eq)}}
+                                        </button>
                                         <button class="btn btn-default"
-                                            data-ng-click="ctrl.Asignar(eq)"
-                                            data-ng-show="{{ctrl.gearAsignarShow(eq)}}">
-                                            {{ctrl.gearAsignarText(eq)}}</button>
+                                                data-ng-click="ctrl.Asignar(eq)"
+                                                data-ng-show="{{ctrl.gearAsignarShow(eq)}}">
+                                            {{ctrl.gearAsignarText(eq)}}
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -219,11 +231,14 @@
                         <!--            Selector de Tx o Rx.-->
                         <ul class="pager mdsel">
                             <li>
-                                <button class="btn btn-xs btn-primary" data-ng-click="ctrl.uhf_mode_select=0" translate>Tx</button></li>
+                                <button class="btn btn-xs btn-primary" data-ng-click="ctrl.uhf_mode_select=0" translate>Tx</button>
+                            </li>
                             <li>
-                                <button class="btn btn-xs btn-primary" data-ng-click="ctrl.uhf_mode_select=1" translate>Rx</button></li>
+                                <button class="btn btn-xs btn-primary" data-ng-click="ctrl.uhf_mode_select=1" translate>Rx</button>
+                            </li>
                             <li>
-                                <button class="btn btn-xs btn-primary" data-ng-click="ctrl.uhf_mode_select=-1" translate>Ambos</button></li>
+                                <button class="btn btn-xs btn-primary" data-ng-click="ctrl.uhf_mode_select=-1" translate>Ambos</button>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -239,65 +254,131 @@
         </div>
     </div>
 
-    <!-- Interfaces Telefonicas -->
-    <div class="opespv" data-ng-show="ctrl.pagina()==2">
-        <h1 translate>Interfaces Telefonicas</h1>
-    </div>
-
     <!-- Equipos HF -->
     <div class='opespv' data-ng-show="ctrl.pagina()==3">
-            <h1><strong translate>Transmisores HF</strong></h1>
-            <div class="mnman" data-ng-show="(ctrl.gestorhf.length != 0)"> 
-                <ul class="list-group" >
-                    <li class="list-group-item">     
-                        <table class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th translate>Equipo</th>
-                                    <th translate>Gestor</th>
-                                    <th translate>OID</th>
-                                    <th translate>Estado</th>
-                                    <th translate>Usuario</th>
-                                    <th translate>Frec.</th>
-                                    <th translate>Sip</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr data-ng-repeat="eq in ctrl.gestorhf" data-ng-class="ctrl.hfColorEstado(eq.std)">
-                                    <td>{{eq.id}}</td>
-                                    <td>{{eq.gestor}}</td>
-                                    <td>{{eq.oid}}</td>
-                                    <td>{{ctrl.hfTextoEstadoEquipo(eq.std)}}</td>
-                                    <td>{{eq.user}}</td>
-                                    <td>{{eq.fre}}</td>
-                                    <td>{{eq.uri}}</td>
-<!--                                     <td>
-                                        <button class="btn btn-default" data-ng-click="ctrl.hfLiberar(eq)" data-ng-show="{{ctrl.hfEnableDisableShow(eq.std)}}" translate>Liberar</button>
-                                    </td>
- -->                                </tr>
-                            </tbody>
-                        </table>
-                    </li>
-                </ul>
-            </div>    
+        <h1><strong translate>Transmisores HF</strong></h1>
+        <div class="mnman" data-ng-show="(ctrl.gestorhf.length != 0)">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th translate>Equipo</th>
+                                <th translate>Gestor</th>
+                                <th translate>OID</th>
+                                <th translate>Estado</th>
+                                <th translate>Usuario</th>
+                                <th translate>Frec.</th>
+                                <th translate>Sip</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="eq in ctrl.gestorhf" data-ng-class="ctrl.hfColorEstado(eq.std)">
+                                <td>{{eq.id}}</td>
+                                <td>{{eq.gestor}}</td>
+                                <td>{{eq.oid}}</td>
+                                <td>{{ctrl.hfTextoEstadoEquipo(eq.std)}}</td>
+                                <td>{{eq.user}}</td>
+                                <td>{{eq.fre}}</td>
+                                <td>{{eq.uri}}</td>
+                                <!--                                     <td>
+                                                                        <button class="btn btn-default" data-ng-click="ctrl.hfLiberar(eq)" data-ng-show="{{ctrl.hfEnableDisableShow(eq.std)}}" translate>Liberar</button>
+                                                                    </td>
+                                 -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ul>
         </div>
-
-    <div class="opespv" data-ng-show="ctrl.pagina()==4">
-        <h1 translate>Destinos ATS/SIP Externos</h1>
-        <div class="row" ng-repeat="ed in ctrl.eds track by $index" ng-if="$index % 6 == 0" >
-            <div class="col-md-2" ng-repeat="i in [$index, $index + 1, $index + 2, $index + 3, $index + 4, $index + 5]" 
-                ng-if="ctrl.eds[i] != null" >
-              <a ng-href="" class="thumbnail" ng-show="true">
-                <img ng-src="./images/Operador.png" alt="" class="{{ctrl.std_class(ctrl.eds[i])}}"
-                    bs-popover
-                    data-content="{{ctrl.ed_detail(ctrl.eds[i])}}" 
-                    ng-click="ctrl.popover_click($event)"
-                    >
-                <p>{{ctrl.eds[i].name}}</p>
-              </a>
-              </div>
-        </div>        
     </div>
+
+    <!-- Estado 1+1 -->
+    <div id="UnoMasUno" class='opespv' data-ng-show="ctrl.pagina()==2">
+        <div style="width:98%;margin-left:1%;font-size:80%;" ng-show="ctrl.dtUnoMasUno.length > 0">
+            <ul class="list-group" style="margin:0.75em">
+                <!-- Seleccion de la Frecuencia  -->
+                <li class="list-group-item">
+                    <div class="row text-primary">
+                        <div class="col-md-10"><label class="form-control">Seleccione la Frecuencia</label></div>
+                        <div class="col-sm-2">
+                            <select class="form-control" data-ng-model="ctrl.dtUnoMasUnoSelectedFrec">
+                                <option data-ng-repeat="fr in ctrl.dtUnoMasUno" value="{{fr.fr}}">
+                                    {{fr.fr}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="list-group-item">
+                    <div class="row bg-primary">
+                        <div class="col-md-1 level-1" translate>Frecuencia</div>
+                        <div class="col-md-2 level-1" translate>Emplazamiento</div>
+                        <div class="col-md-5 level-1" translate>Transmisores</div>
+                        <div class="col-md-4 level-1" translate>Receptores</div>
+                    </div>
+                </li>
+                <li class="list-group-item text-primary" ng_repeat="fr in ctrl.dtUnoMasUno | filter: {fr: ctrl.dtUnoMasUnoSelectedFrec}" ng-init="ifrec = $index">
+                    <div class="row">
+                        <div class="col-md-1">{{fr.fr}}</div>
+                        <div class="col-md-11">
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="site in fr.sites">
+                                    <div class="row">
+                                        <div class="col-md-2">{{site.site}}</div>
+                                        <div class="col-md-5">
+                                            <ul class="list-group">
+                                                <li class="list-group-item" ng-repeat="tx in site.txs" style="padding:5px;">
+                                                    <div class="row">
+                                                        <div class="col-md-7" style="padding-left:5px; padding-right:5px;">
+                                                            <label class="btn btn-sm" ng-class="ctrl.rdUnoMasUnoIdClass(tx)" style="font-size:90%; padding-right:5px; margin-left:10px;">{{ctrl.rdUnoMasUnoId(tx)}}</label>
+                                                        </div>
+                                                        <div class="col-md-5" style="padding-left:5px; padding-right:5px;">
+                                                            <button class="btn btn-sm btn-default" style="font-size:90%; padding-right:5px;"
+                                                                    ng-click="ctrl.rdUnoMasUnoSelectMain(tx)"
+                                                                    ng-disabled="ctrl.rdUnoMasUnoTxDisabled(tx)"
+                                                                    ng-show="{{tx.sel==0}}">
+                                                                {{"Standby=>Sel"}}
+                                                            </button>
+                                                            <label class="btn btn-sm text-success" style="font-size:90%; padding-right:5px;" ng-show="{{tx.sel==1}}"><strong>Main</strong></label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <ul class="list-group">
+                                                <li class="list-group-item" ng-repeat="rx in site.rxs" style="padding:5px;">
+                                                    <div class="row">
+                                                        <div class="col-md-7" style="padding-left:5px; padding-right:5px; margin-left:0;">
+                                                            <label class="btn btn-sm" ng-class="ctrl.rdUnoMasUnoIdClass(rx)" style="font-size:90%; padding-right:5px; margin-left:10px;">{{ctrl.rdUnoMasUnoId(rx)}}</label>
+                                                        </div>
+                                                        <div class="col-md-5" style="padding-left:5px; padding-right:5px;">
+                                                            <!--<button class="btn btn-sm btn-default" style="font-size:90%; padding-right:5px;" ng-click="" ng-show="{{rx.sel==0}}">
+                                                                {{"Standby=>Sel"}}
+                                                            </button>-->
+                                                            <label class="btn btn-sm text-success" style="font-size:90%; padding-right:5px;" ng-show="{{rx.sel==0}}"><strong>Standby</strong></label>
+                                                            <label class="btn btn-sm text-success" style="font-size:90%; padding-right:5px;" ng-show="{{rx.sel==1}}"><strong>Main</strong></label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+        <div style="width:98%;margin-left:1%;font-size:80%;" ng-show="ctrl.dtUnoMasUno.lenght == 0">
+            <h1 class="text-center">No existen frecuencias con recursos 1+1</h1>
+        </div>
+    </div>
+
 
 </section>
 

@@ -310,6 +310,9 @@
     <None Include="ndf.uv5k.137b5.mib">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="ndf.uv5k.137c5-v1.mib">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="ndf.uv5k.137c5.mib">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

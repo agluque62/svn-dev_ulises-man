@@ -82,6 +82,12 @@ angular
                 var url = rest_url_radio_hf + "/" + data.id;
                 return remotePost(url, data);
             }
+            , radio_data: function () {
+                return remoteGet(rest_url_radio);
+            }
+            , radio_11_select: function (equ) {
+                return remotePost(rest_url_radio_11, equ);
+            }
             , sacta_get: function () {
                 return remoteGet(rest_url_sacta);
             }
