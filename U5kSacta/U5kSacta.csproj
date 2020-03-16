@@ -47,8 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code\SactaBdt.cs" />
     <Compile Include="Code\SactaConfig.cs" />
     <Compile Include="Code\SactaMessages.cs" />
+    <Compile Include="Code\SactaModule.cs" />
     <Compile Include="SactaClientService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -187,4 +187,44 @@ namespace U5kSacta
 
 		private SactaConfig Config = null;
 	}
+
+	class SectorizationResult
+	{
+		public uint Version { get; set; }
+		public int Resultado { get; set; }
+		public string ErrorCause { get; set; }
+		public string SectName { get; set; }
+		public string SectData { get; set; }
+
+		public object this[string index]
+		{
+			get
+			{
+				return null;
+			}
+
+			set
+			{
+				switch(index)
+				{
+					case "SectVersion":
+						Version = (uint)value;
+						break;
+					case "Resultado":
+						Resultado = (int)value;
+						break;
+					case "ErrorCause":
+						ErrorCause = (string)value;
+						break;
+					case "SectName":
+						SectName = (string)value;
+						break;
+					case "SectData":
+						SectData = (string)value;
+						break;
+				}
+			}
+		}
+
+	}
 }

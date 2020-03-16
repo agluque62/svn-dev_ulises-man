@@ -37,8 +37,10 @@ namespace U5kSacta
             public string Ignore { get; set; }
         }
 
+        public Int32 Tick { get; set; }
         public Int32 TickPresencia { get; set; }
         public Int32 TimeoutPresencia { get; set; }
+        public Int32 TimeoutActividadSacta { get; set; }
         public SactaSide sacta { get; set; }
         public ScvSide scv { get; set; }
         public static void GetConfig(Action< SactaConfig /*cfg*/, Exception> delivery)
@@ -81,8 +83,10 @@ namespace U5kSacta
             {
                 var sactaDefault = new
                 {
+                    Tick = 1000,
                     TickPresencia = 5000,
                     TimeoutPresencia = 30000,
+                    TimeoutActividadSacta = 60000,
                     sacta = new
                     {
                         Domain = 1,
