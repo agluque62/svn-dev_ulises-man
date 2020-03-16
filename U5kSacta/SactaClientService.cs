@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Newtonsoft.Json;
+
 namespace U5kSacta
 {
     public class SactaClientService
@@ -24,8 +26,40 @@ namespace U5kSacta
 
         public string Config
         {
-            get;
-            set;
+            get
+            {
+                string cfgstr = "{}";
+                SactaConfig.GetConfig((cfg, error) =>
+                {
+                    try 
+                    {
+                        cfgstr = JsonConvert.SerializeObject(cfg);
+                    }
+                    catch(Exception)
+                    {
+                        // Todo. Notificacion o log de la excepcion.
+                    }
+                });
+                return cfgstr;
+            }
+            set
+            {
+                try
+                {
+                    SactaConfig.SetConfig(JsonConvert.DeserializeObject<SactaConfig>(value), (error) =>
+                    {
+                        if (error != null)
+                        {
+                            // Todo. Notificacion o log de la excepcion.
+                        }
+                    });
+                }
+                catch(Exception )
+                {
+                    // Todo. Notificación o log de la excepción.
+                }
+            }
+
         }
 
     }
