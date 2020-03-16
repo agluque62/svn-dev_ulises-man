@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Code\SactaConfig.cs" />
+    <Compile Include="Code\SactaMessages.cs" />
     <Compile Include="SactaClientService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
