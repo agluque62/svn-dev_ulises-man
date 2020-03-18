@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Code\SactaBdt.cs" />
     <Compile Include="Code\SactaConfig.cs" />
+    <Compile Include="Code\SactaLog.cs" />
     <Compile Include="Code\SactaMessages.cs" />
     <Compile Include="Code\SactaModule.cs" />
     <Compile Include="External\Cd40.BD.Fake.cs" />

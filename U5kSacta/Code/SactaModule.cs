@@ -99,10 +99,8 @@ namespace U5kSacta
                     _PeriodicTasks.AutoReset = false;
                     _PeriodicTasks.Elapsed += PeriodicTasks;
 
-                    Log(false, System.Reflection.MethodBase.GetCurrentMethod().Name, "SactaModule inicializado. Sacta1 en {0}:{1}, Sacta2 en {2}:{3}",
-                        _EndPoint[0].Address.ToString(), _EndPoint[0].Port, _EndPoint[1].Address.ToString(), _EndPoint[1].Port);
-                    Log(false, System.Reflection.MethodBase.GetCurrentMethod().Name, "SactaModule. Gestionado los Sectores: {0} en las posicones {1} ",
-                       SactaBdt.IdSectores, SactaBdt.IdUcs);
+                    SactaLog.Info<SactaModule>($"SactaModule inicializado. Sacta1 en {_EndPoint[0].Address.ToString()}:{_EndPoint[0].Port}, Sacta2 en {_EndPoint[1].Address.ToString()}:{_EndPoint[0].Port}");
+                    SactaLog.Info<SactaModule>($"SactaModule. Gestionado los Sectores: {SactaBdt.IdSectores} en las posicones {SactaBdt.IdUcs}");
                 }
                 catch(Exception)
                 {
@@ -120,11 +118,11 @@ namespace U5kSacta
                 _State = SactaState.WaitingSactaActivity;
                 _PeriodicTasks.Enabled = true;
                 _socket.BeginReceive();
-                Log(false, System.Reflection.MethodBase.GetCurrentMethod().Name, "Modulo arrancado en puerto {0}...", Config.scv.udpport);
+                SactaLog.Info<SactaModule>($"Modulo arrancado en puerto {Config.scv.udpport}...");
             }
             catch(Exception x)
             {
-                // TODO.
+                SactaLog.Error<SactaModule>($"Excepcion en Start {x.Message}");
             }
         }
         /// <summary>
@@ -150,12 +148,12 @@ namespace U5kSacta
                         _socket.Dispose();
                         _socket = null;
                     }
-                    Log(false, System.Reflection.MethodBase.GetCurrentMethod().Name, "Modulo detenido...");
+                    SactaLog.Info<SactaModule>($"Modulo detenido...");
                 }
             }
             catch (Exception x)
             {
-                // TODO.
+                SactaLog.Error<SactaModule>($"Excepcion en Stop {x.Message}");
             }
         }
 
@@ -203,10 +201,10 @@ namespace U5kSacta
                     int net = client == sacta1 ? 0 : client == sacta2 ? 1 : -1;
                     if (net == -1)
                     {
-                        Log(true, System.Reflection.MethodBase.GetCurrentMethod().Name, "Recibida Trama no identificada de {0}", dg.Client.Address.ToString());
+                        SactaLog.Warning<SactaModule>($"Recibida Trama no identificada de {dg.Client.Address.ToString()}");
                         return;
                     }
-                    Log(false, System.Reflection.MethodBase.GetCurrentMethod().Name, "Mensaje de red {0} recibido: {1}", net == 0 ? "SACTA1" : "SACTA2", msg.Type);
+                    SactaLog.Trace<SactaModule>($"Mensaje de red {"SACTA"+(net+1).ToString()} recibido: {msg.Type}");
                     if (IsValid(msg))
                     {
                         _LastSactaReceived[net] = DateTime.Now;
@@ -242,7 +240,7 @@ namespace U5kSacta
 
                 //    OnResultSectorizacion(info);
                 //}
-                Log(true, System.Reflection.MethodBase.GetCurrentMethod().Name, "Excepcion: {0}", x.Message);
+                SactaLog.Error<SactaModule>($"Excepcion {x.Message}: {x.ToString()}");
             }
         }
 
@@ -274,8 +272,7 @@ namespace U5kSacta
                             }
                             if (currentSect != null)
                             {
-                                Log(true, System.Reflection.MethodBase.GetCurrentMethod().Name,
-                                    String.Format("Procesando Sectorizacion {0}", ((SactaMsg.SectInfo)(currentSect.Info)).Version));
+                                SactaLog.Info<SactaModule>($"Procesando Sectorizacion {((SactaMsg.SectInfo)(currentSect.Info)).Version}");
 
                                 DateTime startingTime = DateTime.Now;
 
@@ -309,12 +306,9 @@ namespace U5kSacta
 
                                     //    OnResultSectorizacion(info);
                                     //}
-                                    Log(true, System.Reflection.MethodBase.GetCurrentMethod().Name, "Excepcion: {0}", x.Message);
+                                    SactaLog.Error<SactaModule>($"Excepcion {x.Message}: {x.ToString()}");
                                 }
-                                Log(true, System.Reflection.MethodBase.GetCurrentMethod().Name,
-                                    String.Format("Sectorizacion {0} procesada en {1} segundos.", 
-                                    ((SactaMsg.SectInfo)(currentSect.Info)).Version,
-                                    (DateTime.Now-startingTime).TotalSeconds));
+                                SactaLog.Info<SactaModule>($"Sectorizacion {((SactaMsg.SectInfo)(currentSect.Info)).Version} procesada en {(DateTime.Now - startingTime).TotalSeconds} segundos.");
                             }
                         } while (currentSect != null);
                         pendingSectProc = null;
@@ -323,9 +317,7 @@ namespace U5kSacta
             }
             else
             {
-                Log(false, System.Reflection.MethodBase.GetCurrentMethod().Name, 
-                    "Petición de sectorización (Red = {0}, Versión = {1}, DESCARTADA. Ya se esta procesado...", 
-                    net, ((SactaMsg.SectInfo)(sect.Info)).Version);
+                SactaLog.Info<SactaModule>($"Petición de sectorización (Red = {net}, Versión = {((SactaMsg.SectInfo)(sect.Info)).Version}, DESCARTADA. Ya se esta procesado...");
             }
         }
         /// <summary>
@@ -343,9 +335,9 @@ namespace U5kSacta
                 {
                     if (_ActivityState != _LastActivityState || _State != _LastState)
                     {
-                        Log(false, System.Reflection.MethodBase.GetCurrentMethod().Name, "Tick {0},{1}", _ActivityState, _State);
                         _LastActivityState = _ActivityState;
                         _LastState = _State;
+                        SactaLog.Trace<SactaModule>($"Tick {_ActivityState},{_State}");
                     }
                     int activityState = ((uint)((DateTime.Now - _LastSactaReceived[0]).TotalMilliseconds) < _ActivityTimeOut ? 1 : 0);
                     activityState |= ((uint)((DateTime.Now - _LastSactaReceived[1]).TotalMilliseconds) < _ActivityTimeOut ? 2 : 0);
@@ -360,9 +352,10 @@ namespace U5kSacta
                         //info["SactaActivity"] = (byte)_ActivityState;
                         //info["SactaAEP"] = _EndPoint[0];
                         //info["SactaBEP"] = _EndPoint[1];
+
                         //// TODO. Sirve de algo esta notificación...
                         //General.AsyncSafeLaunchEvent(SactaActivityChanged, this, info);
-                        Log(false, System.Reflection.MethodBase.GetCurrentMethod().Name, "SactaActivityChangedEvent => {0}", _ActivityState);
+                        SactaLog.Info<SactaModule>($"SactaActivityChangedEvent => {_ActivityState}");
                     }
 
                     if (_ActivityState == 0)
@@ -399,7 +392,7 @@ namespace U5kSacta
                 if (!_Disposed)
                 {
                 }
-                Log(true, System.Reflection.MethodBase.GetCurrentMethod().Name, "Excepcion: {0}", x.Message);
+                SactaLog.Error<SactaModule>($"Excepción {x.Message}: {x.ToString()}");
             }
             finally
             {
@@ -431,10 +424,10 @@ namespace U5kSacta
             PSIInfo psi = _SactaSPSIUsers[msg.UserOrg];
             if ((psi.LastSectMsgId == msg.Id) && (psi.LastSectVersion == ((SactaMsg.SectInfo)(msg.Info)).Version))
             {
-                Log(false, System.Reflection.MethodBase.GetCurrentMethod().Name, "Segundo MSG Sectorizacion UserOrg={4}, {0}:{1}, {2}:{3}", psi.LastSectMsgId, msg.Id, psi.LastSectVersion, ((SactaMsg.SectInfo)(msg.Info)).Version, msg.UserOrg);
+                SactaLog.Info<SactaModule>($"Segundo MSG Sectorizacion UserOrg={msg.UserOrg}, {psi.LastSectMsgId}:{msg.Id}, {psi.LastSectVersion}:{((SactaMsg.SectInfo)(msg.Info)).Version}");
                 return true;
             }
-            Log(false, System.Reflection.MethodBase.GetCurrentMethod().Name, "Primer MSG Sectorizacion UserOrg={4}, {0}:{1}, {2}:{3}", psi.LastSectMsgId, msg.Id, psi.LastSectVersion, ((SactaMsg.SectInfo)(msg.Info)).Version, msg.UserOrg);
+            SactaLog.Info<SactaModule>($"Primer MSG Sectorizacion UserOrg={msg.UserOrg}, {psi.LastSectMsgId}:{msg.Id}, {psi.LastSectVersion}:{((SactaMsg.SectInfo)(msg.Info)).Version}");
             psi.LastSectMsgId = msg.Id;
             psi.LastSectVersion = ((SactaMsg.SectInfo)(msg.Info)).Version;
             return false;
@@ -454,7 +447,7 @@ namespace U5kSacta
                 /** Ignoro los sectores virtuales */
                 if (SactaBdt.HayQueIgnorar(UInt16.Parse(sector.SectorCode)))
                 {
-                    Log(false, System.Reflection.MethodBase.GetCurrentMethod().Name, "Ignorando Asignacion Virtual {0} => {1}", sector.SectorCode, sector.Ucs);
+                    SactaLog.Info<SactaModule>($"Ignorando Asignacion Virtual {sector.SectorCode} => {sector.Ucs}");
                     continue;
                 }
                 if (!SactaBdt.UcsInBdt((UInt16)sector.Ucs))
@@ -507,12 +500,11 @@ namespace U5kSacta
                             _State = SactaState.SendingPresences;
                             SendSectAnswer(sactaSect.Version, (int)result?.Resultado);
 
-                            Log((int)result?.Resultado == 1, System.Reflection.MethodBase.GetCurrentMethod().Name, "Resultado Sectorizacion: {0}", result?.ErrorCause ?? "OK");
+                            SactaLog.Info<SactaModule>($"Resultado Sectorizacion: {result?.ErrorCause ?? "OK"}");
                         }
                         else
                         {
-                            Log(true, System.Reflection.MethodBase.GetCurrentMethod().Name, "Resultado de Sectorizacion DESCARTADO State: {0}, Version: {1}, TryingVersion  {2}",
-                                _State, sactaSect.Version, _TryingSectVersion);
+                            SactaLog.Info<SactaModule>($"Resultado de Sectorizacion DESCARTADO State: {_State}, Version: {sactaSect.Version}, TryingVersion  {_TryingSectVersion}");
                         }
                     }
                     //
@@ -615,19 +607,20 @@ namespace U5kSacta
                 string listenIp = Config.scv.Interfaz;
                 //Ref_Service.ServiciosCD40 s = new Ref_Service.ServiciosCD40();
 
-                Log(false, System.Reflection.MethodBase.GetCurrentMethod().Name, "Comunica Sectorizacion Activa idsec=SACTA, fechaActivacion: {0}", activationDate.ToLocalTime());
+                SactaLog.Info<SactaModule>($"Comunica Sectorizacion Activa idsec=SACTA, Fecha: {activationDate.ToLocalTime()}");
                 if (/*s.ComunicaSectorizacionActiva(listenIp, IdSistema, "SACTA", ref fechaActivacion) ==*/ true)
                 {
-                    Log(false, System.Reflection.MethodBase.GetCurrentMethod().Name, "Sectorizacion Implantada {0}...", activationDate.ToLocalTime());
+                    SactaLog.Info<SactaModule>($"Sectorizacion Implantada {activationDate.ToLocalTime()}...");
                 }
                 else
                 {
-                    Log(true, System.Reflection.MethodBase.GetCurrentMethod().Name, "Error Comunica Sectorizacion Activa {0}", activationDate.ToLocalTime());
+                    SactaLog.Info<SactaModule>($"Error Comunica Sectorizacion Activa {activationDate.ToLocalTime()}");
                 }
             }
             catch(Exception x)
             {
                 // todo.
+                SactaLog.Error<SactaModule>($"Excepcion {x.Message}: {x.ToString()}");
             }
 
         }
@@ -641,7 +634,7 @@ namespace U5kSacta
                 _socket.Send(_EndPoint[0], (new SactaMsg(SactaMsg.MsgType.Init, SactaMsg.InitId, 0)).Serialize());
             if ((_ActivityState & 0x2) == 0x2)
                 _socket.Send(_EndPoint[1], (new SactaMsg(SactaMsg.MsgType.Init, SactaMsg.InitId, 0)).Serialize());
-            Log(false, System.Reflection.MethodBase.GetCurrentMethod().Name, "Mensaje INIT enviado...");
+            SactaLog.Info<SactaModule>($"Mensaje INIT enviado...");
             _SeqNum = 0;
         }
         /// <summary>
@@ -658,7 +651,7 @@ namespace U5kSacta
 
             _SeqNum = _SeqNum >= 287 ? 0 : _SeqNum + 1; // (_SeqNum + 1) & 0x1FFF;
 
-            Log(false, System.Reflection.MethodBase.GetCurrentMethod().Name, "Mensaje SECTASK enviado...");
+            SactaLog.Info<SactaModule>($"Mensaje SECTASK enviado...");
             _BeginOfWaitForSect = DateTime.Now;
         }
         /// <summary>
@@ -676,7 +669,7 @@ namespace U5kSacta
 
             _SeqNum = _SeqNum >= 287 ? 0 : _SeqNum + 1; // _SeqNum = (_SeqNum + 1) & 0x1FFF;
 
-            Log(false, System.Reflection.MethodBase.GetCurrentMethod().Name, "Mensaje SectAnswer enviado...");
+            SactaLog.Info<SactaModule>($"Mensaje SectAnswer enviado...");
         }
         /// <summary>
         /// 
@@ -691,28 +684,27 @@ namespace U5kSacta
 
             _SeqNum = _SeqNum >= 287 ? 0 : _SeqNum + 1; // _SeqNum = (_SeqNum + 1) & 0x1FFF;
 
-            Log(false, 
-                System.Reflection.MethodBase.GetCurrentMethod().Name, 
-                String.Format("{0}, Mensaje Presencia Enviado...", strModuleState));
+            SactaLog.Info<SactaModule>($"{strModuleState}, Mensaje Presencia Enviado...");
             _LastPresenceSended = DateTime.Now;
         }
 
 #endregion
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="from"></param>
-        /// <param name="msg"></param>
-        /// <param name="par"></param>        
-        static void Log(bool isError, string from, string msg, params object[] par)
-        {
-//#if __SACTA2017__
-            string message = String.Format("[{0}.{1}]: {2}", "SactaModule", from, msg);
-            if (isError)
-                NLog.LogManager.GetLogger("SactaModule").Error(message, par);
-            else
-                NLog.LogManager.GetLogger("SactaModule").Info(message, par);
-//#endif
-        }
+//        /// <summary>
+//        /// 
+//        /// </summary>
+//        /// <param name="from"></param>
+//        /// <param name="msg"></param>
+//        /// <param name="par"></param>        
+//        static void Log(bool isError, string from, string msg, params object[] par)
+//        {
+////#if __SACTA2017__
+//            string message = String.Format("[{0}.{1}]: {2}", "SactaModule", from, msg);
+//            if (isError)
+//                NLog.LogManager.GetLogger("SactaModule").Error(message, par);
+//            else
+//                NLog.LogManager.GetLogger("SactaModule").Info(message, par);
+////#endif
+//        }
+
     }
 }
