@@ -18,7 +18,7 @@ namespace U5kSacta
 {
     public class SactaModule
     {
-        public event GenericEventHandler<Dictionary<string, object>> SactaActivityChanged;
+        //public event GenericEventHandler<Dictionary<string, object>> SactaActivityChanged;
 
         #region Declaración de atributos
         enum SactaState { WaitingSactaActivity, /*WaitingIOLActivity,*/ WaitingSectorization, WaitingSectFinish, SendingPresences, Stopped }
@@ -283,7 +283,18 @@ namespace U5kSacta
                                 _TryingSectVersion = ((SactaMsg.SectInfo)(currentSect.Info)).Version;
                                 try
                                 {
-                                    ProcessSectorization(currentSect);
+                                    ProcessSectorization(currentSect, (success, info) =>
+                                    {
+                                        // Todo.
+                                        if (success)
+                                        {
+
+                                        }
+                                        else
+                                        {
+
+                                        }
+                                    });
                                 }
                                 catch(Exception x)
                                 {
@@ -344,13 +355,13 @@ namespace U5kSacta
                         _ActivityState = activityState;
 
                         // ModuleInfo info = new ModuleInfo();
-                        Dictionary<string, object> info = new Dictionary<string, object>();
+                        //Dictionary<string, object> info = new Dictionary<string, object>();
 
-                        info["SactaActivity"] = (byte)_ActivityState;
-                        info["SactaAEP"] = _EndPoint[0];
-                        info["SactaBEP"] = _EndPoint[1];
-                        // TODO. Sirve de algo esta notificación...
-                        General.AsyncSafeLaunchEvent(SactaActivityChanged, this, info);
+                        //info["SactaActivity"] = (byte)_ActivityState;
+                        //info["SactaAEP"] = _EndPoint[0];
+                        //info["SactaBEP"] = _EndPoint[1];
+                        //// TODO. Sirve de algo esta notificación...
+                        //General.AsyncSafeLaunchEvent(SactaActivityChanged, this, info);
                         Log(false, System.Reflection.MethodBase.GetCurrentMethod().Name, "SactaActivityChangedEvent => {0}", _ActivityState);
                     }
 
@@ -380,7 +391,6 @@ namespace U5kSacta
                         {
                             SendPresence();
                         }
-
                     }
                 }
             }
@@ -433,15 +443,10 @@ namespace U5kSacta
         /// 
         /// </summary>
         /// <param name="msg"></param>
-        void ProcessSectorization(SactaMsg msg)
+        void ProcessSectorization(SactaMsg msg, Action<bool, object> Result)
         {
-            const int Error = 1;
             StringBuilder str = new StringBuilder();
             SactaMsg.SectInfo sactaSect = (SactaMsg.SectInfo)(msg.Info);
-            // CD40.BD.SactaInfo info = new CD40.BD.SactaInfo();
-            var info = new SectorizationResult();
-
-            info["SectVersion"] = sactaSect.Version;
             List<SactaMsg.SectInfo.SectorInfo> listaSectores = new List<SactaMsg.SectInfo.SectorInfo>();
 
             foreach (SactaMsg.SectInfo.SectorInfo sector in sactaSect.Sectors)
@@ -454,10 +459,7 @@ namespace U5kSacta
                 }
                 if (!SactaBdt.UcsInBdt((UInt16)sector.Ucs))
                 {
-                    info["Resultado"] = Error;
-                    info["ErrorCause"] = String.Format("ERROR: TOP {0} desconocido.", sector.Ucs);
-                    OnResultSectorizacion(info);
-                    Log(true, System.Reflection.MethodBase.GetCurrentMethod().Name, "ERROR: Top desconocido {0}", sector.Ucs);
+                    Result(false, $"ERROR: TOP {sector.Ucs} desconocido.");
                     return;
                 }
                 listaSectores.Add(sector);
@@ -477,18 +479,12 @@ namespace U5kSacta
             {
                 if (!SactaBdt.SectInBdt(UInt16.Parse(sector.SectorCode)))
                 {
-                    info["Resultado"] = Error;
-                    info["ErrorCause"] = String.Format("ERROR: Sector {0} desconocido.", sector.SectorCode);
-                    OnResultSectorizacion(info);
-                    Log(true, System.Reflection.MethodBase.GetCurrentMethod().Name, "ERROR: Sector desconocido {0}", sector.SectorCode);
+                    Result(false, $"ERROR: Sector {sector.SectorCode} desconocido");
                     return;
                 }
                 if (controlSectoresRepetidos.Exists(n => n == Convert.ToInt32(sector.SectorCode)))
                 {
-                    info["Resultado"] = Error;
-                    info["ErrorCause"] = String.Format("ERROR: Sector {0} repetido.", sector.SectorCode);
-                    OnResultSectorizacion(info);
-                    Log(true, System.Reflection.MethodBase.GetCurrentMethod().Name, "ERROR: Sector repetido {0}", sector.SectorCode);
+                    Result(false, $"ERROR: Sector {sector.SectorCode} repetido.");
                     return;
                 }
 
@@ -499,41 +495,74 @@ namespace U5kSacta
             // Añadir sectores de mantenimiento
             str.Append(SactaBdt.MttoSectors());
 
-            info["SectName"] = "SACTA";
-            info["SectData"] = str.ToString();
-
-            //GeneraSectorizacionDll.Sectorization s=new GeneraSectorizacionDll.Sectorization(
-            DateTime fechaActivacion = new DateTime();
-            fechaActivacion = DateTime.Now;
-
-            CD40.BD.Utilidades util = new CD40.BD.Utilidades(ConexionCD40);
-            util.EventResultSectorizacion += new CD40.BD.SectorizacionEventHandler<CD40.BD.SactaInfo>(OnResultSectorizacion);
-            GeneraSectorizacionDll.Sectorization sectorizacion = util.GeneraSectorizacion(info, fechaActivacion);
-
-            try
+            // Genera la sectorizacion.
+            SactaBdt.GeneraSectorizacionSacta(sactaSect.Version, str.ToString(), (success, date, result) =>
             {
-                if (sectorizacion != null)
+                if (success)
                 {
-                    Ref_Service.ServiciosCD40 s = new Ref_Service.ServiciosCD40();
+                    lock (_Sync)
+                    {
+                        if ((_State == SactaState.WaitingSectFinish) && (sactaSect.Version == _TryingSectVersion))
+                        {
+                            _State = SactaState.SendingPresences;
+                            SendSectAnswer(sactaSect.Version, (int)result?.Resultado);
 
-                    System.Configuration.Configuration webConfiguracion = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("~");
-                    string listenIp = webConfiguracion.AppSettings.Settings["OrigenIp"].Value;
-                    Log(false, System.Reflection.MethodBase.GetCurrentMethod().Name, "Comunica Sectorizacion Activa idsec=SACTA, fechaActivacion: {0}", fechaActivacion.ToLocalTime());
-                    if (s.ComunicaSectorizacionActiva(listenIp, IdSistema, "SACTA", ref fechaActivacion) == true)
-                    {
-                        Log(false, System.Reflection.MethodBase.GetCurrentMethod().Name, "Sectorizacion Implantada {0}...", fechaActivacion.ToLocalTime());
+                            Log((int)result?.Resultado == 1, System.Reflection.MethodBase.GetCurrentMethod().Name, "Resultado Sectorizacion: {0}", result?.ErrorCause ?? "OK");
+                        }
+                        else
+                        {
+                            Log(true, System.Reflection.MethodBase.GetCurrentMethod().Name, "Resultado de Sectorizacion DESCARTADO State: {0}, Version: {1}, TryingVersion  {2}",
+                                _State, sactaSect.Version, _TryingSectVersion);
+                        }
                     }
-                    else
-                    {
-                        Log(true, System.Reflection.MethodBase.GetCurrentMethod().Name, "Error Comunica Sectorizacion Activa {0}", fechaActivacion.ToLocalTime());
-                    }
+                    //
+                    // Comunica en el Grupo Mcast Config activa.
+                    SendMulticastCambioConfiguracion(date);
+                    Result(true, $"");
                 }
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.Assert(false, e.Message);
-                Log(true, System.Reflection.MethodBase.GetCurrentMethod().Name, "Excepcion: {0}", e.Message);
-            }
+                else
+                {
+                    // todo. Log de sectorizacion en bdt no ejecutada.
+                    Result(false, $"");
+                }
+
+            });
+
+            //info["SectName"] = "SACTA";
+            //info["SectData"] = str.ToString();
+
+            ////GeneraSectorizacionDll.Sectorization s=new GeneraSectorizacionDll.Sectorization(
+            //DateTime fechaActivacion = new DateTime();
+            //fechaActivacion = DateTime.Now;
+
+            //CD40.BD.Utilidades util = new CD40.BD.Utilidades(ConexionCD40);
+            //util.EventResultSectorizacion += new CD40.BD.SectorizacionEventHandler<CD40.BD.SactaInfo>(OnResultSectorizacion);
+            //GeneraSectorizacionDll.Sectorization sectorizacion = util.GeneraSectorizacion(info, fechaActivacion);
+
+            //try
+            //{
+            //    if (sectorizacion != null)
+            //    {
+            //        //Ref_Service.ServiciosCD40 s = new Ref_Service.ServiciosCD40();
+
+            //        //System.Configuration.Configuration webConfiguracion = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("~");
+            //        //string listenIp = webConfiguracion.AppSettings.Settings["OrigenIp"].Value;
+            //        //Log(false, System.Reflection.MethodBase.GetCurrentMethod().Name, "Comunica Sectorizacion Activa idsec=SACTA, fechaActivacion: {0}", fechaActivacion.ToLocalTime());
+            //        //if (s.ComunicaSectorizacionActiva(listenIp, IdSistema, "SACTA", ref fechaActivacion) == true)
+            //        //{
+            //        //    Log(false, System.Reflection.MethodBase.GetCurrentMethod().Name, "Sectorizacion Implantada {0}...", fechaActivacion.ToLocalTime());
+            //        //}
+            //        //else
+            //        //{
+            //        //    Log(true, System.Reflection.MethodBase.GetCurrentMethod().Name, "Error Comunica Sectorizacion Activa {0}", fechaActivacion.ToLocalTime());
+            //        //}
+            //    }
+            //}
+            //catch (Exception e)
+            //{
+            //    System.Diagnostics.Debug.Assert(false, e.Message);
+            //    Log(true, System.Reflection.MethodBase.GetCurrentMethod().Name, "Excepcion: {0}", e.Message);
+            //}
 
 //#endif
         }
@@ -543,41 +572,65 @@ namespace U5kSacta
         /// 
         /// </summary>
         /// <param name="info"></param>
-        void OnResultSectorizacion(CD40.BD.SactaInfo info)
+        //void OnResultSectorizacion(CD40.BD.SactaInfo info)
+        //{
+        //    try
+        //    {
+        //        int result = (int)info["Resultado"];
+        //        uint version = (uint)info["SectVersion"];
+        //        string cause = info.ContainsKey("ErrorCause") ? (string)info["ErrorCause"] : null;
+
+        //        Log(result == 1, System.Reflection.MethodBase.GetCurrentMethod().Name, "Resultado Sectorizacion: {0}", cause ?? "OK");
+        //        lock (_Sync)
+        //        {
+        //            if ((_State == SactaState.WaitingSectFinish) && (version == _TryingSectVersion))
+        //            {
+        //                _State = SactaState.SendingPresences;
+        //                SendSectAnswer(version, result);
+
+        //                new CD40.BD.Utilidades(ConexionCD40).CreaEventoConfiguracion("departamento", (uint)(result == 0 ? 109 : 110), new string[] { cause }, "127.0.0.1");
+        //            }
+        //            else
+        //            {
+        //                Log(true, System.Reflection.MethodBase.GetCurrentMethod().Name, "Resultado de Sectorizacion DESCARTADO State: {0}, Version: {1}, TryingVersion  {2}",
+        //                    _State, version, _TryingSectVersion);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception x)
+        //    {
+        //        if (!_Disposed)
+        //        {
+        //            // _Logger.ErrorException(Resources.OnSectResultError, ex);
+        //        }
+        //        Log(true, System.Reflection.MethodBase.GetCurrentMethod().Name, "Excepcion: {0}", x.Message);
+        //    }
+        //}
+
+        void SendMulticastCambioConfiguracion(DateTime activationDate)
         {
             try
             {
-                int result = (int)info["Resultado"];
-                uint version = (uint)info["SectVersion"];
-                string cause = info.ContainsKey("ErrorCause") ? (string)info["ErrorCause"] : null;
+                //string listenIp = webConfiguracion.AppSettings.Settings["OrigenIp"].Value;
+                string listenIp = Config.scv.Interfaz;
+                //Ref_Service.ServiciosCD40 s = new Ref_Service.ServiciosCD40();
 
-                Log(result == 1, System.Reflection.MethodBase.GetCurrentMethod().Name, "Resultado Sectorizacion: {0}", cause ?? "OK");
-                lock (_Sync)
+                Log(false, System.Reflection.MethodBase.GetCurrentMethod().Name, "Comunica Sectorizacion Activa idsec=SACTA, fechaActivacion: {0}", activationDate.ToLocalTime());
+                if (/*s.ComunicaSectorizacionActiva(listenIp, IdSistema, "SACTA", ref fechaActivacion) ==*/ true)
                 {
-                    if ((_State == SactaState.WaitingSectFinish) && (version == _TryingSectVersion))
-                    {
-                        _State = SactaState.SendingPresences;
-                        SendSectAnswer(version, result);
-
-                        new CD40.BD.Utilidades(ConexionCD40).CreaEventoConfiguracion("departamento", (uint)(result == 0 ? 109 : 110), new string[] { cause }, "127.0.0.1");
-                    }
-                    else
-                    {
-                        Log(true, System.Reflection.MethodBase.GetCurrentMethod().Name, "Resultado de Sectorizacion DESCARTADO State: {0}, Version: {1}, TryingVersion  {2}",
-                            _State, version, _TryingSectVersion);
-                    }
+                    Log(false, System.Reflection.MethodBase.GetCurrentMethod().Name, "Sectorizacion Implantada {0}...", activationDate.ToLocalTime());
+                }
+                else
+                {
+                    Log(true, System.Reflection.MethodBase.GetCurrentMethod().Name, "Error Comunica Sectorizacion Activa {0}", activationDate.ToLocalTime());
                 }
             }
-            catch (Exception x)
+            catch(Exception x)
             {
-                if (!_Disposed)
-                {
-                    // _Logger.ErrorException(Resources.OnSectResultError, ex);
-                }
-                Log(true, System.Reflection.MethodBase.GetCurrentMethod().Name, "Excepcion: {0}", x.Message);
+                // todo.
             }
-        }
 
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -612,7 +665,7 @@ namespace U5kSacta
         /// 
         /// </summary>
         /// <param name="version"></param>
-        /// <param name="result"></param>
+        /// <param name="result">0 Aceptada. 1 Rechazada</param>
         void SendSectAnswer(uint version, int result)
         {
             Debug.Assert(_ActivityState != 0);

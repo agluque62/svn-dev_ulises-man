@@ -51,6 +51,7 @@
     <Compile Include="Code\SactaConfig.cs" />
     <Compile Include="Code\SactaMessages.cs" />
     <Compile Include="Code\SactaModule.cs" />
+    <Compile Include="External\Cd40.BD.Fake.cs" />
     <Compile Include="SactaClientService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

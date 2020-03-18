@@ -4,12 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using CD40.BD;
+
 namespace U5kSacta
 {
     class SactaBdt
     {
         static public void Init(/*string idSistema, MySql.Data.MySqlClient.MySqlConnection bdtconn*/)
         {
+            // TODO.
             //try
             //{
             //    bdtconn.Open();
@@ -68,6 +71,51 @@ namespace U5kSacta
         {
             // TODO
             return default;
+        }
+        static public void GeneraSectorizacionSacta(uint version, string dataSect, Action<bool, DateTime, SectorizationResult> Result)
+        {
+            var ConexionCD40 = new Object();
+            var info = new SactaInfo();
+            var fechaActivacion = DateTime.Now;
+            var util = new Utilidades(ConexionCD40);
+
+            util.EventResultSectorizacion += new CD40.BD.SectorizacionEventHandler<CD40.BD.SactaInfo>((resinfo) =>
+            {
+                Result(true, fechaActivacion, new SectorizationResult()
+                {
+                    SectName = "SACTA",
+                    SectData = dataSect,
+                    Version = (uint)info["SectVersion"],
+                    Resultado = (int)info["Resultado"],
+                    ErrorCause = info.ContainsKey("ErrorCause") ? (string)info["ErrorCause"] : null
+                });
+                // TODO. Meter en el generador de Historicos propio del Servicio.
+                util.CreaEventoConfiguracion("departamento", 
+                    (uint)((int)info["Resultado"] == 0 ? 109 : 110),
+                    new string[] { info.ContainsKey("ErrorCause") ? (string)info["ErrorCause"] : null }, "127.0.0.1");
+            });
+
+            info["Version"] = version;
+            info["SectName"] = "SACTA";
+            info["SectData"] = dataSect;
+            try
+            {
+                var sectorizacion = util.GeneraSectorizacion(info, fechaActivacion);
+            }
+            catch (Exception x)
+            {
+                Result(false, fechaActivacion, new SectorizationResult()
+                {
+                    SectName = "SACTA",
+                    SectData = dataSect,
+                    Version = version,
+                    Resultado = 1,
+                    ErrorCause = $"Exception {x.Message}"
+                }); 
+
+            }
+
+            //new CD40.BD.Utilidades(ConexionCD40).CreaEventoConfiguracion("departamento", (uint)(result == 0 ? 109 : 110), new string[] { cause }, "127.0.0.1");
         }
         static public bool UcsInBdt(UInt16 ucs) { return idUcs.Contains(ucs); }
         static public bool SectInBdt(UInt16 sec) { return idSectores.Contains(sec); }
