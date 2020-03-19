@@ -1,70 +1,48 @@
 ﻿using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using U5kBaseDatos;
 using CD40.BD;
 
 namespace U5kSacta
 {
     class SactaBdt
     {
-        static public void Init(/*string idSistema, MySql.Data.MySqlClient.MySqlConnection bdtconn*/)
+        static public void Init(Func<object> dbService)
         {
-            // TODO.
-            //try
-            //{
-            //    bdtconn.Open();
-            //    string sec_qry = String.Format("SELECT NumSacta FROM sectores WHERE IdSistema='{0}' AND sectorsimple=1 AND (tipo='R' OR tipo='V')", idSistema);
-            //    using (MySql.Data.MySqlClient.MySqlCommand command = new MySql.Data.MySqlClient.MySqlCommand(sec_qry, bdtconn))
-            //    {
-            //        using (MySql.Data.MySqlClient.MySqlDataReader reader = command.ExecuteReader())
-            //        {
-            //            while (reader.Read())
-            //            {
-            //                idSectores.Add(reader.GetUInt16(0));
-            //            }
-            //        }
-            //    }
-            //    /** 20180716. Proteccion contra STRING vacio */
-            //    if (SactaSectionHandler.CfgSacta.CfgSactaUsuarioSectores.IdSectores != string.Empty)
-            //    {
-            //        string[] otrossectores = SactaSectionHandler.CfgSacta.CfgSactaUsuarioSectores.IdSectores.Split(new char[] { ',' }).ToArray();
-            //        foreach (string sect in otrossectores)
-            //        {
-            //            /** 20180716. Proteccion errores de formato */
-            //            try
-            //            {
-            //                /** 20180731 Considero todo el filtro. */
-            //                //if (!idSectores.Contains(UInt16.Parse(sect)))
-            //                idSectoresIgnorados.Add(UInt16.Parse(sect));
-            //            }
-            //            finally { }
-            //        }
-            //    }
-            //    /**************************/
+            DbService = dbService;
+        }
+        static public void Start()
+        {
+            if (U5kBdt != null)
+            {
+                var qrySectors = $"SELECT NumSacta FROM sectores WHERE IdSistema='departamento' AND sectorsimple=1 AND (tipo='R' OR tipo='V')";
+                var qryTops = $"SELECT PosicionSacta FROM top WHERE IdSistema='departamento'";
+                idSectores = U5kBdt.ReadTableOrView(qrySectors)?.Tables[0]?.AsEnumerable()
+                    .Select(s => s.Field<UInt16>("NumSacta")).ToList();
+                idUcs = U5kBdt.ReadTableOrView(qryTops)?.Tables[0]?.AsEnumerable()
+                    .Select(s => s.Field<UInt16>("PosicionSacta")).ToList();
+                SactaConfig.GetConfig((cfg, error) =>
+                {
+                    idSectoresIgnorados = cfg.scv.Ignore.Split(new char[] { ',' }).ToList()
+                    .Select(item =>
+                    {
+                        UInt16 ui = 0;
+                        return (UInt16.TryParse(item, out ui) ? ui : default);
+                    }).ToList();
+                });
+            }
+        }
 
-            //    string top_qry = String.Format("SELECT PosicionSacta FROM top WHERE IdSistema='{0}'", idSistema);
-            //    using (MySql.Data.MySqlClient.MySqlCommand command = new MySql.Data.MySqlClient.MySqlCommand(top_qry, bdtconn))
-            //    {
-            //        using (MySql.Data.MySqlClient.MySqlDataReader reader = command.ExecuteReader())
-            //        {
-            //            while (reader.Read())
-            //            {
-            //                idUcs.Add(reader.GetUInt16(0));
-            //            }
-            //        }
-            //    }
-            //}
-            //catch (Exception x)
-            //{
-            //    throw x;
-            //}
-            //finally
-            //{
-            //    bdtconn.Close();
-            //}
+        static public void Stop()
+        {
+            idSectores.Clear();
+            idUcs.Clear();
+            idSectoresIgnorados.Clear();
         }
 
         static public string MttoSectors()
@@ -90,7 +68,7 @@ namespace U5kSacta
                     ErrorCause = info.ContainsKey("ErrorCause") ? (string)info["ErrorCause"] : null
                 });
                 // TODO. Meter en el generador de Historicos propio del Servicio.
-                util.CreaEventoConfiguracion("departamento", 
+                util.CreaEventoConfiguracion("departamento",
                     (uint)((int)info["Resultado"] == 0 ? 109 : 110),
                     new string[] { info.ContainsKey("ErrorCause") ? (string)info["ErrorCause"] : null }, "127.0.0.1");
             });
@@ -111,7 +89,7 @@ namespace U5kSacta
                     Version = version,
                     Resultado = 1,
                     ErrorCause = $"Exception {x.Message}"
-                }); 
+                });
 
             }
 
@@ -140,10 +118,12 @@ namespace U5kSacta
                 return strUcs;
             }
         }
-        
-        
+
+
         static List<UInt16> idSectores = new List<UInt16>();
         static List<UInt16> idUcs = new List<UInt16>();
         static List<UInt16> idSectoresIgnorados = new List<ushort>();
+        static Func<object> DbService = null;
+        static U5kBdtService U5kBdt => (U5kBdtService)DbService?.Invoke();
     }
 }

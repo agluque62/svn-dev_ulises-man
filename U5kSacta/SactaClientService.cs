@@ -10,22 +10,30 @@ namespace U5kSacta
 {
     public class SactaClientService
     {
-        public static bool Start(Action<string> notiyError)
+        public SactaClientService(Func<object> dbService)
+        {
+            SactaBdt.Init(dbService);
+        }
+        public  bool Start(Action<string> notiyError)
         {
             if (module==null)
             {
                 module = new SactaModule();
             }
+            SactaBdt.Start();
             module.Start();
-            return false;
+            return true;
         }
 
-        public static bool Stop(Action<string> notifyError)
+        public  bool Stop(Action<string> notifyError)
         {
+            SactaBdt.Stop();
+            module?.Stop();
+            module = null;
             return false;
         }
 
-        public static string Config
+        public  string Config
         {
             get
             {
@@ -62,7 +70,8 @@ namespace U5kSacta
             }
 
         }
+        SactaModule module = null;
 
-        static SactaModule module = null;
+        
     }
 }

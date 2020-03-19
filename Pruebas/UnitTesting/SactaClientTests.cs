@@ -22,7 +22,7 @@ namespace UnitTesting
         [TestMethod]
         public void SactaConfigTest2()
         {
-            var sacta = new SactaClientService();
+            var sacta = new SactaClientService(null);
             var config = sacta.Config;
             sacta.Config = config;
         }
