@@ -41,11 +41,11 @@ namespace U5kManMibRevC
         {
             u5KMIBIIMib.Dispose();
             u5KSCVMib.Dispose();
-            // OJO. Habria que vaciar el ObjectStore???. No hay rutina para ello....
+            
         }
 
-        private readonly U5kMIBIIMib u5KMIBIIMib;
-        private readonly U5kSCVMib u5KSCVMib;
+        private readonly U5kMIBIIMib u5KMIBIIMib = null;
+        private readonly U5kSCVMib u5KSCVMib = null;
         /** */
         private static ObjectStore Store { get; set; }
         public static ScalarObject SnmpObjectGet(string oid)

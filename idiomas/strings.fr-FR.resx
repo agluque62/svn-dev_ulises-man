@@ -333,4 +333,7 @@ Erreur de demande des infos</value>
   <data name="EquiposExternos" xml:space="preserve">
     <value>Ressources Externes</value>
   </data>
+  <data name="GW_NEW_CONFIG" xml:space="preserve">
+    <value>Nouvelle Configuration</value>
+  </data>
 </root>

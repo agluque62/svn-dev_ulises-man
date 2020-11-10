@@ -339,4 +339,7 @@ Error requesting data</value>
   <data name="EquiposExternos" xml:space="preserve">
     <value>External Equipments</value>
   </data>
+  <data name="GW_NEW_CONFIG" xml:space="preserve">
+    <value>New Configuration</value>
+  </data>
 </root>

@@ -114,8 +114,11 @@ angular.module("Uv5kiman")
             ctrl.std.csi.mixed.mas === "" ? "---" : ctrl.std.csi.mixed.mas;
         return name;
     };
-    ctrl.nbx_mixed_list_class = function () {
-        return stdc_class[stdc.Ok];
+    ctrl.nbx_mixed_list_class = function (nbx) {
+
+        return nbx == undefined ? stdc_class[stdc.Ok] :
+            nbx.RadioService == "Master" ? stdc_class[stdc.Ok] : stdc_class[stdc.Aviso];
+        // return stdc_class[stdc.Ok];
     };
     ctrl.nbx_mixed_info_services = function (item) {
         var info = sprintf(

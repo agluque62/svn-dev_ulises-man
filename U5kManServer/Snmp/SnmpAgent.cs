@@ -554,7 +554,7 @@ namespace U5kManServer
 		{
             try
             {
-                TrapReceived = delegate { };
+                TrapReceived -= delegate { };
 
                 if (_engine != null && _engine.Active)
                 {

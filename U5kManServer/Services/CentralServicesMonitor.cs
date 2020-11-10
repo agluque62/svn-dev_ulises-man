@@ -194,16 +194,20 @@ namespace U5kManServer.Services
             };
             reply(data);
         }
-        public void RdUnoMasUnoSelect(string rid, Action<bool, string> reply)
+        public void RdUnoMasUnoCommand(object command, Action<bool, string> reply)
         {
             if (GetDataAccess())
             {
+#if DEBUG1
+                var master = new { ip = "127.0.0.1", WebPort = "1023" };
+#else
                 var master = DataAndStates.Values.Where(e => e.RadioService == "Master").FirstOrDefault();
-                var url = HttpHelper.URL(master.ip, master.WebPort, "/rd11");
+#endif
                 ReleaseDataAccess();
                 if (master != null)
                 {
-                    HttpHelper.PostSync(url,  new { id = rid }, 
+                    var url = HttpHelper.URL(master?.ip, master?.WebPort, "/rd11");
+                    HttpHelper.PostSync(url,  command, 
                         TimeSpan.FromMilliseconds(Properties.u5kManServer.Default.HttpGetTimeout), 
                         (success, data) => 
                         {
@@ -254,9 +258,9 @@ namespace U5kManServer.Services
                 return ret;
             }
         }
-        #endregion
+#endregion
 
-        #region Constructores
+#region Constructores
 
         public CentralServicesMonitor(Func<bool> masterStateInfo,
             Action<bool, string, string, string> internalEvent,
@@ -288,9 +292,9 @@ namespace U5kManServer.Services
             }
         }
 
-        #endregion
+#endregion
 
-        #region Metodos Publicos
+#region Metodos Publicos
 
         public void Start()
         {
@@ -351,9 +355,9 @@ namespace U5kManServer.Services
             }
         }
 
-        #endregion
+#endregion
 
-        #region Callbacks
+#region Callbacks
         /// <summary>
         /// 
         /// </summary>
@@ -457,9 +461,9 @@ namespace U5kManServer.Services
             } while (SpvTask != null);
         }
 
-        #endregion
+#endregion
 
-        #region Metodos Privados
+#region Metodos Privados
         /// <summary>
         /// 
         /// </summary>
@@ -748,9 +752,9 @@ namespace U5kManServer.Services
             });
         }
 
-        #endregion Metodos Privados.
+#endregion Metodos Privados.
 
-        #region Atributos privados
+#region Atributos privados
 
         private UdpClient UdpServer { get; set; }
         Task SpvTask { get; set; }
@@ -812,6 +816,6 @@ namespace U5kManServer.Services
         readonly Func<bool> MasterStateInfo;
         readonly Action<int, string> Trace;
 
-        #endregion Atributos Privados
+#endregion Atributos Privados
     }
 }

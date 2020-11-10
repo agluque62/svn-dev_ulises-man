@@ -34,7 +34,7 @@
                         <li class="list-group-item" data-ng_repeat="proxy in cgw.res" ng-init="ires = $index">
                             <div class="row" ng-class="ctrl.ProxyStatusColor(proxy.std)">
                                 <div class="col-md-2">{{proxy.dep}}</div>
-                                <div class="col-md-2">{{ctrl.ProxyTypeText(proxy.tp)}}</div>
+                                <div class="col-md-2">{{ctrl.ProxyTypeText(proxy)}}</div>
                                 <div class="col-md-4">{{proxy.id}}</div>
                                 <div class="col-md-2">{{ctrl.ProxyStatusText(proxy.std)}}</div>
                             </div>

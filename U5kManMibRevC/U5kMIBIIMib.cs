@@ -135,7 +135,7 @@ namespace U5kManMibRevC
             }
 
         }
-        internal sealed class IfTableLoc : TableObject
+        internal sealed class IfTableLoc : TableObject, IDisposable
         {
             internal sealed class IfIndex : ScalarObject
             {
@@ -598,13 +598,27 @@ namespace U5kManMibRevC
             /// </summary>
             public IfTableLoc()
             {
-                /** Ejemplo para programar el evento de actualizacion de la tabla */
-                NetworkChange.NetworkAddressChanged +=
-                    (sender, args) => LoadElements();
+                /** Programar el evento de actualizacion de la tabla */
+                NetworkChange.NetworkAddressChanged += NetworkAddressChanged; // (sender, args) => LoadElements();
 #if NET452
             NetworkChange.NetworkAvailabilityChanged +=
                 (sender, args) => LoadElements();
 #endif                
+                LoadElements();
+            }
+
+            private void NetworkAddressChanged()
+            {
+                LoadElements();
+            }
+
+            public void Dispose()
+            {
+                /** Desprogramar el evento de actualizacion de la tabla */
+                NetworkChange.NetworkAddressChanged -= NetworkAddressChanged; // (sender, args) => LoadElements();
+            }
+            private void NetworkAddressChanged(object sender, EventArgs args)
+            {
                 LoadElements();
             }
 
@@ -1123,7 +1137,7 @@ namespace U5kManMibRevC
             }
         }
 
-        internal sealed class IpAddrTable : TableObject
+        internal sealed class IpAddrTable : TableObject, IDisposable
         {
 
             internal sealed class IpAdEntAddr : ScalarObject
@@ -1217,14 +1231,23 @@ namespace U5kManMibRevC
             /// </summary>
             public IpAddrTable()
             {
-                /** Ejemplo para programar el evento de actualizacion de la tabla*/
-                NetworkChange.NetworkAddressChanged +=
-                    (sender, args) => LoadElements();
+                /** Programar el evento de actualizacion de la tabla. */
+                NetworkChange.NetworkAddressChanged += NetworkAddressChanged; // (sender, args) => LoadElements();
 #if NET452
             NetworkChange.NetworkAvailabilityChanged +=
                 (sender, args) => LoadElements();
 #endif                
                 LoadElements();
+            }
+
+            private void NetworkAddressChanged(object sender, EventArgs args)
+            {
+                LoadElements();
+            }
+
+            public void Dispose()
+            {
+                NetworkChange.NetworkAddressChanged -= NetworkAddressChanged; // (sender, args) => LoadElements();
             }
 
             // ".1.3.6.1.2.1.4.20"
@@ -1257,7 +1280,7 @@ namespace U5kManMibRevC
             }
         }
 
-        internal class IpRouteTable : TableObject
+        internal class IpRouteTable : TableObject, IDisposable
         {
             internal sealed class IpRouteDest : ScalarObject
             {
@@ -1487,14 +1510,23 @@ namespace U5kManMibRevC
             /// </summary>
             public IpRouteTable()
             {
-                /** Ejemplo para programar el evento de actualizacion de la tabla */
-                NetworkChange.NetworkAddressChanged +=
-                    (sender, args) => LoadElements();
+                /** Para programar el evento de actualizacion de la tabla */
+                NetworkChange.NetworkAddressChanged += NetworkAddressChanged; // (sender, args) => LoadElements();
 #if NET452
             NetworkChange.NetworkAvailabilityChanged +=
                 (sender, args) => LoadElements();
 #endif                
                 LoadElements();
+            }
+
+            private void NetworkAddressChanged(object sender, EventArgs args)
+            {
+                LoadElements();
+            }
+
+            public void Dispose()
+            {
+                NetworkChange.NetworkAddressChanged -= NetworkAddressChanged; // (sender, args) => LoadElements();
             }
 
             // ".1.3.6.1.2.1.4.21"
@@ -1536,7 +1568,7 @@ namespace U5kManMibRevC
             }
         }
 
-        internal sealed class IpNetToMediaTable : TableObject
+        internal sealed class IpNetToMediaTable : TableObject, IDisposable
         {
             internal sealed class IpNetToMediaIfIndex : ScalarObject
             {
@@ -1618,14 +1650,22 @@ namespace U5kManMibRevC
             /// </summary>
             public IpNetToMediaTable()
             {
-                /** Ejemplo para programar el evento de actualizacion de la tabla */
-                NetworkChange.NetworkAddressChanged +=
-                    (sender, args) => LoadElements();
+                /** Para programar el evento de actualizacion de la tabla */
+                NetworkChange.NetworkAddressChanged += NetworkAddressChanged; // (sender, args) => LoadElements();
 #if NET452
             NetworkChange.NetworkAvailabilityChanged +=
                 (sender, args) => LoadElements();
 #endif                
                 LoadElements();
+            }
+            private void NetworkAddressChanged(object sender, EventArgs args)
+            {
+                LoadElements();
+            }
+
+            public void Dispose()
+            {
+                NetworkChange.NetworkAddressChanged -= NetworkAddressChanged; // (sender, args) => LoadElements();
             }
 
             // ".1.3.6.1.2.1.4.22"
@@ -2042,7 +2082,7 @@ namespace U5kManMibRevC
             }
         }
 
-        internal sealed class TcpConnTable : TableObject
+        internal sealed class TcpConnTable : TableObject, IDisposable
         {
             internal sealed class TcpConnState : ScalarObject
             {
@@ -2142,13 +2182,21 @@ namespace U5kManMibRevC
             public TcpConnTable()
             {
                 /** Ejemplo para programar el evento de actualizacion de la tabla */
-                NetworkChange.NetworkAddressChanged +=
-                    (sender, args) => LoadElements();
+                NetworkChange.NetworkAddressChanged += NetworkAddressChanged; // (sender, args) => LoadElements();
 #if NET452
             NetworkChange.NetworkAvailabilityChanged +=
                 (sender, args) => LoadElements();
 #endif
                 LoadElements();
+            }
+
+            private void NetworkAddressChanged(object sender, EventArgs args)
+            {
+                LoadElements();
+            }
+            public void Dispose() 
+            {
+                NetworkChange.NetworkAddressChanged -= NetworkAddressChanged; // (sender, args) => LoadElements();
             }
 
             // ".1.3.6.1.2.1.6.13"
@@ -2347,7 +2395,7 @@ namespace U5kManMibRevC
             }
         }
 
-        internal sealed class UdpTable : TableObject
+        internal sealed class UdpTable : TableObject, IDisposable
         {
             internal sealed class UdpLocalAddress : ScalarObject
             {
@@ -2395,8 +2443,7 @@ namespace U5kManMibRevC
             public UdpTable()
             {
                 /** Ejemplo para programar el evento de actualizacion de la tabla */
-                NetworkChange.NetworkAddressChanged +=
-                    (sender, args) => LoadElements();
+                NetworkChange.NetworkAddressChanged += NetworkAddressChanged; // (sender, args) => LoadElements();
 #if NET452
             NetworkChange.NetworkAvailabilityChanged +=
                 (sender, args) => LoadElements();
@@ -2404,8 +2451,18 @@ namespace U5kManMibRevC
                 LoadElements();
             }
 
-            // ".1.3.6.1.2.1.7.5"
-            private readonly IList<ScalarObject> _elements = new List<ScalarObject>();
+            private void NetworkAddressChanged(object sender, EventArgs args)
+            {
+                LoadElements();
+            }
+
+            public void Dispose()
+            {
+                NetworkChange.NetworkAddressChanged -= NetworkAddressChanged; // (sender, args) => LoadElements();        
+            }
+
+        // ".1.3.6.1.2.1.7.5"
+        private readonly IList<ScalarObject> _elements = new List<ScalarObject>();
             private void LoadElements()
             {
                 _elements.Clear();
@@ -3546,6 +3603,8 @@ namespace U5kManMibRevC
             public void Dispose()
             {
                 supervisor?.Set();
+                /** 20201030. ManualResetEvent es Disposble. Si no se llama a Dispose puede generar Leak de Memoria */
+                supervisor?.Dispose();
                 supervisor = null;
             }
 

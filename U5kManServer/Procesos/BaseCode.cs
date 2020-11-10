@@ -39,8 +39,10 @@ namespace NucleoGeneric
 
         #region Logs
 
-        #region Logs - Base
+#region Logs - Base
+#if _FILTER_V1_
         private static BaseStoreFilter filter = new BaseStoreFilter();
+#endif
 
         /// <summary>
         /// Utiliza esta funcion para escribir en la consola.
@@ -88,8 +90,14 @@ namespace NucleoGeneric
 
                 if (type != eIncidencias.IGNORE)
                 {
+#if _FILTER_V1_
                     if (HistThread.hproc != null && filter.ToStore(key) == true)
+#else
+                    if (HistThread.hproc != null)
+#endif
+                    {
                         HistThread.hproc.AddInci(DateTime.Now, 0, type, (int)thw, idhw, issueMessages);
+                    }
                 }
             }
             catch (Exception x)
@@ -167,9 +175,9 @@ namespace NucleoGeneric
             Log<T>(level, message, eIncidencias.IGNORE, lineNumber, caller);
         }
 
-        #endregion
+#endregion
 
-        #region Trace
+#region Trace
 
         /// <summary>
         /// Utiliza esta función para realizar un log de tipo TRACE, y adicionalmente enviar una incidencia con el string del mensaje literalmente. 
@@ -201,9 +209,9 @@ namespace NucleoGeneric
         //    Log<T>(LogLevel.Trace, message, type, issueMessages, lineNumber, caller);
         //}
 
-        #endregion
+#endregion
 
-        #region Debug
+#region Debug
 
         /// <summary>
         /// Utiliza esta función para realizar un log de tipo DEBUG, y adicionalmente enviar una incidencia con el string del mensaje literalmente. 
@@ -235,9 +243,9 @@ namespace NucleoGeneric
         //    Log<T>(LogLevel.Debug, message, type, issueMessages, lineNumber, caller);
         //}
 
-        #endregion
+#endregion
 
-        #region Info
+#region Info
 
         /// <summary>
         /// Utiliza esta función para realizar un log de tipo INFO, y adicionalmente enviar una incidencia con el string del mensaje literalmente. 
@@ -269,9 +277,9 @@ namespace NucleoGeneric
             Log<T>(LogLevel.Info, message, type, issueMessages, lineNumber, caller);
         }
 
-        #endregion
+#endregion
 
-        #region Warn
+#region Warn
 
         /// <summary>
         /// Utiliza esta función para realizar un log de tipo WARN, y adicionalmente enviar una incidencia con el string del mensaje literalmente. 
@@ -303,9 +311,9 @@ namespace NucleoGeneric
             Log<T>(LogLevel.Warn, message, type, issueMessages, lineNumber, caller);
         }
 
-        #endregion
+#endregion
 
-        #region Error
+#region Error
 
         /// <summary>
         /// Utiliza esta función para realizar un log de tipo ERROR, y adicionalmente enviar una incidencia con el string del mensaje literalmente. 
@@ -349,9 +357,9 @@ namespace NucleoGeneric
             Log<T>(LogLevel.Error, message, type, issueMessages, lineNumber, caller);
         }
 
-        #endregion
+#endregion
 
-        #region Fatal
+#region Fatal
 
         /// <summary>
         /// Utiliza esta función para realizar un log de tipo ERROR, y adicionalmente enviar una incidencia con el string del mensaje literalmente. 
@@ -393,7 +401,7 @@ namespace NucleoGeneric
             Log<T>(/*from, */LogLevel.Fatal, message, type, issueMessages, lineNumber, caller);
         }
 
-        #endregion
+#endregion
 
         /// <summary>
         /// Utiliza esta función para realizar un log de tipo ERROR, y adicionalmente enviar una incidencia, con mensajes diferentes entre el del Log y el de la incidencia.
@@ -460,7 +468,7 @@ namespace NucleoGeneric
         }
         Dictionary<String, Exception> last_exceptions = new Dictionary<string, Exception>();
 #endif
-        #endregion
+#endregion
 
 #if _PARA_BORRAR_
         static Dictionary<String, Tuple<String, int>> _lastLogCollection = new Dictionary<string, Tuple<string, int>>();
@@ -567,6 +575,7 @@ namespace NucleoGeneric
         }
         public ImAliveTick IamAlive = new ImAliveTick(60);
 
+#if _FILTER_V1_
         /// <summary>
         /// 
         /// </summary>
@@ -634,6 +643,7 @@ namespace NucleoGeneric
             DateTime lastClean = DateTime.Now;
             object locker = new object();
         }
+#endif
 
         public static void ConfigCultureSet()
         {

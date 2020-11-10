@@ -123,7 +123,7 @@
 						"Machine": "DF1501",
 						"ServerType": "Mixed",
 						"GlobalMaster": "Master",
-						"RadioService": "Slave",
+						"RadioService": "Master",
 						"CfgService": "Slave",
 						"PhoneService": "Slave",
 						"TifxService": "Slave",

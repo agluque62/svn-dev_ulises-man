@@ -85,8 +85,11 @@ angular
             , radio_data: function () {
                 return remoteGet(rest_url_radio);
             }
-            , radio_11_select: function (equ) {
-                return remotePost(rest_url_radio_11, equ);
+            , radio_11_select: function (id) {
+                return remotePost(rest_url_radio_11, { id, command: "select" });
+            }
+            , radio_11_enable: function (id, enable) {
+                return remotePost(rest_url_radio_11, { id, command: enable });
             }
             , sacta_get: function () {
                 return remoteGet(rest_url_sacta);

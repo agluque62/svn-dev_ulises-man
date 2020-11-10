@@ -18,6 +18,8 @@ namespace Utilities
         long TickAverageTime { get; set; }
         long RunningAverageTime { get; set; }
         long RunningMaxTime { get; set; }
+        private DateTime CreationTime { get; set; }
+
         public TimeMeasurement(String name = "Generico")
         {
             Id = name;
@@ -26,6 +28,7 @@ namespace Utilities
             TickAverageTime = -1;
             RunningAverageTime = -1;
             RunningMaxTime = -1;
+            CreationTime = DateTime.Now;
         }
         public void StopAndPrint(Action<string>action, string etiqueta = "", [System.Runtime.CompilerServices.CallerLineNumber] int lineNumber = 0)
         {
@@ -35,6 +38,12 @@ namespace Utilities
                     Id,                
                     etiqueta,                
                     watch.ElapsedMilliseconds));
+        }
+        public void PrintAndGo(Action<string> cb)
+        {
+            watch.Stop();
+            cb?.Invoke($"{watch.ElapsedMilliseconds,6}");
+            watch.Restart();
         }
         public void Tick(Action<long, long, long> cb)
         {
@@ -49,6 +58,15 @@ namespace Utilities
             RunningAverageTime = RunningAverageTime == -1 ? measured : (RunningAverageTime + measured) / 2;
             RunningMaxTime = RunningMaxTime >= measured ? RunningMaxTime : measured;
             return RunningAverageTime;
+        }
+
+        public void FromCreation(TimeSpan t, Action cb)
+        {
+            var elapsep = DateTime.Now - CreationTime;
+            if (elapsep > t)
+            {
+                cb?.Invoke();
+            }
         }
 
         public void Dispose()

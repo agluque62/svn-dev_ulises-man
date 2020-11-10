@@ -1110,8 +1110,9 @@ namespace U5kManServer
         {
             get
             {
+                // 20201008. RM4631. Incluir en el estado global de pasarela el estado de FA.
 #if GW_STD_V1
-                if (CfgMod.Std != std.Ok || SnmpMod.Std != std.Ok || SipMod.Std != std.Ok)
+                if (CfgMod.Std != std.Ok || SnmpMod.Std != std.Ok || SipMod.Std != std.Ok || stdFA != std.Ok)
                     return true;
 #endif
                 foreach (stdSlot slot in slots)
@@ -1168,7 +1169,20 @@ namespace U5kManServer
             {
                 for (int iRec = 0; iRec < 4; iRec++)
                 {
+                    slots[iSlot].rec[iRec].name = "";
+                    slots[iSlot].rec[iRec].bdt_name = "";
+                    slots[iSlot].rec[iRec].tipo = itf.rcNotipo;
+                    slots[iSlot].rec[iRec].tipo_itf = itf.rcNotipo;
+                    slots[iSlot].rec[iRec].bdt = false;
+                    slots[iSlot].rec[iRec].Stpo = 0;
                     slots[iSlot].rec[iRec].snmp_port = 16100 + (10 * (iSlot + 1)) + (iRec + 1);
+                    slots[iSlot].rec[iRec].snmp_trap_port = 16200 + (10 * (iSlot + 1)) + (iRec + 1);
+
+                    slots[iSlot].rec[iRec].presente = false;
+                    slots[iSlot].rec[iRec].std_online = std.NoInfo;
+                    slots[iSlot].rec[iRec].tipo_online = trc.rcNotipo;
+
+                    slots[iSlot].rec[iRec].VirtualIp = "";
                 }
             }
         }
@@ -1852,6 +1866,10 @@ namespace U5kManServer
                                 {
                                     LogTrace<stdGw>($"Pasarela {gw.name}: Error en carga de memoria...");
                                 }
+                                /** 20200810. Historico que marca que se reinician estados por Cambio de Configuracion */
+                                RecordEvent<stdGw>(DateTime.Now, 
+                                    eIncidencias.IGW_ENTRADA, eTiposInci.TEH_TIFX, 
+                                    gw.name, Params(idiomas.strings.GW_NEW_CONFIG));
                             }
                             else 
                             {

@@ -40,7 +40,11 @@ public partial class ServicioInterfazSacta : System.Web.Services.Protocols.SoapH
     /// <remarks/>
     public ServicioInterfazSacta(string ipServer) {
         // this.Url = "http://localhost:51277/InterfazSacta/ServicioInterfazSacta.asmx";
+#if DEBUG
+        this.Url = "http://localhost:51277/ServicioInterfazSacta.asmx";
+#else
         this.Url = String.Format("http://{0}/nucleodf/u5kcfg/InterfazSacta/ServicioInterfazSacta.asmx", ipServer/*U5kManServer.Properties.u5kManServer.Default.MySqlServer*/);
+#endif
     }
     
     /// <remarks/>

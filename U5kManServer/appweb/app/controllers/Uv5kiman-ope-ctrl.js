@@ -40,10 +40,15 @@ angular.module("Uv5kiman")
 
         /** Servicios Pagina de Sesiones*/
         //** Version 1 */ 
+        //ctrl.colorEstadoFrecuencia = function (std) {
+        //    return (std == frec_stdcodes.NoDisponible ? "bg-danger text-danger" :
+        //        std == frec_stdcodes.Disponible ? "text-info" :
+        //            std == frec_stdcodes.Degradada ? "bg-warning text-warning" : "text-danger bg-danger");
+        //};
         ctrl.colorEstadoFrecuencia = function (std) {
-            return (std == frec_stdcodes.NoDisponible ? "bg-warning text-danger" :
-                std == frec_stdcodes.Disponible ? "text-info" :
-                    std == frec_stdcodes.Degradada ? "bg-warning text-info" : "text-danger bg-danger");
+            return (std == frec_stdcodes.NoDisponible ? "freqNotAvailable" :
+                std == frec_stdcodes.Disponible ? "freqAvailable" :
+                    std == frec_stdcodes.Degradada ? "freqDegraded" : "text-danger bg-danger");
         };
         ctrl.textTipoPrio = function (tp, pr) {
             var txtTipo = tp == frec_tipos.Normal ? $lserv.translate("Simple") :
@@ -52,7 +57,7 @@ angular.module("Uv5kiman")
                         tp == frec_tipos.EM ? $lserv.translate("ME") : "ERR";
             var txtPrio = pr == frec_prio.Normal ? $lserv.translate("Normal") :
                 pr == frec_prio.Emergencia ? $lserv.translate("Emergencia") : $lserv.translate("Error");
-            return txtTipo + "/" + txtPrio;
+            return { txtTipo, txtPrio };
         };
         ctrl.colorEstadoSesion = function (std) {
             return std == session_stdcodes.Desconectado ? "bg-warning text-danger" :
@@ -64,7 +69,7 @@ angular.module("Uv5kiman")
                 md == frec_cclimax.Realtivo ? "R" : "?";
         };
         ctrl.enableOnFD = function (tp) {
-            return tp == frec_tipos.FD ? true : false;
+            return { FD: tp == frec_tipos.FD ? true : false, UnoMasUno: true };
         };
         ctrl.showOnTx = function (tp) {
             return (tp == session_types.TX || tp == session_types.RXTX);
@@ -97,7 +102,7 @@ angular.module("Uv5kiman")
             }
             if (item.selected_site == "")
                 return "";
-            return item.selected_site + "/" + item.selected_site_qidx.toString();
+            return StringCut(item.selected_site, 40) + " // " + StringCut(item.selected_rx, 40) + " // " + item.selected_site_qidx.toString();
         };
         ctrl.TxSelected = function (item) {
             switch (item.ftipo) {
@@ -446,6 +451,11 @@ angular.module("Uv5kiman")
                         selected_site: session.selected_site,
                         selected_site_qidx: session.selected_site_qidx,
                         selected_tx: session.selected_tx,
+                        // 20200525
+                        selected_rx: session.selected_resource,
+                        fp_unomasuno: session.UnoMasUno,
+                        fp_bss_mod: session.selected_BSS_method,
+                        fp_tx_mod: session.ftipo == 2 ? (session.selected_tx == "CLX" ? "Climax" : "BTS") : "",
                         ses: new Object()
                     };
                 }
@@ -627,7 +637,9 @@ angular.module("Uv5kiman")
                 if (rdUnoMasUnoChanged(normalizedData) == true) {
                     console.log("Cambio en tabla de 1+1");
                     ctrl.dtUnoMasUno = normalizedData;
-                    ctrl.dtUnoMasUnoSelectedFrec = ctrl.dtUnoMasUno.length > 0 ? ctrl.dtUnoMasUno[0].fr : "";
+                    ctrl.dtUnoMasUnoSelectedFrec = ctrl.dtUnoMasUnoSelectedFrec == "" ?
+						ctrl.dtUnoMasUno.length > 0 ? ctrl.dtUnoMasUno[0].fr : "" :
+						ctrl.dtUnoMasUnoSelectedFrec;
                 }
             }
             else {
@@ -668,11 +680,15 @@ angular.module("Uv5kiman")
             return res;
         }
         ctrl.rdUnoMasUnoId = function (res) {
-            var retorno = "(" + (res.ab == 1 ? "A" : "B") + ") " + res.id;
+            var retorno = /*"(" + (res.ab == 1 ? "A" : "B") + ") " + */res.id;
             return StringCut(retorno, 24);
         };
         ctrl.rdUnoMasUnoIdClass = function (res) {
-            var retorno = res.ses == 0 ? "bg-danger" : "";
+            var retorno = res.ses == 0 ? "bg-danger" : "bg-success";
+            return retorno;
+        };
+        ctrl.rdUnoMasUnoRxIdClass = function (res) {
+            var retorno = res.ab == 0 ? "bg-secondary" : res.ses == 0 ? "bg-danger" : "bg-success";
             return retorno;
         };
         ctrl.rdUnoMasUnoTxDisabled = function (res) {
@@ -682,12 +698,31 @@ angular.module("Uv5kiman")
                 var strQuestion = equ.id + $lserv.translate(" ¿Desea Seleccionar el equipo como Principal?");
                 alertify.confirm(strQuestion,
                     function () {
-                        $serv.radio_11_select(equ).then(function (response) {
+                        $serv.radio_11_select(equ.id).then(function (response) {
                             console.log("RD1+1 Post Response => ", response.data);
                             alertify.success($lserv.translate("Operacion Ejecutada."));
                         }, function (response) {
                             console.log("RD1+1 Post Error => ", response);
                             alertify.error($lserv.translate("Error: " + response.status + ", " + response.statusText));
+                        });
+                    },
+                    function () {
+                        alertify.message($lserv.translate("Operacion Cancelada"));
+                    });
+        };
+        ctrl.rdUnoMasUnoEnable = function (equ) {
+                var enable = equ.ab == 0 ? "enable" : "disable";
+                var strOperation = enable == "enable" ? $lserv.translate(" ¿Desea Habilitar el equipo?") :
+                    $lserv.translate(" ¿Desea Deshabilitar el equipo?");
+                var strQuestion = equ.id + strOperation;
+                alertify.confirm(strQuestion,
+                    function () {
+                        $serv.radio_11_enable(equ.id, enable).then(function (response) {
+                            console.log("RD1+1 Post Response => ", response.data);
+                            alertify.success($lserv.translate("Operacion Ejecutada."));
+                        }, function (response) {
+                            console.log("RD1+1 Post Error => ", response);
+                            alertify.error($lserv.translate(response.data.res));
                         });
                     },
                     function () {

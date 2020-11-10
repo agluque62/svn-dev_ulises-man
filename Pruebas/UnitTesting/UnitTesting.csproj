@@ -70,7 +70,6 @@
     <Compile Include="ExternalResourcesUnitTest.cs" />
     <Compile Include="GenericTests.cs" />
     <Compile Include="GwCallLogsParseTest.cs" />
-    <Compile Include="SactaClientTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

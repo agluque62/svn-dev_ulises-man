@@ -59,16 +59,18 @@ namespace U5kManServer
                 string desc;
                 try
                 {
-                    if (_inciDescr.Where(rr => rr.id == (int)inci).Count() > 0)
+                    var inciDescList = _inciDescr.Where(rr => rr.id == (int)inci).ToList();
+
+                    if (inciDescList.Count() > 0)
                     {
-                        var inciDescr = _inciDescr.Where(rr => rr.id == (int)inci).First();
+                        var inciDesc = inciDescList[0];
                         /** */
                         int npar = parametros.Length;
                         Array.Resize(ref parametros, 8);
                         for (int i = npar; i < 8; i++)
                             parametros[i] = "--";
 
-                        desc = string.Format(_inciDescr.Where(rr => rr.id == (int)inci).First().strformat, parametros);
+                        desc = string.Format(inciDesc.strformat, parametros);
 
                         U5kIncidencia tinci = new U5kIncidencia()
                         {
@@ -82,7 +84,7 @@ namespace U5kManServer
                             reconocida = DateTime.MinValue
                         };
 
-                        if (_inciFilter.ToStore(tinci, inciDescr.Trep) == true)
+                        if (_inciFilter.ToStore(tinci, inciDesc.Trep) == true)
                         {
                             _incidencias.Enqueue(tinci);
                         }
@@ -318,7 +320,7 @@ namespace U5kManServer
         /// <summary>
         /// 
         /// </summary>
-        class StoreFilterControl
+        public class StoreFilterControl
         {
             class StoreFilterData
             {

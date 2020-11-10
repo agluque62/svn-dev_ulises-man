@@ -25,18 +25,26 @@ angular.module("Uv5kiman")
     };
 
     //** */
-    ctrl.ProxyTypeText = function (tp) {
-        if (tp == 5)
-            return $lserv.translate("Local") + "-" + $lserv.translate("Principal");
-        else if (tp == 6)
-            return $lserv.translate("Local") + "-" + $lserv.translate("Alternativo");
-        else if (tp == 7)
-            return $lserv.translate("Externo") + "-" + $lserv.translate("Principal");
-        else if (tp == 8)
-            return $lserv.translate("Externo") + "-" + $lserv.translate("Alternativo");
+        ctrl.ProxyTypeText = function (prx) {
+            if (prx.tp == 5)
+                return $lserv.translate("Interno Principal");
+            else if (prx.tp == 6)
+                return $lserv.translate("Interno Alternativo");
+			else {
+					if (prx.prio==1)
+						return $lserv.translate("SBC Principal");
+					if (prx.prio==2)
+						return $lserv.translate("SBC Alternativo");
+					if (prx.prio==3)
+						return $lserv.translate("Dependencia");
+				}
+//            else if (tp == 7)
+//                return $lserv.translate("Externo") + "-" + $lserv.translate("Principal");
+//            else if (tp == 8)
+//                return $lserv.translate("Externo") + "-" + $lserv.translate("Alternativo");
 
-        return $lserv.translate("Desconocido");
-    };
+            return $lserv.translate("Desconocido");
+        };
 
     ctrl.ProxyStatusText = function (tp) {
         if (tp == 3)

@@ -585,11 +585,16 @@ namespace U5kManServer.WebAppServer
         {
             if (context.Request.HttpMethod == "GET")
             {
+#if DEBUG1
+                var data = File.ReadAllText(".\\appweb\\simulate\\rddata.json");
+                sb.Append(data);
+#else
                 Services.CentralServicesMonitor.Monitor.GetRadioData((data) =>
                 {
                     var strData = U5kManWebAppData.JSerialize(data);
                     sb.Append(strData);
                 });
+#endif
             }
             else
             {
@@ -611,10 +616,10 @@ namespace U5kManServer.WebAppServer
                 using (var reader = new StreamReader(context.Request.InputStream, context.Request.ContentEncoding))
                 {
                     var data = JsonConvert.DeserializeObject(reader.ReadToEnd()) as JObject;
-                    if (JsonHelper.JObjectPropertyExist(data, "id"))
+                    if (JsonHelper.JObjectPropertyExist(data, "id") && JsonHelper.JObjectPropertyExist(data, "command"))
                     {
-                        var idEquipo = (string)data["id"];
-                        Services.CentralServicesMonitor.Monitor.RdUnoMasUnoSelect(idEquipo, (success, msg) =>
+                        // var idEquipo = (string)data["id"];
+                        Services.CentralServicesMonitor.Monitor.RdUnoMasUnoCommand(data, (success, msg) =>
                         {
                             if (success)
                             {
@@ -690,6 +695,7 @@ namespace U5kManServer.WebAppServer
         /// <param name="sb"></param>
         protected void restSacta(HttpListenerContext context, StringBuilder sb, U5kManStdData gdt)
         {
+#if !_SACTA_API_V1_
             if (context.Request.HttpMethod == "GET")
             {
                 ServicioInterfazSacta sacta_srv = new ServicioInterfazSacta(U5kManServer.Properties.u5kManServer.Default.MySqlServer);
@@ -724,7 +730,7 @@ namespace U5kManServer.WebAppServer
                         {
 
                             ServicioInterfazSacta sacta_srv = new ServicioInterfazSacta(U5kManServer.Properties.u5kManServer.Default.MySqlServer);
-                            sacta_srv.StartSacta();
+                            sacta_srv.EndSacta();
                             GlobalServices.GetWriteAccess((data) =>
                             {
                                 U5kManService._main.EstadoSacta(0, stdg);
@@ -760,6 +766,84 @@ namespace U5kManServer.WebAppServer
                 context.Response.StatusCode = 404;
                 sb.Append(U5kManWebAppData.JSerialize<U5kManWADResultado>(new U5kManWADResultado() { res = context.Request.HttpMethod + idiomas.strings.WAP_MSG_002 /*": Metodo No Permitido"*/ }));
             }
+#else
+            ServicioInterfazSacta sacta_srv = new ServicioInterfazSacta(U5kManServer.Properties.u5kManServer.Default.MySqlServer);
+            if (context.Request.HttpMethod == "GET")
+            {
+                sb.Append(sacta_srv.SactaConfGet());
+            }
+            else if (context.Request.HttpMethod == "POST")
+            {
+                string[] UrlFields = context.Request.Url.LocalPath.Split('/');
+                if (UrlFields.Length > 2)
+                {
+                    string activar = UrlFields[2];
+                    U5KStdGeneral stdg = gdt.STDG;
+                    if (activar == "true")
+                    {
+                        stdg.SactaServiceEnabled = true;
+                        sacta_srv.StartSacta();
+                        RecordManualAction("Activacion Manual de Servicio SACTA");   // todo. Multi-Idioma.
+                        sb.Append(JsonConvert.SerializeObject(new { res = $"Estado SACTA {sacta_srv.GetEstadoSacta()} "}));
+
+                        //Task.Factory.StartNew(() =>
+                        //{
+                        //    sacta_srv.StartSacta();
+                        //    GlobalServices.GetWriteAccess((data) =>
+                        //    {
+                        //        U5kManService._main.EstadoSacta(16, stdg);
+                        //    });
+                        //    /** TODO. Generar Historico de Actuacion */
+                        //    RecordManualAction("Activacion Manual de Servicio SACTA");   // todo. Multi-Idioma.
+                        //});
+                    }
+                    else if (activar == "false")
+                    {
+                        stdg.SactaServiceEnabled = false;
+                        sacta_srv.EndSacta();
+                        RecordManualAction("Desactivacion Manual de Servicio SACTA");   // todo. Multi-Idioma.
+                        sb.Append(JsonConvert.SerializeObject(new { res = $"Estado SACTA {sacta_srv.GetEstadoSacta()} " }));
+
+                        //Task.Factory.StartNew(() =>
+                        //{
+
+                        //    //ServicioInterfazSacta sacta_srv = new ServicioInterfazSacta(U5kManServer.Properties.u5kManServer.Default.MySqlServer);
+                        //    sacta_srv.StartSacta();
+                        //    GlobalServices.GetWriteAccess((data) =>
+                        //    {
+                        //        U5kManService._main.EstadoSacta(0, stdg);
+                        //    });
+                        //    /** TODO. Generar Historico de Actuacion */
+                        //    RecordManualAction("Desactivacion Manual de Servicio SACTA");   // todo. Multi-Idioma.
+                        //});
+                    }
+                    else
+                    {
+                        context.Response.StatusCode = 400;
+                        sb.Append(JsonConvert.SerializeObject(new { res = "Codigo no implementado: " + activar }));
+                    }
+                }
+                else
+                {
+                    using (var reader = new StreamReader(context.Request.InputStream, context.Request.ContentEncoding))
+                    {
+                        string strData = reader.ReadToEnd();
+                        sacta_srv.SactaConfSet(strData);
+
+                        /** Sincronizar el otro servidor */
+                        _sync_server.Sync(cmdSync.OpcionesSacta, strData);
+
+                        sb.Append(U5kManWebAppData.JSerialize<U5kManWADResultado>(new U5kManWADResultado() { res = idiomas.strings.WAP_MSG_001 /* "OK" */}));
+                        RecordManualAction("Cambio de opciones de Servicio SACTA");   // todo. Multi-Idioma.
+                    }
+                }
+            }
+            else
+            {
+                context.Response.StatusCode = 404;
+                sb.Append(U5kManWebAppData.JSerialize<U5kManWADResultado>(new U5kManWADResultado() { res = context.Request.HttpMethod + idiomas.strings.WAP_MSG_002 /*": Metodo No Permitido"*/ }));
+            }
+#endif
         }
 
         /// <summary>

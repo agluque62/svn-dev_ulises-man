@@ -79,6 +79,7 @@
     <Compile Include="CustomBinaryFormatter.cs" />
     <Compile Include="EncryptionHelper.cs" />
     <Compile Include="EventQueue.cs" />
+    <Compile Include="FailuresFilterHelper.cs" />
     <Compile Include="FSBindingList.cs" />
     <Compile Include="GeneralHelper.cs" />
     <Compile Include="HttpHelper.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="NtpClientStatus.cs" />
     <Compile Include="ntp_client.cs" />
     <Compile Include="PerformanceMeter.cs" />
+    <Compile Include="PollingHelper.cs" />
     <Compile Include="ReaderWriterLock.cs" />
     <Compile Include="RegistrySettingsProvider.cs" />
     <Compile Include="SimpleSipAgent.cs" />

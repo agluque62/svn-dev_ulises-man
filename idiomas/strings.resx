@@ -333,4 +333,7 @@ Error Solicitando Info</value>
   <data name="EquiposExternos" xml:space="preserve">
     <value>Equipos Externos</value>
   </data>
+  <data name="GW_NEW_CONFIG" xml:space="preserve">
+    <value>Nueva Configuracion</value>
+  </data>
 </root>

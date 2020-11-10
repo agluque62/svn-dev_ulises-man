@@ -315,13 +315,12 @@ namespace U5kManServer.ExtEquSpvSpace
                         List<EquipoEurocae> localequ = null;    // new List<EquipoEurocae>();
                         try
                         {
-                            Utilities.TimeMeasurement tm = new Utilities.TimeMeasurement("EXT Explorer");
+                            Utilities.TimeMeasurement itm = new Utilities.TimeMeasurement("EXT Explorer");
 
                             // Copia de equipo configurados.
                             GlobalServices.GetWriteAccess((gdata) => localequ = gdata.STDEQS.Select(eq => new EquipoEurocae(eq)).ToList());
                             List<Task> tasks = new List<Task>();
 
-                            /** Agruparlos por equipo */
                             var grupos = localequ?.GroupBy(eq => eq.Ip1)
                                 .ToDictionary(grp => grp.Key, grp => grp.ToList());
                             if (grupos != null)
@@ -351,6 +350,18 @@ namespace U5kManServer.ExtEquSpvSpace
                                         LogTrace<ExtEquSpv>($"PING Skipped : {grp.Key}");
                                     }
                                 }
+#if DEBUG1
+                                /** Para simular Sectorizaciones con cambios 'problematicos' */
+                                tm.FromCreation(TimeSpan.FromMinutes(1), () =>
+                                {
+                                    GlobalServices.GetWriteAccess((gdata) =>
+                                    {
+                                        //gdata.EQUDIC.Remove("HFTX1_2");
+                                        //gdata.EQUDIC["HFTX1_2"] = new EquipoEurocae() { Id = "HFTX1", Ip1 = "127.0.0.1", Tipo = 2 };
+                                    });
+                                });
+#endif
+                                /** Agruparlos por equipo */
                                 var waitingResult = Task.WaitAll(tasks.ToArray(), TimeSpan.FromMilliseconds((double)poolTimeout));
                                 LogTrace<ExtEquSpv>($"Fin de Supervision de equipos y recursos externos ({tasks.Count}, {waitingResult})...");
                             }
@@ -369,7 +380,13 @@ namespace U5kManServer.ExtEquSpvSpace
                         {
                             GlobalServices.GetWriteAccess((gdata) =>
                             {
-                                gdata.EQUDIC = localequ.Select(e => e).ToDictionary(e => e.Key, e => e);
+                                var toActualize = localequ
+                                    .Where(e => gdata.EQUDIC.Keys.Contains(e.Key))  // Elimino los eliminados en una posible sectorizacion.
+                                    .Where(e => gdata.EQUDIC[e.Key].Equals(e))      // Elimino los modificados en una posible sectorizacion.                                
+                                    .Select(e => e).ToList();
+                                // Copio el estado de los 'No afectados'
+                                toActualize.ForEach(e => gdata.EQUDIC[e.Key].CopyFrom(e));
+                                // Se calcula el estado final del subsistema.
                                 SetEstadoGlobalEquipos(gdata, localequ);
                             });
                         }

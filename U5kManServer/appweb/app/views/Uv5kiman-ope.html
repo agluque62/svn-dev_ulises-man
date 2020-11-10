@@ -25,7 +25,6 @@
                         <thead>
                             <tr>
                                 <th translate>Frecuencia</th>
-                                <th translate>Tipo/Prioridad</th>
                                 <th translate>RxSel</th>
                                 <th translate>TxSel</th>
                             </tr>
@@ -34,53 +33,70 @@
                             <tr data-ng-repeat="fr in ctrl.frecs" ng-init="ifrec = $index"
                                 class="pv-1"
                                 data-ng-class="ctrl.colorEstadoFrecuencia(fr.fstd)">
-                                <td class="col-md-1">{{fr.frec}}</td>
-                                <td class="col-md-2">{{ctrl.textTipoPrio(fr.ftipo,fr.prio)}}</td>
-                                <td class="col-md-1">{{ctrl.RxSelected(fr)}}</td>
-                                <td class="col-md-1">{{ctrl.TxSelected(fr)}}</td>
                                 <td class="col-md-2">
                                     <div>
                                         <button type="button"
-                                                class="btn btn-default"
-                                                ng-disabled="(ctrl.enableOnFD(fr.ftipo)==false)"
-                                                data-toggle="collapse" data-target="#tpar-{{ifrec}}" translate>
-                                            Parametros
+                                                class="btn"
+                                                data-toggle="collapse" data-target="#tpar-{{ifrec}}">
+                                            <strong>{{fr.frec}}</strong>
                                         </button>
-                                        <div id="tpar-{{ifrec}}" class="collapse">
+                                        <div id="tpar-{{ifrec}}" class="collapse" style="margin-left: 10px;">
                                             <table class="table table-bordered">
                                                 <tr>
+                                                    <td translate>Tipo</td>
+                                                    <td>{{ctrl.textTipoPrio(fr.ftipo,fr.prio).txtTipo}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td translate>Modo</td>
+                                                    <td>{{ctrl.textTipoPrio(fr.ftipo,fr.prio).txtPrio}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td translate>1+1</td>
+                                                    <td>{{fr.fp_unomasuno==true ? "Si" : "No"}}</td>
+                                                </tr>
+                                                <tr ng-show="ctrl.enableOnFD(fr.ftipo).FD">
+                                                    <td translate>Modo TX</td>
+                                                    <td>{{fr.fp_tx_mod}}</td>
+                                                </tr>
+                                                <tr ng-show="ctrl.enableOnFD(fr.ftipo).FD">
                                                     <td translate>Climax</td>
                                                     <td>{{ctrl.txtCClimax(fr.fp_climax_mc)}}</td>
                                                 </tr>
-                                                <tr>
-                                                    <td translate>W-BSS</td>
+                                                <tr ng-show="ctrl.enableOnFD(fr.ftipo).FD || fr.fp_unomasuno==true"">
+                                                    <td translate>Mtdo Bss</td>
+                                                    <td>{{fr.fp_bss_mod}}</td>
+                                                </tr>
+                                                <tr ng-show="ctrl.enableOnFD(fr.ftipo).FD || fr.fp_unomasuno==true"">
+                                                    <td translate>Vtna. Bss</td>
                                                     <td>{{fr.fp_bss_win + " ms"}}</td>
                                                 </tr>
                                             </table>
                                         </div>
                                     </div>
                                 </td>
-                                <td>
+                                <td class="col-md-2">{{ctrl.RxSelected(fr)}}</td>
+                                <td class="col-md-1">{{ctrl.TxSelected(fr)}}</td>
+                                <td class="col-md-7">
                                     <button type="button"
                                             class="btn btn-default"
                                             data-toggle="collapse"
                                             data-target="#tses-{{ifrec}}" translate>
                                         Sesiones
                                     </button>
-                                    <div id="tses-{{ifrec}}" class="collapse">
+                                    <div id="tses-{{ifrec}}" class="collapse" style="margin-left: 15px;">
                                         <table class="table table-bordered">
                                             <tr data-ng_repeat="ses in fr.ses"
                                                 data-ng-class="ctrl.colorEstadoSesion(ses.std)"
                                                 ng-init="ises = $index">
-                                                <td class="col-md-1">{{ses.site + " (" + ses.tipo + ")"}}</td>
-                                                <td class="col-md-6">{{ses.uri}}</td>
-                                                <td class="level-1">
+                                                <td class="col-md-1">{{ses.tipo}}</td>
+                                                <td class="col-md-3">{{ses.site}}</td>
+                                                <td class="col-md-8 level-1">
                                                     <button type="button" class="btn btn-default"
                                                             data-toggle="collapse"
-                                                            data-target="#tpses-{{ifrec}}-{{ises}}" translate>
-                                                        Parametros
+                                                            data-target="#tpses-{{ifrec}}-{{ises}}">
+                                                        {{ses.uri}}
                                                     </button>
-                                                    <div id="tpses-{{ifrec}}-{{ises}}" class="collapse">
+                                                    <div id="tpses-{{ifrec}}-{{ises}}" class="collapse" style="margin-left: 15px;">
                                                         <table class="table table-bordered">
                                                             <tr ng-show="ctrl.showOnTx(ses.tipo)">
                                                                 <td>{{"RTPTx"}}</td>
@@ -315,7 +331,7 @@
                     <div class="row bg-primary">
                         <div class="col-md-1 level-1" translate>Frecuencia</div>
                         <div class="col-md-2 level-1" translate>Emplazamiento</div>
-                        <div class="col-md-5 level-1" translate>Transmisores</div>
+                        <div class="col-md-5 level-1" translate>Transmisores/Tranceptores</div>
                         <div class="col-md-4 level-1" translate>Receptores</div>
                     </div>
                 </li>
@@ -335,13 +351,13 @@
                                                             <label class="btn btn-sm" ng-class="ctrl.rdUnoMasUnoIdClass(tx)" style="font-size:90%; padding-right:5px; margin-left:10px;">{{ctrl.rdUnoMasUnoId(tx)}}</label>
                                                         </div>
                                                         <div class="col-md-5" style="padding-left:5px; padding-right:5px;">
-                                                            <button class="btn btn-sm btn-default" style="font-size:90%; padding-right:5px;"
+                                                            <button class="btn btn-sm btn-info" style="font-size:90%; padding-right:5px;"
                                                                     ng-click="ctrl.rdUnoMasUnoSelectMain(tx)"
                                                                     ng-disabled="ctrl.rdUnoMasUnoTxDisabled(tx)"
                                                                     ng-show="{{tx.sel==0}}">
-                                                                {{"Standby=>Sel"}}
+                                                                {{"Reserva=>Sel"}}
                                                             </button>
-                                                            <label class="btn btn-sm text-success" style="font-size:90%; padding-right:5px;" ng-show="{{tx.sel==1}}"><strong>Main</strong></label>
+                                                            <label class="btn btn-sm text-success" style="font-size:90%; padding-right:5px;" ng-show="{{tx.sel==1}}"><strong>Seleccionado</strong></label>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -352,14 +368,13 @@
                                                 <li class="list-group-item" ng-repeat="rx in site.rxs" style="padding:5px;">
                                                     <div class="row">
                                                         <div class="col-md-7" style="padding-left:5px; padding-right:5px; margin-left:0;">
-                                                            <label class="btn btn-sm" ng-class="ctrl.rdUnoMasUnoIdClass(rx)" style="font-size:90%; padding-right:5px; margin-left:10px;">{{ctrl.rdUnoMasUnoId(rx)}}</label>
+                                                            <label class="btn btn-sm" ng-class="ctrl.rdUnoMasUnoRxIdClass(rx)" style="font-size:90%; padding-right:5px; margin-left:10px;">{{ctrl.rdUnoMasUnoId(rx)}}</label>
                                                         </div>
                                                         <div class="col-md-5" style="padding-left:5px; padding-right:5px;">
-                                                            <!--<button class="btn btn-sm btn-default" style="font-size:90%; padding-right:5px;" ng-click="" ng-show="{{rx.sel==0}}">
-                                                                {{"Standby=>Sel"}}
-                                                            </button>-->
-                                                            <label class="btn btn-sm text-success" style="font-size:90%; padding-right:5px;" ng-show="{{rx.sel==0}}"><strong>Standby</strong></label>
-                                                            <label class="btn btn-sm text-success" style="font-size:90%; padding-right:5px;" ng-show="{{rx.sel==1}}"><strong>Main</strong></label>
+                                                            <button class="btn btn-sm btn-info" style="font-size:90%; padding-right:5px;" 
+                                                                    ng-click="ctrl.rdUnoMasUnoEnable(rx)">
+                                                                {{rx.ab==0 ? "Habilitar" : "Deshabilitar"}}
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </li>

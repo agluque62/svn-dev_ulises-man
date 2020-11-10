@@ -964,7 +964,7 @@ body .modal
     }
 
     .popover-content i {
-        color: #4A7729 /*#C1022C*/;
+        color: #C1022C;
     }
 
     .popover-content table td:nth-child(2)
@@ -1331,4 +1331,18 @@ a.disabled {
     pointer-events: none;
     cursor: default;
     color: gray;
+}
+
+/** Colores para las Frecuencias */
+.freqAvailable {
+/*    background-color: white;*/
+    color: #31708f;
+}
+.freqDegraded {
+    background-color: #ffc266;
+    color: #663d00;
+}
+.freqNotAvailable {
+    background-color: #ff8080;
+    color: #800000;
 }

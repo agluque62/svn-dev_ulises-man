@@ -321,7 +321,7 @@
                  ng-if="ctrl.std.csi.mixed.phsl[i] != null">
                 <a target="_blank" ng-href="{{ctrl.std.csi.mixed.phsl[i].Value.url}}" class="thumbnail" ng-show="true"
                    style=":hover {text-decoration: none;}">
-                    <img ng-src="./images/radioserver.jpg" alt="" class="{{ctrl.nbx_mixed_list_class()}}" style="width:70%;">
+                    <img ng-src="./images/radioserver.jpg" alt="" class="{{ctrl.nbx_mixed_list_class(ctrl.std.csi.mixed.phsl[i].Value)}}" style="width:70%;">
                     <p class="text-info text-center mt-1">{{ctrl.std.csi.mixed.phsl[i].Value.ip}}</p>
                     <div ng-bind-html="ctrl.nbx_mixed_info_services(ctrl.std.csi.mixed.phsl[i].Value)"></div>
                 </a>

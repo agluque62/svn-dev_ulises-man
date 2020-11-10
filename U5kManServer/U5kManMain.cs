@@ -774,7 +774,7 @@ namespace U5kManServer
                     items.ForEach(item =>
                     {
                         LogDebug<U5kServiceMain>(item.What);
-                        RecordEvent<U5kServiceMain>(item.When, item.IsError ? eIncidencias.IGRL_NBXMNG_EVENT : eIncidencias.IGRL_NBXMNG_ALARM,
+                        RecordEvent<U5kServiceMain>(item.When, item.IsError==false ? eIncidencias.IGRL_NBXMNG_EVENT : eIncidencias.IGRL_NBXMNG_ALARM,
                             eTiposInci.TEH_SISTEMA, "BKP", Params(item.What));
                     });
                 }

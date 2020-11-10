@@ -138,11 +138,11 @@ namespace Utilities
             request.Method = "POST";
             request.ContentType = "application/json;";
             request.Headers["UlisesClient"] = "MTTO";
+            string json = JsonConvert.SerializeObject(data);
             try
             {
                 using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                 {
-                    string json = JsonConvert.SerializeObject(data);
                     streamWriter.Write(json);
                 }
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
@@ -169,7 +169,7 @@ namespace Utilities
             }
             catch(WebException x)
             {
-                var resp = new StreamReader(x.Response.GetResponseStream()).ReadToEnd();
+                var resp = new StreamReader(x.Response?.GetResponseStream())?.ReadToEnd();
                 var msg = $"{x.Message}, {resp}";
                 Notify?.Invoke(false, msg);
             }

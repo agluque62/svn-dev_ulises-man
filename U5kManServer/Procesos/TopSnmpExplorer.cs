@@ -226,6 +226,8 @@ namespace U5kManServer
             Decimal threadTimeout = 2 * interval / 3;                           // Tiempo de proceso individual.
             Decimal poolTimeout = 3 * interval / 4;                             // Tiempo máximo del Pool de Procesos.
 
+            var taskControl = new PollingHelper();
+
             //U5kGenericos.SetCurrentCulture();
             LogInfo<TopSnmpExplorer>("Arrancado...");
 
@@ -236,6 +238,7 @@ namespace U5kManServer
                 {
                     if (U5kManService._Master == true)
                     {
+#if POOL_METHOD_0
                         List<stdPos> localpos = null;   // new List<stdPos>();
                         try
                         {
@@ -286,6 +289,81 @@ namespace U5kManServer
                             GlobalServices.GetWriteAccess((data) => data.POSDIC = localpos.Select(p => p).ToDictionary(p => p.name, p => p));
                         }
                         tm.StopAndPrint((msg) => { LogTrace<TopSnmpExplorer>(msg); });
+#else
+                        GlobalServices.GetWriteAccess((gdata) =>
+                        {
+                            // limpiar pollingControl con los Puestos que puedan desaparecer de la configuracion.
+                            taskControl.DeleteNotPresent(gdata.STDTOPS.Select(p => p.name).ToList());
+
+                            // Relleno los datos...
+                            gdata.STDTOPS.ForEach(psto =>
+                            {
+                                if (taskControl.IsTaskActive(psto.name) == false)
+                                {
+                                    var newPsto = new stdPos(psto);
+                                    var task = Task.Factory.StartNew(() =>
+                                    {
+                                        try
+                                        {
+                                            LogTrace<TopSnmpExplorer>($"Exploracion Puesto {newPsto.name} iniciada.");
+
+                                            ExploraTop(newPsto);
+#if DEBUG1
+                                            // Para asegurar un tiempo de ejecucion.
+                                            Task.Delay(TimeSpan.FromMilliseconds(500)).Wait();
+#endif
+                                            /// Copio los datos obtenidos a la tabla...
+                                            GlobalServices.GetWriteAccess((gdata1) =>
+                                            {
+                                                if (gdata1.POSDIC.ContainsKey(newPsto.name))
+                                                {
+                                                    /** 20200813. Solo actualiza el estado si no se ha cambiado en medio la configuracion */
+                                                    if (gdata1.POSDIC[newPsto.name].Equals(newPsto))
+                                                    {
+                                                        gdata1.POSDIC[newPsto.name].CopyFrom(newPsto);
+                                                    }
+                                                    else
+                                                    {
+                                                        LogWarn<GwExplorer>($"Exploracion {newPsto.name}. Resultado Exploracion ignorado. El Puesto ha cambiado de Configuracion.");
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    LogWarn<GwExplorer>($"Exploracion {newPsto.name}. Resultado Exploracion ignorado. El puesto ha sido eliminado.");
+                                                }
+                                            });
+                                        }
+                                        catch (Exception x)
+                                        {
+                                            LogException<TopSnmpExplorer>("Supervisando Puesto " + newPsto.name, x);
+                                        }
+                                        finally
+                                        {
+                                            LogTrace<TopSnmpExplorer>($"Exploracion Puesto {newPsto.name} finalizada.");
+                                        }
+                                    }, TaskCreationOptions.LongRunning);
+                                    taskControl.SetTask(psto.name, task);
+                                }
+                                else
+                                {
+                                    // todo. Algun tipo de supervision si nunca vuelve...
+                                    LogWarn<TopSnmpExplorer>($"Exploracion de Puesto {psto.name} no finalizada en Tiempo ...");
+                                }
+                            });
+                        });
+#if DEBUG1
+                        /** Para simular Sectorizaciones con cambios 'problematicos' */
+                        tm.FromCreation(TimeSpan.FromMinutes(1), () =>
+                        {
+                            GlobalServices.GetWriteAccess((gdata) =>
+                            {
+                                //gdata.POSDIC.Remove("PICT01");
+                                gdata.POSDIC["PICT01"] = new stdPos() { name = "PICT01", ip = "127.0.0.1" };
+                            });
+                        });
+#endif
+
+#endif
                     }
                     GoToSleepInTimer();
                 }

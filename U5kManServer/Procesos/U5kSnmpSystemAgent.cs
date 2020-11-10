@@ -41,7 +41,7 @@ namespace U5kManServer
         EventosTLF _evTlf = new EventosTLF();
         EventosATS _evAts = new EventosATS();
 #endif
-        SnmpAgent snmpAgent = new SnmpAgent();
+        SnmpAgent snmpAgent = null; // new SnmpAgent();
 
         SystemAgentState State { get; set; }
         public bool ReloadRequest { get; set; }
@@ -182,6 +182,7 @@ namespace U5kManServer
 #if _ED137_REVB_
                 _mib = new U5kScvMib();
 #endif
+                snmpAgent = new SnmpAgent();
                 snmpAgent.Init(ipServ);            // Poner la IP del Servidor....
                 snmpAgent.TrapReceived += new Action<string, string, ISnmpData, IPEndPoint, IPEndPoint>(RecibidoTrap);
 
@@ -219,6 +220,7 @@ namespace U5kManServer
                         });
                     }), AgentData.OidBase);
                 _mib.StoreTo(SnmpAgent.Store);
+                //_mib = null;
 #endif
                 snmpAgent.Start();
                 LogInfo<U5kSnmpSystemAgent>("Agente SNMP. Arrancado");
@@ -238,8 +240,11 @@ namespace U5kManServer
             try
             {
                 snmpAgent.Close();
-                _mib.Dispose();
+                snmpAgent = null;
+
+                _mib?.Dispose();
                 _mib = null;
+
                 LogInfo<U5kSnmpSystemAgent>("Agente SNMP. Detenido...");
             }
             catch (Exception x)
