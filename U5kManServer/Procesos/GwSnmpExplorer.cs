@@ -64,6 +64,77 @@ namespace U5kManServer
     /// </summary>
     class GwExplorer : NucleoGeneric.NGThread
     {
+        // 20200805. Control del Polling a pasarelas.
+        readonly PollingHelper taskControl = new PollingHelper();
+        public override void DoWork()
+        {
+            GlobalServices.GetWriteAccess((gdata) =>
+            {
+                // limpiar pollingControl con las Pasarelas que puedan desaparecer de la configuracion.
+                taskControl.DeleteNotPresent(gdata.STDGWS.Select(g => g.name).ToList());
+
+                // Relleno los datos...
+                gdata.STDGWS.ForEach(gw =>
+                {
+                    if (taskControl.IsTaskActive(gw.name) == false)
+                    {
+                        var newGw = new stdGw(gw);
+                        var task = Task.Factory.StartNew(() =>
+                        {
+                            try
+                            {
+                                LogTrace<GwExplorer>($"Exploracion {newGw.name} iniciada.");
+                                ExploraGw(newGw);
+#if DEBUG
+                                // Para asegurar un tiempo de ejecucion.
+                                Task.Delay(TimeSpan.FromMilliseconds(500)).Wait();
+#endif
+                                /// Copio los datos obtenidos a la tabla...
+                                GlobalServices.GetWriteAccess((gdata1) =>
+                                {
+                                    if (gdata1.GWSDIC.ContainsKey(newGw.name))
+                                    {
+                                        /** 20200813. Solo actualiza el estado si no se ha cambiado en medio la configuracion */
+                                        if (gdata1.GWSDIC[newGw.name].Equals(newGw))
+                                        {
+                                            gdata1.GWSDIC[newGw.name].CopyFrom(newGw);
+                                        }
+                                        else
+                                        {
+                                            LogWarn<GwExplorer>($"Exploracion {newGw.name}. Resultado Exploracion ignorado. Cambio de configuracion.");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        LogWarn<GwExplorer>($"Exploracion {newGw.name}. Resultado Exploracion ignorado.  Pasarela Eliminada");
+                                    }
+                                });
+                            }
+                            catch (Exception x)
+                            {
+                                LogException<GwExplorer>("Supervisando Pasarela " + newGw.name, x);
+                            }
+                            finally
+                            {
+                                LogTrace<GwExplorer>($"Exploracion de {newGw.name} finalizada.");
+                            }
+                        }, TaskCreationOptions.LongRunning);
+                        taskControl.SetTask(gw.name, task);
+                    }
+                    else
+                    {
+                        // todo. Algun tipo de supervision si nunca vuelve...
+                        LogWarn<GwExplorer>($"Exploracion de Pasarela {gw.name} no finalizada en Tiempo ...");
+                    }
+                });
+            });
+            LogInfo<GwExplorer>("GwExplorer DoWork!");
+        }
+
+        public override void LocalDispose()
+        {
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -215,8 +286,6 @@ namespace U5kManServer
             Decimal threadTimeout = 2 * interval / 3;                           // Tiempo de proceso individual.
             Decimal poolTimeout = 3 * interval / 4;                             // Tiempo máximo del Pool de Procesos.            
             
-            // 20200805. Control del Polling a pasarelas.
-            var taskControl = new PollingHelper();
             using (timer = new TaskTimer(TimeSpan.FromMilliseconds((double)interval), this.Cancel))
             {
                 while (IsRunning())

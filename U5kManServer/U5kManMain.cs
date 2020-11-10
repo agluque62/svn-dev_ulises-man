@@ -122,6 +122,14 @@ namespace U5kManServer
 
     class U5kServiceMain : NGThread
     {
+        public override void DoWork()
+        {
+            U5kManService._main.DoWork();
+        }
+        public override void LocalDispose()
+        {
+            U5kManService._main.LocalDispose();
+        }
         void GeneraIncidencia(int scv, eIncidencias inci, eTiposInci thw, string idhw, params object[] parametros)
         {
             RecordEvent<U5kServiceMain>(DateTime.Now, inci, thw, idhw, parametros);
@@ -147,8 +155,10 @@ namespace U5kManServer
             // Arranca el Servicio WEB
             _started = ActivateService();
 
+#if !_ONE_THREAD_VERSION_
             // Arranca los procesos...
             U5kManService._main.Start();
+#endif
 
             // 20170802. Arranca el Servicio de Estadisticas.
             U5kEstadisticaProc.Estadisticas = new U5kEstadisticaProc(
@@ -275,6 +285,9 @@ namespace U5kManServer
                                     //}
                                     CheckWebServer();
                                     CheckLanesAndNtpSync(/*stdg*/);
+#if _ONE_THREAD_VERSION_
+                                    DoWork();
+#endif
                                     //U5kManService._std.STDG = stdg;
                                 }
                                 catch (Exception x)
@@ -313,10 +326,12 @@ namespace U5kManServer
             // 20170802. Parar el Servicio de Estadisticas.
             U5kEstadisticaProc.Estadisticas.Stop();
             /*****************************************************/
-
+#if !_ONE_THREAD_VERSION_
             if (U5kManService._main.Running)
                 U5kManService._main.Stop(TimeSpan.FromSeconds(20));
-
+#else
+            LocalDispose();
+#endif
             CheckSactaService(true);
             DeactivateService();
             /** */
@@ -561,6 +576,7 @@ namespace U5kManServer
                             bMaster = false;
                             LogInfo<U5kServiceMain>("Modo RESERVA...");
                         }
+#if !_ONE_THREAD_VERSION_
                         else if (U5kManService._Master && U5kManService._main.Running == false)
                         {
                             /** 20180309. Posiblemente viene de una recuperacion de error de BDT */
@@ -569,6 +585,7 @@ namespace U5kManServer
                             U5kManService._main.InvalidateConfig();
                             U5kManService._main.Start();
                         }
+#endif
                     });
 
                     /** Actualizar Datos de Servidores */
@@ -835,6 +852,15 @@ namespace U5kManServer
 
                 if (U5kManService._Master)
                 {
+#if _ONE_THREAD_VERSION_
+                    GlobalServices.GetWriteAccess((gdata) =>
+                    {
+                        // TODO. Inicializar _std con los valores convenientes.
+                        U5KStdGeneral stdg = gdata.STDG;
+                        stdg.cfgVersion = string.Empty;
+                        stdg.cfgName = string.Empty;
+                    });
+#else
                     bool main_running = U5kManService._main.Running;
                     if (main_running)
                     {
@@ -847,6 +873,7 @@ namespace U5kManServer
                             stdg.cfgName = string.Empty;
                         });
                     }
+#endif
                 }
                 if (U5kManService.Database != null)
                 {

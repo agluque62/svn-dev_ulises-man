@@ -38,6 +38,104 @@ namespace U5kManServer
     /// </summary>
     public class MainThread : NucleoGeneric.NGThread
     {
+        bool OneThreadInit = false;
+        public override void DoWork()
+        {
+            try
+            {
+                if (OneThreadInit == false)
+                {
+                    HistThread.hproc = new HistThread();
+                    _snmpagent = new U5kSnmpSystemAgent();
+                    _gwExplorer = new GwExplorer(CambiaEstado);
+                    _topExplorer = new TopSnmpExplorer(CambiaEstado);
+                    _ext_sup = new ExtEquSpvSpace.ExtEquSpv();
+
+                    MonitorOfServices = new Services.CentralServicesMonitor(() =>
+                    {
+                        NucleoGeneric.BaseCode.ConfigCultureSet();
+                        return U5kManService._Master;
+                    },
+                        (alarma, str1, str2, str3) =>
+                        {
+                            eIncidencias inci = alarma == true ? eIncidencias.IGRL_NBXMNG_ALARM : eIncidencias.IGRL_NBXMNG_EVENT;
+                            RecordEvent<Services.CentralServicesMonitor>(DateTime.Now, inci, eTiposInci.TEH_SISTEMA, "SPV",
+                                new object[] { str1, " Server en " + str2, str3, "", "", "", "", "" });
+                        },
+                        (m, x) =>
+                        {
+                            if (x != null)
+                                LogException<Services.CentralServicesMonitor>("CentralServiceMonitor", x);
+                            else
+                                LogDebug<Services.CentralServicesMonitor>(m);
+                        },
+                        (l, m) =>
+                        {
+                            LogTrace<Services.CentralServicesMonitor>(m);
+                        },
+                            Properties.u5kManServer.Default.nbxSupPort
+                    );
+                    MonitorOfServices.Start();
+
+                    OneThreadInit = true;
+                }
+                /** Supervisa la configuracion */
+                if (cfg_loaded == false)
+                {
+                    GlobalServices.GetWriteAccess((data) =>
+                    {
+                        cfg_loaded = LoadConfig(data);
+                    });
+                }
+
+                new List<NGThread>()
+                    {
+                        HistThread.hproc,
+                        _snmpagent,
+                        _gwExplorer,
+                        _topExplorer,
+                        _ext_sup,
+                    }.ForEach(p =>
+                    {
+                        try
+                        {
+                            p.DoWork();
+                        }
+                        catch (Exception x)
+                        {
+                            LogException<Action>("", x);
+                        }
+                    });
+
+                new List<Action<U5kManStdData>>()
+                    {
+                        SupervisaScv,SupervisaPosiciones,/*SupervisaSacta,*/SupervisaNtp,SpAlarmas
+                    }.ForEach(action =>
+                    {
+                        GlobalServices.GetWriteAccess((gdata) =>
+                        {
+                            try
+                            {
+                                action(gdata);
+                            }
+                            catch (Exception x)
+                            {
+                                LogException<Action>("", x);
+                            }
+                        });
+                    });
+
+            }
+            catch (Exception x)
+            {
+                LogException<MainThread>("Supervisor Genérico", x);
+            }
+            LogInfo<MainThread>("MainThread DoWork!");
+        }
+        public override void LocalDispose()
+        {
+            MonitorOfServices.Dispose();
+        }
 
         /// <summary>
         /// Los procesos hijos.

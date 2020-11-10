@@ -26,6 +26,14 @@ namespace U5kManServer
     /// </summary>
     public class PabxItfService : NucleoGeneric.NGThread //BaseCode
     {
+        public override void DoWork()
+        {
+            throw new NotImplementedException();
+        }
+        public override void LocalDispose()
+        {
+            throw new NotImplementedException();
+        }
         public PabxItfService()
         {
         }

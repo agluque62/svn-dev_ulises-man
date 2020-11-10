@@ -133,6 +133,9 @@ namespace Utilities
 
         void ReceiveCallback(IAsyncResult ar)
         {
+            /** Al destruir un objeto se llama a esta funcion con _Udp=null */
+            if (_Udp == null)
+                return;
             try
             {
                 DataGram dg = new DataGram();
@@ -210,6 +213,7 @@ namespace Utilities
                     // LogManager.GetCurrentClassLogger().Error("UdpSocket: ERROR receiving data: {0}", ex.Message);
                 }
             }
+
         }
 
         #endregion

@@ -16,6 +16,7 @@ using NucleoGeneric;
 
 namespace U5kManServer
 {
+
     /// <summary>
     /// Parámetros y Eventos en el Operador.
     /// </summary>
@@ -50,6 +51,76 @@ namespace U5kManServer
     /// </summary>
     class TopSnmpExplorer : NucleoGeneric.NGThread
     {
+        PollingHelper taskControl = new PollingHelper();
+        public override void DoWork()
+        {
+            GlobalServices.GetWriteAccess((gdata) =>
+            {
+                // limpiar pollingControl con los Puestos que puedan desaparecer de la configuracion.
+                taskControl.DeleteNotPresent(gdata.STDTOPS.Select(p => p.name).ToList());
+
+                // Relleno los datos...
+                gdata.STDTOPS.ForEach(psto =>
+                {
+                    if (taskControl.IsTaskActive(psto.name) == false)
+                    {
+                        var newPsto = new stdPos(psto);
+                        var task = Task.Factory.StartNew(() =>
+                        {
+                            try
+                            {
+                                LogTrace<TopSnmpExplorer>($"Exploracion Puesto {newPsto.name} iniciada.");
+
+                                ExploraTop(newPsto);
+#if DEBUG1
+                                            // Para asegurar un tiempo de ejecucion.
+                                            Task.Delay(TimeSpan.FromMilliseconds(500)).Wait();
+#endif
+                                /// Copio los datos obtenidos a la tabla...
+                                GlobalServices.GetWriteAccess((gdata1) =>
+                                {
+                                    if (gdata1.POSDIC.ContainsKey(newPsto.name))
+                                    {
+                                        /** 20200813. Solo actualiza el estado si no se ha cambiado en medio la configuracion */
+                                        if (gdata1.POSDIC[newPsto.name].Equals(newPsto))
+                                        {
+                                            gdata1.POSDIC[newPsto.name].CopyFrom(newPsto);
+                                        }
+                                        else
+                                        {
+                                            LogWarn<GwExplorer>($"Exploracion {newPsto.name}. Resultado Exploracion ignorado. El Puesto ha cambiado de Configuracion.");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        LogWarn<GwExplorer>($"Exploracion {newPsto.name}. Resultado Exploracion ignorado. El puesto ha sido eliminado.");
+                                    }
+                                });
+                            }
+                            catch (Exception x)
+                            {
+                                LogException<TopSnmpExplorer>("Supervisando Puesto " + newPsto.name, x);
+                            }
+                            finally
+                            {
+                                LogTrace<TopSnmpExplorer>($"Exploracion Puesto {newPsto.name} finalizada.");
+                            }
+                        }, TaskCreationOptions.LongRunning);
+                        taskControl.SetTask(psto.name, task);
+                    }
+                    else
+                    {
+                        // todo. Algun tipo de supervision si nunca vuelve...
+                        LogWarn<TopSnmpExplorer>($"Exploracion de Puesto {psto.name} no finalizada en Tiempo ...");
+                    }
+                });
+            });
+            LogInfo<TopSnmpExplorer>("TopSnmpExplore Do Work!");
+        }
+        public override void LocalDispose()
+        {
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -225,8 +296,6 @@ namespace U5kManServer
             Decimal interval = Properties.u5kManServer.Default.SpvInterval;     // Tiempo de Polling,
             Decimal threadTimeout = 2 * interval / 3;                           // Tiempo de proceso individual.
             Decimal poolTimeout = 3 * interval / 4;                             // Tiempo máximo del Pool de Procesos.
-
-            var taskControl = new PollingHelper();
 
             //U5kGenericos.SetCurrentCulture();
             LogInfo<TopSnmpExplorer>("Arrancado...");

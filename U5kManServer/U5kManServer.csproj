@@ -21,7 +21,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;_LISTANBX_ STD_ACCESS_V1 GW_STD_V1</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;_LISTANBX_ STD_ACCESS_V1 GW_STD_V1 _ONE_THREAD_VERSION_</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>

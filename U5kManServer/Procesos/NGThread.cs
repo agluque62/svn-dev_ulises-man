@@ -141,7 +141,7 @@ namespace NucleoGeneric
     }	// De la Clase
 
 #else
-    public class NGThread : BaseCode
+    public abstract class NGThread : BaseCode
     { 
         public string Name { get; set; }
         public CancellationTokenSource Cancel
@@ -262,6 +262,8 @@ namespace NucleoGeneric
         protected TaskTimer timer = null;
         protected TimeMeasurement tm = null;
 
+        public abstract void DoWork();
+        public abstract void LocalDispose();
     }
 
     public class BackgroundTaskFactory

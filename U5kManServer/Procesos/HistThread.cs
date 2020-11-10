@@ -21,6 +21,52 @@ namespace U5kManServer
     /// </summary>
     public class HistThread : NucleoGeneric.NGThread
     {
+        public override void DoWork()
+        {
+            try
+            {
+                if (_init == false)
+                    _init = Init();
+                else
+                {
+                    SupervisaCambioDeDia();
+
+                    lock (_incidencias)
+                    {
+                        U5kIncidencia inci = null;
+
+                        while(_incidencias.Count > 0)
+                        {
+                            inci = _incidencias.Dequeue();
+                            StoreInci(inci);
+                        }
+                    }
+                }
+            }
+            catch (Exception x)
+            {
+                LogException<HistThread>("", x);
+            }
+            finally
+            {
+                LogInfo<HistThread>("HistThread DoWork!");
+            }
+        }
+        public override void LocalDispose()
+        {
+            foreach (U5kIncidencia inci in _incidencias)
+            {
+                try
+                {
+                    StoreInci(inci);
+                }
+                catch (Exception x)
+                {
+                    LogException<HistThread>("", x);
+                }
+            }
+        }
+
         /** 20170802. Para que puedan acceder todos... */
         public static HistThread hproc = null;
 

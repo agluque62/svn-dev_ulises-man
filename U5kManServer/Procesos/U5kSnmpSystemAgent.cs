@@ -25,6 +25,51 @@ namespace U5kManServer
     /// </summary>
     class U5kSnmpSystemAgent : NucleoGeneric.NGThread
     {
+        public override void DoWork()
+        {
+            switch (State)
+            {
+                case SystemAgentState.NotInit:
+                    if (SnmpAgentInit())
+                    {
+                        State = SystemAgentState.NotStarted;
+                    }
+                    break;
+
+                case SystemAgentState.NotStarted:
+                    if (SnmpAgentStart())
+                    {
+                        State = SystemAgentState.Operative;
+                        ReloadRequest = false;
+                    }
+                    else
+                    {
+                        SnmpAgentStop();
+                        State = SystemAgentState.NotInit;
+                    }
+                    break;
+
+                case SystemAgentState.Operative:
+
+                    if (ReloadRequest == true)
+                    {
+                        SnmpAgentStop();
+                        State = SystemAgentState.NotInit;
+                        ReloadRequest = false;
+                    }
+                    else
+                    {
+                        // Por si hay algo que supervisar...
+                    }
+                    break;
+            }
+            LogInfo<U5kSnmpSystemAgent>("U5kSnmpSystemAgent DoWork!");
+        }
+        public override void LocalDispose()
+        {
+            SnmpAgentStop();
+        }
+
         enum SystemAgentState { NotInit, NotStarted, Operative }
         string ipServ = Properties.u5kManServer.Default.MiDireccionIP;  //  U5kGenericos.MiDireccionIP;
 #if _ED137_REVB_
