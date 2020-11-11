@@ -287,6 +287,8 @@ namespace U5kManServer
                                     CheckLanesAndNtpSync(/*stdg*/);
 #if _ONE_THREAD_VERSION_
                                     DoWork();
+                                    Task.Delay(3000).Wait();
+                                    GC.Collect();
 #endif
                                     //U5kManService._std.STDG = stdg;
                                 }

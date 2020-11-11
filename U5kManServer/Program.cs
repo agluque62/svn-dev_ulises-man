@@ -117,6 +117,12 @@ namespace U5kManServer
                     {
                         U5kGenericos.ResetService = true;
                     }
+                    else if (key == '1')
+                    {
+                        // Simula una Reconfiguracion...
+                        LogInfo<uv5kSgmManProgram>("Invalidando la configuracion...");
+                        U5kManService._main.InvalidateConfig();
+                    }
 #endif
                 }
 
